@@ -37,7 +37,7 @@ If you aren't satisfied with the build tool and configuration choices, you can `
 
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However, we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
 ## Learn More
 
@@ -45,26 +45,40 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# Problem Statement 1
 
-### Analyzing the Bundle Size
+## Problem
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Getting feedback on police operations is difficult due to outdated methods and privacy concerns. Traditional ways like inspections and calls to complainants are restricted and lack inclusivity. This hampers understanding community feelings and addressing policing issues effectively.
 
-### Making a Progressive Web App
+### Background
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Current feedback methods are non-digital, missing guest records, and lack a uniform tracking system. Limited manpower inhibits daily follow-up, and the diverse, less digitally aware community adds complexity. Standard Operating Procedures (SOPs) for model police stations highlight the need for regular feedback to improve transparency and efficiency.
 
-### Advanced Configuration
+### Challenges
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Non-digital method.
+- Lack of uniform guest records.
+- Inadequate staff for daily follow-up.
+- Multi-lingual and digitally less-literate society.
 
-### Deployment
+## Solution
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Design a user-friendly, cost-effective Police Feedback System incorporating:
 
-### `npm run build` fails to minify
+- Bulk SMS Tool: Gather quick comments on experiences (Happy/Not Happy).
+- Auto Chatbot: Engage users with questions and compile answers in real-time.
+- Online Portal: Record detailed comments for a holistic view.
+- Social Media-Like Platform: Allow users to share experiences, tagging specific places for easy categorization.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Expectations
+
+- User-Friendly: A simple, intuitive system for different tech proficiencies.
+- Mobile-Friendly: Optimize for mobile use.
+- Cost-Effective: Keep costs within 2-5K per spot.
+- Simplicity: Easy for users to provide comments.
+- Auto Data Entry: Regularly collect data for efficient monitoring.
+
+This Police Feedback System aims to improve transparency and efficiency by providing an accessible, real-time platform for community members to share their experiences and feedback on police interactions.
