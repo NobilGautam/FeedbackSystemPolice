@@ -1,14 +1,32 @@
 import logo from './logo.svg';
+import { BrowserRouter,Link,Route,Routes } from 'react-router-dom';
+import Home from './components/Home';
+import Feedback from "./components/Feedback"
+import { useState } from 'react';
+
+
+
 
 
 function App() {
-  return (
-    <div className="text-white text-center my-auto h-screen justify-center flex items-center">
-      hackathon in progress
+  const [user,setUser]=useState("ramesh");
 
+  return (
+<div>
+  
+ 
+  <Routes>
+    <Route path="/" element={<Home/>}></Route>
+   {user &&  <Route path="/feedback" element={<Feedback/>}></Route>}
+   {/* <Route path="/single/:id" element={<SinglePolice/>}></Route> */}
+   {/* <Route path="/form" element={<Form/>}></Route> */}
+
+
+  </Routes>
+ 
 
  
-    </div>
+</div>
   );
 }
 
