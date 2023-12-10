@@ -4,13 +4,14 @@ import { Card, CardBody, CardFooter } from '@chakra-ui/react'
 import { Text ,Stack,Heading,Image,Button,Divider,ButtonGroup} from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import { BsStarFill } from 'react-icons/bs'
+
 function SingleCommPost({item}) {
     const number=item.rating;
     const temp=[];
     for(var i=0; i<number; i++){
         temp.push(<span><BsStarFill color='gold'/></span>);
     }
-
+  
   return (
   <div>
   <Card maxW='sm'>
@@ -30,7 +31,7 @@ function SingleCommPost({item}) {
         </Text>
         <Text color='blue.600' fontSize='sm' className='flex'>
 
-        {temp.map((item)=>{return <span>{item}</span>})}
+       {temp.map((item)=>{return <span>{item}</span>})}
         </Text>
       </Stack>
     </CardBody>
@@ -41,8 +42,7 @@ function SingleCommPost({item}) {
         <Button variant='solid' colorScheme='teal'>
         View more
         </Button>
-        
-        </Link>
+      </Link>
       </ButtonGroup>
     </CardFooter>
   </Card>
