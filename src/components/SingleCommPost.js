@@ -17,7 +17,7 @@ function SingleCommPost({item}) {
     <Stack mt='1' spacing='1'>
       <Heading size='md'>{item.name}</Heading>
       <Text>
-        This sofa is perfect for modern tropical spaces, baroque inspired
+        This sofa is perfect for modern trical spaces, baroque inspired
         spaces, 
       </Text>
       <Text color='blue.600' fontSize='sm'>
