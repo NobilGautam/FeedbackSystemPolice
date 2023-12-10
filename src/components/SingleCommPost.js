@@ -11,8 +11,7 @@ function SingleCommPost({item}) {
         temp.push(<span><BsStarFill color='gold'/></span>);
 
     }
-    console.log(temp)
-   
+  
   return (
 <div>
     
