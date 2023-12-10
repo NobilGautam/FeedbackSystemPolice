@@ -3,7 +3,15 @@ import React from 'react'
 import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
 import { Text ,Stack,Heading,Box,StackDivider,Image,Button,Divider,ButtonGroup} from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
+import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs'
 function SingleCommPost({item}) {
+    const number=item.rating;
+    const temp=[];
+    for(var i=0; i<number; i++){
+        temp.push(<span><BsStarFill color='gold'/></span>);
+
+    }
+    console.log(temp)
    
   return (
 <div>
@@ -22,6 +30,10 @@ function SingleCommPost({item}) {
       </Text>
       <Text color='blue.600' fontSize='sm'>
         {item.adress}
+      </Text>
+      <Text color='blue.600' fontSize='sm' className='flex'>
+
+       {temp.map((item)=>{return <span>{item}</span>})}
       </Text>
     </Stack>
   </CardBody>
