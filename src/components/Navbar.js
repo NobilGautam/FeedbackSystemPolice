@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 function Navbar() {
   let Links =[
     {name:"HOME",link:"/"},
-    {name:"MY FEEDBACKS",link:"/"},
-    {name:"NEW FEEDBACK",link:"/feedback"},
+    {name:"MY FEEDBACKS",link:"/myfeedback"},
+    {name:"NEW FEEDBACK",link:"/form"},
     {name:"LOGIN",link:"/"},
   ];
   let [open,setOpen]=useState(false);

@@ -2,7 +2,7 @@ import React from 'react'
 
 function Feedback() {
   return (
-    <div>Feedback</div>
+    <div className='mt-20'>Feedback</div>
   )
 }
 
