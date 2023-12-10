@@ -7,7 +7,7 @@ function Single() {
   const {id}=useParams();
   console.log(id);
   return (
-    <div>
+    <div className='mt-20'>
       <Link to='/'>
       <Button colorScheme='teal'>Back to All Posts</Button>
       </Link>
