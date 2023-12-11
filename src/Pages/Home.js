@@ -24,12 +24,12 @@ function Home() {
   }
   return (
     <>
-    <div className='w-[80%] mx-auto mt-28 flex'>
+    <div className='w-[80%] mx-auto mt-24 flex'>
       
   <Input placeholder='Search Police Stations' onChange={handlechange} />
   <Button colorScheme='teal'onClick={handleclick} >Search</Button>
   </div>
-   <div className='container w-[80%] mx-auto grid grid-cols-3 gap-10'>
+   <div className='container w-[80%] mx-auto grid md:grid-cols-3   grid-cols-1 gap-10'>
     
     
    {   searchResults.map((item)=>{
