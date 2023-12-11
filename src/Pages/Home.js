@@ -3,10 +3,15 @@ import SingleCommPost from '../components/SingleCommPost'
 import PoliceData from '../components/data'
 import { Button, useStatStyles } from '@chakra-ui/react'
 import { Input } from '@chakra-ui/react'
+import InfiniteScroll from 'react-infinite-scroller';
 
 function Home() {
   const [searchResults,setSearchResults]=useState(PoliceData);
   const [searchTerm,setSearchTerm]=useState('');
+  const [index,setIndex]=useState(15);
+  const loadFunc=()=>{
+    setIndex(index+3);
+  }
   
   const handleclick=()=>{
     const temp=PoliceData.filter((item)=>{
@@ -23,11 +28,19 @@ function Home() {
         <Input placeholder='Search Police Stations' onChange={handlechange} />
         <Button colorScheme='teal'onClick={handleclick} >Search</Button>
       </div>
+      <InfiniteScroll
+    pageStart={0}
+    loadMore={loadFunc}
+    hasMore={true || false}
+    loader={<div className="loader" key={0}>Loading ...</div>}
+>
       <div className='container w-[80%] mx-auto grid grid-cols-3 gap-10'>
-        {searchResults.map((item)=>{
+        
+        {searchResults.slice(0,index).map((item)=>{
           return <SingleCommPost key={item.id} item={item}></SingleCommPost>
         })}
       </div>
+      </InfiniteScroll>
     </>
   )
 }
