@@ -7,9 +7,11 @@ import Single from './Pages/Single';
 import Form from './Pages/Form';
 import {useAuthState} from "react-firebase-hooks/auth"
 import { Auth } from './Firebase';
+import Error from './Pages/Error';
 
 function App() {
   const [user]=useAuthState(Auth);
+  console.log(user);
   return (
   <div>
     <Navbar/>
@@ -18,6 +20,12 @@ function App() {
       {user &&  <Route path="/myfeedback" element={<Feedback/>}></Route>}
       <Route path="/single/:id" element={<Single/>}></Route>
      { user && <Route path="/form" element={<Form/>}></Route>}
+
+
+
+
+     <Route path="*" element={<Error/>}></Route>
+   
       </Routes>
   </div>
   );
