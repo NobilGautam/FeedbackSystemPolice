@@ -1,165 +1,29 @@
-const PoliceData=[{
-    "id":1,
-    "name":"SURAJGARH POLICE STATION",
-    "adress":"xyz 45 ok",
-    "rating":3,
-    "image":"https://images.unsplash.com/photo-1600081191763-05da665acf1a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9saWNlJTIwc3RhdGlvbnxlbnwwfHwwfHx8MA%3D%3D",
-
-
-},
-{
-    "id":2,
-    "name":"BURAJGARH POLICE STATION",
-    "adress":"xyz 45 ok",
-    "rating":3,
-    "image":"https://images.unsplash.com/photo-1600081191763-05da665acf1a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9saWNlJTIwc3RhdGlvbnxlbnwwfHwwfHx8MA%3D%3D",
-
-
-},
-{
-    "id":3,
-    "name":"SURAJGARH POLICE STATION",
-    "adress":"xyz 45 ok",
-    "rating":3,
-    "image":"https://images.unsplash.com/photo-1600081191763-05da665acf1a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9saWNlJTIwc3RhdGlvbnxlbnwwfHwwfHx8MA%3D%3D",
-
-
-},
-{
-    "id":4,
-    "name":"SURAJGARH POLICE STATION",
-    "adress":"xyz 45 ok",
-    "rating":3,
-    "image":"https://images.unsplash.com/photo-1600081191763-05da665acf1a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9saWNlJTIwc3RhdGlvbnxlbnwwfHwwfHx8MA%3D%3D",
-
-
-},
-{
-    "id":5,
-    "name":"SURAJGARH POLICE STATION",
-    "adress":"xyz 45 ok",
-    "rating":3,
-    "image":"https://images.unsplash.com/photo-1600081191763-05da665acf1a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9saWNlJTIwc3RhdGlvbnxlbnwwfHwwfHx8MA%3D%3D",
-
-
-},
-{
-    "id":6,
-    "name":"SURAJGARH POLICE STATION",
-    "adress":"xyz 45 ok",
-    "rating":3,
-    "image":"https://images.unsplash.com/photo-1600081191763-05da665acf1a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9saWNlJTIwc3RhdGlvbnxlbnwwfHwwfHx8MA%3D%3D",
-
-
-},
-{
-    "id":7,
-    "name":"SURAJGARH POLICE STATION",
-    "adress":"xyz 45 ok",
-    "rating":3,
-    "image":"https://images.unsplash.com/photo-1600081191763-05da665acf1a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9saWNlJTIwc3RhdGlvbnxlbnwwfHwwfHx8MA%3D%3D",
-
-
-},
-{
-    "id":8,
-    "name":"SURAJGARH POLICE STATION",
-    "adress":"xyz 45 ok",
-    "rating":3,
-    "image":"https://images.unsplash.com/photo-1600081191763-05da665acf1a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9saWNlJTIwc3RhdGlvbnxlbnwwfHwwfHx8MA%3D%3D",
-
-
-},
-{
-    "id":9,
-    "name":"SURAJGARH POLICE STATION",
-    "adress":"xyz 45 ok",
-    "rating":3,
-    "image":"https://images.unsplash.com/photo-1600081191763-05da665acf1a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9saWNlJTIwc3RhdGlvbnxlbnwwfHwwfHx8MA%3D%3D",
-
-
-},
-{
-    "id":10,
-    "name":"SURAJGARH POLICE STATION",
-    "adress":"xyz 45 ok",
-    "rating":3,
-    "image":"https://images.unsplash.com/photo-1600081191763-05da665acf1a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9saWNlJTIwc3RhdGlvbnxlbnwwfHwwfHx8MA%3D%3D",
-
-
-},
-{
-    "id":11,
-    "name":"SURAJGARH POLICE STATION",
-    "adress":"xyz 45 ok",
-    "rating":3,
-    "image":"https://images.unsplash.com/photo-1600081191763-05da665acf1a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9saWNlJTIwc3RhdGlvbnxlbnwwfHwwfHx8MA%3D%3D",
-
-
-},
-{
-    "id":12,
-    "name":"SURAJGARH POLICE STATION",
-    "adress":"xyz 45 ok",
-    "rating":3,
-    "image":"https://images.unsplash.com/photo-1600081191763-05da665acf1a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9saWNlJTIwc3RhdGlvbnxlbnwwfHwwfHx8MA%3D%3D",
-
-
-}
-,
-{
-    "id":13,
-    "name":"SURAJGARH POLICE STATION",
-    "adress":"xyz 45 ok",
-    "rating":3,
-    "image":"https://images.unsplash.com/photo-1600081191763-05da665acf1a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9saWNlJTIwc3RhdGlvbnxlbnwwfHwwfHx8MA%3D%3D",
-
-
-}
-,{
-    "id":14,
-    "name":"SURAJGARH POLICE STATION",
-    "adress":"xyz 45 ok",
-    "rating":3,
-    "image":"https://images.unsplash.com/photo-1600081191763-05da665acf1a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9saWNlJTIwc3RhdGlvbnxlbnwwfHwwfHx8MA%3D%3D",
-
-
-},
-{
-    "id":15,
-    "name":"SURAJGARH POLICE STATION",
-    "adress":"xyz 45 ok",
-    "rating":3,
-    "image":"https://images.unsplash.com/photo-1600081191763-05da665acf1a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9saWNlJTIwc3RhdGlvbnxlbnwwfHwwfHx8MA%3D%3D",
-
-
-},
-{
-    "id":16,
-    "name":"SURAJGARH POLICE STATION",
-    "adress":"xyz 45 ok",
-    "rating":3,
-    "image":"https://images.unsplash.com/photo-1600081191763-05da665acf1a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9saWNlJTIwc3RhdGlvbnxlbnwwfHwwfHx8MA%3D%3D",
-
-
-},
-{
-    "id":17,
-    "name":"SURAJGARH POLICE STATION",
-    "adress":"xyz 45 ok",
-    "rating":3,
-    "image":"https://images.unsplash.com/photo-1600081191763-05da665acf1a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9saWNlJTIwc3RhdGlvbnxlbnwwfHwwfHx8MA%3D%3D",
-
-
-},
-{
-    "id":18,
-    "name":"SURAJGARH POLICE STATION",
-    "adress":"xyz 45 ok",
-    "rating":3,
-    "image":"https://images.unsplash.com/photo-1600081191763-05da665acf1a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9saWNlJTIwc3RhdGlvbnxlbnwwfHwwfHx8MA%3D%3D",
-
-
-}
-]
-export default PoliceData
+// Function to generate a random string
+function getRandomString(length) {
+    const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+  }
+  
+  // Generate random police stations
+  const numberOfStations = 700;
+  const policeStations = [];
+  
+  for (let i = 1; i <= numberOfStations; i++) {
+    const station = {
+      id: i,
+      name: getRandomString(10) + ' POLICE STATION',
+      address: `xyz ${i} ok`,
+      rating: Math.floor(Math.random() * 5) + 1, // Random rating between 1 and 5
+      image: 'https://images.unsplash.com/photo-1600081191763-05da665acf1a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9saWNlJTIwc3RhdGlvbnxlbnwwfHwwfHx8MA%3D%3D',
+    };
+  
+    policeStations.push(station);
+  }
+  
+  // Export the array
+  export default policeStations;
+  
