@@ -16,7 +16,6 @@ function Navbar() {
   const signout=async()=>{
     await signOut(Auth);
     navigator('/');
-
   }
   
   const [user]=useAuthState(Auth);
@@ -41,7 +40,6 @@ return (
     <div onClick={()=>setOpen(!open)} className='text-3xl absolute right-8 top-6 cursor-pointer md:hidden'>
     <ion-icon name={open ? 'close':'menu'}></ion-icon>
     </div>
-
     <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-20 ':'top-[-490px]'}`}>
       {/* {
         Links.map((link)=>(
@@ -54,7 +52,7 @@ return (
       <li className='md:ml-8 text-xl md:my-0 my-7'><Link to='/' className='text-gray-800 hover:text-gray-400 duration-500'>Home</Link></li>
       {user &&    <li className='md:ml-8 text-xl md:my-0 my-7'><Link to='/myfeedback' className='text-gray-800 hover:text-gray-400 duration-500'>My Feedback</Link></li>}
       {user &&    <li className='md:ml-8 text-xl md:my-0 my-7'><Link to='/form' className='text-gray-800 hover:text-gray-400 duration-500'>New Feedback</Link></li>}
-     { user? <li className='md:ml-8 text-xl md:my-0 my-7 flex'><Link onClick={signout} className='text-gray-800 hover:text-gray-400 duration-500 '>Logout</Link><img src={user.photoURL} className='text-sm' alt={user.displayName}/></li>:<li className='md:ml-8 text-xl md:my-0 my-7'><Link onClick={signIN} className='text-gray-800 hover:text-gray-400 duration-500'>Login</Link></li>}
+      { user? <li className='md:ml-8 text-xl md:my-0 my-7 flex'><Link onClick={signout} className='text-gray-800 hover:text-gray-400 duration-500 '>Logout</Link><img src={user.photoURL} className='text-sm' alt={user.displayName}/></li>:<li className='md:ml-8 text-xl md:my-0 my-7'><Link onClick={signIN} className='text-gray-800 hover:text-gray-400 duration-500'>Login</Link></li>}
     </ul>
     </div>
   </div>
