@@ -38,7 +38,7 @@ function SingleCommPost({item}) {
     <Divider />
     <CardFooter>
       <ButtonGroup>
-      <Link to={`/single/${item.id}`} target="_blank" rel="noopener noreferrer">
+      <Link to={`/single/${item.id}`}>
         <Button variant='solid' colorScheme='teal'>
         View more
         </Button>

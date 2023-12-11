@@ -4,6 +4,7 @@ import { signInWithPopup,signOut } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 import {useAuthState} from "react-firebase-hooks/auth"
 import { useNavigate } from 'react-router-dom';
+import { MdOutlineLogout } from "react-icons/md";
 
 function Navbar() {
   const navigator=useNavigate();
@@ -54,7 +55,7 @@ return (
       <li className='md:ml-8 text-xl md:my-0 my-7'><Link to='/' className='text-gray-800 hover:text-gray-400 duration-500'>Home</Link></li>
       {user &&    <li className='md:ml-8 text-xl md:my-0 my-7'><Link to='/myfeedback' className='text-gray-800 hover:text-gray-400 duration-500'>My Feedback</Link></li>}
       {user &&    <li className='md:ml-8 text-xl md:my-0 my-7'><Link to='/form' className='text-gray-800 hover:text-gray-400 duration-500'>New Feedback</Link></li>}
-     { user? <li className='md:ml-8 text-xl md:my-0 my-7 flex'><Link onClick={signout} className='text-gray-800 hover:text-gray-400 duration-500 '>Logout</Link><img src={user.photoURL} className='text-sm' alt={user.displayName}/></li>:<li className='md:ml-8 text-xl md:my-0 my-7'><Link onClick={signIN} className='text-gray-800 hover:text-gray-400 duration-500'>Login</Link></li>}
+     { user? <li className='md:ml-8 text-xl md:my-0 my-7 flex items-center'><img src={user.photoURL} className='text-sm rounded-[50%] w-[40%]' alt={user.displayName} /><Link onClick={signout} className='text-gray-800 hover:text-gray-400 duration-500 '><MdOutlineLogout className='text-3xl'/></Link></li>:<li className='md:ml-8 text-xl md:my-0 my-7'><Link onClick={signIN} className='text-gray-800 hover:text-gray-400 duration-500'>Login</Link></li>}
     </ul>
     </div>
   </div>
