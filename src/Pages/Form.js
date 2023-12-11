@@ -39,8 +39,10 @@ function Form() {
   return (
     <>
     <div className='flex h-[100%] lg:flex-row flex-col flex-wrap lg:mt-0 sm:mt-[90px]'>
-    <motion.div 
-    variants={slideIn('left', "tween", 2, 2)}
+    <motion.div
+    initial="hidden"
+    animate="show" 
+    variants={slideIn('left', "tween", 0.2, 1)}
     className='w-[30%] flex mx-auto justify-center items-center'>
       <h1 className='text-9xl'>Fill</h1>  
       <h1 className='text-5xl'>YOUR FEEDBACK</h1>
@@ -48,6 +50,8 @@ function Form() {
 
 
     <motion.div 
+    initial="hidden"
+    animate="show"
     variants={slideIn('right', "tween", 0.2, 1)}
     className=' lg:w-[50%] mx-auto mt-28'>
       <form
