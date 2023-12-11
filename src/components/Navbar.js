@@ -11,6 +11,7 @@ function Navbar() {
     signInWithPopup(Auth,Provider)
     .then(res=>{console.log("ok")})
     .catch(err=>{console.log(err)});
+    navigator('/');
   }
   const signout=async()=>{
     await signOut(Auth);
