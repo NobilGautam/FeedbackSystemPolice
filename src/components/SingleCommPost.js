@@ -30,8 +30,7 @@ function SingleCommPost({item}) {
           {item.adress}
         </Text>
         <Text color='blue.600' fontSize='sm' className='flex'>
-
-       {temp.map((item)=>{return <span>{item}</span>})}
+          {temp.map((item)=>{return <span>{item}</span>})}
         </Text>
       </Stack>
     </CardBody>

@@ -12,36 +12,23 @@ function Home() {
     const temp=PoliceData.filter((item)=>{
       return item.name.toLowerCase().includes(searchTerm.toLowerCase());
     })
-  //  console.log(temp);
-  //  console.log(searchTerm)
-   setSearchResults(temp);
-
+    setSearchResults(temp);
   }
- 
   const handlechange=(e)=>{
     setSearchTerm(e.target.value);
-
   }
   return (
     <>
-    <div className='w-[80%] mx-auto mt-24 flex'>
-      
-  <Input placeholder='Search Police Stations' onChange={handlechange} />
-  <Button colorScheme='teal'onClick={handleclick} >Search</Button>
-  </div>
-   <div className='container w-[80%] mx-auto grid md:grid-cols-3   grid-cols-1 gap-10'>
-    
-    
-   {   searchResults.map((item)=>{
-    return <SingleCommPost key={item.id} item={item}></SingleCommPost>
-   })}
-
-    
-    </div>
-
+      <div className='w-[80%] mx-auto mt-28 flex'>
+        <Input placeholder='Search Police Stations' onChange={handlechange} />
+        <Button colorScheme='teal'onClick={handleclick} >Search</Button>
+      </div>
+      <div className='container w-[80%] mx-auto grid grid-cols-3 gap-10'>
+        {searchResults.map((item)=>{
+          return <SingleCommPost key={item.id} item={item}></SingleCommPost>
+        })}
+      </div>
     </>
-    
-  
   )
 }
 
