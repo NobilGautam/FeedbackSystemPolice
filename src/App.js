@@ -10,6 +10,7 @@ import { Auth } from './Firebase';
 
 function App() {
   const [user]=useAuthState(Auth);
+  console.log(user);
   return (
   <div>
     <Navbar/>
