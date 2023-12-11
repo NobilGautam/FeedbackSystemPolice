@@ -24,7 +24,7 @@ function Home() {
         <Button colorScheme='teal'onClick={handleclick} >Search</Button>
       </div>
       <div className='container w-[80%] mx-auto grid grid-cols-3 gap-10'>
-        {   searchResults.map((item)=>{
+        {searchResults.map((item)=>{
           return <SingleCommPost key={item.id} item={item}></SingleCommPost>
         })}
       </div>
