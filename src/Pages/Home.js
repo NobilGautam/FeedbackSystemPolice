@@ -31,7 +31,7 @@ function Home() {
       <InfiniteScroll
     pageStart={0}
     loadMore={loadFunc}
-    hasMore={ searchResults>15?true:false}
+    hasMore={ searchResults.length>15?true:false}
     
 >
       <div className='container w-[80%] mx-auto grid grid-cols-3 gap-10'>
