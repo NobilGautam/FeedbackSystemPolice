@@ -1,6 +1,24 @@
 import React, { useState } from 'react'
+import {Auth,Provider} from "../Firebase";
+import { signInWithPopup,signOut } from 'firebase/auth';
+import { Link } from 'react-router-dom';
+import {useAuthState} from "react-firebase-hooks/auth"
+import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
+  const navigator=useNavigate();
+  const signIN=()=>{
+    signInWithPopup(Auth,Provider)
+    .then(res=>{console.log("ok")})
+    .catch(err=>{console.log(err)});
+  }
+  const signout=async()=>{
+    await signOut(Auth);
+    navigator('/');
+
+  }
+  
+  const [user]=useAuthState(Auth);
   let Links =[
     {name:"HOME",link:"/"},
     {name:"MY FEEDBACKS",link:"/myfeedback"},
@@ -24,14 +42,18 @@ return (
     </div>
 
     <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-20 ':'top-[-490px]'}`}>
-      {
+      {/* {
         Links.map((link)=>(
           // Render values according to login state
           <li key={link.name} className='md:ml-8 text-xl md:my-0 my-7'>
-            <a href={link.link} className='text-gray-800 hover:text-gray-400 duration-500'>{link.name}</a>
+            <a href={link.link} onClick={link.name=='LOGIN'?signIN:""}className='text-gray-800 hover:text-gray-400 duration-500'>{link.name}</a>
           </li>
         ))
-      }
+      } */}
+      <li className='md:ml-8 text-xl md:my-0 my-7'><Link to='/' className='text-gray-800 hover:text-gray-400 duration-500'>Home</Link></li>
+      {user &&    <li className='md:ml-8 text-xl md:my-0 my-7'><Link to='/myfeedback' className='text-gray-800 hover:text-gray-400 duration-500'>My Feedback</Link></li>}
+      {user &&    <li className='md:ml-8 text-xl md:my-0 my-7'><Link to='/form' className='text-gray-800 hover:text-gray-400 duration-500'>New Feedback</Link></li>}
+     { user? <li className='md:ml-8 text-xl md:my-0 my-7'><Link onClick={signout} className='text-gray-800 hover:text-gray-400 duration-500'>Logout</Link></li>:<li className='md:ml-8 text-xl md:my-0 my-7'><Link onClick={signIN} className='text-gray-800 hover:text-gray-400 duration-500'>Login</Link></li>}
     </ul>
     </div>
   </div>
