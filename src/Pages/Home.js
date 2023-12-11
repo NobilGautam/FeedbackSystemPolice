@@ -31,12 +31,12 @@ function Home() {
       <InfiniteScroll
     pageStart={0}
     loadMore={loadFunc}
-    hasMore={true || false}
-    loader={<div className="loader" key={0}>Loading ...</div>}
+    hasMore={ searchResults>15?true:false}
+    
 >
       <div className='container w-[80%] mx-auto grid grid-cols-3 gap-10'>
         
-        {searchResults.slice(0,index).map((item)=>{
+        {searchResults.slice(0,Math.min(index,searchResults.length+1)).map((item)=>{
           return <SingleCommPost key={item.id} item={item}></SingleCommPost>
         })}
       </div>
