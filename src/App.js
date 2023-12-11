@@ -5,9 +5,11 @@ import {useState } from 'react';
 import Navbar from './components/Navbar'
 import Single from './Pages/Single';
 import Form from './Pages/Form';
+import {useAuthState} from "react-firebase-hooks/auth"
+import { Auth } from './Firebase';
 
 function App() {
-  const [user,setUser]=useState("ramesh");
+  const [user]=useAuthState(Auth);
   return (
   <div>
     <Navbar/>
@@ -15,7 +17,7 @@ function App() {
       <Route path="/" element={<Home></Home>}></Route>
       {user &&  <Route path="/myfeedback" element={<Feedback/>}></Route>}
       <Route path="/single/:id" element={<Single/>}></Route>
-      <Route path="/form" element={<Form/>}></Route>
+     { user && <Route path="/form" element={<Form/>}></Route>}
       </Routes>
   </div>
   );
