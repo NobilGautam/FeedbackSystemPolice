@@ -9,7 +9,7 @@ function getRandomString(length) {
   }
   
   // Generate random police stations
-  const numberOfStations = 700;
+  const numberOfStations = 699;
   const policeStations = [];
   
   for (let i = 1; i <= numberOfStations; i++) {
@@ -23,6 +23,15 @@ function getRandomString(length) {
   
     policeStations.push(station);
   }
+  const fixedp={
+    id:700,
+    name:"SURAJGARH POLICE STAION",
+    address:'xyz',
+    rating:3,
+      image: 'https://images.unsplash.com/photo-1600081191763-05da665acf1a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9saWNlJTIwc3RhdGlvbnxlbnwwfHwwfHx8MA%3D%3D',
+
+  }
+  policeStations.push(fixedp);
   
   // Export the array
   export default policeStations;
