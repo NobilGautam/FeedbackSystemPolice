@@ -27,7 +27,7 @@ function SingleCommPost({item}) {
           spaces, 
         </Text>
         <Text color='blue.600' fontSize='sm'>
-          {item.adress}
+          {item.address}
         </Text>
         <Text color='blue.600' fontSize='sm' className='flex'>
           {temp.map((item)=>{return <span>{item}</span>})}
