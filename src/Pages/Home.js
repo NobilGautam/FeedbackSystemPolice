@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import SingleCommPost from '../components/SingleCommPost'
 import PoliceData from '../components/data'
-import { Button, useStatStyles } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
 import { Input } from '@chakra-ui/react'
 import InfiniteScroll from 'react-infinite-scroller';
 import { Circles } from 'react-loader-spinner'
