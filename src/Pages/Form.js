@@ -2,9 +2,13 @@ import React, { useState } from 'react'
 import PoliceData from '../components/data'
 import { motion } from 'framer-motion';
 import { slideIn } from '../utils/motion';
-
+import { collection,getDoc,addDoc } from 'firebase/firestore';
+import {Auth,db} from "../Firebase"
+import {useAuthState} from "react-firebase-hooks/auth"
 function Form() {
-  const policeData = PoliceData;
+  const policeData = PoliceData; 
+  const [user]=useAuthState(Auth);
+ const postRef=collection(db,"feedbacks");
 
   const [form, setForm] = useState({
     fname:'',
@@ -19,6 +23,17 @@ function Form() {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert(form.fname + form.surname + form.age + form.gender + form.psname + form.purpose + form.feedback);
+addDoc(postRef,{
+  Email:"divyam.mishra.ug21@nsut.ac.in",
+  Age:form.age,
+  Feedback:form.feedback,
+  Gender:form.gender,
+  FirstName:form.fname,
+  LastName:form.surname,
+  PoliceStation:form.psname,
+  Purpose:form.purpose
+
+})
     setForm({
       fname:'',
       surname:'',
