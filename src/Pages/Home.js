@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import SingleCommPost from '../components/SingleCommPost'
 import PoliceData from '../components/data'
-import { Button, useStatStyles } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
 import { Input } from '@chakra-ui/react'
 
 function Home() {
   const [searchResults,setSearchResults]=useState(PoliceData);
   const [searchTerm,setSearchTerm]=useState('');
-  
+
   const handleclick=()=>{
     const temp=PoliceData.filter((item)=>{
       return item.name.toLowerCase().includes(searchTerm.toLowerCase());
