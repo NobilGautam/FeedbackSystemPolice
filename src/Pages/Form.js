@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PoliceData from '../components/data'
 import { motion } from 'framer-motion';
 import { slideIn } from '../utils/motion';
-import { collection,getDoc,addDoc } from 'firebase/firestore';
+import { collection,addDoc } from 'firebase/firestore';
 import {Auth,db} from "../Firebase"
 import {useAuthState} from "react-firebase-hooks/auth"
 function Form() {
@@ -14,6 +14,7 @@ function Form() {
     fname:'',
     surname:'',
     age:'',
+    email:"",
     gender:'male',
     psname:policeData.at(1).name,
     purpose:'',
@@ -24,7 +25,7 @@ function Form() {
     e.preventDefault();
     alert(form.fname + form.surname + form.age + form.gender + form.psname + form.purpose + form.feedback);
 addDoc(postRef,{
-  Email:"divyam.mishra.ug21@nsut.ac.in",
+  Email:form.email,
   Age:form.age,
   Feedback:form.feedback,
   Gender:form.gender,
@@ -38,6 +39,7 @@ addDoc(postRef,{
       fname:'',
       surname:'',
       age:'',
+      email:"",
       gender:'male',
       psname:policeData.at(1).name,
       purpose:'',
@@ -153,6 +155,22 @@ addDoc(postRef,{
                 />
             </label>
           </div>
+          <div className='flex justify-start flex-wrap flex-row'>
+            <label
+              className='flex flex-col lg:flex-row lg:items-center mt-5 mb-2 ml-[5%]'>
+                <span className='font-bold'>Email </span>
+                <input
+                  type='email'
+                  name='email'
+                  value={form.email}
+                  required
+                  onChange={handleChange}
+                  placeholder='Enter your Email'
+                  className='w-[550px] sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent'
+                />
+            </label>
+          </div>
+
 
           <div className='flex flex-initial justify-start flex-wrap flex-col'>
             <label

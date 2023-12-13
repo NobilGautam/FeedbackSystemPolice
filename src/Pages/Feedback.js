@@ -32,13 +32,14 @@ setPersonal(fina);
     }
     getPost();
   },[])
+  
   console.log((personal));
   
   return (
     <div className='mt-24'>
-      {/* {personal.map((item)=>{
+      {personal.map((item)=>{
         return <h1>{item.PoliceStation}</h1>
-      })} */}
+      })}
     </div>
   )
 }
