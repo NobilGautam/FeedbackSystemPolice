@@ -4,12 +4,12 @@ import { Button } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 function Single() {
-  const {id}=useParams();
+  const { id } = useParams();
   console.log(id);
   return (
     <div className='mt-20'>
       <Link to='/'>
-      <Button colorScheme='teal'>Back to All Posts</Button>
+        <Button colorScheme='teal'>Back to All Posts</Button>
       </Link>
     </div>
   )

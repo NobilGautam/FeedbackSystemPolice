@@ -1,9 +1,12 @@
 import React from 'react'
+import { useEffect } from 'react'
 
 import { Card, CardBody, CardFooter } from '@chakra-ui/react'
 import { Text ,Stack,Heading,Image,Button,Divider,ButtonGroup} from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import { BsStarFill } from 'react-icons/bs'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 function SingleCommPost({item}) {
     const number=item.rating;
@@ -11,9 +14,13 @@ function SingleCommPost({item}) {
     for(var i=0; i<number; i++){
         temp.push(<span><BsStarFill color='gold'/></span>);
     }
+    useEffect(()=>{
+      AOS.init({duration:1000});
+  },[]);
+  
   
   return (
-  <div>
+  <div data-aos="fade-up">
   <Card maxW='sm'>
     <CardBody>
       <Image
