@@ -6,6 +6,7 @@ import { Input } from '@chakra-ui/react'
 import InfiniteScroll from 'react-infinite-scroller';
 import { Circles } from 'react-loader-spinner'
 
+
 function Home() {
   const [searchResults,setSearchResults]=useState(PoliceData);
   const [searchTerm,setSearchTerm]=useState('');
@@ -19,7 +20,9 @@ function Home() {
     }, 1500);
   
 
+
   }
+
   // useEffect(()=>{
   //   const fetchdata=async(url)=>{
 
@@ -73,7 +76,7 @@ function Home() {
       <div className='container w-[80%] mx-auto grid md:grid-cols-3 grid-cols-1 gap-10 mt-5'>
         
         {searchResults.slice(0,Math.min(index,searchResults.length)).map((item)=>{
-          return <SingleCommPost key={item.id} item={item}></SingleCommPost>
+          return <SingleCommPost  key={item.id} item={item}></SingleCommPost>
         })}
       </div>
       </InfiniteScroll>

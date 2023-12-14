@@ -9,6 +9,7 @@ import { MdOutlineLogout } from "react-icons/md";
 function Navbar() {
   const navigator=useNavigate();
   const signIN=()=>{
+    
     signInWithPopup(Auth,Provider)
     .then(res=>{console.log("ok")})
     .catch(err=>{console.log(err)});
