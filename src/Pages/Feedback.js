@@ -50,13 +50,6 @@ function Feedback() {
       setPersonal(fina);
       setImgLinks(ImgUrls);
       setAddressLinks(Address);
-
-
-
-
-
-
-
     }
     getPost();
   }, [])
