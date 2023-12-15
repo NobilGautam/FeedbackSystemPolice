@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { useAuthState } from "react-firebase-hooks/auth"
 import { useNavigate } from 'react-router-dom';
 import { MdOutlineLogout } from "react-icons/md";
+import close from '../assets/close.svg'
+import menu from '../assets/menu.svg'
 
 function Navbar() {
   const navigator = useNavigate();
@@ -39,10 +41,10 @@ function Navbar() {
           Rajasthan Police Feedback
         </div>
 
-        <div onClick={() => setOpen(!open)} className='text-3xl absolute right-8 top-6 cursor-pointer md:hidden'>
+        {/* <div onClick={() => setOpen(!open)} className='text-3xl absolute right-8 top-6 cursor-pointer md:hidden'>
           <ion-icon name={open ? 'close' : 'menu'}></ion-icon>
-        </div>
-        <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-20 ' : 'top-[-490px]'}`}>
+        </div> */}
+        <ul className='hidden flex-row md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in'>
           {/* {
         Links.map((link)=>(
           .....// Render values according to login state
@@ -56,6 +58,36 @@ function Navbar() {
           {user && <li className='md:ml-8 text-xl md:my-0 my-7'><Link to='/form' className='text-gray-800 hover:text-gray-400 duration-500'>New Feedback</Link></li>}
           {user ? <li className='md:ml-8 text-xl md:my-0 my-7 flex items-center'><img src={user.photoURL} className='text-sm rounded-[50%] w-[40%]' alt={user.displayName} /><Link onClick={signout} className='text-gray-800 hover:text-gray-400 duration-500 '><MdOutlineLogout className='text-3xl' /></Link></li> : <li className='md:ml-8 text-xl md:my-0 my-7'><Link onClick={signIN} className='text-gray-800 hover:text-gray-400 duration-500'>Login</Link></li>}
         </ul>
+
+
+        <div className='md:hidden flex flex-1 justify-end items-center'>
+          <img
+            src={open ? close : menu} alt='menu'
+            className='w-[28px] h-[28px] object-contain cursor-pointer'
+            onClick={() => setOpen(!open)}
+          />
+          <div className={`${!open ? 'hidden' : 'flex'} bg-slate-200 p-6 absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}>
+            <ul className='list-none flex justify-end items-start flex-1 flex-col gap-4'>
+              <li className='md:ml-8 text-xl md:my-0 my-7' onClick={() => {
+                  setOpen(!open);
+                }}><Link to='/' className='text-gray-800 hover:text-gray-400 duration-500'>Home</Link></li>
+            {user && <li className='md:ml-8 text-xl md:my-0 my-7' onClick={() => {
+                  setOpen(!open);
+                }}><Link to='/   myfeedback' className='text-gray-800 hover:text-gray-400    duration-500'>My Feedback</Link></li>}
+            {user && <li className='md:ml-8 text-xl md:my-0 my-7' onClick={() => {
+                  setOpen(!open);
+                }}><Link to='/   form' className='text-gray-800 hover:text-gray-400    duration-500'>New Feedback</Link></li>}
+            {user ? <li onClick={() => {
+                  setOpen(!open);
+                }} className='md:ml-8 text-xl md:my-0 my-7 flex    items-center'><img src={user.photoURL} className='text-sm rounded-[50%] w-[40%]' alt={user.displayName} /><Link onClick={signout}    className='text-gray-800 hover:text-gray-400 duration-500   '><MdOutlineLogout className='text-3xl' /></Link></li> : <li onClick={() => {
+                  setOpen(!open);
+                }}     className='md:ml-8 text-xl md:my-0 my-7'><Link onClick={signIN}     className='text-gray-800 hover:text-gray-400 duration-500'>Login</    Link></li>}
+            </ul>
+          </div>
+
+        </div>
+
+
       </div>
     </div>
   )
