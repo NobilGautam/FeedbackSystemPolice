@@ -9,29 +9,47 @@ import { Img } from '@chakra-ui/react';
 
 
 function Feedback() {
-  const postRef=collection(db,'feedbacks');
-  const [personal,setPersonal]=useState([]);
-  const [user]=useAuthState(Auth);
-  useEffect(()=>{
-    const getPost=async()=>{
-     const dataa= await getDocs(postRef);
-     const temp=dataa.docs.filter((item)=>{
-      const va=item.data();
-      // console.log(va)
-     return va.Email===user.email;
-    
-     })
-    
-const fina=temp.map((item)=>{return item.data()});
-// console.log(fina);
-setPersonal(fina);
+  const postRef = collection(db, 'feedbacks');
+  const [ImgLinks, setImgLinks] = useState([]);
+  const [personal, setPersonal] = useState([]);
+  // const [policeDetails,setPoliceDetails]=useState([]);
+  const [addressLinks, setAddressLinks] = useState([]);
+  const [user] = useAuthState(Auth);
+  useEffect(() => {
+    const getPost = async () => {
+      const dataa = await getDocs(postRef);
+      const temp = dataa.docs.filter((item) => {
+        const va = item.data();
+        // console.log(va)
+        return va.Email === user.email;
+
+      })
+
+      const fina = temp.map((item) => { return item.data() });
+      // console.log(fina);
+      const matching_PS = [];
+      for (var i = 0; i < fina.length; i++) {
+        const Ps = fina[i].PoliceStation;
+        for (var j = 0; j < policeStations.length; j++) {
+          if (Ps == policeStations[j].name) {
+            matching_PS.push(policeStations[j]);
+
+          }
+        }
+      }
+      // setPoliceDetails(matching_PS);
+      const ImgUrls = new Map();
+      const Address = new Map();
+      for (var j = 0; j < matching_PS.length; j++) {
+        ImgUrls.set(matching_PS[j].name, matching_PS[j].image);
+        Address.set(matching_PS[j].name, matching_PS[j].address);
+      }
+      console.log(ImgUrls);
 
 
-    
-
-
-
-
+      setPersonal(fina);
+      setImgLinks(ImgUrls);
+      setAddressLinks(Address);
     }
     getPost();
   }, [])
