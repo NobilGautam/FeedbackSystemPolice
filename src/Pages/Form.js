@@ -9,7 +9,7 @@ function Form() {
   const policeData = PoliceData;
   const [user] = useAuthState(Auth);
   const postRef = collection(db, "feedbacks");
-
+ 
   const [form, setForm] = useState({
     fname: '',
     surname: '',
@@ -23,7 +23,6 @@ function Form() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(form.fname + form.surname + form.age + form.gender + form.psname + form.purpose + form.feedback);
     addDoc(postRef, {
       Email: form.email,
       Age: form.age,
