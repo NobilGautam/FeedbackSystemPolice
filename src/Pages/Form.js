@@ -5,7 +5,10 @@ import { slideIn } from '../utils/motion';
 import { collection, addDoc } from 'firebase/firestore';
 import { Auth, db } from "../Firebase"
 import { useAuthState } from "react-firebase-hooks/auth"
+var Sentiment = require('sentiment');
+var sentiment = new Sentiment();
 function Form() {
+
   const policeData = PoliceData; 
   const [user]=useAuthState(Auth);
  const postRef=collection(db,"feedbacks");
@@ -32,9 +35,12 @@ addDoc(postRef,{
   FirstName:form.fname,
   LastName:form.surname,
   PoliceStation:form.psname,
-  Purpose:form.purpose
+  Purpose:form.purpose,
+  Feel: sentiment.analyze(form.feedback).score
 
     })
+    // var result = sentiment.analyze(form.feedback);
+    // console.log(result);
     setForm({
       fname: '',
       surname: '',

@@ -19,7 +19,7 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
         {addressLinks.get(item.PoliceStation)}
       </div>
 
-      <div className='flex items-center justify-center'>
+      <div className={`flex items-center justify-center ${item.Feel<=0?'text-red-500':'text-green-500'}`}>
         {item.Feedback}
       </div>
 
