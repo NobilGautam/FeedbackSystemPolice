@@ -11,6 +11,7 @@ function Home() {
   const [searchResults, setSearchResults] = useState(PoliceData);
   const [searchTerm, setSearchTerm] = useState('');
   const [index, setIndex] = useState(15);
+  const [flag,setFlag]=useState(true);
   const url = "https://script.google.com/macros/s/AKfycbzvSyrLrcpMXul2X517D714Y8LvOlr29FDmJNH0OYDCqBEqKPPts9VBw6pIrjCORYB6uQ/exec"
   const loadFunc = () => {
     // setIndex(index+3);
@@ -50,12 +51,36 @@ function Home() {
 
     setSearchTerm(e.target.value);
   }
+  function sortBy(field) {
+    return function(a, b) {
+      return (a[field] > b[field]) - (a[field] < b[field])
+    };
+  }
+
+  useEffect(()=>{
+    setSearchResults(searchResults);
+  },[flag]);
+
+  const sort=()=>{
+  searchResults.sort(sortBy('rating'));
+  
+setFlag(!flag);
+ 
+   
+  
+    
+  }
 
   return (
     <>
       <div className='w-[80%] mx-auto mt-28  flex'>
         <Input placeholder='Search Police Stations' onChange={handlechange} />
         <Button colorScheme='teal' onClick={handleclick} >Search</Button>
+
+      </div>
+      <div className='w-[80%] mx-auto'>
+        <Button colorScheme='teal' onClick={sort}>sort</Button>
+        
       </div>
       <InfiniteScroll
 
@@ -74,6 +99,7 @@ function Home() {
 
       >
         <div className='container w-[80%] mx-auto grid md:grid-cols-3 grid-cols-1 gap-10 mt-5'>
+
 
           {searchResults.slice(0, Math.min(index, searchResults.length)).map((item) => {
             return <SingleCommPost key={item.id} item={item}></SingleCommPost>
