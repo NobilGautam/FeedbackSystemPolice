@@ -25,7 +25,7 @@ function Form() {
     e.preventDefault();
     alert(form.fname + form.surname + form.age + form.gender + form.psname + form.purpose + form.feedback);
 addDoc(postRef,{
-  Email:"divyam.mishra.ug21@nsut.ac.in",
+  Email:form.email,
   Age:form.age,
   Feedback:form.feedback,
   Gender:form.gender,
