@@ -8,6 +8,12 @@ import { useAuthState } from "react-firebase-hooks/auth"
 var Sentiment = require('sentiment');
 var sentiment = new Sentiment();
 function Form() {
+  var options = {
+    extras: {
+     'not':-2,
+
+    }
+  };
 
   const policeData = PoliceData; 
   const [user]=useAuthState(Auth);
@@ -36,7 +42,7 @@ addDoc(postRef,{
   LastName:form.surname,
   PoliceStation:form.psname,
   Purpose:form.purpose,
-  Feel: sentiment.analyze(form.feedback).score
+  Feel: sentiment.analyze(form.feedback,options).score
 
     })
     // var result = sentiment.analyze(form.feedback);
