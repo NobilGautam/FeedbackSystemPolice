@@ -7,6 +7,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { Circles } from 'react-loader-spinner'
 
 
+
 function Home() {
   const [searchResults, setSearchResults] = useState(PoliceData);
   const [searchTerm, setSearchTerm] = useState('');
@@ -72,8 +73,8 @@ setFlag(!flag);
   }
 
   return (
-    <>
-      <div className='w-[80%] mx-auto mt-28  flex'>
+    < div className=''>
+      <div className='w-[80%] mx-auto mt-28 flex '>
         <Input placeholder='Search Police Stations' onChange={handlechange} />
         <Button colorScheme='teal' onClick={handleclick} >Search</Button>
 
@@ -106,7 +107,7 @@ setFlag(!flag);
           })}
         </div>
       </InfiniteScroll>
-    </>
+    </div>
   )
 }
 
