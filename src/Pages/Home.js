@@ -27,6 +27,7 @@ function Home() {
   };
 
   const sortBy = (field) => (a, b) => (a[field] > b[field]) - (a[field] < b[field]);
+  const sortByRev = (field) => (a, b) => (a[field] < b[field]) - (a[field] > b[field]);
 
   const showLoader = () => {
     setLoader(true);
@@ -38,11 +39,22 @@ function Home() {
 
   useEffect(() => {
     setSearchResults(searchResults);
-  }, [flag]);
+  }, [flag, searchResults]);
 
-  const sort = () => {
-    searchResults.sort(sortBy('rating'));
+  const sort = (sortState) => {
+    if(sortState === 'name' || sortState === 'rating') searchResults.sort(sortBy(sortMethods[sortState].method));
+    else searchResults.sort(sortByRev(sortMethods[sortState].method));
     setFlag(!flag);
+  };
+
+  const [sortState, setSortState] = useState("name");
+
+  const sortMethods = {
+    none: { method: null },
+    name: { method: 'name' },
+    name_dsc: { method: 'name' },
+    rating: { method: 'rating' },
+    rating_dsc: { method: 'rating' },
   };
 
   return (
@@ -54,7 +66,14 @@ function Home() {
         </Button>
       </div>
       <div className='w-[80%] mx-auto'>
-        <Button colorScheme='teal' onClick={sort}>
+      <select defaultValue="None" onChange={(e) => setSortState(e.target.value)}>
+        <option value="null" disabled>None</option>
+        <option value="name">Name</option>
+        <option value="name_dsc">Name Dsc</option>
+        <option value="rating">Rating</option>
+        <option value="rating_dsc">Rating Dsc</option>
+      </select>
+        <Button colorScheme='teal' onClick={() => sort(sortState)}>
           Sort
         </Button>
       </div>
