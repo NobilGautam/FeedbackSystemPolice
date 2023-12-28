@@ -61,6 +61,19 @@ function Home() {
       return (a[field] > b[field]) - (a[field] < b[field])
     };
   }
+  const showLoader=()=>{
+    setLoader(true);
+   
+setTimeout(()=>{
+  
+  setLoader(false);
+  setIndex(index => index + 3);
+},1000)
+
+
+
+
+  }
 
   useEffect(()=>{
     setSearchResults(searchResults);
@@ -87,7 +100,7 @@ setFlag(!flag);
         <Button colorScheme='teal' onClick={sort}>sort</Button>
         
       </div>
-      <InfiniteScroll
+      {/* <InfiniteScroll
 
         loadMore={loadFunc}
         hasMore={true || false}
@@ -102,17 +115,29 @@ setFlag(!flag);
         wrapperClass=""
         /></h1>: ""}
 
-      >
+      > */}
         <div className='container w-[80%] mx-auto grid md:grid-cols-3 grid-cols-1 gap-10 mt-5'>
 
 
           {searchResults.slice(0, Math.min(index, searchResults.length)).map((item) => {
             return <SingleCommPost key={item.id} item={item}></SingleCommPost>
           })}
-          
-          {/* <Button onClick={loadFunc}>Load More</Button> */}
+       
         </div>
-      </InfiniteScroll>
+        
+        <div className='flex justify-center items-center w-[80%] mx-auto py-5'>
+          {loader?<h1><ThreeDots
+        visible={true}
+        height="80"
+        width="80"
+        color="#8C4E1D"
+        radius="9"
+        ariaLabel="three-dots-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+        /></h1>:<Button onClick={showLoader} className='mx-auto justify-center mt-2 loadmore ' >Load More</Button>}
+          </div>
+      {/* </InfiniteScroll> */}
     </div>
   )
 }
