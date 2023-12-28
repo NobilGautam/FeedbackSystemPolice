@@ -1,7 +1,7 @@
 const policeStations = [
     {
-      "address": 301001,
-      "name": "ALWAR 1",
+      "address": '301001',
+      "name": "Dwarka Police Station",
       "image": "https://images.unsplash.com/photo-1600081191763-05da665acf1a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9saWNlJTIwc3RhdGlvbnxlbnwwfHwwfHx8MA%3D%3D",
       "rating": 1,
       "id": 1

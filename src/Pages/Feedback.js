@@ -59,11 +59,11 @@ function Feedback() {
 
   return (
     <div className='mt-24 py-10 '>
-      <div className='header grid grid-cols-3 w-[100%] md:w-[80%]  mx-auto'>
+      {/* <div className='header grid grid-cols-3 w-[100%] md:w-[80%]  mx-auto'>
         <h1 className='text-center text-xl font-bold'>Name</h1>
         <h1 className='text-center text-xl font-bold '>Adress</h1>
         <h1 className='text-center text-xl font-bold'>Feedback</h1>
-      </div>
+      </div> */}
       {personal.map((item) => {
         return <SingleFeedbackPost ImgLinks={ImgLinks} addressLinks={addressLinks} item={item} />
       })}

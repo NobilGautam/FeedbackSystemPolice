@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 import { useAuthState } from "react-firebase-hooks/auth"
 import { useNavigate } from 'react-router-dom';
 import { MdOutlineLogout } from "react-icons/md";
-import close from '../assets/close.svg'
-import menu from '../assets/menu.svg'
+import close from '../assets/close.svg';
+import menu from '../assets/menu.svg';
+import rpLogo from '../assets/rplogo.png';
 
 function Navbar() {
   const navigator = useNavigate();
@@ -34,11 +35,8 @@ function Navbar() {
     
     <div className='shadow-md w-full fixed z-20 top-0 left-0 '>
       <div className='md:flex items-center justify-between py-4 md:px-10 px-7 bg-[#8C4E1D]'>
-        <div className='font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
-    text-gray-800'>
-          <span className='text-3xl text-indigo-600 mr-1 pt-2'>
-            <ion-icon name="logo-ionic"></ion-icon>
-          </span>
+        <div className='font-semibold text-2xl cursor-pointer flex items-center text-gray-800'>
+          <img src={rpLogo} className='w-[15%] mr-4'/>
           <span className='text-white'>
           Rajasthan Police Feedback
           </span>
