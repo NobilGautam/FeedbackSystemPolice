@@ -135,7 +135,7 @@ setFlag(!flag);
         ariaLabel="three-dots-loading"
         wrapperStyle={{}}
         wrapperClass=""
-        /></h1>:<Button onClick={showLoader} className='mx-auto justify-center mt-2 loadmore ' >Load More</Button>}
+        /></h1>:<Button onClick={showLoader} className='mx-auto justify-center mt-2 loadmore' >Load More</Button>}
           </div>
       {/* </InfiniteScroll> */}
     </div>
