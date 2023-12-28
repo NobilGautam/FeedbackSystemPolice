@@ -45,7 +45,7 @@ function SingleCommPost({item}) {
     <CardFooter>
       <ButtonGroup>
       <Link to={`/single/${item.id}`}>
-        <Button variant='solid' colorScheme='teal'>
+        <Button variant='solid' bg="#F4BC77">
         View more
         </Button>
       </Link>
