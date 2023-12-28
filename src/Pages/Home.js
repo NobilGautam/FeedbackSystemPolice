@@ -110,7 +110,7 @@ setFlag(!flag);
             return <SingleCommPost key={item.id} item={item}></SingleCommPost>
           })}
           
-          <Button onClick={loadFunc}>Load More</Button>
+          {/* <Button onClick={loadFunc}>Load More</Button> */}
         </div>
       </InfiniteScroll>
     </div>
