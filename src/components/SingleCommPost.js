@@ -1,59 +1,55 @@
-import React from 'react'
-import { useEffect } from 'react'
+import React from 'react';
+import { useEffect } from 'react';
+import { Text, Button, ButtonGroup } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+import { BsStarFill } from 'react-icons/bs';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import ImageCard from './ImageCard';
 
-import { Card, CardBody, CardFooter } from '@chakra-ui/react'
-import { Text ,Stack,Heading,Image,Button,Divider,ButtonGroup} from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
-import { BsStarFill } from 'react-icons/bs'
-import AOS from 'aos'
-import 'aos/dist/aos.css'
+function SingleCommPost({ item }) {
+  const number = item.rating;
+  const temp = [];
+  for (var i = 0; i < number; i++) {
+    temp.push(
+      <span key={i}>
+        <BsStarFill color="gold" />
+      </span>
+    );
+  }
 
-function SingleCommPost({item}) {
-    const number=item.rating;
-    const temp=[];
-    for(var i=0; i<number; i++){
-        temp.push(<span><BsStarFill color='gold'/></span>);
-    }
-    useEffect(()=>{
-      AOS.init({duration:1000});
-  },[]);
-  
-  
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   return (
-  <div data-aos="fade-up">
-  <Card maxW='sm'>
-    <CardBody>
-      <Image
-        src={item.image}
-        borderRadius='sm'
-      />
-      <Stack mt='1' spacing='1'>
-        <Heading size='md'>{item.name}</Heading>
-        <Text>
-          This sofa is perfect for modern trical spaces, baroque inspired
-          spaces, 
-        </Text>
-        <Text color='blue.600' fontSize='sm'>
-          {item.address}
-        </Text>
-        <Text color='blue.600' fontSize='sm' className='flex'>
-          {temp.map((item)=>{return <span>{item}</span>})}
-        </Text>
-      </Stack>
-    </CardBody>
-    <Divider />
-    <CardFooter>
-      <ButtonGroup>
-      <Link to={`/single/${item.id}`}>
-        <Button variant='solid' bg="#F4BC77">
-        View more
-        </Button>
-      </Link>
-      </ButtonGroup>
-    </CardFooter>
-  </Card>
-  </div>
-  )
+    <div data-aos="fade-up">
+      <ImageCard ImgSrc={item.image}>
+        <div className="w-full h-full flex justify-between items-center">
+          <div>
+            <h1 className="font-sans">{item.name}</h1>
+            <div className="flex w-full items-center justify-start">
+              <Text className="mr-2">{item.address}</Text>
+              <Text color="blue.600" fontSize="sm" className="flex">
+                {temp.map((tag, index) => (
+                  <span key={index}>{tag}</span>
+                ))}
+              </Text>
+            </div>
+          </div>
+          <div className="flex justify-end">
+            <ButtonGroup>
+              <Link to={`/single/${item.id}`}>
+              <Button variant="solid" bg="#F4BC77" fontWeight='bold'>
+                  View more
+                </Button>
+              </Link>
+            </ButtonGroup>
+          </div>
+        </div>
+      </ImageCard>
+    </div>
+  );
 }
 
-export default SingleCommPost
+export default SingleCommPost;
