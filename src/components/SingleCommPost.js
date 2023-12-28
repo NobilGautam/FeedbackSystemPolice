@@ -46,7 +46,8 @@ function SingleCommPost({ item }) {
               </Link>
             </ButtonGroup>
           </div>
-        </div>
+        </div> 
+        {/* ais */}
       </ImageCard>
     </div>
   );
