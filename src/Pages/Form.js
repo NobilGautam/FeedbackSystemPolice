@@ -4,7 +4,9 @@ import { motion } from 'framer-motion';
 import { slideIn } from '../utils/motion';
 import { collection, addDoc } from 'firebase/firestore';
 import { Auth, db } from "../Firebase"
-import { useAuthState } from "react-firebase-hooks/auth"
+import { useAuthState } from "react-firebase-hooks/auth";
+import formBG from '../assets/formBG.jpg';
+
 var Sentiment = require('sentiment');
 var sentiment = new Sentiment();
 function Form() {
@@ -67,7 +69,7 @@ addDoc(postRef,{
 
   return (
     <>
-      <div className='flex h-[100%] lg:flex-row flex-col flex-wrap lg:mt-0 sm:mt-[90px]'>
+      <div className='flex h-[100%] lg:flex-row justify-center flex-col items-center flex-wrap lg:mt-0 mt-[90px]' >
         <motion.div
           initial="hidden"
           animate="show"
@@ -82,11 +84,16 @@ addDoc(postRef,{
           initial="hidden"
           animate="show"
           variants={slideIn('right', "tween", 0.2, 1)}
-          className=' lg:w-[50%] mx-auto mt-28'>
+          className=' lg:w-[50%] mx-auto lg:mt-28'>
           <form
             id='feedbackForm'
             onSubmit={handleSubmit}
-            className='mt-12 flex flex-col gap-8  bg-slate-50 rounded-md shadow-md mb-3'>
+            className='mt-12 flex flex-col gap-8 lg:mb-10  bg-slate-50 rounded-md shadow-xl shadow-[#5e5d5d]' style={{
+              background: `url(${formBG})`,
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+          }}>
             <div className='flex flex-row justify-start flex-wrap'>
               <label
                 className='w-[45%] ml-[5%] flex flex-col mt-5 mb-2'>
