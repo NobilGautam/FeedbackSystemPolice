@@ -10,12 +10,17 @@ import ImageCard from './ImageCard';
 function SingleCommPost({ item }) {
   const number = item.rating;
   const temp = [];
-  for (var i = 0; i < number; i++) {
-    temp.push(
+  for (var i = 0; i < 5; i++) {
+    if(i < number) {temp.push(
       <span key={i}>
         <BsStarFill color="gold" />
       </span>
-    );
+    )}
+    else {temp.push(
+      <span key={i}>
+        <BsStarFill color="grey" />
+      </span>
+    )}
   }
 
   useEffect(() => {
