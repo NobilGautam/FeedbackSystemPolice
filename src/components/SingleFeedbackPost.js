@@ -26,6 +26,7 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
 
     </div> */}
 
+
     <div className='flex justify-center my-4 lg:h-[140px] hover:scale-105 duration-300'>
     <div className='flex flex-row w-[80%] justify-between rounded-2xl overflow-hidden shadow-md shadow-[#8e8e8e] bg-[#f6bd85]'>
       <div className='flex justify-between items-center w-[30%]'>
