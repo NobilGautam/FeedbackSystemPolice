@@ -12,17 +12,16 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
 
   return (
     <>
-    <div className='flex justify-center my-4 lg:h-[140px] lg:hover:scale-105 duration-300'>
-      <div className='flex lg:flex-row w-[80%] flex-col lg:justify-between rounded-2xl overflow-hidden shadow-md shadow-[#8e8e8e] bg-[#f6bd85]'>
+    <div className='flex justify-center my-8 min-h-max max-h-max lg:hover:scale-105 duration-300'>
+      <div className='flex lg:flex-row w-[80%] flex-col lg:justify-between rounded-lg overflow-hidden shadow-md shadow-[#8e8e8e9a] bg-[#f6bd85]'>
         <div className='flex lg:flex-row flex-col w-[100%] lg:justify-between lg:items-center lg:w-[30%]'>
-          <img src={ImgLinks.get(item.PoliceStation)} className='lg:w-[60%] lg:h-[100%]' alt={`${item.name} Police Station Picture`}></img>
-          <h2 className='text-[1.2rem] font-bold text-center w-[100%]'>{item.PoliceStation}</h2>
+          <img src={ImgLinks.get(item.PoliceStation)} className='lg:w-[80%] lg:h-[100%] aspect-[16/9] object-cover' alt={`${item.name} Police Station Picture`}></img>
+          <h2 className='text-[1.2rem] mt-2 ml-0 md:mt-0 md:ml-8 font-bold text-center w-[100%]'>{item.PoliceStation}</h2>
         </div>
-        <div className='flex text-center items-center lg:text-[1.2rem] font-light justify-center lg:w-[40%]'>
+        <div className='flex text-center items-center mt-2 md:mt-0 lg:text-[1.2rem] font-light justify-center lg:w-[40%]'>
           {addressLinks.get(item.PoliceStation)}
         </div>
-    
-        <div className={`flex items-center bg-[#f9d4ae] m-2 rounded-lg p-2 font-light lg:w-[30%] justify-center ${item.Feel<=0?'text-red-500':'text-green-500'}`}>
+        <div className={`flex items-center min-h-max bg-zinc-50 p-4 mt-2 md:mt-0 font-light lg:w-[30%] justify-center ${item.Feel<=0?'text-red-500':'text-green-500'}`}>
           {item.Feedback}
         </div>
       </div>
