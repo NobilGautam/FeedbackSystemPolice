@@ -43,7 +43,7 @@ function Navbar() {
         <ul className='hidden flex-row md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-[#8C4E1D] md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in'>
           {Links.map((link) => (
             <li key={link.name} className='md:ml-8 text-xl md:my-0 my-7'>
-              <Link to={link.link} onClick={link.name === 'LOGIN' ? signIN : ''} className='text-gray-800 hover:text-gray-400 duration-500'>
+              <Link to={link.link} onClick={link.name === 'LOGIN' ? signIN : ''} className='text-white hover:text-gray-400 duration-500'>
                 {link.name}
               </Link>
             </li>
@@ -51,13 +51,13 @@ function Navbar() {
           {user ? (
             <li className='md:ml-8 text-xl md:my-0 my-7 flex items-center'>
               <img src={user.photoURL} className='text-sm rounded-[50%] w-[40%]' alt={user.displayName} />
-              <Link onClick={signout} className='text-gray-800 hover:text-gray-400 duration-500 '>
+              <Link onClick={signout} className='text-white hover:text-gray-400 duration-500 '>
                 <MdOutlineLogout className='text-3xl' />
               </Link>
             </li>
           ) : (
             <li className='md:ml-8 text-xl md:my-0 my-7'>
-              <Link onClick={signIN} className='text-gray-800 hover:text-gray-400 duration-500'>
+              <Link onClick={signIN} className='text-white hover:text-gray-400 duration-500'>
                 Login
               </Link>
             </li>
@@ -71,7 +71,7 @@ function Navbar() {
             className='w-[28px] h-[28px] object-contain cursor-pointer'
             onClick={() => setOpen(!open)}
           />
-          <div className={`${!open ? 'hidden' : 'flex'} bg-slate-200 p-6 absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}>
+          <div className={`${!open ? 'hidden' : 'flex'} bg-[#8C4E1D] p-6 absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}>
             <ul className='list-none flex justify-end items-start flex-1 flex-col gap-4'>
               {Links.map((link) => (
                 <li
@@ -81,7 +81,7 @@ function Navbar() {
                   }}
                   className='md:ml-8 text-xl md:my-0 my-7'
                 >
-                  <Link to={link.link} className='text-gray-800 hover:text-gray-400 duration-500'>
+                  <Link to={link.link} className='text-white hover:text-gray-400 duration-500'>
                     {link.name}
                   </Link>
                 </li>
@@ -94,7 +94,7 @@ function Navbar() {
                   className='md:ml-8 text-xl md:my-0 my-7 flex items-center'
                 >
                   <img src={user.photoURL} className='text-sm rounded-[50%] w-[40%]' alt={user.displayName} />
-                  <Link onClick={signout} className='text-gray-800 hover:text-gray-400 duration-500   '>
+                  <Link onClick={signout} className='text-white hover:text-gray-400 duration-500   '>
                     <MdOutlineLogout className='text-3xl' />
                   </Link>
                 </li>
@@ -105,7 +105,7 @@ function Navbar() {
                   }}
                   className='md:ml-8 text-xl md:my-0 my-7'
                 >
-                  <Link onClick={signIN} className='text-gray-800 hover:text-gray-400 duration-500'>
+                  <Link onClick={signIN} className='text-white hover:text-gray-400 duration-500'>
                     Login
                   </Link>
                 </li>
