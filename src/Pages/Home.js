@@ -60,26 +60,26 @@ function Home() {
 
   return (
     <div>
-      <div className='w-[80%] mx-auto mt-28 flex items-center pt-10 justify-between'>
-        <div className='flex w-[50%]'>
+      <div className='w-[80%] mx-auto mt-28 flex flex-col md:flex-row items-center pt-10 justify-between'>
+        <div className='flex w-full md:w-[50%]'>
           <Input placeholder='Search Police Stations' onChange={handlechange} className='searchBar shadow-md' />
           <Button className='customButton mx-4' onClick={handleclick}>
             Search
           </Button>
         </div>
-        <div className='flex'>
-          <select defaultValue="None" className='border rounded px-4 py-2 shadow-md mx-4' onChange={(e) => setSortState(e.target.value)}>
+        <div className='flex mt-4 md:mt-0'>
+          <select defaultValue="None" className='border rounded px-4 py-2 shadow-md' onChange={(e) => setSortState(e.target.value)}>
             <option value="name">Name</option>
             <option value="name_dsc">Name Dsc</option>
             <option value="rating">Rating</option>
             <option value="rating_dsc">Rating Dsc</option>
           </select>
-          <Button className='customButton' onClick={() => sort(sortState)}>Sort</Button>
+          <Button className='customButton mx-4' onClick={() => sort(sortState)}>Sort</Button>
         </div>
       </div>
 
       
-      <div className='container w-[80%] mx-auto grid md:grid-cols-3 grid-cols-1 gap-10 mt-16'>
+      <div className='container w-[80%] mx-auto grid md:grid-cols-3 grid-cols-1 gap-10 mt-8 md:mt-16'>
         {searchResults.slice(0, Math.min(index, searchResults.length)).map((item) => (
           <SingleCommPost key={item.id} item={item} />
         ))}
