@@ -45,7 +45,7 @@ function Navbar() {
               className='w-[28px] h-[28px] object-contain cursor-pointer'
               onClick={() => setOpen(!open)}
             />
-            <div className={`${!open ? 'hidden' : 'flex'}  bg-white p-6 absolute top-20 right-0 mx-4 shadow-2xl my-2 min-w-[140px] z-10 rounded-xl`}>
+            <div className={`${!open ? 'hidden' : 'flex'} bg-slate-50 p-6 absolute top-20 right-0 mx-4 shadow-2xl my-2 min-w-[140px] z-10 rounded-xl`}>
               <ul className='list-none flex justify-end items-start flex-1 flex-col gap-4'>
                 {Links.filter((link) => link).map((link) => (
                   <li
@@ -53,7 +53,7 @@ function Navbar() {
                     onClick={() => {
                       setOpen(!open);
                     }}
-                    className='md:ml-8 text-xl md:my-0 my-7'
+                    className='md:ml-8  text-base md:my-0 my-3'
                   >
                     <Link to={link.link} className='text-black hover:text-gray-400 duration-500'>
                       {link.name}
@@ -65,7 +65,7 @@ function Navbar() {
                     onClick={() => {
                       setOpen(!open);
                     }}
-                    className='md:ml-8 text-xl md:my-0 my-7 flex items-center'
+                    className='md:ml-8  text-base md:my-0 my-3 flex items-center'
                   >
                     <img src={user.photoURL} className='text-sm rounded-[50%] w-[40%]' alt={user.displayName} />
                     <Link onClick={signout} className='text-black hover:text-gray-400 duration-500   '>
@@ -77,7 +77,7 @@ function Navbar() {
                     onClick={() => {
                       setOpen(!open);
                     }}
-                    className='md:ml-8 text-xl md:my-0 my-7'
+                    className='md:ml-8  text-base md:my-0 my-3'
                   >
                     <Link onClick={signIN} className='text-black hover:text-gray-400 duration-500'>
                       Login
