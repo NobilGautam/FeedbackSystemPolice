@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PoliceData from '../components/data';
 import { motion } from 'framer-motion';
-import { slideIn } from '../utils/motion';
 import { collection, addDoc } from 'firebase/firestore';
 import { Auth, db } from '../Firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -73,22 +72,32 @@ function Form() {
     setForm({ ...form, [name]: value });
   };
 
+  const slideInLeftAndFadeIn = {
+    hidden: { opacity: 0, x: '-100%' },
+    show: { opacity: 1, x: 0, transition: { duration: 1, ease: 'easeOut' } },
+  };
+
+  const slideInRightAndFadeIn = {
+    hidden: { opacity: 0, x: '100%' },
+    show: { opacity: 1, x: 0, transition: { duration: 1, ease: 'easeOut' } },
+  };
+
   return (
     <>
       <div className='flex h-[100%] lg:flex-row justify-center flex-col items-center flex-wrap lg:mt-0 mt-[90px]'>
         <motion.div
           initial='hidden'
           animate='show'
-          variants={slideIn('left', 'tween', 0.2, 1)}
+          variants={slideInLeftAndFadeIn}
           className='w-[30%] flex mx-auto justify-center items-center'>
           <h1 className='text-9xl'>Fill</h1>
           <h1 className='text-5xl'>YOUR FEEDBACK</h1>
-        </motion.div>
+        </motion.div>;
 
         <motion.div
           initial='hidden'
           animate='show'
-          variants={slideIn('right', 'tween', 0.2, 1)}
+          variants={slideInRightAndFadeIn}
           className=' lg:w-[50%] mx-auto lg:mt-28'>
           <form
             id='feedbackForm'
@@ -162,7 +171,7 @@ function Form() {
                   onChange={handleChange}
                   className='bg-transparent sm:mt-1 xl:mt-0 xl:ml-2'>
                   {policeData.map((data) => (
-                    <option value={data.name}>{data.name}</option>
+                    <option key={data.id} value={data.name}>{data.name}</option>
                   ))}
                 </select>
               </label>

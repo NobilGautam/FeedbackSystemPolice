@@ -13,7 +13,7 @@ function Home() {
 
   const handleclick = () => {
     if (searchTerm.trimStart().length === 0) {
-      alert("Please type a valid PoliceStation");
+      alert("Please type a valid Police Station");
       return;
     }
     const temp = PoliceData.filter((item) =>
