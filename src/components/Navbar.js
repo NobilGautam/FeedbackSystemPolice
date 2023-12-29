@@ -28,8 +28,8 @@ function Navbar() {
 
   const Links = [
     { name: 'Home', link: '/' },
-    { name: 'My Feedbacks', link: '/myfeedback' },
-    { name: 'New Feedback', link: '/form' },
+    user && { name: 'My Feedbacks', link: '/myfeedback' },
+    user && { name: 'New Feedback', link: '/form' },
   ];
 
   return (
@@ -41,7 +41,7 @@ function Navbar() {
         </div>
 
         <ul className='hidden flex-row md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-[#8C4E1D] md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in'>
-          {Links.map((link) => (
+          {Links.filter((link) => link).map((link) => (
             <li key={link.name} className='md:ml-8 text-xl md:my-0 my-7'>
               <Link to={link.link} onClick={link.name === 'LOGIN' ? signIN : ''} className='text-white hover:text-gray-400 duration-500'>
                 {link.name}
@@ -73,7 +73,7 @@ function Navbar() {
           />
           <div className={`${!open ? 'hidden' : 'flex'} bg-[#8C4E1D] p-6 absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}>
             <ul className='list-none flex justify-end items-start flex-1 flex-col gap-4'>
-              {Links.map((link) => (
+              {Links.filter((link) => link).map((link) => (
                 <li
                   key={link.name}
                   onClick={() => {
