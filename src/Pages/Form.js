@@ -1,102 +1,107 @@
-import React, { useState } from 'react'
-import PoliceData from '../components/data'
+import React, { useState } from 'react';
+import PoliceData from '../components/data';
 import { motion } from 'framer-motion';
 import { slideIn } from '../utils/motion';
 import { collection, addDoc } from 'firebase/firestore';
-import { Auth, db } from "../Firebase"
-import { useAuthState } from "react-firebase-hooks/auth";
+import { Auth, db } from '../Firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import formBG from '../assets/formBG.jpg';
 
 var Sentiment = require('sentiment');
 var sentiment = new Sentiment();
+
 function Form() {
   var options = {
     extras: {
-     'not':-2,
-
-    }
+      not: -2,
+    },
   };
 
-  const policeData = PoliceData; 
-  const [user]=useAuthState(Auth);
- const postRef=collection(db,"feedbacks");
+  const policeData = PoliceData;
+  // eslint-disable-next-line no-unused-vars
+  const [user] = useAuthState(Auth);
+  const postRef = collection(db, 'feedbacks');
 
   const [form, setForm] = useState({
     fname: '',
     surname: '',
     age: '',
-    email: "",
+    email: '',
     gender: 'male',
-    psname: policeData.at(1).name,
+    psname: policeData[0].name,
     purpose: '',
-    feedback: ''
+    feedback: '',
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(form.fname + form.surname + form.age + form.gender + form.psname + form.purpose + form.feedback);
-addDoc(postRef,{
-  Email:form.email,
-  Age:form.age,
-  Feedback:form.feedback,
-  Gender:form.gender,
-  FirstName:form.fname,
-  LastName:form.surname,
-  PoliceStation:form.psname,
-  Purpose:form.purpose,
-  Feel: sentiment.analyze(form.feedback,options).score
+    alert(
+      form.fname +
+        form.surname +
+        form.age +
+        form.gender +
+        form.psname +
+        form.purpose +
+        form.feedback
+    );
+    addDoc(postRef, {
+      Email: form.email,
+      Age: form.age,
+      Feedback: form.feedback,
+      Gender: form.gender,
+      FirstName: form.fname,
+      LastName: form.surname,
+      PoliceStation: form.psname,
+      Purpose: form.purpose,
+      Feel: sentiment.analyze(form.feedback, options).score,
+    });
 
-    })
-    // var result = sentiment.analyze(form.feedback);
-    // console.log(result);
     setForm({
       fname: '',
       surname: '',
       age: '',
-      email: "",
+      email: '',
       gender: 'male',
-      psname: policeData.at(1).name,
+      psname: policeData[0].name,
       purpose: '',
-      feedback: ''
+      feedback: '',
     });
-  }
+  };
 
   const handleChange = (e) => {
-    // console.log(e.target.value);
     const { name, value } = e.target;
-    setForm({ ...form, [name]: value })
-  }
+    setForm({ ...form, [name]: value });
+  };
 
   return (
     <>
-      <div className='flex h-[100%] lg:flex-row justify-center flex-col items-center flex-wrap lg:mt-0 mt-[90px]' >
+      <div className='flex h-[100%] lg:flex-row justify-center flex-col items-center flex-wrap lg:mt-0 mt-[90px]'>
         <motion.div
-          initial="hidden"
-          animate="show"
-          variants={slideIn('left', "tween", 0.2, 1)}
+          initial='hidden'
+          animate='show'
+          variants={slideIn('left', 'tween', 0.2, 1)}
           className='w-[30%] flex mx-auto justify-center items-center'>
           <h1 className='text-9xl'>Fill</h1>
           <h1 className='text-5xl'>YOUR FEEDBACK</h1>
         </motion.div>
 
-
         <motion.div
-          initial="hidden"
-          animate="show"
-          variants={slideIn('right', "tween", 0.2, 1)}
+          initial='hidden'
+          animate='show'
+          variants={slideIn('right', 'tween', 0.2, 1)}
           className=' lg:w-[50%] mx-auto lg:mt-28'>
           <form
             id='feedbackForm'
             onSubmit={handleSubmit}
-            className='mt-12 flex flex-col gap-8 lg:mb-10  bg-slate-50 rounded-md shadow-xl shadow-[#5e5d5d]' style={{
+            className='mt-12 flex flex-col gap-8 lg:mb-10 bg-slate-50 rounded-md shadow-xl shadow-[#5e5d5d]'
+            style={{
               background: `url(${formBG})`,
               backgroundSize: 'cover',
               backgroundRepeat: 'no-repeat',
               backgroundPosition: 'center',
-          }}>
+            }}>
             <div className='flex flex-row justify-start flex-wrap'>
-              <label
-                className='w-[45%] ml-[5%] flex flex-col mt-5 mb-2'>
+              <label className='w-[45%] ml-[5%] flex flex-col mt-5 mb-2'>
                 <span className='font-bold'>First Name: </span>
                 <input
                   name='fname'
@@ -107,8 +112,7 @@ addDoc(postRef,{
                   className='rounded-md mt-1 bg-transparent'
                 />
               </label>
-              <label
-                className='flex flex-col mt-5 mb-2'>
+              <label className='flex flex-col mt-5 mb-2'>
                 <span className='font-bold'>Last Name: </span>
                 <input
                   name='surname'
@@ -121,8 +125,7 @@ addDoc(postRef,{
             </div>
 
             <div className='flex justify-start flex-wrap flex-row'>
-              <label
-                className='flex flex-col lg:flex-row w-[45%] lg:items-center ml-[5%] mt-5 mb-2'>
+              <label className='flex flex-col lg:flex-row w-[45%] lg:items-center ml-[5%] mt-5 mb-2'>
                 <span className='font-bold'>Age: </span>
                 <input
                   name='age'
@@ -134,34 +137,39 @@ addDoc(postRef,{
                   className='rounded-md sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent'
                 />
               </label>
-              <label
-                className='flex flex-col lg:flex-row lg:items-center mt-5 mb-2'>
+              <label className='flex flex-col lg:flex-row lg:items-center mt-5 mb-2'>
                 <span className='font-bold'>Gender: </span>
-                <select name='gender' form='feedbackForm' onChange={handleChange} value={form.gender} className='bg-transparent sm:mt-1 xl:mt-0 xl:ml-2'>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="others">Others</option>
+                <select
+                  name='gender'
+                  form='feedbackForm'
+                  onChange={handleChange}
+                  value={form.gender}
+                  className='bg-transparent sm:mt-1 xl:mt-0 xl:ml-2'>
+                  <option value='male'>Male</option>
+                  <option value='female'>Female</option>
+                  <option value='others'>Others</option>
                 </select>
               </label>
             </div>
 
             <div className='flex justify-start flex-wrap flex-row'>
-              <label
-                className='flex flex-col lg:flex-row lg:items-center mt-5 mb-2 ml-[5%]'>
+              <label className='flex flex-col lg:flex-row lg:items-center mt-5 mb-2 ml-[5%]'>
                 <span className='font-bold'>Select Police Station: </span>
-                <select name='psname' form='feedbackForm' value={form.psname} onChange={handleChange} className='bg-transparent sm:mt-1 xl:mt-0 xl:ml-2'>
-                  {
-                    policeData.map((data) => {
-                      return <option value={data.name}>{data.name}</option>
-                    })
-                  }
+                <select
+                  name='psname'
+                  form='feedbackForm'
+                  value={form.psname}
+                  onChange={handleChange}
+                  className='bg-transparent sm:mt-1 xl:mt-0 xl:ml-2'>
+                  {policeData.map((data) => (
+                    <option value={data.name}>{data.name}</option>
+                  ))}
                 </select>
               </label>
             </div>
 
             <div className='flex justify-start flex-wrap flex-row'>
-              <label
-                className='flex flex-col lg:flex-row lg:items-center mt-5 mb-2 ml-[5%]'>
+              <label className='flex flex-col lg:flex-row lg:items-center mt-5 mb-2 ml-[5%]'>
                 <span className='font-bold'>Purpose of visit: </span>
                 <input
                   type='text'
@@ -175,8 +183,7 @@ addDoc(postRef,{
               </label>
             </div>
             <div className='flex justify-start flex-wrap flex-row'>
-              <label
-                className='flex flex-col lg:flex-row lg:items-center mt-5 mb-2 ml-[5%]'>
+              <label className='flex flex-col lg:flex-row lg:items-center mt-5 mb-2 ml-[5%]'>
                 <span className='font-bold'>Email </span>
                 <input
                   type='email'
@@ -190,10 +197,8 @@ addDoc(postRef,{
               </label>
             </div>
 
-
             <div className='flex flex-initial justify-start flex-wrap flex-col'>
-              <label
-                className='flex flex-col mt-5 mb-2 ml-[5%]'>
+              <label className='flex flex-col mt-5 mb-2 ml-[5%]'>
                 <span className='font-bold'>Your feedback: </span>
                 <textarea
                   type='text'
@@ -208,16 +213,15 @@ addDoc(postRef,{
             </div>
 
             <button
-              type="submit"
-              className=" bg-gray-300 hover:bg-gray-400 ml-[5%] py-3 px-8 mb-3 outline-none w-fit text-black font-bold shadow-md shadow-primary rounded-xl"
-            >
+              type='submit'
+              className='bg-gray-300 hover:bg-gray-400 ml-[5%] py-3 px-8 mb-3 outline-none w-fit text-black font-bold shadow-md shadow-primary rounded-xl'>
               Submit
             </button>
           </form>
         </motion.div>
       </div>
     </>
-  )
+  );
 }
 
-export default Form
+export default Form;

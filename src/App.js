@@ -10,7 +10,6 @@ import Error from './Pages/Error';
 
 function App() {
   const [user]=useAuthState(Auth);
-  console.log(user);
   return (
   <div>
     <Navbar/>
@@ -24,6 +23,5 @@ function App() {
   </div>
   );
 }
-//check
 
 export default App;

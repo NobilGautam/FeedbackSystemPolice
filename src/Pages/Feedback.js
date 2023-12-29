@@ -27,7 +27,7 @@ function Feedback() {
       for (var i = 0; i < fina.length; i++) {
         const Ps = fina[i].PoliceStation;
         for (var j = 0; j < policeStations.length; j++) {
-          if (Ps == policeStations[j].name) {
+          if (Ps === policeStations[j].name) {
             matching_PS.push(policeStations[j]);
 
           }
@@ -35,25 +35,22 @@ function Feedback() {
       }
       const ImgUrls = new Map();
       const Address = new Map();
-      for (var j = 0; j < matching_PS.length; j++) {
-        ImgUrls.set(matching_PS[j].name, matching_PS[j].image);
-        Address.set(matching_PS[j].name, matching_PS[j].address);
+      for (var k = 0; k < matching_PS.length; k++) {
+        ImgUrls.set(matching_PS[k].name, matching_PS[k].image);
+        Address.set(matching_PS[k].name, matching_PS[k].address);
       }
-      console.log(ImgUrls);
       setPersonal(fina);
       setImgLinks(ImgUrls);
       setAddressLinks(Address);
     }
     getPost();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  console.log((personal));
-
 
   return (
     <div className='mt-24 py-10 '>
       {personal.map((item) => {
-        return <SingleFeedbackPost ImgLinks={ImgLinks} addressLinks={addressLinks} item={item} />
+        return <SingleFeedbackPost key={item.id} ImgLinks={ImgLinks} addressLinks={addressLinks} item={item} />
       })}
     </div>
   )
