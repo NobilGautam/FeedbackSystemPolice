@@ -60,7 +60,7 @@ function Home() {
 
   return (
     <div>
-      <div className='w-[80%] mx-auto mt-28 flex flex-col md:flex-row items-center pt-10 justify-between'>
+      <div className='w-[80%] mx-auto mt-20 md:mt-28 flex flex-col md:flex-row items-center pt-10 justify-between'>
         <div className='flex w-full md:w-[50%]'>
           <Input placeholder='Search Police Stations' onChange={handlechange} className='searchBar shadow-md' />
           <Button className='customButton mx-4' onClick={handleclick}>
@@ -68,7 +68,7 @@ function Home() {
           </Button>
         </div>
         <div className='flex mt-4 md:mt-0'>
-          <select defaultValue="None" className='border rounded px-4 py-2 shadow-md' onChange={(e) => setSortState(e.target.value)}>
+          <select defaultValue="None" className='border rounded px-4 py-2 shadow-md bg-white' onChange={(e) => setSortState(e.target.value)}>
             <option value="name">Name</option>
             <option value="name_dsc">Name Dsc</option>
             <option value="rating">Rating</option>
