@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from 'react'
 import '../index.css'
 import AOS from 'aos'
@@ -30,7 +31,7 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
     <div className='flex justify-center my-4 lg:h-[140px] hover:scale-105 duration-300'>
     <div className='flex flex-row md:w-[80%] justify-between rounded-2xl overflow-hidden shadow-md shadow-[#8e8e8e] bg-[#f6bd85]'>
       <div className='flex justify-between items-center w-[30%]'>
-        <img src={ImgLinks.get(item.PoliceStation)} className='w-[60%] h-[100%]'></img>
+        <img src={ImgLinks.get(item.PoliceStation)} className='w-[60%] h-[100%]' alt={`${item.name} Police Station Picture`}></img>
         <h2 className='text-[1.2rem] font-bold text-center w-[100%]'>{item.PoliceStation}</h2>
       </div>
       <div className='flex items-center md:text-[1.2rem] font-light justify-center w-[40%]'>
