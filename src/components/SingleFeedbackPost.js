@@ -28,7 +28,6 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
     </div>
     </div>
     </>
-
   )
 }
 
