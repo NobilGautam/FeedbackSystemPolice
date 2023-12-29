@@ -21,7 +21,7 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
         <div className='flex text-center items-center mt-2 md:mt-0 lg:text-[1.2rem] font-light justify-center lg:w-[40%]'>
           {addressLinks.get(item.PoliceStation)}
         </div>
-        <div className={`flex items-center min-h-max bg-zinc-50 p-4 mt-2 md:mt-0 font-light lg:w-[30%] justify-center ${item.Feel<=0?'text-red-500':'text-green-500'}`}>
+        <div className={`flex items-center min-h-max bg-zinc-50 p-4 mt-2 md:mt-0 font-light lg:w-[30%] justify-center ${item.Feel<=0?'text-red-600':'text-green-700'}`}>
           {item.Feedback}
         </div>
       </div>
