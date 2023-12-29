@@ -2,14 +2,14 @@ const policeStations = [
   {
     "address": 301001,
     "name": "ALWAR 1",
-    "rating": 1,
+    "rating": 5,
     "id": 1,
     "image": "https://i.imgur.com/8smnwsZ.png"
   },
   {
     "address": 301002,
     "name": "ALWAR 2",
-    "rating": 1,
+    "rating": 4,
     "id": 2,
     "image": "https://i.imgur.com/TemYr29.png"
   },
@@ -30,14 +30,14 @@ const policeStations = [
   {
     "address": 301020,
     "name": "ALWAR 5",
-    "rating": 3,
+    "rating": 4,
     "id": 5,
     "image": "https://i.imgur.com/NhV4YDI.png"
   },
   {
     "address": 301021,
     "name": "ALWAR 6",
-    "rating": 2,
+    "rating": 4,
     "id": 6,
     "image": "https://i.imgur.com/Gc8o0fl.png"
   },
@@ -79,7 +79,7 @@ const policeStations = [
   {
     "address": 301027,
     "name": "ALWAR 12",
-    "rating": 1,
+    "rating": 5,
     "id": 12,
     "image": "https://i.imgur.com/TemYr29.png"
   },
