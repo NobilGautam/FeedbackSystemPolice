@@ -8,7 +8,7 @@ import { MdOutlineLogout } from "react-icons/md";
 import close from '../assets/close.svg';
 import menu from '../assets/menu.svg';
 import rpLogo from '../assets/rplogo.png';
-
+// import '../index.css'
 function Navbar() {
   const navigator = useNavigate();
   const signIN = () => {
@@ -35,7 +35,7 @@ function Navbar() {
     
     <div className='shadow-md w-full fixed z-20 top-0 left-0 '>
       <div className='md:flex items-center justify-between py-4 md:px-10 px-7 bg-[#8C4E1D]'>
-        <div className='font-semibold text-2xl cursor-pointer flex items-center text-gray-800'>
+        <div className='font-semibold text-2xl cursor-pointer flex items-center'>
           <img src={rpLogo} className='w-[15%] mr-4'/>
           <span className='text-white'>
           Rajasthan Police Feedback
@@ -57,7 +57,7 @@ function Navbar() {
           <li className='md:ml-8 text-xl md:my-0 my-7'><Link to='/' className='text-white hover:text-gray-400 duration-500'>Home</Link></li>
           {user && <li className='md:ml-8 text-xl md:my-0 my-7'><Link to='/myfeedback' className='text-white hover:text-gray-400 duration-500'>My Feedback</Link></li>}
           {user && <li className='md:ml-8 text-xl md:my-0 my-7'><Link to='/form' className='text-white hover:text-gray-400 duration-500'>New Feedback</Link></li>}
-          {user ? <li className='md:ml-8 text-xl md:my-0 my-7 flex items-center'><img src={user.photoURL} className='text-sm rounded-[50%] w-[40%]' alt={user.displayName} /><Link onClick={signout} className='text-gray-800 hover:text-gray-400 duration-500 '><MdOutlineLogout className='text-3xl' /></Link></li> : <li className='md:ml-8 text-xl md:my-0 my-7'><Link onClick={signIN} className='text-gray-800 hover:text-gray-400 duration-500'>Login</Link></li>}
+          {user ? <li className='md:ml-8 text-xl md:my-0 my-7 flex items-center'><img src={user.photoURL} className='text-sm rounded-[50%] w-[40%]' alt={user.displayName} /><Link onClick={signout} className='text-white hover:text-gray-400 duration-500 '><MdOutlineLogout className='text-3xl' /></Link></li> : <li className='md:ml-8 text-xl md:my-0 my-7'><Link onClick={signIN} className='text-white hover:text-gray-400 duration-500'>Login</Link></li>}
         </ul>
 
 
@@ -71,18 +71,18 @@ function Navbar() {
             <ul className='list-none flex justify-end items-start flex-1 flex-col gap-4'>
               <li className='md:ml-8 text-xl md:my-0 my-7' onClick={() => {
                   setOpen(!open);
-                }}><Link to='/' className='text-gray-800 hover:text-gray-400 duration-500'>Home</Link></li>
+                }}><Link to='/' className='text-white hover:text-gray-400 duration-500'>Home</Link></li>
             {user && <li className='md:ml-8 text-xl md:my-0 my-7' onClick={() => {
                   setOpen(!open);
-                }}><Link to='/myfeedback' className='text-gray-800 hover:text-gray-400    duration-500'>My Feedback</Link></li>}
+                }}><Link to='/myfeedback' className='text-white  hover:text-gray-400    duration-500'>My Feedback</Link></li>}
             {user && <li className='md:ml-8 text-xl md:my-0 my-7' onClick={() => {
                   setOpen(!open);
-                }}><Link to='/form' className='text-gray-800 hover:text-gray-400    duration-500'>New Feedback</Link></li>}
+                }}><Link to='/form' className='text-white hover:text-gray-400    duration-500'>New Feedback</Link></li>}
             {user ? <li onClick={() => {
                   setOpen(!open);
-                }} className='md:ml-8 text-xl md:my-0 my-7 flex    items-center'><img src={user.photoURL} className='text-sm rounded-[50%] w-[40%]' alt={user.displayName} /><Link onClick={signout}    className='text-gray-800 hover:text-gray-400 duration-500   '><MdOutlineLogout className='text-3xl' /></Link></li> : <li onClick={() => {
+                }} className='md:ml-8 text-xl md:my-0 my-7 flex   items-center'><img src={user.photoURL} className='text-sm rounded-[50%] w-[40%]' alt={user.displayName} /><Link onClick={signout}    className= 'text-white hover:text-gray-400   logout duration-500 '><MdOutlineLogout className='text-2xl ' /></Link></li> : <li onClick={() => {
                   setOpen(!open);
-                }}     className='md:ml-8 text-xl md:my-0 my-7'><Link onClick={signIN}     className='text-gray-800 hover:text-gray-400 duration-500'>Login</    Link></li>}
+                }}     className='md:ml-8 text-xl md:my-0 my-7'><Link onClick={signIN}     className='text-white hover:text-gray-400 duration-500'>Login</    Link></li>}
             </ul>
           </div>
 

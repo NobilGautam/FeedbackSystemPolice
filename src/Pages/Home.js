@@ -10,6 +10,7 @@ function Home() {
   const [index, setIndex] = useState(6);
   const [flag, setFlag] = useState(true);
   const [loader, setLoader] = useState(false);
+  const [divv,setDiv]=useState(true);
 
   const handleclick = () => {
     if (searchTerm.trimStart().length === 0) {
@@ -33,12 +34,13 @@ function Home() {
     setLoader(true);
     setTimeout(() => {
       setLoader(false);
-      setIndex((prevIndex) => prevIndex + 3);
+      setIndex((prevIndex) => prevIndex + 6);
     }, 1000);
   };
 
   useEffect(() => {
     setSearchResults(searchResults);
+    setIndex(6);
   }, [flag, searchResults]);
 
   const sort = (sortState) => {
@@ -60,8 +62,8 @@ function Home() {
   return (
     <div className=''>
       <div className='w-[80%] mx-auto mt-28 flex'>
-        <Input placeholder='Search Police Stations' onChange={handlechange} />
-        <Button colorScheme='teal' onClick={handleclick}>
+        <Input placeholder='Search Police Stations' onChange={handlechange} className=' text-[#8C4E1D] border-2 border-sky-500' />
+        <Button className='customButton' onClick={handleclick}>
           Search
         </Button>
       </div>
@@ -73,26 +75,39 @@ function Home() {
         <option value="rating">Rating</option>
         <option value="rating_dsc">Rating Dsc</option>
       </select>
-        <Button colorScheme='teal' onClick={() => sort(sortState)}>
+        <Button className='customButton' onClick={() => sort(sortState)}>
           Sort
         </Button>
       </div>
+      
       <div className='container w-[80%] mx-auto grid md:grid-cols-3 grid-cols-1 gap-10 mt-5'>
         {searchResults.slice(0, Math.min(index, searchResults.length)).map((item) => (
           <SingleCommPost key={item.id} item={item} />
         ))}
       </div>
+      
+      {
+        searchResults.length>0?
+        
       <div className='flex justify-center items-center w-[80%] mx-auto py-5'>
+        
         {loader ? (
           <h1>
             <ThreeDots visible={true} height='80' width='80' color='#8C4E1D' radius='9' ariaLabel='three-dots-loading' />
           </h1>
         ) : (
-          <Button onClick={showLoader} className='mx-auto justify-center mt-2 loadmore'>
+          <div>
+            {
+              index<searchResults.length?
+          <Button onClick={showLoader} className='mx-auto justify-center mt-2 customButton'>
             Load More
-          </Button>
+          </Button>:""
+}
+          </div>
+         
         )}
-      </div>
+      </div>:<h1 className='mt-5 text-[#8C4E1D] text-center text-3xl'>No Police Staions found!!</h1>
+      }
     </div>
   );
 }
