@@ -52,7 +52,6 @@ function SingleCommPost({ item }) {
             </ButtonGroup>
           </div>
         </div> 
-        {/* ais */}
       </ImageCard>
     </div>
   );
