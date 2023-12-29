@@ -11,7 +11,7 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
   }, []);
 
   return (
-    <>
+    < div data-aos='fade-up' >
     <div className='flex justify-center my-8 min-h-max max-h-max lg:hover:scale-105 duration-300'>
       <div className='flex lg:flex-row w-[80%] flex-col lg:justify-between rounded-lg overflow-hidden shadow-md shadow-[#8e8e8e9a] bg-[#f6bd85]'>
         <div className='flex lg:flex-row flex-col w-[100%] lg:justify-between lg:items-center lg:w-[30%]'>
@@ -26,7 +26,7 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
         </div>
       </div>
     </div>
-    </>
+    </div>
   )
 }
 
