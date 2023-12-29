@@ -7,7 +7,7 @@ import { ThreeDots } from 'react-loader-spinner';
 function Home() {
   const [searchResults, setSearchResults] = useState(PoliceData);
   const [searchTerm, setSearchTerm] = useState('');
-  const [index, setIndex] = useState(15);
+  const [index, setIndex] = useState(6);
   const [flag, setFlag] = useState(true);
   const [loader, setLoader] = useState(false);
 
