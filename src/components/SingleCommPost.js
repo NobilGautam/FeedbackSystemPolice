@@ -32,7 +32,7 @@ function SingleCommPost({ item }) {
       <ImageCard ImgSrc={item.image}>
         <div className="w-full h-full flex justify-between items-center">
           <div>
-            <h1 className="font-sans">{item.name}</h1>
+            <h1 className="font-sans font-bold text-2xl">{item.name}</h1>
             <div className="flex w-full items-center justify-start">
               <Text className="mr-2">{item.address}</Text>
               <Text color="blue.600" fontSize="sm" className="flex">
