@@ -10,7 +10,6 @@ function Home() {
   const [index, setIndex] = useState(6);
   const [flag, setFlag] = useState(true);
   const [loader, setLoader] = useState(false);
-  const [divv,setDiv]=useState(true);
 
   const handleclick = () => {
     if (searchTerm.trimStart().length === 0) {
@@ -44,7 +43,7 @@ function Home() {
   }, [flag, searchResults]);
 
   const sort = (sortState) => {
-    if(sortState === 'name' || sortState === 'rating') searchResults.sort(sortBy(sortMethods[sortState].method));
+    if (sortState === 'name' || sortState === 'rating') searchResults.sort(sortBy(sortMethods[sortState].method));
     else searchResults.sort(sortByRev(sortMethods[sortState].method));
     setFlag(!flag);
   };
@@ -60,54 +59,49 @@ function Home() {
   };
 
   return (
-    <div className=''>
-      <div className='w-[80%] mx-auto mt-28 flex'>
-        <Input placeholder='Search Police Stations' onChange={handlechange} className=' text-[#8C4E1D] border-2 border-sky-500' />
-        <Button className='customButton' onClick={handleclick}>
-          Search
-        </Button>
+    <div>
+      <div className='w-[80%] mx-auto mt-28 flex items-center pt-10 justify-between'>
+        <div className='flex w-[50%]'>
+          <Input placeholder='Search Police Stations' onChange={handlechange} className='searchBar shadow-md' />
+          <Button className='customButton mx-4' onClick={handleclick}>
+            Search
+          </Button>
+        </div>
+        <div className='flex'>
+          <select defaultValue="None" className='border rounded px-4 py-2 shadow-md mx-4' onChange={(e) => setSortState(e.target.value)}>
+            <option value="name">Name</option>
+            <option value="name_dsc">Name Dsc</option>
+            <option value="rating">Rating</option>
+            <option value="rating_dsc">Rating Dsc</option>
+          </select>
+          <Button className='customButton' onClick={() => sort(sortState)}>Sort</Button>
+        </div>
       </div>
-      <div className='w-[80%] mx-auto'>
-      <select defaultValue="None" onChange={(e) => setSortState(e.target.value)}>
-        <option value="null" disabled>None</option>
-        <option value="name">Name</option>
-        <option value="name_dsc">Name Dsc</option>
-        <option value="rating">Rating</option>
-        <option value="rating_dsc">Rating Dsc</option>
-      </select>
-        <Button className='customButton' onClick={() => sort(sortState)}>
-          Sort
-        </Button>
-      </div>
+
       
-      <div className='container w-[80%] mx-auto grid md:grid-cols-3 grid-cols-1 gap-10 mt-5'>
+      <div className='container w-[80%] mx-auto grid md:grid-cols-3 grid-cols-1 gap-10 mt-16'>
         {searchResults.slice(0, Math.min(index, searchResults.length)).map((item) => (
           <SingleCommPost key={item.id} item={item} />
         ))}
       </div>
       
-      {
-        searchResults.length>0?
-        
-      <div className='flex justify-center items-center w-[80%] mx-auto py-5'>
-        
-        {loader ? (
-          <h1>
-            <ThreeDots visible={true} height='80' width='80' color='#8C4E1D' radius='9' ariaLabel='three-dots-loading' />
-          </h1>
-        ) : (
-          <div>
-            {
-              index<searchResults.length?
-          <Button onClick={showLoader} className='mx-auto justify-center mt-2 customButton'>
-            Load More
-          </Button>:""
-}
-          </div>
-         
-        )}
-      </div>:<h1 className='mt-5 text-[#8C4E1D] text-center text-3xl'>No Police Staions found!!</h1>
-      }
+      {searchResults.length > 0 ? (
+        <div className='flex justify-center items-center w-[80%] mx-auto py-5'>
+          {loader ? (
+            <h1>
+              <ThreeDots visible={true} height='80' width='80' color='#8C4E1D' radius='9' ariaLabel='three-dots-loading' />
+            </h1>
+          ) : (
+            <div>
+              {index < searchResults.length ? (
+                <Button onClick={showLoader} className='mx-auto justify-center mt-6 p-8 text-2xl customButton'>
+                  Load More
+                </Button>
+              ) : ""}
+            </div>
+          )}
+        </div>
+      ) : <h1 className='mt-5 text-[#8C4E1D] text-center text-3xl'>No Police Stations found!!</h1>}
     </div>
   );
 }

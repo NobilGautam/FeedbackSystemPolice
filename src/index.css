@@ -3,20 +3,34 @@
 @tailwind utilities;
 
 
+/* Tailwind base, components, and utilities */
+
 @media screen and (max-width: 600px) {
-   .hata{
+  .hata {
     display: none;
-   }
   }
- body{
-   background-color: #F8E2CF !important; 
- }
- .customButton{
-  background-color: #B27D3E  !important;
+}
+
+body {
+  background-color: #f8e2cf !important;
+}
+
+.customButton {
+  background-color: #b27d3e !important;
   color: white !important;
-  padding-left:1.2rem !important ;
+  padding-left: 1.2rem !important;
   padding-right: 1.2rem !important;
- }
- .logout{
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Adjust values as needed */
+}
+
+.logout {
   color: white !important;
- }
+}
+
+.searchBar {
+  background-color: white !important;
+  color: black !important;
+  padding-left: 1.2rem !important;
+  padding-right: 1.2rem !important;
+  max-width: 100%;
+}
