@@ -110,6 +110,7 @@ function Form() {
                   onChange={handleChange}
                   placeholder='Enter your first name'
                   className='rounded-md mt-1 bg-transparent'
+                  
                 />
               </label>
               <label className='flex flex-col mt-5 mb-2'>
