@@ -7,6 +7,7 @@ import Form from './Pages/Form';
 import {useAuthState} from "react-firebase-hooks/auth"
 import { Auth } from './Firebase';
 import Error from './Pages/Error';
+import Chat from './Chat';
 
 function App() {
   const [user]=useAuthState(Auth);
@@ -18,7 +19,10 @@ function App() {
       {user &&  <Route path="/myfeedback" element={<Feedback/>}></Route>}
       <Route path="/single/:id" element={<Single/>}></Route>
       { user && <Route path="/form" element={<Form/>}></Route>}
+      { user && <Route path="/chat" element={<Chat/>}></Route>}
+      
       <Route path="*" element={<Error/>}></Route>
+
       </Routes>
   </div>
   );
