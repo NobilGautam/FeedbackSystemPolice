@@ -59,12 +59,12 @@ function Single() {
       <Link to='/'>
         <Button className='customButton'>Back to All Posts</Button>
       </Link>
-      <div className='parent grid lg:grid-cols-2 w-[100%]  grid-cols-1 mx-auto gap-1'>
+      <div className='parent grid lg:grid-cols-2 w-[100%]  grid-cols-1 mx-auto gap-0'>
         <div className='imgC w-[90%] mt-5 mx-auto'>
           <img src={policeData.image} className='w-[100%]'></img>
         </div>
         <div className='info w-[90%] mx-auto mt-5' >
-          <h1 className='text-3xl font-sans text-[#8C4E1D] font-bold'>{policeData.name}</h1>
+          <h1 className='md:text-6xl  text-3xl font-sans text-[#8C4E1D] font-bold'>{policeData.name}</h1>
           <Text color="blue.600" fontSize="sm" className="flex">
                 {stars.map((tag, index) => (
                   <span key={index} className='text-2xl brightness-[95%]'>{tag}</span>
