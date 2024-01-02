@@ -7,20 +7,35 @@ import Form from './Pages/Form';
 import {useAuthState} from "react-firebase-hooks/auth"
 import { Auth } from './Firebase';
 import Error from './Pages/Error';
-import Chat from './Chat';
+import ChatBot from 'react-simple-chatbot'
+// import Chat from './Pages/Chat';
+const steps = [
+  {
+    id: '0',
+    message: 'Welcome to react chatbot!',
+    trigger: '1',
+  },
+  {
+    id: '1',
+    message: 'Bye!',
+    end: true,
+  },
+];
 
 function App() {
   const [user]=useAuthState(Auth);
   return (
   <div>
     <Navbar/>
+    
+    <ChatBot steps={steps} floating={true} className='chatbot'/>
     <Routes>
       <Route path="/" element={<Home></Home>}></Route>
       {user &&  <Route path="/myfeedback" element={<Feedback/>}></Route>}
       <Route path="/single/:id" element={<Single/>}></Route>
       { user && <Route path="/form" element={<Form/>}></Route>}
-      { user && <Route path="/chat" element={<Chat/>}></Route>}
-      
+      {/* { user && <Route path="/chat" element={<Chat/>}></Route>}
+       */}
       <Route path="*" element={<Error/>}></Route>
 
       </Routes>
