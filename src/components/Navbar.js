@@ -14,6 +14,7 @@ function Navbar() {
   const [open, setOpen] = useState(false);
   const [user] = useAuthState(Auth);
 
+
   const signIN = () => {
     signInWithPopup(Auth, Provider)
       .then(() => console.log('Sign in successful'))
@@ -31,6 +32,7 @@ function Navbar() {
     user && { name: 'My Feedbacks', link: '/myfeedback' },
     user && { name: 'New Feedback', link: '/form' },
   ];
+ 
 
   return (
     <div className='shadow-md w-full fixed z-20 top-0 left-0'>
