@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PoliceData from '../components/data';
 import { motion } from 'framer-motion';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, updateDoc, doc, getDoc } from 'firebase/firestore';
 import { Auth, db } from '../Firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import formBG from '../assets/formBG.jpg';
+import { useParams } from 'react-router';
 
 var Sentiment = require('sentiment');
 var sentiment = new Sentiment();
 
-function Form() {
+function Form({item}) {
   var options = {
     extras: {
       not: -2,
@@ -19,7 +20,32 @@ function Form() {
   const policeData = PoliceData;
   // eslint-disable-next-line no-unused-vars
   const [user] = useAuthState(Auth);
-  const postRef = collection(db, 'feedbacks');
+  const postRef = collection(db, 'visits');
+
+  const {documentId} = useParams();
+  console.log(documentId);
+
+  useEffect(() => {
+    // Fetch the document by documentId and set the initial form values
+    const fetchDocument = async () => {
+      const docRef = doc(db, 'visits', documentId);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        setForm({
+          fname: data.name,
+          age: data.age,
+          email: data.email,
+          gender: data.gender || 'male',
+          psname: data.policeStation,
+          purpose: '',
+          feedback: data.feedback || '',
+        });
+      }
+    };
+
+    fetchDocument();
+  }, [documentId]);
 
   const [form, setForm] = useState({
     fname: '',
@@ -32,17 +58,14 @@ function Form() {
     feedback: '',
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addDoc(postRef, {
-      Email: form.email,
-      Age: form.age,
-      Feedback: form.feedback,
-      Gender: form.gender,
-      FirstName: form.fname,
-      LastName: form.surname,
-      PoliceStation: form.psname,
-      Purpose: form.purpose,
+
+    const docRef = doc(db, 'visits', documentId);
+    await updateDoc(docRef, {
+      gender: form.gender,
+      feedback: form.feedback,
+      purpose: form.purpose,
       Feel: sentiment.analyze(form.feedback, options).score,
     });
 
@@ -102,7 +125,7 @@ function Form() {
             }}>
             <div className='flex flex-row justify-start flex-wrap'>
               <label className='w-[45%] ml-[5%] flex flex-col mt-5 mb-2'>
-                <span className='font-bold'>First Name: </span>
+                <span className='font-bold'>Full Name: </span>
                 <input
                   name='fname'
                   value={form.fname}
@@ -110,17 +133,8 @@ function Form() {
                   onChange={handleChange}
                   placeholder='Enter your first name'
                   className='rounded-md mt-1 bg-transparent'
+                  disabled
                   
-                />
-              </label>
-              <label className='flex flex-col mt-5 mb-2'>
-                <span className='font-bold'>Last Name: </span>
-                <input
-                  name='surname'
-                  value={form.surname}
-                  onChange={handleChange}
-                  placeholder='Enter your last name'
-                  className='rounded-md mt-1 bg-transparent'
                 />
               </label>
             </div>
@@ -136,6 +150,7 @@ function Form() {
                   placeholder='Enter your age'
                   type='number'
                   className='rounded-md sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent'
+                  disabled
                 />
               </label>
               <label className='flex flex-col lg:flex-row lg:items-center mt-5 mb-2'>
@@ -161,7 +176,8 @@ function Form() {
                   form='feedbackForm'
                   value={form.psname}
                   onChange={handleChange}
-                  className='bg-transparent sm:mt-1 xl:mt-0 xl:ml-2'>
+                  className='bg-transparent sm:mt-1 xl:mt-0 xl:ml-2'
+                  disabled>
                   {policeData.map((data) => (
                     <option key={data.id} value={data.name}>{data.name}</option>
                   ))}
@@ -194,6 +210,7 @@ function Form() {
                   onChange={handleChange}
                   placeholder='Enter your Email'
                   className='w-[550px] sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent'
+                  disabled
                 />
               </label>
             </div>

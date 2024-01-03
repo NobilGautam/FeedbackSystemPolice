@@ -30,7 +30,7 @@ function Navbar() {
   const Links = [
     { name: 'Home', link: '/' },
     user && { name: 'My Feedbacks', link: '/myfeedback' },
-    user && { name: 'New Feedback', link: '/form' },
+    user && { name: 'My Visits', link: '/myVisits' },
   ];
  
 

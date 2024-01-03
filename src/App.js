@@ -7,6 +7,8 @@ import Form from './Pages/Form';
 import {useAuthState} from "react-firebase-hooks/auth"
 import { Auth } from './Firebase';
 import Error from './Pages/Error';
+import NewVisit from './Pages/NewVisit';
+import MyVisits from './Pages/MyVisits';
 import ChatBot from 'react-simple-chatbot'
 // import Chat from './Pages/Chat';
 const steps = [
@@ -33,6 +35,9 @@ function App() {
       <Route path="/" element={<Home></Home>}></Route>
       {user &&  <Route path="/myfeedback" element={<Feedback/>}></Route>}
       <Route path="/single/:id" element={<Single/>}></Route>
+      { user && <Route path="/myVisits" element={<MyVisits/>}></Route>}
+      { user && <Route path='/newFeedback/:documentId' element={<Form/>} />}
+      <Route path="/newVisit" element={<NewVisit />} />
       { user && <Route path="/form" element={<Form/>}></Route>}
       {/* { user && <Route path="/chat" element={<Chat/>}></Route>}
        */}

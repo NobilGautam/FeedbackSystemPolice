@@ -4,14 +4,26 @@ import '../index.css'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
-function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
+function SingleVisitPost({ item, ImgLinks, addressLinks, documentId }) {
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
 
+  const formatTimestamp = (timestamp) => {
+    const date = timestamp ? new Date(timestamp.seconds * 1000) : null;
 
-  console.log(item);
+    if (date) {
+      // Customize the date and time format as needed
+      const formattedDate = date.toLocaleDateString();
+      const formattedTime = date.toLocaleTimeString();
+      return `${formattedDate} ${formattedTime}`;
+    }
+
+    return 'N/A';
+  };
+
   return (
     < div data-aos='fade-up' >
     <div className='flex justify-center my-8 min-h-max max-h-max lg:hover:scale-105 duration-300'>
@@ -23,8 +35,16 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
         <div className='flex text-center items-center mt-2 md:mt-0 lg:text-[1.2rem] font-light justify-center lg:w-[40%]'>
           {addressLinks.get(item.policeStation)}
         </div>
-        <div className={`flex items-center min-h-max bg-zinc-50 p-4 mt-2 md:mt-0 font-light lg:w-[30%] justify-center ${item.Feel<=0?'text-red-600':'text-green-700'}`}>
-          {item.feedback}
+        {/* <div className={`flex items-center min-h-max bg-zinc-50 p-4 mt-2 md:mt-0 font-light lg:w-[30%] justify-center ${item.Feel<=0?'text-red-600':'text-green-700'}`}>
+          {item.Feedback}
+        </div> */}
+        <div className='flex items-center mt-2 md:mt-0 lg:w-[30%] justify-center'>
+          <p className="font-light text-sm">
+            {formatTimestamp(item.timeStamp)}
+          </p>
+        </div>
+        <div>
+            <Link to={`/newFeedback/${documentId}`}>Add Feedback</Link>
         </div>
       </div>
     </div>
@@ -32,4 +52,4 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
   )
 }
 
-export default SingleFeedbackPost
+export default SingleVisitPost;
