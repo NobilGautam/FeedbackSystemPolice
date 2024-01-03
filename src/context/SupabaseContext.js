@@ -15,6 +15,7 @@ export const SupabaseProvider = ({ children }) => {
 
   // State to hold the fetched data
   const [tableData, setTableData] = useState([]);
+  // const [policeData, setPoliceData] = useState({});
 
   useEffect(() => {
     const fetchTableData = async () => {
@@ -27,6 +28,8 @@ export const SupabaseProvider = ({ children }) => {
         } else {
           // Update state with the retrieved data
           setTableData(data || []);
+          // setPoliceData(data||[]);
+  
         }
       } catch (error) {
         console.error("Error:", error.message);
