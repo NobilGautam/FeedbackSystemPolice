@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import SingleCommPost from '../components/SingleCommPost';
-import PoliceData from '../components/data';
-import { Button, Input } from '@chakra-ui/react';
-import { ThreeDots } from 'react-loader-spinner';
+import React, { useEffect, useState } from "react";
+import SingleCommPost from "../components/SingleCommPost";
+import { Button, Input } from "@chakra-ui/react";
+import { ThreeDots } from "react-loader-spinner";
+import { useSupabase } from "../context/SupabaseContext";
 
 function Home() {
+  const { tableData:PoliceData } = useSupabase();
   const [searchResults, setSearchResults] = useState(PoliceData);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [index, setIndex] = useState(6);
   const [flag, setFlag] = useState(true);
   const [loader, setLoader] = useState(false);
+
+  useEffect(() => {
+    setSearchResults(PoliceData)
+  },[PoliceData])
 
   const handleclick = () => {
     if (searchTerm.trimStart().length === 0) {
@@ -26,8 +31,10 @@ function Home() {
     setSearchTerm(e.target.value);
   };
 
-  const sortBy = (field) => (a, b) => (a[field] > b[field]) - (a[field] < b[field]);
-  const sortByRev = (field) => (a, b) => (a[field] < b[field]) - (a[field] > b[field]);
+  const sortBy = (field) => (a, b) =>
+    (a[field] > b[field]) - (a[field] < b[field]);
+  const sortByRev = (field) => (a, b) =>
+    (a[field] < b[field]) - (a[field] > b[field]);
 
   const showLoader = () => {
     setLoader(true);
@@ -43,7 +50,8 @@ function Home() {
   }, [flag, searchResults]);
 
   const sort = (sortState) => {
-    if (sortState === 'name' || sortState === 'rating') searchResults.sort(sortBy(sortMethods[sortState].method));
+    if (sortState === "name" || sortState === "rating")
+      searchResults.sort(sortBy(sortMethods[sortState].method));
     else searchResults.sort(sortByRev(sortMethods[sortState].method));
     setFlag(!flag);
   };
@@ -52,56 +60,83 @@ function Home() {
 
   const sortMethods = {
     none: { method: null },
-    name: { method: 'name' },
-    name_dsc: { method: 'name' },
-    rating: { method: 'rating' },
-    rating_dsc: { method: 'rating' },
+    name: { method: "name" },
+    name_dsc: { method: "name" },
+    rating: { method: "rating" },
+    rating_dsc: { method: "rating" },
   };
 
   return (
     <div>
-      <div className='w-[80%] mx-auto mt-20 md:mt-28 flex flex-col md:flex-row items-center pt-10 justify-between'>
-        <div className='flex w-full md:w-[50%]'>
-          <Input placeholder='Search Police Stations' onChange={handlechange} className='searchBar shadow-md' />
-          <Button className='customButton mx-4' onClick={handleclick}>
+      <div className="w-[80%] mx-auto mt-20 md:mt-28 flex flex-col md:flex-row items-center pt-10 justify-between">
+        <div className="flex w-full md:w-[50%]">
+          <Input
+            placeholder="Search Police Stations"
+            onChange={handlechange}
+            className="searchBar shadow-md"
+          />
+          <Button className="customButton mx-4" onClick={handleclick}>
             Search
           </Button>
         </div>
-        <div className='flex mt-4 md:mt-0'>
-          <select defaultValue="None" className='border rounded px-4 py-2 shadow-md bg-white' onChange={(e) => setSortState(e.target.value)}>
+        <div className="flex mt-4 md:mt-0">
+          <select
+            defaultValue="None"
+            className="border rounded px-4 py-2 shadow-md bg-white"
+            onChange={(e) => setSortState(e.target.value)}
+          >
             <option value="name">Name</option>
             <option value="name_dsc">Name Dsc</option>
             <option value="rating">Rating</option>
             <option value="rating_dsc">Rating Dsc</option>
           </select>
-          <Button className='customButton mx-4' onClick={() => sort(sortState)}>Sort</Button>
+          <Button className="customButton mx-4" onClick={() => sort(sortState)}>
+            Sort
+          </Button>
         </div>
       </div>
 
-      
-      <div className='container w-[80%] mx-auto grid md:grid-cols-3 grid-cols-1 gap-10 mt-8 md:mt-16'>
-        {searchResults.slice(0, Math.min(index, searchResults.length)).map((item) => (
-          <SingleCommPost key={item.id} item={item} />
-        ))}
+      <div className="container w-[80%] mx-auto grid md:grid-cols-3 grid-cols-1 gap-10 mt-8 md:mt-16">
+        {searchResults
+          .slice(0, Math.min(index, searchResults.length))
+          .map((item) => (
+            <SingleCommPost key={item.id} item={item} />
+          ))}
       </div>
-      
+
       {searchResults.length > 0 ? (
-        <div className='flex justify-center items-center w-[80%] mx-auto py-5'>
+        <div className="flex justify-center items-center w-[80%] mx-auto py-5">
           {loader ? (
             <h1>
-              <ThreeDots visible={true} height='80' width='80' color='#8C4E1D' radius='9' ariaLabel='three-dots-loading' />
+              <ThreeDots
+                visible={true}
+                height="80"
+                width="80"
+                color="#8C4E1D"
+                radius="9"
+                ariaLabel="three-dots-loading"
+              />
             </h1>
           ) : (
             <div>
               {index < searchResults.length ? (
-                <Button onClick={showLoader} className='mx-auto justify-center mt-6 p-8 text-2xl customButton'>
+                <Button
+                  onClick={showLoader}
+                  className="mx-auto justify-center mt-6 p-8 text-2xl customButton"
+                >
                   Load More
                 </Button>
-              ) : ""}
+              ) : (
+                ""
+              )}
             </div>
           )}
         </div>
-      ) : <h1 className='mt-5 text-[#8C4E1D] text-center text-3xl'>No Police Stations found!!</h1>}
+      ) : (
+        <h1 className="mt-5 text-[#8C4E1D] text-center text-3xl">
+          No Police Stations found!!
+        </h1>
+      )}
     </div>
   );
 }

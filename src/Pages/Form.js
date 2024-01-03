@@ -26,7 +26,6 @@ function Form({item}) {
   console.log(documentId);
 
   useEffect(() => {
-    // Fetch the document by documentId and set the initial form values
     const fetchDocument = async () => {
       const docRef = doc(db, 'visits', documentId);
       const docSnap = await getDoc(docRef);
