@@ -1,14 +1,14 @@
-import React from 'react'
-import { collection, getDocs } from 'firebase/firestore';
-import { Auth, db } from '../Firebase';
-import { useState, useEffect } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import policeStations from '../components/data';
-import SingleFeedbackPost from '../components/SingleFeedbackPost';
-
+/* eslint-disable array-callback-return */
+import React from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { Auth, db } from "../Firebase";
+import { useState, useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import policeStations from "../components/data";
+import SingleFeedbackPost from "../components/SingleFeedbackPost";
 
 function Feedback() {
-  const postRef = collection(db, 'visits');
+  const postRef = collection(db, "visits");
   const [ImgLinks, setImgLinks] = useState([]);
   const [personal, setPersonal] = useState([]);
   const [addressLinks, setAddressLinks] = useState([]);
@@ -19,17 +19,17 @@ function Feedback() {
       const temp = dataa.docs.filter((item) => {
         const va = item.data();
         return va.email === user.email;
+      });
 
-      })
-
-      const fina = temp.map((item) => { return item.data() });
+      const fina = temp.map((item) => {
+        return item.data();
+      });
       const matching_PS = [];
       for (var i = 0; i < fina.length; i++) {
         const Ps = fina[i].policeStation;
         for (var j = 0; j < policeStations.length; j++) {
           if (Ps === policeStations[j].name) {
             matching_PS.push(policeStations[j]);
-
           }
         }
       }
@@ -42,22 +42,27 @@ function Feedback() {
       setPersonal(fina);
       setImgLinks(ImgUrls);
       setAddressLinks(Address);
-    }
+    };
     getPost();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   return (
-    <div className='mt-24 py-10 '>
+    <div className="mt-24 py-10 ">
       {personal.map((item) => {
-        if(item.feedback){
-        
-        return <SingleFeedbackPost key={item.id} ImgLinks={ImgLinks} addressLinks={addressLinks} item={item} />
+        if (item.feedback) {
+          return (
+            <SingleFeedbackPost
+              key={item.id}
+              ImgLinks={ImgLinks}
+              addressLinks={addressLinks}
+              item={item}
+            />
+          );
         }
-        
       })}
     </div>
-  )
+  );
 }
 
-export default Feedback
+export default Feedback;
