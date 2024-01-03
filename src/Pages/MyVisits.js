@@ -29,7 +29,6 @@ export const MyVisits = () => {
           for (var j = 0; j < policeStations.length; j++) {
             if (Ps === policeStations[j].name) {
               matching_PS.push(policeStations[j]);
-              console.log('inside');
             }
           }
         }

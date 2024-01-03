@@ -44,8 +44,7 @@ function Feedback() {
       setAddressLinks(Address);
     };
     getPost();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [postRef, user.email]);
 
   return (
     <div className="mt-24 py-10 ">
