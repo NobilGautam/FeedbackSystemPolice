@@ -50,7 +50,11 @@ function Feedback() {
   return (
     <div className='mt-24 py-10 '>
       {personal.map((item) => {
+        if(item.feedback){
+        
         return <SingleFeedbackPost key={item.id} ImgLinks={ImgLinks} addressLinks={addressLinks} item={item} />
+        }
+        
       })}
     </div>
   )
