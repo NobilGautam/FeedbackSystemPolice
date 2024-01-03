@@ -49,7 +49,7 @@ function Single() {
           </TabList>
           <TabPanels>
             <TabPanel bgColor={'#FFFFFF'}>
-              <TabAbout/>
+              <TabAbout policeData={policeData}/>
             </TabPanel>
             <TabPanel bgColor={'#FFFFFF'}>
               <TabReviews/>

@@ -1,16 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import PoliceData from "../components/data";
+// import PoliceData from "../components/data";
 import { Text } from "@chakra-ui/react";
 import { BsStarFill } from "react-icons/bs";
 
-function TabAbout() {
+function TabAbout({policeData}) {
   const { id } = useParams();
   const [stars, setStars] = useState([]);
-  const PoliceStation = PoliceData[Number(id)-1]
+ let number=Number(policeData.rating);
+
+  
   useEffect(() => {
-    const number = Number(PoliceStation.rating);
+  
+  
     const temp = [];
     for (var i = 0; i < 5; i++) {
       if (i < number) {
@@ -28,15 +31,25 @@ function TabAbout() {
       }
     }
     setStars(temp);
-  }, []);
+  }, [policeData]);
   return (
-    <div className="flex items-center">
-        <h1>{PoliceStation.name}</h1>
-      <Text color="blue.600" fontSize="md" className="flex">
+    <div className="flex flex-col justify-center">
+        <h1 className="text-3xl">{policeData.name}</h1>
+  
+      <Text color="blue.600" fontSize="md" className="flex mt-1">
         {stars.map((tag, index) => (
-          <span key={index}>{tag}</span>
+          <span  className='text-2xl' key={index}>{tag}</span>
         ))}
       </Text>
+
+      <Text  fontSize="md" className="flex mt-1 text-[#8c4e1d] font-semibold">
+       <span className="text-xl"> Address: {policeData.address}</span>
+      
+      </Text>
+      <div className="map-container">
+        map
+      </div>
+
     </div>
   );
 }
