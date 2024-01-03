@@ -6,13 +6,25 @@ import { Button, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/reac
 import TabAbout from "../components/TabAbout";
 import TabReviews from "../components/TabReviews";
 import TabData from "../components/TabData";
-
+import { useSupabase } from "../context/SupabaseContext";
 function Single() {
+  
   const { id } = useParams();
+  const { tableData:  policeStations } = useSupabase();
+  console.log(policeStations);
   const [policeData, setPoliceData] = useState({});
-  useEffect(() => {
-    setPoliceData(PoliceData[Number(id)-1]);
-  }, [id]);
+  // useEffect(() => {
+  //   setPoliceData(policeStations[Number(id)-1]);
+  //   // setTimeout(() => {
+      
+  //   // // }, );
+  // }, [id,policeStations]);
+  useEffect(()=>{
+    if(policeStations){
+      setPoliceData(policeStations[Number(id)-1]);
+    }
+  },[id,policeStations])
+  if(!policeData) return null;
 
   return (
     <div className="container mx-auto mt-32 flex items-center justify-center">

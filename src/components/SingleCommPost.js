@@ -7,6 +7,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import ImageCard from './ImageCard';
 
+
 function SingleCommPost({ item }) {
   const number = item.rating;
   const temp = [];
