@@ -8,7 +8,7 @@ import SingleFeedbackPost from '../components/SingleFeedbackPost';
 
 
 function Feedback() {
-  const postRef = collection(db, 'feedbacks');
+  const postRef = collection(db, 'visits');
   const [ImgLinks, setImgLinks] = useState([]);
   const [personal, setPersonal] = useState([]);
   const [addressLinks, setAddressLinks] = useState([]);
@@ -18,14 +18,14 @@ function Feedback() {
       const dataa = await getDocs(postRef);
       const temp = dataa.docs.filter((item) => {
         const va = item.data();
-        return va.Email === user.email;
+        return va.email === user.email;
 
       })
 
       const fina = temp.map((item) => { return item.data() });
       const matching_PS = [];
       for (var i = 0; i < fina.length; i++) {
-        const Ps = fina[i].PoliceStation;
+        const Ps = fina[i].policeStation;
         for (var j = 0; j < policeStations.length; j++) {
           if (Ps === policeStations[j].name) {
             matching_PS.push(policeStations[j]);
