@@ -39,6 +39,7 @@ function Navbar() {
       <div className='md:flex items-center justify-between py-4 md:px-10 px-7 bg-[#8C4E1D]'>
         <div className='font-semibold text-2xl cursor-pointer flex items-center text-gray-800'>
           <img src={rpLogo} className='w-[15%] mr-4' alt='Logo' />
+          <img src='https://police.rajasthan.gov.in/uploads/emblem_1_a1b8909620.png' className='w-[50px]  hatade mr-4'></img>
           <span className='text-white text-base md:text-2xl'>Rajasthan Police Feedback</span>
           <div className='md:hidden flex flex-1 justify-end items-center'>
             <img

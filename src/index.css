@@ -26,7 +26,11 @@ body {
 .logout {
   color: white !important;
 }
-
+@media (max-width:420px){
+  .hatade{
+    display: none;
+  }
+}
 .searchBar {
   background-color: white !important;
   color: black !important;
