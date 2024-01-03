@@ -47,3 +47,16 @@ body {
 .sc-bZQynM{
   background-color: #8c4e1d !important;
 }
+
+.tooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1; /* Make sure it's above other elements */
+}
