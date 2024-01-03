@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router";
-import PoliceData from "../components/data";
 import { useState } from "react";
 import { Button, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import TabAbout from "../components/TabAbout";
@@ -13,12 +12,7 @@ function Single() {
   const { tableData:  policeStations } = useSupabase();
   console.log(policeStations);
   const [policeData, setPoliceData] = useState({});
-  // useEffect(() => {
-  //   setPoliceData(policeStations[Number(id)-1]);
-  //   // setTimeout(() => {
-      
-  //   // // }, );
-  // }, [id,policeStations]);
+
   useEffect(()=>{
     if(policeStations){
       setPoliceData(policeStations[Number(id)-1]);

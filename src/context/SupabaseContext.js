@@ -21,7 +21,7 @@ export const SupabaseProvider = ({ children }) => {
     const fetchTableData = async () => {
       try {
         // Fetch all rows from the specified table
-        const { data, error } = await supabase.from(tableName).select("*");
+        const { data, error } = await supabase.from(tableName).select("*").order("id");
 
         if (error) {
           console.error("Error fetching data:", error.message);
