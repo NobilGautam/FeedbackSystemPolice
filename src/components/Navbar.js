@@ -8,6 +8,7 @@ import { MdOutlineLogout } from 'react-icons/md';
 import close from '../assets/close.svg';
 import menu from '../assets/menu.svg';
 import rpLogo from '../assets/rplogo.png';
+import emblem from '../assets/emblem.png';
 
 function Navbar() {
   const navigator = useNavigate();
@@ -38,8 +39,8 @@ function Navbar() {
     <div className='shadow-md w-full fixed z-20 top-0 left-0'>
       <div className='md:flex items-center justify-between py-4 md:px-10 px-7 bg-[#8C4E1D]'>
         <div className='font-semibold text-2xl cursor-pointer flex items-center text-gray-800'>
+          <img src={emblem} alt='Emblem' className='w-[50px] hatade mr-4'/>
           <img src={rpLogo} className='w-[15%] mr-4' alt='Logo' />
-          <img src='https://police.rajasthan.gov.in/uploads/emblem_1_a1b8909620.png' className='w-[50px]  hatade mr-4'></img>
           <span className='text-white text-base md:text-2xl'>Rajasthan Police Feedback</span>
           <div className='md:hidden flex flex-1 justify-end items-center'>
             <img

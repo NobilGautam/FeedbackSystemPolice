@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import PoliceData from '../components/data';
 import { motion } from 'framer-motion';
@@ -18,7 +19,6 @@ function Form({item}) {
   };
 
   const policeData = PoliceData;
-  // eslint-disable-next-line no-unused-vars
   const [user] = useAuthState(Auth);
   const postRef = collection(db, 'visits');
 

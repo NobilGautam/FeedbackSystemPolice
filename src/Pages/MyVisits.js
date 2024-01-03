@@ -44,7 +44,7 @@ export const MyVisits = () => {
         setAddressLinks(Address);
       }
       getVisits();
-    }, [])
+    }, [docRef, user.email])
 
 
   return (
