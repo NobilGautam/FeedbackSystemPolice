@@ -4,10 +4,13 @@ import PoliceData from '../components/data';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../Firebase';
 import { useNavigate } from 'react-router-dom';
+import { useSupabase } from '../context/SupabaseContext';
 
 const NewVisit = () => {
 
   const navigator = useNavigate();
+  const {individual}=useSupabase();
+  console.log(individual);
   const docRef = collection(db, 'visits');
 
   const [form, setForm] = useState({
@@ -94,8 +97,9 @@ const NewVisit = () => {
                 <select
                   name='pstation'
                   form='visitForm'
-                  value={form.pstation}
+                  value={individual}
                   onChange={handleChange}
+                  disabled
                   className='bg-transparent border-[1px] border-black rounded-xl p-2'>
                   {PoliceData.map((data) => (
                     <option key={data.id} value={data.name}>{data.name}</option>

@@ -17,6 +17,7 @@ export const SupabaseProvider = ({ children }) => {
   const [tableData, setTableData] = useState([]);
   const [loading,setLoading]=useState(true);
   // const [policeData, setPoliceData] = useState({});
+  const [individual,setIndividual]=useState('');
 
   useEffect(() => {
     const fetchTableData = async () => {
@@ -44,7 +45,7 @@ export const SupabaseProvider = ({ children }) => {
   }, []); // The empty dependency array ensures that this effect runs only once when the context provider mounts
 
   return (
-    <SupabaseContext.Provider value={{ tableData ,loading}}>
+    <SupabaseContext.Provider value={{ tableData ,loading,individual,setIndividual}}>
       {children}
     </SupabaseContext.Provider>
   );
