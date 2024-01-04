@@ -17,9 +17,11 @@ import { Link } from "react-router-dom";
 import { IoMdArrowBack } from "react-icons/io";
 function Single() {
   const { id } = useParams();
-  const { tableData: policeStations } = useSupabase();
-  const { individual, setIndividual } = useSupabase();
-  console.log(policeStations);
+  const {
+    tableData: policeStations,
+    individual,
+    setIndividual,
+  } = useSupabase();
   const [policeData, setPoliceData] = useState({});
   const navigator = useNavigate();
 
@@ -99,7 +101,7 @@ function Single() {
                 <TabAbout policeData={policeData} />
               </TabPanel>
               <TabPanel bgColor={"#FFFFFF"}>
-                <TabReviews />
+                <TabReviews policeStationName={policeData.name} />
               </TabPanel>
               <TabPanel bgColor={"#FFFFFF"}>
                 <TabData />

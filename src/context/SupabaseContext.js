@@ -17,6 +17,7 @@ export const SupabaseProvider = ({ children }) => {
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [visits, setVisits] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [individual, setIndividual] = useState("");
 
   useEffect(() => {
@@ -111,7 +112,20 @@ export const SupabaseProvider = ({ children }) => {
   };
 
   const fetchReviews = async (policeStation) => {
-    
+    try {
+      const { data, error } = await supabase
+        .from(visitsTableName)
+        .select("*")
+        .filter("policeStation", "eq", policeStation);
+
+      if (error) {
+        console.error("Error fetching visits:", error.message);
+      } else {
+        setReviews(data || []);
+      }
+    } catch (error) {
+      console.error("Error fetching visits:", error.message);
+    }
   }
 
   return (
@@ -121,10 +135,12 @@ export const SupabaseProvider = ({ children }) => {
         loading,
         individual,
         visits,
+        reviews,
         setIndividual,
         handleSubmit,
         fetchVisits,
         updateVisit,
+        fetchReviews,
       }}
     >
       {children}
