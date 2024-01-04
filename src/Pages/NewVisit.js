@@ -12,7 +12,7 @@ const NewVisit = () => {
     name: "",
     age: "",
     email: "",
-    pstation: individual | "",
+    pstation: individual || "",
   });
 
   const handleChange = (e) => {
