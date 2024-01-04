@@ -44,17 +44,15 @@ const MyVisits = () => {
       {visits.length === 0 ? (
         <h1>Loading...</h1>
       ) : (
-        visits
-          .filter((item) => item.feedback === null) // Filter out items with non-null feedback
-          .map((item) => (
-            <SingleVisitPost
-              key={item.id}
-              ImgLinks={imgLinks}
-              addressLinks={addressLinks}
-              item={item}
-              documentId={item.documentID}
-            />
-          ))
+        visits.map((item) => (
+          <SingleVisitPost
+            key={item.id}
+            ImgLinks={imgLinks}
+            addressLinks={addressLinks}
+            item={item}
+            documentId={item.documentID}
+          />
+        ))
       )}
     </div>
   );

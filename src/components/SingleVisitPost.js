@@ -56,7 +56,11 @@ function SingleVisitPost({ item, ImgLinks, addressLinks, documentId }) {
             </p>
           </div>
           <div>
-            <Link to={`/newFeedback/${documentId}`}>Add Feedback</Link>
+            {item.feedback !== null ? (
+              <span>Feedback added</span>
+            ) : (
+              <Link to={`/newFeedback/${documentId}`}>Add Feedback</Link>
+            )}
           </div>
         </div>
       </div>
