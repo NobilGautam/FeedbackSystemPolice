@@ -74,9 +74,8 @@ function Navbar() {
                     </div>
                     <img
                       src={user.photoURL}
-                      className="text-sm rounded-[50%] w-[30%] logoimg "
+                      className="text-sm rounded-[50%] w-[30%]"
                       alt={user.displayName}
-                     
                     />
                   </li>
                 ) : (
@@ -147,7 +146,7 @@ function Navbar() {
             <li className="md:ml-8 text-xl md:my-0 my-7 flex items-center">
               <img
                 src={user.photoURL}
-                className="text-sm rounded-[50%] w-[50%] hover:shadow-[#B27D3E] hover:shadow-lg cursor-pointer"
+                className="text-sm rounded-[50%] w-[50%]"
                 alt={user.displayName}
                 onClick={handleImageClick}
               />
