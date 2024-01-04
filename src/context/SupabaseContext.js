@@ -15,6 +15,7 @@ export const SupabaseProvider = ({ children }) => {
 
   // State to hold the fetched data
   const [tableData, setTableData] = useState([]);
+  const [loading,setLoading]=useState(true);
   // const [policeData, setPoliceData] = useState({});
 
   useEffect(() => {
@@ -22,12 +23,14 @@ export const SupabaseProvider = ({ children }) => {
       try {
         // Fetch all rows from the specified table
         const { data, error } = await supabase.from(tableName).select("*").order("id");
+      
 
         if (error) {
           console.error("Error fetching data:", error.message);
         } else {
           // Update state with the retrieved data
           setTableData(data || []);
+          setLoading(false);
           // setPoliceData(data||[]);
   
         }
@@ -41,7 +44,7 @@ export const SupabaseProvider = ({ children }) => {
   }, []); // The empty dependency array ensures that this effect runs only once when the context provider mounts
 
   return (
-    <SupabaseContext.Provider value={{ tableData }}>
+    <SupabaseContext.Provider value={{ tableData ,loading}}>
       {children}
     </SupabaseContext.Provider>
   );
