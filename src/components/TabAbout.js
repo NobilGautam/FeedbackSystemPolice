@@ -27,22 +27,24 @@ function TabAbout({ policeData }) {
     setStars(temp);
   }, [policeData]);
   return (
-    <div className="flex flex-col justify-center">
-      <h1 className="text-3xl">{policeData.name}</h1>
-
-      <Text color="blue.600" fontSize="md" className="flex mt-1">
-        {stars.map((tag, index) => (
-          <span className="text-2xl" key={index}>
-            {tag}
-          </span>
-        ))}
-      </Text>
-
-      <Text fontSize="md" className="flex mt-1 text-[#8c4e1d] font-semibold">
-        <span className="text-xl"> PINCODE: {policeData.address}</span>
+    <div className="p-4">
+      <div className="flex flex-row w-[52%] justify-between">
+        <h1 className="text-3xl font-semibold text-[#8C4E1D]">
+          {policeData.name}
+        </h1>
+        <Text color="blue.600" fontSize="md" className="flex mt-1">
+          {stars.map((tag, index) => (
+            <span className="text-2xl" key={index}>
+              {tag}
+            </span>
+          ))}
+        </Text>
+      </div>
+      <Text fontSize="md" className="mt-4">
+        <div className="text-xl flex flex-col"> <span className="text-[#8c4e1d] font-semibold">PINCODE</span> <span className="mt-1">{policeData.address}</span> </div>
       </Text>
       <div className="map-container mt-5">
-        <h1 className="text-[#8c4e1d] text-xl font-semibold">LOCATION:</h1>
+        <h1 className="text-[#8c4e1d] text-xl font-semibold">Location</h1>
 
         <img src={map} alt="Map" className="text-2xl"></img>
       </div>

@@ -19,7 +19,6 @@ function Single() {
   const { id } = useParams();
   const {
     tableData: policeStations,
-    individual,
     setIndividual,
   } = useSupabase();
   const [policeData, setPoliceData] = useState({});

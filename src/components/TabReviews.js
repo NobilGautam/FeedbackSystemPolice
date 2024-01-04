@@ -29,7 +29,7 @@ function TabReviews({ policeStationName }) {
   }
 
   return (
-    <div className="container w-[90%] mx-auto grid md:grid-cols-2 grid-cols-1 gap-10 mt-8 md:my-2">
+    <div className="container grid md:grid-cols-2 grid-cols-1 gap-10 md:p-4">
       {reviews.length === 0 ? (
         <h1>Loading...</h1>
       ) : (
@@ -38,7 +38,7 @@ function TabReviews({ policeStationName }) {
           .map((item) => (
             <div
               key={item.documentID}
-              className="border border-#8C4E1D rounded-md p-4"
+              className={item.Feel > 0 ? 'border-green-500 border p-4 rounded-md' : 'border-red-500 border p-4 rounded-md'}
             >
               <div className="flex justify-between">
                 <h1 className="font-bold">{item.name}</h1>
@@ -51,6 +51,7 @@ function TabReviews({ policeStationName }) {
       )}
     </div>
   );
+  
 }
 
 export default TabReviews;
