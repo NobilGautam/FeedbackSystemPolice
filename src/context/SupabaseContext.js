@@ -110,6 +110,10 @@ export const SupabaseProvider = ({ children }) => {
     }
   };
 
+  const fetchReviews = async (policeStation) => {
+    
+  }
+
   return (
     <SupabaseContext.Provider
       value={{

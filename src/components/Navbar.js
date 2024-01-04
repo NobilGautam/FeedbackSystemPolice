@@ -76,7 +76,6 @@ function Navbar() {
                       src={user.photoURL}
                       className="text-sm rounded-[50%] w-[30%] logoimg "
                       alt={user.displayName}
-                     
                     />
                   </li>
                 ) : (
