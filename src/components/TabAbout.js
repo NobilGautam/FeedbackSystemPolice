@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 // import PoliceData from "../components/data";
 import { Text } from "@chakra-ui/react";
 import { BsStarFill } from "react-icons/bs";
-
+import map from '../assets/map.png'
 function TabAbout({policeData}) {
   const { id } = useParams();
   const [stars, setStars] = useState([]);
@@ -43,11 +43,14 @@ function TabAbout({policeData}) {
       </Text>
 
       <Text  fontSize="md" className="flex mt-1 text-[#8c4e1d] font-semibold">
-       <span className="text-xl"> Address: {policeData.address}</span>
+       <span className="text-xl"> PINCODE: {policeData.address}</span>
       
       </Text>
-      <div className="map-container">
-        map
+      <div className="map-container mt-5">
+
+        <h1 className="text-[#8c4e1d] text-xl font-semibold">LOCATION:</h1>
+
+        <img src={map} className="text-2xl"></img>
       </div>
 
     </div>
