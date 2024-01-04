@@ -7,45 +7,122 @@ const SupabaseContext = createContext();
 export const useSupabase = () => useContext(SupabaseContext);
 
 export const SupabaseProvider = ({ children }) => {
-  // Replace 'YOUR_SUPABASE_URL' and 'YOUR_SUPABASE_API_KEY' with your Supabase project URL and API key
-  const supabase = createClient("https://wbddiuietsgrlxuitvda.supabase.co", process.env.REACT_APP_SUPABASE_KEY);
+  const supabase = createClient(
+    "https://wbddiuietsgrlxuitvda.supabase.co",
+    process.env.REACT_APP_SUPABASE_KEY
+  );
 
-  // Replace 'YOUR_TABLE_NAME' with the name of the table you want to read
-  const tableName = "policeStations";
-
-  // State to hold the fetched data
+  const policeStationTableName = "policeStations";
+  const visitsTableName = "visits";
   const [tableData, setTableData] = useState([]);
-  const [loading,setLoading]=useState(true);
-  // const [policeData, setPoliceData] = useState({});
-  const [individual,setIndividual]=useState('');
+  const [loading, setLoading] = useState(true);
+  const [visits, setVisits] = useState([]);
+  const [individual, setIndividual] = useState("");
 
   useEffect(() => {
     const fetchTableData = async () => {
       try {
-        // Fetch all rows from the specified table
-        const { data, error } = await supabase.from(tableName).select("*").order("id");
-      
+        const { data, error } = await supabase
+          .from(policeStationTableName)
+          .select("*")
+          .order("id");
 
         if (error) {
           console.error("Error fetching data:", error.message);
         } else {
-          // Update state with the retrieved data
           setTableData(data || []);
           setLoading(false);
-          // setPoliceData(data||[]);
-  
         }
       } catch (error) {
         console.error("Error:", error.message);
       }
     };
 
-    // Call the function to fetch data when the context provider mounts
     fetchTableData();
-  }, []); // The empty dependency array ensures that this effect runs only once when the context provider mounts
+  }, []);
+
+  const fetchVisits = async (userEmail) => {
+    try {
+      const { data, error } = await supabase
+        .from(visitsTableName)
+        .select("*")
+        .filter("email", "eq", userEmail);
+
+      if (error) {
+        console.error("Error fetching visits:", error.message);
+      } else {
+        setVisits(data || []);
+      }
+    } catch (error) {
+      console.error("Error fetching visits:", error.message);
+    }
+  };
+
+  const handleSubmit = async (form) => {
+    try {
+      // Send form data to the "visits" table in Supabase
+      const { data, error } = await supabase.from(visitsTableName).upsert([
+        {
+          name: form.name,
+          age: form.age,
+          email: form.email,
+          policeStation: form.pstation,
+          created_at: new Date().toISOString(),
+        },
+      ]);
+
+      if (error) {
+        console.error("Error inserting data:", error.message);
+      } else {
+        console.log("Data inserted successfully:", data);
+      }
+    } catch (error) {
+      console.error("Error processing form submission:", error.message);
+    }
+  };
+
+  const updateVisit = async (documentId, form) => {
+    try {
+      // Update visit data in the "visits" table in Supabase
+      const { data, error } = await supabase
+        .from(visitsTableName)
+        .update([
+          {
+            name: form.name,
+            age: form.age,
+            email: form.email,
+            policeStation: form.pstation,
+            gender: form.gender,
+            feedback: form.feedback,
+            purpose: form.purpose,
+            Feel: form.Feel,
+          },
+        ])
+        .match({ documentID: documentId });
+
+      if (error) {
+        console.error("Error updating data:", error.message);
+      } else {
+        console.log("Data updated successfully:", data);
+      }
+    } catch (error) {
+      console.error("Error updating visit:", error.message);
+    }
+  };
 
   return (
-    <SupabaseContext.Provider value={{ tableData ,loading,individual,setIndividual}}>
+    <SupabaseContext.Provider
+      value={{
+        tableData,
+        loading,
+        individual,
+        visits,
+        setIndividual,
+        handleSubmit,
+        fetchVisits,
+        updateVisit,
+      }}
+    >
       {children}
     </SupabaseContext.Provider>
   );

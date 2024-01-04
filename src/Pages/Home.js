@@ -5,18 +5,17 @@ import { ThreeDots } from "react-loader-spinner";
 import { useSupabase } from "../context/SupabaseContext";
 
 function Home() {
-  const { tableData:PoliceData } = useSupabase();
+  const { tableData: PoliceData } = useSupabase();
   const [searchResults, setSearchResults] = useState(PoliceData);
   const [searchTerm, setSearchTerm] = useState("");
   const [index, setIndex] = useState(6);
   const [flag, setFlag] = useState(true);
   const [loader, setLoader] = useState(false);
-  const {loading}=useSupabase();
-
+  const { loading } = useSupabase();
 
   useEffect(() => {
-    setSearchResults(PoliceData)
-  },[PoliceData])
+    setSearchResults(PoliceData);
+  }, [PoliceData]);
 
   const handleclick = () => {
     if (searchTerm.trimStart().length === 0) {
@@ -57,7 +56,6 @@ function Home() {
     else searchResults.sort(sortByRev(sortMethods[sortState].method));
     setFlag(!flag);
   };
-  
 
   const [sortState, setSortState] = useState("name");
 
@@ -68,7 +66,6 @@ function Home() {
     rating: { method: "rating" },
     rating_dsc: { method: "rating" },
   };
- 
 
   return (
     <div>
@@ -100,17 +97,20 @@ function Home() {
         </div>
       </div>
 
-      { loading ? <h1 className="mt-32 text-center text-[#8c4e1d] text-5xl">Loading...</h1>: 
-
-      <div className="container w-[80%] mx-auto grid md:grid-cols-3 grid-cols-1 gap-10 mt-8 md:mt-16">
-        {searchResults
-          .slice(0, Math.min(index, searchResults.length))
-          .map((item) => (
-            <SingleCommPost key={item.id} item={item} />
-          ))}
-      </div>
-}
-      { searchResults.length > 0 ? (
+      {loading ? (
+        <h1 className="mt-32 text-center text-[#8c4e1d] text-5xl">
+          Loading...
+        </h1>
+      ) : (
+        <div className="container w-[80%] mx-auto grid md:grid-cols-3 grid-cols-1 gap-10 mt-8 md:mt-16">
+          {searchResults
+            .slice(0, Math.min(index, searchResults.length))
+            .map((item) => (
+              <SingleCommPost key={item.id} item={item} />
+            ))}
+        </div>
+      )}
+      {searchResults.length > 0 ? (
         <div className="flex justify-center items-center w-[80%] mx-auto py-5">
           {loader ? (
             <h1>
@@ -124,7 +124,7 @@ function Home() {
               />
             </h1>
           ) : (
-           <div>
+            <div>
               {index < searchResults.length ? (
                 <Button
                   onClick={showLoader}
@@ -140,9 +140,11 @@ function Home() {
         </div>
       ) : (
         <div>
-        {!loading && <h1 className="mt-5 text-[#8C4E1D] text-center text-3xl">
-          No Police Stations found!!
-        </h1>}
+          {!loading && (
+            <h1 className="mt-5 text-[#8C4E1D] text-center text-3xl">
+              No Police Stations found!!
+            </h1>
+          )}
         </div>
       )}
     </div>

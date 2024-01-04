@@ -1,58 +1,63 @@
-import React, { useEffect, useState } from 'react'
-import { collection, getDocs } from 'firebase/firestore';
-import { Auth, db } from '../Firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import SingleVisitPost from '../components/SingleVisitPost';
-import policeStations from '../components/data';
+import React, { useEffect, useState } from "react";
+import SingleVisitPost from "../components/SingleVisitPost";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Auth } from "../Firebase";
+import { useSupabase } from "../context/SupabaseContext";
 
-export const MyVisits = () => {
+const MyVisits = () => {
+  const [user] = useAuthState(Auth);
+  const { fetchVisits, visits, tableData: PoliceData } = useSupabase();
+  const [policeStations, setPoliceStations] = useState([]);
+  const [imgLinks, setImgLinks] = useState(new Map());
+  const [addressLinks, setAddressLinks] = useState(new Map());
 
-    const docRef = collection(db, 'visits');
-    const [user] = useAuthState(Auth);
-    const [personal, setPersonal] = useState([]);
-    const [imgLinks, setImgLinks] = useState([]);
-    const [addressLinks, setAddressLinks] = useState([]);
-    useEffect(() => {
-      const getVisits = async () => {
-        const visits = await getDocs(docRef);
-        const temp = visits.docs.filter((item) => {
-          const visit = item.data();
-          return visit.email === user.email;
-        })
+  useEffect(() => {
+    if (user) {
+      fetchVisits(user.email);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-        const myVisits = temp.map((item) => {
-          return { ...item.data(), id: item.id }; 
-        });
-        const matching_PS = [];
-        for (var i = 0; i < myVisits.length; i++) {
-          const Ps = myVisits[i].policeStation;
-          for (var j = 0; j < policeStations.length; j++) {
-            if (Ps === policeStations[j].name) {
-              matching_PS.push(policeStations[j]);
-            }
-          }
+  useEffect(() => {
+    const matching_PS = [];
+    setPoliceStations(PoliceData);
+    for (var i = 0; i < visits.length; i++) {
+      const Ps = visits[i].policeStation;
+      for (var j = 0; j < policeStations.length; j++) {
+        if (Ps === policeStations[j].name) {
+          matching_PS.push(policeStations[j]);
         }
-        const ImgUrls = new Map();
-        const Address = new Map();
-        for (var k = 0; k < matching_PS.length; k++) {
-          ImgUrls.set(matching_PS[k].name, matching_PS[k].image);
-          Address.set(matching_PS[k].name, matching_PS[k].address);
-        }
-        setPersonal(myVisits);
-        setImgLinks(ImgUrls);
-        setAddressLinks(Address);
       }
-      getVisits();
-    }, [docRef, user.email])
-
+    }
+    const ImgUrls = new Map();
+    const Address = new Map();
+    for (var k = 0; k < matching_PS.length; k++) {
+      ImgUrls.set(matching_PS[k].name, matching_PS[k].image);
+      Address.set(matching_PS[k].name, matching_PS[k].address);
+    }
+    setImgLinks(ImgUrls);
+    setAddressLinks(Address);
+  }, [PoliceData, policeStations, visits]);
 
   return (
-    <div className='mt-24 py-10 '>
-      {personal.map((item) => {
-        return <SingleVisitPost key={item.id} ImgLinks={imgLinks} addressLinks={addressLinks} item={item} documentId={item.id} />
-      })}
+    <div className="mt-24 py-10">
+      {visits.length === 0 ? (
+        <h1>Loading...</h1>
+      ) : (
+        visits
+          .filter((item) => item.feedback === null) // Filter out items with non-null feedback
+          .map((item) => (
+            <SingleVisitPost
+              key={item.id}
+              ImgLinks={imgLinks}
+              addressLinks={addressLinks}
+              item={item}
+              documentId={item.documentID}
+            />
+          ))
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default MyVisits;

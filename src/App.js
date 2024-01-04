@@ -10,7 +10,7 @@ import Error from "./Pages/Error";
 import NewVisit from "./Pages/NewVisit";
 import MyVisits from "./Pages/MyVisits";
 import ChatBot from "react-simple-chatbot";
-// import Chat from './Pages/Chat';
+
 const steps = [
   {
     id: "0",

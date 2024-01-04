@@ -1,54 +1,49 @@
 /* eslint-disable array-callback-return */
 import React from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { Auth, db } from "../Firebase";
+import { Auth } from "../Firebase";
 import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import policeStations from "../components/data";
 import SingleFeedbackPost from "../components/SingleFeedbackPost";
+import { useSupabase } from "../context/SupabaseContext";
 
-function Feedback() {
-  const postRef = collection(db, "visits");
-  const [ImgLinks, setImgLinks] = useState([]);
-  const [personal, setPersonal] = useState([]);
-  const [addressLinks, setAddressLinks] = useState([]);
+const Feedback = () => {
+  const { fetchVisits, visits, tableData: PoliceData } = useSupabase();
+  const [policeStations, setPoliceStations] = useState(PoliceData);
   const [user] = useAuthState(Auth);
-  useEffect(() => {
-    const getPost = async () => {
-      const dataa = await getDocs(postRef);
-      const temp = dataa.docs.filter((item) => {
-        const va = item.data();
-        return va.email === user.email;
-      });
+  const [ImgLinks, setImgLinks] = useState(new Map());
+  const [addressLinks, setAddressLinks] = useState(new Map());
 
-      const fina = temp.map((item) => {
-        return item.data();
-      });
-      const matching_PS = [];
-      for (var i = 0; i < fina.length; i++) {
-        const Ps = fina[i].policeStation;
-        for (var j = 0; j < policeStations.length; j++) {
-          if (Ps === policeStations[j].name) {
-            matching_PS.push(policeStations[j]);
-          }
+  useEffect(() => {
+    if (user) {
+      fetchVisits(user.email);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const matching_PS = [];
+    setPoliceStations(PoliceData);
+    for (var i = 0; i < visits.length; i++) {
+      const Ps = visits[i].policeStation;
+      for (var j = 0; j < policeStations.length; j++) {
+        if (Ps === policeStations[j].name) {
+          matching_PS.push(policeStations[j]);
         }
       }
-      const ImgUrls = new Map();
-      const Address = new Map();
-      for (var k = 0; k < matching_PS.length; k++) {
-        ImgUrls.set(matching_PS[k].name, matching_PS[k].image);
-        Address.set(matching_PS[k].name, matching_PS[k].address);
-      }
-      setPersonal(fina);
-      setImgLinks(ImgUrls);
-      setAddressLinks(Address);
-    };
-    getPost();
-  }, [postRef, user.email]);
+    }
+    const ImgUrls = new Map();
+    const Address = new Map();
+    for (var k = 0; k < matching_PS.length; k++) {
+      ImgUrls.set(matching_PS[k].name, matching_PS[k].image);
+      Address.set(matching_PS[k].name, matching_PS[k].address);
+    }
+    setImgLinks(ImgUrls);
+    setAddressLinks(Address);
+  }, [PoliceData, policeStations, visits]);
 
   return (
     <div className="mt-24 py-10 ">
-      {personal.map((item) => {
+      {visits.map((item) => {
         if (item.feedback) {
           return (
             <SingleFeedbackPost
@@ -62,6 +57,6 @@ function Feedback() {
       })}
     </div>
   );
-}
+};
 
 export default Feedback;

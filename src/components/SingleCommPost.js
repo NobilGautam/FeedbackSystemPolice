@@ -1,27 +1,29 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { Text, Button, ButtonGroup } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
-import { BsStarFill } from 'react-icons/bs';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import ImageCard from './ImageCard';
-
+import React from "react";
+import { useEffect } from "react";
+import { Text, Button, ButtonGroup } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import { BsStarFill } from "react-icons/bs";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import ImageCard from "./ImageCard";
 
 function SingleCommPost({ item }) {
   const number = item.rating;
   const temp = [];
   for (var i = 0; i < 5; i++) {
-    if(i < number) {temp.push(
-      <span key={i}>
-        <BsStarFill color="gold" />
-      </span>
-    )}
-    else {temp.push(
-      <span key={i}>
-        <BsStarFill color="grey" />
-      </span>
-    )}
+    if (i < number) {
+      temp.push(
+        <span key={i}>
+          <BsStarFill color="gold" />
+        </span>
+      );
+    } else {
+      temp.push(
+        <span key={i}>
+          <BsStarFill color="grey" />
+        </span>
+      );
+    }
   }
 
   useEffect(() => {
@@ -46,13 +48,13 @@ function SingleCommPost({ item }) {
           <div className="flex justify-end">
             <ButtonGroup>
               <Link to={`/single/${item.id}`}>
-              <Button variant="solid" bg="#F4BC77" fontWeight='bold'>
+                <Button variant="solid" bg="#F4BC77" fontWeight="bold">
                   View more
                 </Button>
               </Link>
             </ButtonGroup>
           </div>
-        </div> 
+        </div>
       </ImageCard>
     </div>
   );
