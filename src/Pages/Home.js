@@ -21,14 +21,7 @@ function Home() {
   }, [PoliceData])
 
   const handleclick = () => {
-    if (searchTerm.trimStart().length === 0) {
-      alert("Please type a valid Police Station");
-      return;
-    }
-    const temp = PoliceData.filter((item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setSearchResults(temp);
+  
   };
 
   const handlechange = (e) => {
@@ -53,6 +46,18 @@ function Home() {
     setIndex(6);
   }, [flag, searchResults]);
 
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    if (searchTerm.trimStart().length === 0) {
+      alert("Please type a valid Police Station");
+      return;
+    }
+    const temp = PoliceData.filter((item) =>
+      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(temp);
+
+  }
   const sort = (sortState) => {
     if (sortState === "name" || sortState === "rating")
       searchResults.sort(sortBy(sortMethods[sortState].method));
@@ -75,16 +80,18 @@ function Home() {
   return (
     <div>
       <div className="w-[80%] mx-auto mt-20 md:mt-28 flex flex-col md:flex-row items-center pt-10 justify-between">
-        <div className="flex w-full md:w-[50%]">
+        <form className="flex w-full md:w-[50%]" onSubmit={handleSubmit}>
+          
           <Input
             placeholder="Search Police Stations"
             onChange={handlechange}
             className="searchBar shadow-md"
           />
-          <Button className="customButton mx-4" onClick={handleclick}>
+          
+          <Button className="customButton mx-4"  type="submit">
             Search
           </Button>
-        </div>
+        </form>
         <div className="flex mt-4 md:mt-0">
           <select
             defaultValue="None"
@@ -139,7 +146,7 @@ function Home() {
               />
             </h1>
           ) : (
-            <div>
+          <div>
               {index < searchResults.length ? (
                 <Button
                   onClick={showLoader}
@@ -150,7 +157,7 @@ function Home() {
               ) : (
                 ""
               )}
-            </div>
+            </div >
           )}
         </div>
       ) : (
