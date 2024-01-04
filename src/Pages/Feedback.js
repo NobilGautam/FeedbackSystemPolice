@@ -13,6 +13,7 @@ function Feedback() {
   const [personal, setPersonal] = useState([]);
   const [addressLinks, setAddressLinks] = useState([]);
   const [user] = useAuthState(Auth);
+  
   useEffect(() => {
     const getPost = async () => {
       const dataa = await getDocs(postRef);
@@ -45,6 +46,9 @@ function Feedback() {
     };
     getPost();
   }, [postRef, user.email]);
+  
+  
+
 
   return (
     <div className="mt-24 py-10 ">
