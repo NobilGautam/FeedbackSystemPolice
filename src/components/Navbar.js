@@ -79,19 +79,7 @@ function Navbar() {
                     />
                   </li>
                 ) : (
-                  <li
-                    onClick={() => {
-                      setOpen(!open);
-                    }}
-                    className="md:ml-8 text-base md:my-0 my-3"
-                  >
-                    <Link
-                      onClick={signIN}
-                      className="text-black hover:text-gray-400 duration-500"
-                    >
-                      Login
-                    </Link>
-                  </li>
+                  <></>
                 )}
                 {Links.filter((link) => link).map((link) => (
                   <li
