@@ -19,16 +19,7 @@ function Single() {
 
   useEffect(()=>{
     if(policeStations){
-      let temp={};
-for(let i=0; i<policeStations.length; i++){
-  if(policeStations[i].id===Number(id)){
-    temp=policeStations[i];
-    break;
-  }
-}
-      
-
-      setPoliceData(temp);
+      setPoliceData(policeStations[Number(id)-1]);
     }
   },[id,policeStations])
   if(!policeData) return null;

@@ -3,25 +3,30 @@ import SingleCommPost from "../components/SingleCommPost";
 import { Button, Input } from "@chakra-ui/react";
 import { ThreeDots } from "react-loader-spinner";
 import { useSupabase } from "../context/SupabaseContext";
-import { ColorRing } from "react-loader-spinner";
-
 
 function Home() {
-  const { tableData: PoliceData } = useSupabase();
+  const { tableData:PoliceData } = useSupabase();
   const [searchResults, setSearchResults] = useState(PoliceData);
   const [searchTerm, setSearchTerm] = useState("");
   const [index, setIndex] = useState(6);
   const [flag, setFlag] = useState(true);
   const [loader, setLoader] = useState(false);
-  const { loading } = useSupabase();
+  const {loading}=useSupabase();
 
 
   useEffect(() => {
     setSearchResults(PoliceData)
-  }, [PoliceData])
+  },[PoliceData])
 
   const handleclick = () => {
-  
+    if (searchTerm.trimStart().length === 0) {
+      alert("Please type a valid Police Station");
+      return;
+    }
+    const temp = PoliceData.filter((item) =>
+      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(temp);
   };
 
   const handlechange = (e) => {
@@ -46,25 +51,13 @@ function Home() {
     setIndex(6);
   }, [flag, searchResults]);
 
-  const handleSubmit=(e)=>{
-    e.preventDefault();
-    if (searchTerm.trimStart().length === 0) {
-      alert("Please type a valid Police Station");
-      return;
-    }
-    const temp = PoliceData.filter((item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setSearchResults(temp);
-
-  }
   const sort = (sortState) => {
     if (sortState === "name" || sortState === "rating")
       searchResults.sort(sortBy(sortMethods[sortState].method));
     else searchResults.sort(sortByRev(sortMethods[sortState].method));
     setFlag(!flag);
   };
-
+  
 
   const [sortState, setSortState] = useState("name");
 
@@ -75,23 +68,21 @@ function Home() {
     rating: { method: "rating" },
     rating_dsc: { method: "rating" },
   };
-
+ 
 
   return (
     <div>
       <div className="w-[80%] mx-auto mt-20 md:mt-28 flex flex-col md:flex-row items-center pt-10 justify-between">
-        <form className="flex w-full md:w-[50%]" onSubmit={handleSubmit}>
-          
+        <div className="flex w-full md:w-[50%]">
           <Input
             placeholder="Search Police Stations"
             onChange={handlechange}
             className="searchBar shadow-md"
           />
-          
-          <Button className="customButton mx-4"  type="submit">
+          <Button className="customButton mx-4" onClick={handleclick}>
             Search
           </Button>
-        </form>
+        </div>
         <div className="flex mt-4 md:mt-0">
           <select
             defaultValue="None"
@@ -109,30 +100,17 @@ function Home() {
         </div>
       </div>
 
-      {loading ? <div className="flex justify-center">
-        <h1 className="mt-32 text-center text-[#8c4e1d] text-5xl">
-          <ColorRing
-            visible={true}
-            height="80"
-            width="80"
-            ariaLabel="color-ring-loading"
-            wrapperStyle={{}}
-            wrapperClass="color-ring-wrapper"
-            colors={['#8C4E1D', '#8C4E1D', '#8C4E1D', '#8C4E1D', '#8C4E1D']}
-          />
-        </h1>
-      </div>
-        :
+      { loading ? <h1 className="mt-32 text-center text-[#8c4e1d] text-5xl">Loading...</h1>: 
 
-        <div className="container w-[80%] mx-auto grid md:grid-cols-3 grid-cols-1 gap-10 mt-8 md:mt-16">
-          {searchResults
-            .slice(0, Math.min(index, searchResults.length))
-            .map((item) => (
-              <SingleCommPost key={item.id} item={item} />
-            ))}
-        </div>
-      }
-      {searchResults.length > 0 ? (
+      <div className="container w-[80%] mx-auto grid md:grid-cols-3 grid-cols-1 gap-10 mt-8 md:mt-16">
+        {searchResults
+          .slice(0, Math.min(index, searchResults.length))
+          .map((item) => (
+            <SingleCommPost key={item.id} item={item} />
+          ))}
+      </div>
+}
+      { searchResults.length > 0 ? (
         <div className="flex justify-center items-center w-[80%] mx-auto py-5">
           {loader ? (
             <h1>
@@ -146,7 +124,7 @@ function Home() {
               />
             </h1>
           ) : (
-          <div>
+           <div>
               {index < searchResults.length ? (
                 <Button
                   onClick={showLoader}
@@ -157,14 +135,14 @@ function Home() {
               ) : (
                 ""
               )}
-            </div >
+            </div>
           )}
         </div>
       ) : (
         <div>
-          {!loading && <h1 className="mt-5 text-[#8C4E1D] text-center text-3xl">
-            No Police Stations found!!
-          </h1>}
+        {!loading && <h1 className="mt-5 text-[#8C4E1D] text-center text-3xl">
+          No Police Stations found!!
+        </h1>}
         </div>
       )}
     </div>
