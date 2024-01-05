@@ -22,6 +22,7 @@ export const SupabaseProvider = ({ children }) => {
   const [reviewLoader,setReviewLoader]=useState(true);
   const [visitsLoader,setVisitsLoader]=useState(true);
   const[globalVisits,setGlobalVisits]=useState([]);
+  const [feedback,setFeedback]=useState([]);
 
   useEffect(() => {
     const fetchTableData = async () => {
@@ -55,8 +56,11 @@ export const SupabaseProvider = ({ children }) => {
       if (error) {
         console.error("Error fetching visits:", error.message);
       } else {
+       
         setVisits(data || []);
+        
         setGlobalVisits(data||[]);
+        setFeedback(data||[]);
         setVisitsLoader(false);
       }
     } catch (error) {
@@ -151,7 +155,9 @@ export const SupabaseProvider = ({ children }) => {
         reviewLoader,
         setReviewLoader,
         visitsLoader,
-        setVisits
+        setVisits,
+        feedback,
+        setFeedback
       }}
     >
       {children}
