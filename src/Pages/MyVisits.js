@@ -8,17 +8,20 @@ import { Spinner } from "@chakra-ui/react";
 
 const MyVisits = () => {
   const [user] = useAuthState(Auth);
-  const {
-    fetchVisits,
-    visits,
-    visitsLoader,
-    tableData: PoliceData,
-  } = useSupabase();
-
+  const { fetchVisits, visits,visitsLoader, tableData: PoliceData} = useSupabase();
+  
   const [policeStations, setPoliceStations] = useState([]);
   const [imgLinks, setImgLinks] = useState(new Map());
   const [addressLinks, setAddressLinks] = useState(new Map());
 
+  
+  const sortMethods = {
+    none: { method: null },
+    name: { method: "name" },
+    name_dsc: { method: "name" },
+    rating: { method: "rating" },
+    rating_dsc: { method: "rating" },
+  };
   useEffect(() => {
     if (user) {
       fetchVisits(user.email);

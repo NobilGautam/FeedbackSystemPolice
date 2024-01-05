@@ -68,6 +68,7 @@ function Home() {
     name_dsc: { method: "name" },
     rating: { method: "rating" },
     rating_dsc: { method: "rating" },
+    day_visited:{method:""}
   };
 
   return (
