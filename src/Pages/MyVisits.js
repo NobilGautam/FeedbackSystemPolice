@@ -3,10 +3,12 @@ import SingleVisitPost from "../components/SingleVisitPost";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Auth } from "../Firebase";
 import { useSupabase } from "../context/SupabaseContext";
+import { ColorRing } from "react-loader-spinner";
 
 const MyVisits = () => {
   const [user] = useAuthState(Auth);
-  const { fetchVisits, visits, tableData: PoliceData } = useSupabase();
+  const { fetchVisits, visits,visitsLoader, tableData: PoliceData} = useSupabase();
+  
   const [policeStations, setPoliceStations] = useState([]);
   const [imgLinks, setImgLinks] = useState(new Map());
   const [addressLinks, setAddressLinks] = useState(new Map());
@@ -38,6 +40,22 @@ const MyVisits = () => {
     setImgLinks(ImgUrls);
     setAddressLinks(Address);
   }, [PoliceData, policeStations, visits]);
+
+  if(visitsLoader){
+    return  (<div className="flex justify-center items-center  my-auto mx-auto">
+    <h1 className="mt-32 text-center text-[#8c4e1d] text-5xl">
+      <ColorRing
+        visible={true}
+        height="80"
+        width="80"
+        ariaLabel="color-ring-loading"
+        wrapperStyle={{}}
+        wrapperClass="color-ring-wrapper"
+        colors={["#8C4E1D", "#8C4E1D", "#8C4E1D", "#8C4E1D", "#8C4E1D"]}
+      />
+    </h1>
+  </div>)
+  }
 
   return (
     <div className="mt-24 py-10">
