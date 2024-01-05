@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SingleCommPost from "../components/SingleCommPost";
-import { Button, Input } from "@chakra-ui/react";
+import { Button, Input, Select, Spinner } from "@chakra-ui/react";
 import { ThreeDots } from "react-loader-spinner";
 import { useSupabase } from "../context/SupabaseContext";
 import { ColorRing } from "react-loader-spinner";
@@ -17,8 +17,6 @@ function Home() {
   useEffect(() => {
     setSearchResults(PoliceData);
   }, [PoliceData]);
-
-
 
   const handlechange = (e) => {
     setSearchTerm(e.target.value);
@@ -85,16 +83,18 @@ function Home() {
           </Button>
         </form>
         <div className="flex mt-4 md:mt-0">
-          <select
+          <Select
             defaultValue="None"
-            className="border rounded px-4 py-2 shadow-md bg-white"
+            className="shadow-md"
+            bg={"white"}
             onChange={(e) => setSortState(e.target.value)}
           >
+            <option disabled value="None">None</option>
             <option value="name">Name</option>
             <option value="name_dsc">Name Dsc</option>
             <option value="rating">Rating</option>
             <option value="rating_dsc">Rating Dsc</option>
-          </select>
+          </Select>
           <Button className="customButton mx-4" onClick={() => sort(sortState)}>
             Sort
           </Button>
@@ -102,18 +102,14 @@ function Home() {
       </div>
 
       {loading ? (
-        <div className="flex justify-center">
-          <h1 className="mt-32 text-center text-[#8c4e1d] text-5xl">
-            <ColorRing
-              visible={true}
-              height="80"
-              width="80"
-              ariaLabel="color-ring-loading"
-              wrapperStyle={{}}
-              wrapperClass="color-ring-wrapper"
-              colors={["#8C4E1D", "#8C4E1D", "#8C4E1D", "#8C4E1D", "#8C4E1D"]}
-            />
-          </h1>
+        <div className="flex items-center mt-32 justify-center h-full">
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="#8C4E1D"
+            size="xl"
+          />
         </div>
       ) : (
         <div className="container w-[80%] mx-auto grid md:grid-cols-3 grid-cols-1 gap-10 mt-8 md:mt-16">

@@ -12,6 +12,7 @@ import {
   AlertDescription,
   AlertIcon,
   AlertTitle,
+  useToast,
 } from "@chakra-ui/react";
 
 var Sentiment = require("sentiment");
@@ -76,6 +77,8 @@ function Form() {
     });
   }, [individual]);
 
+  const toast = useToast();
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -92,16 +95,21 @@ function Form() {
 
     // If documentId exists, update the existing visit
     if (documentId) {
-      updateVisit(documentId, updatedFormData);
+      toast.promise(updateVisit(documentId, updatedFormData), {
+        success: { title: "Feedback Recorded", description: "Looks great" },
+        error: { title: "Error", description: "Something wrong" },
+        loading: { title: "Recording Feedback", description: "Please wait" },
+      });
     } else {
       // Otherwise, submit a new visit
-      await handleSubmit(updatedFormData);
+      toast.promise(handleSubmit(updatedFormData), {
+        success: { title: "Feedback Recorded", description: "Looks great" },
+        error: { title: "Error", description: "Something wrong" },
+        loading: { title: "Recording Feedback", description: "Please wait" },
+      });
     }
 
-    setShowAlert(true);
-
     setTimeout(() => {
-      setShowAlert(false);
       setForm({
         fname: "",
         surname: "",
@@ -112,7 +120,7 @@ function Form() {
         purpose: "",
         feedback: "",
       });
-    }, 5000); // Hides the alert after 5 seconds
+    }, 5000);
   };
 
   const handleChange = (e) => {
@@ -279,25 +287,6 @@ function Form() {
             </button>
           </form>
         </motion.div>
-        {showAlert && (
-          <Alert
-            status="success"
-            variant="subtle"
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-            textAlign="center"
-            height="200px"
-          >
-            <AlertIcon boxSize="40px" mr={0} />
-            <AlertTitle mt={4} mb={1} fontSize="lg">
-              Form submitted successfully!
-            </AlertTitle>
-            <AlertDescription maxWidth="sm">
-              Thank you for your feedback. Our team will review it.
-            </AlertDescription>
-          </Alert>
-        )}
       </div>
     </>
   );

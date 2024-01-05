@@ -60,3 +60,8 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1; /* Make sure it's above other elements */
 }
+
+.reviews-container {
+  max-height: 400px; /* Adjust the height as needed */
+  overflow-y: auto; /* Enable vertical scrolling when content overflows */
+}
