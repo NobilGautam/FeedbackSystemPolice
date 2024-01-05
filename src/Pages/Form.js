@@ -150,7 +150,6 @@ function Form() {
           <h1 className="text-9xl">Fill</h1>
           <h1 className="text-5xl">YOUR FEEDBACK</h1>
         </motion.div>
-        ;
         <motion.div
           initial="hidden"
           animate="show"

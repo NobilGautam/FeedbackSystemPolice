@@ -17,10 +17,7 @@ import { Link } from "react-router-dom";
 import { IoMdArrowBack } from "react-icons/io";
 function Single() {
   const { id } = useParams();
-  const {
-    tableData: policeStations,
-    setIndividual,
-  } = useSupabase();
+  const { tableData: policeStations, setIndividual } = useSupabase();
   const [policeData, setPoliceData] = useState({});
   const navigator = useNavigate();
 
@@ -45,30 +42,31 @@ function Single() {
 
   return (
     <div>
-      <Button size={"lg"} className="customButton mt-32 ml-2">
-        {" "}
-        <Link to="/">
-          <span className="text-lg flex items-center">
-            <IoMdArrowBack />
-            Back to All Post
-          </span>{" "}
-        </Link>
-      </Button>
-
-      <div className="container mx-auto flex items-center justify-center">
-        <div className="grid grid-cols-1 lg:grid-cols-2 mt-16 gap-24 w-full">
-          <div className="flex items-center flex-col justify-center">
+      <div className="container mt-32 mx-auto flex items-center justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 mt-16 gap-24 max-h-screen w-full">
+          <div className="flex items-center flex-col justify-center h-full">
+            <Button size={"lg"} className="customButton self-start">
+              {" "}
+              <Link to="/">
+                <span className="text-lg flex items-center">
+                  <IoMdArrowBack />
+                  Back to All Post
+                </span>{" "}
+              </Link>
+            </Button>
             <img
               src={policeData.image}
               alt="police station"
-              className="w-full h-auto drop-shadow-lg object-cover rounded-xl"
+              className="w-full mt-10 h-auto drop-shadow-lg object-cover rounded-xl"
             />
             <div className="w-[100%] mt-4 flex items-center justify-between">
-              <Button size={"lg"} className="w-[48%] customButton"  onClick={handleClick}>
+              <Button
+                size={"lg"}
+                className="w-[48%] customButton"
+                onClick={handleClick}
+              >
                 {" "}
-                <span className="text-xl">
-                  Mark as Visited
-                </span>{" "}
+                <span className="text-xl">Mark as Visited</span>{" "}
               </Button>
               <Button size={"lg"} isDisabled={true} className="w-[48%]">
                 {" "}
@@ -82,7 +80,7 @@ function Single() {
             defaultIndex={0}
             isFitted
             variant="enclosed"
-            className="drop-shadow-lg"
+            className="mt-10"
           >
             <TabList>
               <Tab _selected={{ color: "white", bg: "#8C4E1D" }}>
@@ -95,14 +93,14 @@ function Single() {
                 <span className="text-xl font-semibold">Data</span>
               </Tab>
             </TabList>
-            <TabPanels>
-              <TabPanel bgColor={"#FFFFFF"}>
-                <TabAbout policeData={policeData} />
+            <TabPanels className="drop-shadow-lg h-[90%]">
+              <TabPanel className="h-full" bgColor={"#FFFFFF"}>
+                <TabAbout policeData={policeData}/>
               </TabPanel>
-              <TabPanel bgColor={"#FFFFFF"}>
+              <TabPanel className="h-full overflow-scroll" bgColor={"#FFFFFF"}>
                 <TabReviews policeStationName={policeData.name} />
               </TabPanel>
-              <TabPanel bgColor={"#FFFFFF"}>
+              <TabPanel className="h-full" bgColor={"#FFFFFF"}>
                 <TabData />
               </TabPanel>
             </TabPanels>
