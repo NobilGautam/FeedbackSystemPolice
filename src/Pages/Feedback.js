@@ -42,7 +42,7 @@ const Feedback = () => {
   }, [PoliceData, policeStations, visits]);
 
   return (
-    <div className="mt-24 py-10 ">
+    <div className="mt-24 py-10 grid gap-2">
       {visits.map((item) => {
         if (item.feedback) {
           return (
