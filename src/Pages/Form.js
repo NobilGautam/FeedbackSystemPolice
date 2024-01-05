@@ -1,13 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
-import PoliceData from "../components/data";
 import formBG from "../assets/formBG.jpg";
 import { motion } from "framer-motion";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useParams } from "react-router";
 import { useSupabase } from "../context/SupabaseContext";
 import { Auth } from "../Firebase";
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+} from "@chakra-ui/react";
 
 var Sentiment = require("sentiment");
 var sentiment = new Sentiment();
@@ -19,6 +24,7 @@ function Form() {
     },
   };
 
+  const [showAlert, setShowAlert] = useState(false);
   const [user] = useAuthState(Auth);
   const {
     individual,
@@ -89,19 +95,24 @@ function Form() {
       updateVisit(documentId, updatedFormData);
     } else {
       // Otherwise, submit a new visit
-      handleSubmit(updatedFormData);
+      await handleSubmit(updatedFormData);
     }
 
-    setForm({
-      fname: "",
-      surname: "",
-      age: "",
-      email: "",
-      gender: "male",
-      psname: policeData[0].name,
-      purpose: "",
-      feedback: "",
-    });
+    setShowAlert(true);
+
+    setTimeout(() => {
+      setShowAlert(false);
+      setForm({
+        fname: "",
+        surname: "",
+        age: "",
+        email: "",
+        gender: "male",
+        psname: policeData[0].name,
+        purpose: "",
+        feedback: "",
+      });
+    }, 5000); // Hides the alert after 5 seconds
   };
 
   const handleChange = (e) => {
@@ -268,6 +279,25 @@ function Form() {
             </button>
           </form>
         </motion.div>
+        {showAlert && (
+          <Alert
+            status="success"
+            variant="subtle"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            textAlign="center"
+            height="200px"
+          >
+            <AlertIcon boxSize="40px" mr={0} />
+            <AlertTitle mt={4} mb={1} fontSize="lg">
+              Form submitted successfully!
+            </AlertTitle>
+            <AlertDescription maxWidth="sm">
+              Thank you for your feedback. Our team will review it.
+            </AlertDescription>
+          </Alert>
+        )}
       </div>
     </>
   );
