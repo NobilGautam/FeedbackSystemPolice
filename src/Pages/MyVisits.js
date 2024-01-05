@@ -4,11 +4,17 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Auth } from "../Firebase";
 import { useSupabase } from "../context/SupabaseContext";
 import { ColorRing } from "react-loader-spinner";
+import { Spinner } from "@chakra-ui/react";
 
 const MyVisits = () => {
   const [user] = useAuthState(Auth);
-  const { fetchVisits, visits,visitsLoader, tableData: PoliceData} = useSupabase();
-  
+  const {
+    fetchVisits,
+    visits,
+    visitsLoader,
+    tableData: PoliceData,
+  } = useSupabase();
+
   const [policeStations, setPoliceStations] = useState([]);
   const [imgLinks, setImgLinks] = useState(new Map());
   const [addressLinks, setAddressLinks] = useState(new Map());
@@ -42,20 +48,20 @@ const MyVisits = () => {
     setAddressLinks(Address);
   }, [PoliceData, policeStations, visits]);
 
-  if(visitsLoader){
-    return  (<div className="flex justify-center items-center y my-auto mx-auto">
-    <h1 className="mt-32 text-center text-[#8c4e1d] text-5xl">
-      <ColorRing
-        visible={true}
-        height="80"
-        width="80"
-        ariaLabel="color-ring-loading"
-        wrapperStyle={{}}
-        wrapperClass="color-ring-wrapper"
-        colors={["#8C4E1D", "#8C4E1D", "#8C4E1D", "#8C4E1D", "#8C4E1D"]}
-      />
-    </h1>
-  </div>)
+  if (visitsLoader) {
+    return (
+      <div className="flex justify-center items-center y my-auto mx-auto">
+        <h1 className="mt-32 text-center text-[#8c4e1d] text-5xl">
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="#8C4E1D"
+            size="xl"
+          />
+        </h1>
+      </div>
+    );
   }
   
 
@@ -64,37 +70,18 @@ const MyVisits = () => {
       {visits.length === 0 ? (
         <h1>Loading...</h1>
       ) : (
-        <div>
-       { visits.map((item) =>{
-          if(!item.feedback){
-            return (<SingleVisitPost
-            key={item.id}
-            ImgLinks={imgLinks}
-            addressLinks={addressLinks}
-            item={item}
-            documentId={item.documentID}
-          /> )
-          }
-        } )
-      }
-        { visits.map((item) =>{
-          if(item.feedback){
-            return (<SingleVisitPost
-            key={item.id}
-            ImgLinks={imgLinks}
-            addressLinks={addressLinks}
-            item={item}
-            documentId={item.documentID}
-          /> )
-          }
-        } )
-      }
-</div>
-      
-        
-      )
-      
-      }
+        visits
+          .sort((a, b) => (a.feedback === null ? -1 : 1)) // Sort by feedback (null first)
+          .map((item) => (
+            <SingleVisitPost
+              key={item.id}
+              ImgLinks={imgLinks}
+              addressLinks={addressLinks}
+              item={item}
+              documentId={item.documentID}
+            />
+          ))
+      )}
     </div>
   );
 };
