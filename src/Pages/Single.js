@@ -64,9 +64,9 @@ function Single() {
               className="w-full h-auto drop-shadow-lg object-cover rounded-xl"
             />
             <div className="w-[100%] mt-4 flex items-center justify-between">
-              <Button size={"lg"} className="w-[48%] customButton">
+              <Button size={"lg"} className="w-[48%] customButton"  onClick={handleClick}>
                 {" "}
-                <span className="text-xl" onClick={handleClick}>
+                <span className="text-xl">
                   Mark as Visited
                 </span>{" "}
               </Button>

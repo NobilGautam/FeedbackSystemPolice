@@ -42,7 +42,7 @@ const MyVisits = () => {
   }, [PoliceData, policeStations, visits]);
 
   if(visitsLoader){
-    return  (<div className="flex justify-center items-center  my-auto mx-auto">
+    return  (<div className="flex justify-center items-center y my-auto mx-auto">
     <h1 className="mt-32 text-center text-[#8c4e1d] text-5xl">
       <ColorRing
         visible={true}
