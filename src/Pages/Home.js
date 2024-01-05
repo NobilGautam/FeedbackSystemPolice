@@ -18,7 +18,7 @@ function Home() {
     setSearchResults(PoliceData);
   }, [PoliceData]);
 
-  const handleclick = () => {};
+
 
   const handlechange = (e) => {
     setSearchTerm(e.target.value);
