@@ -8,7 +8,7 @@ import { useSupabase } from "../context/SupabaseContext";
 import { Button,Input } from "@chakra-ui/react";
 
 const Feedback = () => {
-  const { fetchVisits, visits,setVisits, globalVisits,tableData: PoliceData } = useSupabase();
+  const { fetchVisits, visits,setVisits, globalVisits,feedback,setFeedback,tableData: PoliceData } = useSupabase();
   const [policeStations, setPoliceStations] = useState(PoliceData);
   const [user] = useAuthState(Auth);
   const [ImgLinks, setImgLinks] = useState(new Map());
@@ -20,10 +20,10 @@ const Feedback = () => {
   
   const sortMethods = {
     none: { method: null },
-    name: { method: "name" },
-    name_dsc: { method: "name" },
-    rating: { method: "rating" },
-    rating_dsc: { method: "rating" },
+    name: { method: "policeStation" },
+    name_dsc: { method: "policeStation" },
+
+   
     day_Reported:{method:"created_at"}
   };
 
@@ -36,12 +36,12 @@ const Feedback = () => {
   }, []);
   const sort = (sortState) => {
     if (sortState === "name" || sortState === "rating" || sortState==="day_Reported" )
-        visits.sort(sortBy(sortMethods[sortState].method));
-    else visits.sort(sortByRev(sortMethods[sortState].method));
+        feedback.sort(sortBy(sortMethods[sortState].method));
+    else feedback.sort(sortByRev(sortMethods[sortState].method));
     setFlag(!flag);
   };
 
-  const [myFeedbacks,setMyFeedbacks]=useState([]);
+
   useEffect(() => {
     const matching_PS = [];
     setPoliceStations(PoliceData);
@@ -89,10 +89,10 @@ console.log(visits);
     item.policeStation.toLowerCase().includes(searchTerm.toLowerCase())
   );
   console.log(temp);
- ;
-  setVisits(temp);
+ 
+  setFeedback(temp);
 }
-  
+   
   
   return (
     <div className="mt-24 py-10 ">
@@ -120,12 +120,17 @@ console.log(visits);
             <option value="rating_dsc">Rating Dsc</option>
             <option value="day_Reported">Day Reported</option>
           </select>
-          <Button className="customButton mx-4" onClick={() => sort(sortState)}>
+          <Button className="customButton mx-4" onClick={() => {
+            console.log(sortState);
+
+            sort(sortState)
+            console.log(visits);}}>
             Sort
+
           </Button>
         </div>
       </div>
-      {visits.map((item) => {
+      {feedback.map((item) => {
         if (item.feedback) {
           return (
             <SingleFeedbackPost
