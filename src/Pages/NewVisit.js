@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import formBG from "../assets/formBG.jpg";
 import PoliceData from "../components/data";
-import { useNavigate } from "react-router-dom";
 import { useSupabase } from "../context/SupabaseContext";
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+  Fade,
+} from "@chakra-ui/react";
 
 const NewVisit = () => {
-  const navigator = useNavigate();
   const { handleSubmit, individual } = useSupabase();
 
   const [form, setForm] = useState({
@@ -15,15 +20,17 @@ const NewVisit = () => {
     pstation: individual || "",
   });
 
+  const [showAlert, setShowAlert] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    handleSubmit(form);
+    await handleSubmit(form);
 
     setForm({
       name: "",
@@ -32,14 +39,14 @@ const NewVisit = () => {
       pstation: individual || "",
     });
 
-    navigator("/");
+    setShowAlert(true);
   };
 
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="lg:w-[50%] w-[90%] mx-auto mt-28">
         <form
-          className="mt-12 flex flex-col px-2 gap-8 lg:mb-10 bg-slate-50 rounded-md shadow-xl shadow-[#5e5d5d]"
+          className="mt-12 flex flex-col px-2 gap-8 lg:mb-10 bg-slate-50 rounded-md shadow-md shadow-[#5e5d5d]"
           style={{
             background: `url(${formBG})`,
             backgroundSize: "cover",
@@ -108,6 +115,30 @@ const NewVisit = () => {
             </button>
           </div>
         </form>
+
+        {showAlert && (
+          <Fade in={showAlert}>
+            <Alert
+              status="success"
+              variant="subtle"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              textAlign="center"
+              height="200px"
+              className="mt-10 shadow-md"
+            >
+              <AlertIcon boxSize="40px" mr={0} />
+              <AlertTitle mt={4} mb={1} fontSize="lg">
+                Application submitted!
+              </AlertTitle>
+              <AlertDescription maxWidth="sm">
+                Thanks for submitting your application. Our team will get back
+                to you soon.
+              </AlertDescription>
+            </Alert>
+          </Fade>
+        )}
       </div>
     </div>
   );
