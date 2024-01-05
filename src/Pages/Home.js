@@ -3,7 +3,6 @@ import SingleCommPost from "../components/SingleCommPost";
 import { Button, Input, Select, Spinner } from "@chakra-ui/react";
 import { ThreeDots } from "react-loader-spinner";
 import { useSupabase } from "../context/SupabaseContext";
-import { ColorRing } from "react-loader-spinner";
 
 function Home() {
   const { tableData: PoliceData } = useSupabase();
