@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useSupabase } from "../context/SupabaseContext";
+import { ColorRing } from "react-loader-spinner";
 
 function TabReviews({ policeStationName }) {
-  const { fetchReviews, reviews } = useSupabase();
+  const { fetchReviews, reviews,reviewLoader } = useSupabase();
   useEffect(() => {
     fetchReviews(policeStationName);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -27,11 +28,25 @@ function TabReviews({ policeStationName }) {
     const formattedDate = inputDateTime.toLocaleString('en-IN', options);
     return formattedDate;
   }
-
+if(reviewLoader){
+  return (<div className="flex justify-center">
+  <h1 className="mt-32 text-center text-[#8c4e1d] text-5xl">
+    <ColorRing
+      visible={true}
+      height="80"
+      width="80"
+      ariaLabel="color-ring-loading"
+      wrapperStyle={{}}
+      wrapperClass="color-ring-wrapper"
+      colors={["#8C4E1D", "#8C4E1D", "#8C4E1D", "#8C4E1D", "#8C4E1D"]}
+    />
+  </h1>
+</div>)
+}
   return (
     <div className="container grid md:grid-cols-2 grid-cols-1 gap-10 md:p-4">
       {reviews.length === 0 ? (
-        <h1>Loading...</h1>
+        <h1 className="text-[#8c4e1d] text-xl font-semibold">No reviews found for {policeStationName}</h1>
       ) : (
         reviews
           .filter((item) => item.feedback !== null)
