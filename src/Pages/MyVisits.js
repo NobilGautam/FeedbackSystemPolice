@@ -23,6 +23,7 @@ const MyVisits = () => {
   useEffect(() => {
     const matching_PS = [];
     setPoliceStations(PoliceData);
+
     for (var i = 0; i < visits.length; i++) {
       const Ps = visits[i].policeStation;
       for (var j = 0; j < policeStations.length; j++) {
@@ -56,22 +57,44 @@ const MyVisits = () => {
     </h1>
   </div>)
   }
+  
 
   return (
     <div className="mt-24 py-10">
       {visits.length === 0 ? (
         <h1>Loading...</h1>
       ) : (
-        visits.map((item) => (
-          <SingleVisitPost
+        <div>
+       { visits.map((item) =>{
+          if(!item.feedback){
+            return (<SingleVisitPost
             key={item.id}
             ImgLinks={imgLinks}
             addressLinks={addressLinks}
             item={item}
             documentId={item.documentID}
-          />
-        ))
-      )}
+          /> )
+          }
+        } )
+      }
+        { visits.map((item) =>{
+          if(item.feedback){
+            return (<SingleVisitPost
+            key={item.id}
+            ImgLinks={imgLinks}
+            addressLinks={addressLinks}
+            item={item}
+            documentId={item.documentID}
+          /> )
+          }
+        } )
+      }
+</div>
+      
+        
+      )
+      
+      }
     </div>
   );
 };
