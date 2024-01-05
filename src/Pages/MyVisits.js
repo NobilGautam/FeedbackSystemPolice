@@ -68,15 +68,17 @@ const MyVisits = () => {
       {visits.length === 0 ? (
         <h1>Loading...</h1>
       ) : (
-        visits.map((item) => (
-          <SingleVisitPost
-            key={item.id}
-            ImgLinks={imgLinks}
-            addressLinks={addressLinks}
-            item={item}
-            documentId={item.documentID}
-          />
-        ))
+        visits
+          .sort((a, b) => (a.feedback === null ? -1 : 1)) // Sort by feedback (null first)
+          .map((item) => (
+            <SingleVisitPost
+              key={item.id}
+              ImgLinks={imgLinks}
+              addressLinks={addressLinks}
+              item={item}
+              documentId={item.documentID}
+            />
+          ))
       )}
     </div>
   );
