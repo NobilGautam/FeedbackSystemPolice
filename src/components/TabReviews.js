@@ -1,25 +1,25 @@
 import React, { useEffect } from "react";
 import { useSupabase } from "../context/SupabaseContext";
-import { ColorRing } from "react-loader-spinner";
-import { useState } from "react";
-import { Button, Spinner } from "@chakra-ui/react";
-import { ThreeDots } from "react-loader-spinner";
+// import { ColorRing } from "react-loader-spinner";
+// import { useState } from "react";
+import { Spinner } from "@chakra-ui/react";
+// import { ThreeDots } from "react-loader-spinner";
 function TabReviews({ policeStationName }) {
   const { fetchReviews, reviews, reviewLoader } = useSupabase();
   useEffect(() => {
     fetchReviews(policeStationName);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const [index, setIndex] = useState(4);
-  const [loader, setLoader] = useState(false);
+  // const [index, setIndex] = useState(4);
+  // const [loader, setLoader] = useState(false);
 
-  const showLoader = () => {
-    setLoader(true);
-    setTimeout(() => {
-      setLoader(false);
-      setIndex((prevIndex) => prevIndex + 6);
-    }, 1000);
-  };
+  // const showLoader = () => {
+  //   setLoader(true);
+  //   setTimeout(() => {
+  //     setLoader(false);
+  //     setIndex((prevIndex) => prevIndex + 6);
+  //   }, 1000);
+  // };
 
   function convertToISTAndFormatDate(inputDate) {
     // Convert input string to Date object
