@@ -29,6 +29,7 @@ const MyVisits = () => {
   useEffect(() => {
     const matching_PS = [];
     setPoliceStations(PoliceData);
+
     for (var i = 0; i < visits.length; i++) {
       const Ps = visits[i].policeStation;
       for (var j = 0; j < policeStations.length; j++) {
@@ -62,6 +63,7 @@ const MyVisits = () => {
       </div>
     );
   }
+  
 
   return (
     <div className="mt-24 py-10">
