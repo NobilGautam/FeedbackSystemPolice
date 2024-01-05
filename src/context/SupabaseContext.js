@@ -21,6 +21,7 @@ export const SupabaseProvider = ({ children }) => {
   const [individual, setIndividual] = useState("");
   const [reviewLoader,setReviewLoader]=useState(true);
   const [visitsLoader,setVisitsLoader]=useState(true);
+  const[globalVisits,setGlobalVisits]=useState([]);
 
   useEffect(() => {
     const fetchTableData = async () => {
@@ -55,6 +56,7 @@ export const SupabaseProvider = ({ children }) => {
         console.error("Error fetching visits:", error.message);
       } else {
         setVisits(data || []);
+        setGlobalVisits(data||[]);
         setVisitsLoader(false);
       }
     } catch (error) {
@@ -135,6 +137,7 @@ export const SupabaseProvider = ({ children }) => {
   return (
     <SupabaseContext.Provider
       value={{
+        globalVisits,
         tableData,
         loading,
         individual,
@@ -147,7 +150,8 @@ export const SupabaseProvider = ({ children }) => {
         fetchReviews,
         reviewLoader,
         setReviewLoader,
-        visitsLoader
+        visitsLoader,
+        setVisits
       }}
     >
       {children}
