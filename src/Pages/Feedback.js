@@ -96,7 +96,7 @@ console.log(visits);
   
   return (
     <div className="mt-24 py-10 ">
-      <div className="w-[80%] mx-auto  flex flex-col md:flex-row items-center pt-3 justify-between" >
+        <div className="w-[80%] mx-auto  flex flex-col md:flex-row items-center pt-3 justify-between" >
       <form className="flex w-full md:w-[50%]" onSubmit={handleSubmit}>
           <Input
             placeholder="Search Police Stations"
