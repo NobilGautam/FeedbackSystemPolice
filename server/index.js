@@ -25,6 +25,7 @@ app.get('/send-text', (req, res) => {
         from: '+19287560963' // From Twilio
     })
     .then((message) => {
+        console.log('Twilio API Response:', message); // Add this line
         console.log(message.body);
         res.send('SMS sent successfully');
         console.log(recipient);

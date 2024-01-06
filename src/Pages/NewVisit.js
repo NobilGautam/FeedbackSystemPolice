@@ -33,6 +33,7 @@ const NewVisit = () => {
         params: {
           recipient: phoneNumber
         },
+        responseType: 'json',
       });
   
       console.log('SMS Sent:', response.data);
