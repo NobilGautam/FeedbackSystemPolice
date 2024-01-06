@@ -159,7 +159,7 @@ function Navbar() {
                   >
                     Logout
                   </Link>
-                  <PDF/>
+                  {/* <PDF/> */}
                 </div>
               )}
             </li>
