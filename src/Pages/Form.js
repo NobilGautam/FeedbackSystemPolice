@@ -7,6 +7,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useParams } from "react-router";
 import { useSupabase } from "../context/SupabaseContext";
 import { Auth } from "../Firebase";
+
 import {
   Alert,
   AlertDescription,
@@ -14,9 +15,11 @@ import {
   AlertTitle,
   useToast,
 } from "@chakra-ui/react";
+import { encrypt,decrypt } from "n-krypta";
 
 var Sentiment = require("sentiment");
 var sentiment = new Sentiment();
+ const SECRET_KEY='ABC'
 
 function Form() {
   var options = {
@@ -88,12 +91,13 @@ function Form() {
       email: form.email,
       pstation: form.psname,
       gender: form.gender,
-      feedback: form.feedback,
+      feedback: encrypt(form.feedback,SECRET_KEY),
       purpose: form.purpose,
       Feel: sentiment.analyze(form.feedback, options).score,
     };
 
     // If documentId exists, update the existing visit
+    
     if (documentId) {
       toast.promise(updateVisit(documentId, updatedFormData), {
         success: { title: "Feedback Recorded", description: "Looks great" },
@@ -122,7 +126,7 @@ function Form() {
       });
     }, 5000);
   };
-
+console.log(encrypt(4,SECRET_KEY));
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
@@ -137,6 +141,9 @@ function Form() {
     hidden: { opacity: 0, x: "100%" },
     show: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeOut" } },
   };
+  const stringg="divyam";
+  const secretKey="abc"
+  
 
   return (
     <>

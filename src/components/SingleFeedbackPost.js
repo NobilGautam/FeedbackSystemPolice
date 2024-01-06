@@ -5,11 +5,14 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import { Card, CardBody, CardFooter, Heading, Image, Stack } from "@chakra-ui/react";
+import { encrypt,decrypt } from "n-krypta";
+const SECRET_KEY='ABC'
 
 function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
+
 
   const formatTimestamp = (timestamp) => {
     const date = timestamp ? new Date(timestamp) : null;
@@ -66,8 +69,8 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
             <div>
               <p className="font-semibold">Feedback:</p>
               <p className={` ${
-              item.Feel < 0 ? "text-red-600" : "text-green-700"
-            }`}>{item.feedback}</p>
+            item.Feel < 0 ? "text-red-600" : "text-green-700"
+            }`}>{decrypt(item.feedback,SECRET_KEY)}</p>
             </div>
           </CardFooter>
         </Stack>

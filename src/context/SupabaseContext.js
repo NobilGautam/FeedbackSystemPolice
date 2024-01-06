@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
+import { encrypt,decrypt } from "n-krypta";
 
 const SupabaseContext = createContext();
 
@@ -78,6 +79,7 @@ export const SupabaseProvider = ({ children }) => {
           email: form.email,
           policeStation: form.pstation,
           created_at: new Date().toISOString(),
+          mobile:form.mobile
         },
       ]);
 
