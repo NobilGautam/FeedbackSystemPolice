@@ -3,23 +3,44 @@ import formBG from "../assets/formBG.jpg";
 import PoliceData from "../components/data";
 import { useSupabase } from "../context/SupabaseContext";
 import { useToast } from "@chakra-ui/react";
+import axios from 'axios';
 
 const NewVisit = () => {
   const { handleSubmit, individual } = useSupabase();
+  const [ phoneNumber, setPhoneNumber ] = useState('');
 
   const [form, setForm] = useState({
     name: "",
     age: "",
+    mobile: "",
     email: "",
     pstation: individual || "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === 'mobile') {
+      setPhoneNumber(value);
+    }
     setForm({ ...form, [name]: value });
   };
 
   const toast = useToast()
+
+  const handleSendSMS = async () => {
+    try {
+      const response = await axios.get('http://localhost:4000/send-text', {
+        params: {
+          recipient: phoneNumber
+        },
+      });
+  
+      console.log('SMS Sent:', response.data);
+    } catch (error) {
+      console.error('Error sending SMS:', error.response?.data || error.message);
+    }
+  };
+  
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -30,10 +51,13 @@ const NewVisit = () => {
       loading: { title: "Marking Your Visit", description: "Please wait" },
     });
 
+    handleSendSMS();
+
     setForm({
       name: "",
       age: "",
       email: "",
+      mobile: "",
       pstation: individual || "",
     });
   };
@@ -70,6 +94,17 @@ const NewVisit = () => {
               required
               name="age"
               value={form.age}
+              onChange={handleChange}
+              className="bg-transparent border-[1px] border-black rounded-xl p-2"
+            />
+          </label>
+          <label className="flex flex-row justify-center items-center gap-[10%]">
+            <span className="w-[20%] font-bold">Mobile:</span>
+            <input
+              type="text"
+              required
+              name="mobile"
+              value={form.mobile}
               onChange={handleChange}
               className="bg-transparent border-[1px] border-black rounded-xl p-2"
             />
