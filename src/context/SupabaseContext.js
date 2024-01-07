@@ -27,6 +27,7 @@ export const SupabaseProvider = ({ children }) => {
   const [feedback,setFeedback]=useState([]);
   const [stats,setStats]=useState(null);
   const [allPolice,setAllPolice]=useState([]);
+  const [statsLoading,setStatsLoading]=useState(true);
 
   useEffect(() => {
     const fetchTableData = async () => {
@@ -64,6 +65,7 @@ export const SupabaseProvider = ({ children }) => {
         } else {
          setAllPolice(data);
        
+         setStatsLoading(false);
         }
       } catch (error) {
         console.error("Error fetching visits:", error.message);

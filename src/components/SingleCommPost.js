@@ -17,8 +17,11 @@ function SingleCommPost({ item }) {
  
  useEffect(()=>{
 let number=0;
+console.log(allPolice.length);
   for(var i=0; i<allPolice.length; i++){
+    console.log(i);
     if(allPolice[i].policeStation===item.name){
+     
       number=allPolice[i].ps_Rating;
     
       break;
@@ -42,7 +45,7 @@ let number=0;
   }
   setStars(temp);
 
- },[item])
+ },[allPolice])
   
 
  
@@ -51,7 +54,7 @@ let number=0;
     AOS.init({ duration: 1000 });
   }, []);
 
-
+console.log(stars);
   return (
     <div data-aos="fade-up">
       <ImageCard ImgSrc={item.image}>
