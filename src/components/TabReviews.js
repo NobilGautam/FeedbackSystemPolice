@@ -3,6 +3,7 @@ import { useSupabase } from "../context/SupabaseContext";
 // import { ColorRing } from "react-loader-spinner";
 // import { useState } from "react";
 import { Spinner } from "@chakra-ui/react";
+import { decrypt, encrypt } from "n-krypta";
 // import { ThreeDots } from "react-loader-spinner";
 function TabReviews({ policeStationName }) {
   const { fetchReviews, reviews, reviewLoader } = useSupabase();
@@ -53,6 +54,14 @@ function TabReviews({ policeStationName }) {
       </div>
     );
   }
+
+
+
+
+  // const data=encrypt('dddddddddddddddddd',toString(process.env.REACT_APP_SECRET_KEY));
+  // console.log(data);
+  // console.log(decrypt(data,toString(process.env.REACT_APP_SECRET_KEY)));
+
   return (
     <div className="p-4">
       <div className="container grid reviews-container md:grid-cols-2 grid-cols-1 gap-5">
@@ -79,7 +88,7 @@ function TabReviews({ policeStationName }) {
                   </h1>
                 </div>
                 <hr></hr>
-                <h1 className="mt-2">{item.feedback}</h1>
+                <h1 className="mt-2">{decrypt(item.feedback,toString(process.env.REACT_APP_SECRET_KEY))}</h1>
               </div>
             ))
         )}

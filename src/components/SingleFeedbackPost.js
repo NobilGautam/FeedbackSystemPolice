@@ -70,7 +70,7 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
               <p className="font-semibold">Feedback:</p>
               <p className={` ${
             item.Feel < 0 ? "text-red-600" : "text-green-700"
-            }`}>{decrypt(item.feedback,SECRET_KEY)}</p>
+            }`}>{decrypt(item.feedback,toString(process.env.SECRET_KEY))}</p>
             </div>
           </CardFooter>
         </Stack>

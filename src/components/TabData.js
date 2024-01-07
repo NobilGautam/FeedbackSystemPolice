@@ -41,6 +41,7 @@ function TabData({policeData}) {
     }
     ]
   }
+
   return (
     <div className='grid sm:grid-cols-2 w-[100%] py-5 justify-center'>
     <Pie data={data} options={customOptions} className='hello'></Pie>
