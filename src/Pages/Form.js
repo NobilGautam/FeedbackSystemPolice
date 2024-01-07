@@ -91,7 +91,7 @@ function Form() {
       email: form.email,
       pstation: form.psname,
       gender: form.gender,
-      feedback: encrypt(form.feedback,SECRET_KEY),
+      feedback: encrypt(form.feedback,toString(process.env.SECRET_KEY)),
       purpose: form.purpose,
       Feel: sentiment.analyze(form.feedback, options).score,
     };
