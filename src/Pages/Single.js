@@ -101,7 +101,7 @@ function Single() {
                 <TabReviews policeStationName={policeData.name} />
               </TabPanel>
               <TabPanel className="h-full" bgColor={"#FFFFFF"}>
-                <TabData />
+                <TabData policeData={policeData}/>
               </TabPanel>
             </TabPanels>
           </Tabs>

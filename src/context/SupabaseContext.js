@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
+import { encrypt,decrypt } from "n-krypta";
 
 const SupabaseContext = createContext();
 
@@ -14,6 +15,7 @@ export const SupabaseProvider = ({ children }) => {
 
   const policeStationTableName = "policeStations";
   const visitsTableName = "visits";
+  const psStats="psStats"
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [visits, setVisits] = useState([]);
@@ -23,6 +25,7 @@ export const SupabaseProvider = ({ children }) => {
   const [visitsLoader,setVisitsLoader]=useState(true);
   const[globalVisits,setGlobalVisits]=useState([]);
   const [feedback,setFeedback]=useState([]);
+  const [stats,setStats]=useState(null);
 
   useEffect(() => {
     const fetchTableData = async () => {
@@ -67,6 +70,24 @@ export const SupabaseProvider = ({ children }) => {
       console.error("Error fetching visits:", error.message);
     }
   };
+  const fetchStats=async(ps)=>{
+    try {
+      const { data, error } = await supabase
+        .from(psStats)
+        .select("*")
+        .filter("policeStation", "eq", ps);
+
+      if (error) {
+        console.error("Error fetching visits:", error.message);
+      } else {
+       setStats(data);
+     
+      }
+    } catch (error) {
+      console.error("Error fetching visits:", error.message);
+    }
+
+  }
 
   const handleSubmit = async (form) => {
     try {
@@ -78,6 +99,7 @@ export const SupabaseProvider = ({ children }) => {
           email: form.email,
           policeStation: form.pstation,
           created_at: new Date().toISOString(),
+          mobile:form.mobile
         },
       ]);
 
@@ -157,7 +179,9 @@ export const SupabaseProvider = ({ children }) => {
         visitsLoader,
         setVisits,
         feedback,
-        setFeedback
+        setFeedback,
+        fetchStats,
+        stats
       }}
     >
       {children}
