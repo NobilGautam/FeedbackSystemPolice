@@ -49,6 +49,6 @@ function TabData({policeData}) {
     <Pie data={data} options={customOptions} className='hello'></Pie>
   </div>
   )
-}
+}//
 
 export default TabData
