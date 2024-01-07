@@ -3,27 +3,39 @@ import React, { useEffect, useState } from "react";
 import { Text } from "@chakra-ui/react";
 import { BsStarFill } from "react-icons/bs";
 import map from "../assets/map.png";
+import { useSupabase } from "../context/SupabaseContext";
 function TabAbout({ policeData }) {
   const [stars, setStars] = useState([]);
   let number = Number(policeData.rating);
-
+  const {allPolice}=useSupabase();
   useEffect(() => {
-    const temp = [];
-    for (var i = 0; i < 5; i++) {
-      if (i < number) {
-        temp.push(
-          <span key={i}>
-            <BsStarFill color="gold" />
-          </span>
-        );
-      } else {
-        temp.push(
-          <span key={i}>
-            <BsStarFill color="grey" />
-          </span>
-        );
-      }
+  
+    let number=0;
+  for(var i=0; i<allPolice.length; i++){
+    if(allPolice[i].policeStation===policeData.name){
+      number=allPolice[i].ps_Rating;
+    
+      break;
     }
+  }
+  const temp = [];
+  for (var i = 0; i < 5; i++) {
+    if (i < number) {
+      temp.push(
+        <span key={i}>
+          <BsStarFill color="gold" />
+        </span>
+      );
+    } else {
+      temp.push(
+        <span key={i}>
+          <BsStarFill color="grey" />
+        </span>
+      );
+    }
+  }
+  setStars(temp);
+   
     setStars(temp);
   }, [policeData]);
   return (

@@ -26,6 +26,7 @@ export const SupabaseProvider = ({ children }) => {
   const[globalVisits,setGlobalVisits]=useState([]);
   const [feedback,setFeedback]=useState([]);
   const [stats,setStats]=useState(null);
+  const [allPolice,setAllPolice]=useState([]);
 
   useEffect(() => {
     const fetchTableData = async () => {
@@ -48,6 +49,29 @@ export const SupabaseProvider = ({ children }) => {
 
     fetchTableData();
   }, []);
+  useEffect(()=>{
+    const fetchAllStats=async()=>{
+      try {
+        const { data, error } = await supabase
+          .from(psStats)
+          .select("*")
+          .order("id");
+        
+          
+  
+        if (error) {
+          console.error("Error fetching visits:", error.message);
+        } else {
+         setAllPolice(data);
+       
+        }
+      } catch (error) {
+        console.error("Error fetching visits:", error.message);
+      }
+  
+    }
+    fetchAllStats();
+  },[])
 
   const fetchVisits = async (userEmail) => {
     try {
@@ -76,6 +100,7 @@ export const SupabaseProvider = ({ children }) => {
         .from(psStats)
         .select("*")
         .filter("policeStation", "eq", ps);
+        
 
       if (error) {
         console.error("Error fetching visits:", error.message);
@@ -88,6 +113,7 @@ export const SupabaseProvider = ({ children }) => {
     }
 
   }
+
 
   const handleSubmit = async (form) => {
     try {
@@ -181,7 +207,8 @@ export const SupabaseProvider = ({ children }) => {
         feedback,
         setFeedback,
         fetchStats,
-        stats
+        stats,
+        allPolice,
       }}
     >
       {children}

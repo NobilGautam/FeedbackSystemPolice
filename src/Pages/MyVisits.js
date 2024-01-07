@@ -11,6 +11,7 @@ import { Input } from "@chakra-ui/react";
 const MyVisits = () => {
   const [user] = useAuthState(Auth);
   const { fetchVisits, visits,visitsLoader,globalVisits,setVisits, tableData: PoliceData} = useSupabase();
+
   
   const [policeStations, setPoliceStations] = useState([]);
   const [imgLinks, setImgLinks] = useState(new Map());
@@ -89,6 +90,7 @@ const MyVisits = () => {
     setSearchTerm(e.target.value)
   
   }
+  
   
   if (visitsLoader) {
     return (
