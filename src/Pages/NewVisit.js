@@ -23,13 +23,14 @@ const NewVisit = () => {
       setPhoneNumber(value);
     }
     setForm({ ...form, [name]: value });
+    console.log(form.mobile);
   };
 
   const toast = useToast()
 
   const handleSendSMS = async () => {
     try {
-      const response = await axios.get('https://feedback-server-59l6.onrender.com/send-text', {
+      const response = await axios.get('https://f4eedback-server-59l6.onrender.com/send-text', {
         params: {
           recipient: phoneNumber
         },
