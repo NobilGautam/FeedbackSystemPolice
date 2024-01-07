@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import formBG from "../assets/formBG.jpg";
 import PoliceData from "../components/data";
 import { useSupabase } from "../context/SupabaseContext";
 import { useToast } from "@chakra-ui/react";
 import axios from 'axios';
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Auth } from "../Firebase";
 
 const NewVisit = () => {
   const { handleSubmit, individual } = useSupabase();
   const [ phoneNumber, setPhoneNumber ] = useState('');
+  const [userLocation, setUserLocation] = useState(null);
+  const [user]=useAuthState(Auth);
+
 
   const [form, setForm] = useState({
     name: "",
@@ -63,7 +68,36 @@ const NewVisit = () => {
       pstation: individual || "",
     });
   };
-
+  const getUserLocation = () => {
+    // if geolocation is supported by the users browser
+    if (navigator.geolocation) {
+      // get the current users location
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          // save the geolocation coordinates in two variables
+          const { latitude, longitude } = position.coords;
+          console.log(latitude,longitude);
+          // update the value of userlocation variable
+          setUserLocation({ latitude, longitude });
+          
+        },
+        // if there was an error getting the users location
+        (error) => {
+          console.error('Error getting user location:', error);
+        }
+      );
+    }
+    // if geolocation is not supported by the users browser
+    else {
+      console.error('Geolocation is not supported by this browser.');
+    }
+  };
+  useEffect(()=>{
+    getUserLocation();
+  },[user])
+if(!userLocation){
+  return <h1 className="mt-32 text-center text-[#8c4e1d] text-3xl h-[80vh] flex justify-center items-center my-auto">You got to provide your location</h1>
+}
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="lg:w-[50%] w-[90%] mx-auto mt-28">
