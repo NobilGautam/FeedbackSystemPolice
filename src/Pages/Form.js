@@ -66,6 +66,7 @@ function Form() {
     psname: policeData[0].name,
     purpose: "",
     feedback: "",
+    rating: '3'
   });
 
   useEffect(() => {
@@ -77,6 +78,7 @@ function Form() {
       psname: individual.policeStation,
       purpose: "",
       feedback: individual.feedback || "",
+      rating: individual.rating || '3',
     });
   }, [individual]);
 
@@ -94,6 +96,7 @@ function Form() {
       feedback: encrypt(form.feedback,toString(process.env.SECRET_KEY)),
       purpose: form.purpose,
       Feel: sentiment.analyze(form.feedback, options).score,
+      rating: rating,
     };
 
     // If documentId exists, update the existing visit
@@ -123,6 +126,7 @@ function Form() {
         psname: policeData[0].name,
         purpose: "",
         feedback: "",
+        rating: '3',
       });
     }, 5000);
   };
@@ -143,6 +147,7 @@ console.log(encrypt(4,SECRET_KEY));
   };
   const stringg="divyam";
   const secretKey="abc"
+  const [rating, setRating] = useState(3);
   
 
   return (
@@ -268,6 +273,31 @@ console.log(encrypt(4,SECRET_KEY));
                 />
               </label>
             </div>
+
+            <div className="flex justify-start flex-wrap flex-row">
+        <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2 ml-[5%]">
+          <span className="font-bold">Rating: </span>
+          <div className="flex items-center ml-2">
+            {[1, 2, 3, 4, 5].map((value) => (
+              <label key={value} className="flex items-center mr-4">
+                <input
+                  type="radio"
+                  name="rating"
+                  value={value}
+                  checked={rating === value}
+                  onChange={() => setRating(value)}
+                  className="mr-1"
+                />
+                {value === 1 && "Very Dissatisfied"}
+                {value === 2 && "Dissatisfied"}
+                {value === 3 && "Neutral"}
+                {value === 4 && "Satisfied"}
+                {value === 5 && "Very Satisfied"}
+              </label>
+            ))}
+          </div>
+        </label>
+      </div>
 
             <div className="flex flex-initial justify-start flex-wrap flex-col">
               <label className="flex flex-col mt-5 mb-2 ml-[5%]">

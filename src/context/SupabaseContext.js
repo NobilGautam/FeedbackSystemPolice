@@ -156,6 +156,7 @@ export const SupabaseProvider = ({ children }) => {
             feedback: form.feedback,
             purpose: form.purpose,
             Feel: form.Feel,
+            rating: form.rating,
           },
         ])
         .match({ documentID: documentId });
