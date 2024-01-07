@@ -12,7 +12,7 @@ function Home() {
   const [index, setIndex] = useState(6);
   const [flag, setFlag] = useState(true);
   const [loader, setLoader] = useState(false);
-  const { loading } = useSupabase();
+  const { loading ,statsLoading} = useSupabase();
 
   useEffect(() => {
     setSearchResults(PoliceData);
@@ -102,7 +102,7 @@ function Home() {
         </div>
       </div>
 
-      {loading ? (
+      {(loading||statsLoading) ? (
         <div className="flex justify-center">
           <h1 className="mt-32 text-center text-[#8c4e1d] text-5xl">
             <ColorRing
