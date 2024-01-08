@@ -6,11 +6,17 @@ import { useToast } from "@chakra-ui/react";
 import axios from 'axios';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Auth } from "../Firebase";
+import { useNavigate } from "react-router";
 
 const NewVisit = () => {
-  const { handleSubmit, individual } = useSupabase();
+  const {setShow2,show2,setQR, QR,handleSubmit, individual } = useSupabase();
+  const [show,setShow]=useState(false);
   const [ phoneNumber, setPhoneNumber ] = useState('');
   const [userLocation, setUserLocation] = useState(null);
+  const [isInProximity, setIsInProximity] = useState(false);
+  const navigator=useNavigate();
+  const policeStationLocation = { latitude: 40.7128, longitude: -74.0060 };
+
   const [user]=useAuthState(Auth);
 
 
@@ -67,37 +73,87 @@ const NewVisit = () => {
       mobile: "",
       pstation: individual || "",
     });
-  };
-  const getUserLocation = () => {
-    // if geolocation is supported by the users browser
-    if (navigator.geolocation) {
-      // get the current users location
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          // save the geolocation coordinates in two variables
-          const { latitude, longitude } = position.coords;
-          console.log(latitude,longitude);
-          // update the value of userlocation variable
-          setUserLocation({ latitude, longitude });
-          
-        },
-        // if there was an error getting the users location
-        (error) => {
-          console.error('Error getting user location:', error);
-        }
-      );
-    }
-    // if geolocation is not supported by the users browser
-    else {
-      console.error('Geolocation is not supported by this browser.');
-    }
+    navigator('/myVisits')
   };
   useEffect(()=>{
-    getUserLocation();
-  },[user])
-if(!userLocation){
-  return <h1 className="mt-32 text-center text-[#8c4e1d] text-3xl h-[80vh] flex justify-center items-center my-auto">You got to provide your location</h1>
-}
+    if(show2){
+      setShow(true);
+      setShow2(false);
+      setQR(false);
+    }
+  },[])
+  // const getUserLocation = () => {
+  //   // if geolocation is supported by the users browser
+  //   if (navigator.geolocation) {
+  //     // get the current users location
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         // save the geolocation coordinates in two variables
+  //         const { latitude, longitude } = position.coords;
+  //         console.log(latitude,longitude);
+  //         // update the value of userlocation variable
+  //         setUserLocation({ latitude, longitude });
+          
+  //       },
+  //       // if there was an error getting the users location
+  //       (error) => {
+  //         console.error('Error getting user location:', error);
+  //       }
+  //     );
+  //   }
+  //   // if geolocation is not supported by the users browser
+  //   else {
+  //     console.error('Geolocation is not supported by this browser.');
+  //   }
+  // };
+  // // useEffect(()=>{
+  //   navigator('/');
+  // },[])
+  // useEffect(()=>{
+  //   getUserLocation();
+  // },[user])
+  // const calculateDistance = (lat1, lon1, lat2, lon2) => {
+  //   const R = 6371; // Radius of the Earth in kilometers
+  //   const dLat = toRadians(lat2 - lat1);
+  //   const dLon = toRadians(lon2 - lon1);
+  //   const a =
+  //     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+  //     Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  //   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  //   const distance = R * c;
+  //   return distance;
+  // };
+
+  // const toRadians = (degree) => {
+  //   return degree * (Math.PI / 180);
+  // };
+
+  // useEffect(() => {
+  //   getUserLocation();
+  // }, []);
+
+  // useEffect(() => {
+  //   if (userLocation) {
+  //     const distance = calculateDistance(
+  //       userLocation.latitude,
+  //       userLocation.longitude,
+  //       policeStationLocation.latitude,
+  //       policeStationLocation.longitude
+  //     );
+
+  //     // Set a threshold distance (in kilometers) to determine proximity
+  //     const proximityThreshold = 5; // Adjust as needed
+
+  //     setIsInProximity(distance <= proximityThreshold);
+  //   }
+  // }, [userLocation]);
+  if(!show){
+    return <h1 className="mt-32 text-center text-[#8c4e1d] text-3xl h-[80vh] flex justify-center items-center my-auto">You got to  scan QR</h1>
+  }
+  
+// if(!userLocation){
+//   return <h1 className="mt-32 text-center text-[#8c4e1d] text-3xl h-[80vh] flex justify-center items-center my-auto">You got to provide your location</h1>
+// }
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="lg:w-[50%] w-[90%] mx-auto mt-28">

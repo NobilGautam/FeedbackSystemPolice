@@ -36,8 +36,8 @@ function TabAbout({ policeData }) {
   }
   setStars(temp);
    
-    setStars(temp);
-  }, [policeData]);
+    
+  }, [policeData,allPolice]);
   return (
     <div className="p-4">
       <div className="flex flex-row w-[52%] justify-between">

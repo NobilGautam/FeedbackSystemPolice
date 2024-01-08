@@ -14,10 +14,10 @@ import TabReviews from "../components/TabReviews";
 import TabData from "../components/TabData";
 import { useSupabase } from "../context/SupabaseContext";
 import { Link } from "react-router-dom";
-import { IoMdArrowBack } from "react-icons/io";
+import { IoMdArrowBack } from "react-icons/io"; //
 function Single() {
   const { id } = useParams();
-  const { tableData: policeStations, setIndividual } = useSupabase();
+  const {show2,setShow2,QR,setQR, tableData: policeStations, setIndividual } = useSupabase();
   const [policeData, setPoliceData] = useState({});
   const navigator = useNavigate();
 
@@ -34,25 +34,39 @@ function Single() {
       setPoliceData(temp);
     }
   }, [id, policeStations]);
+  // useEffect(()=>{
+  //   if(QR){
+   
+  //     setQR(false);
+  //   }
+  // },[])
   if (!policeData) return null;
   const handleClick = () => {
     setIndividual(policeData.name);
+    if(QR){
+    setShow2(true);
+    }
+    
     navigator("/newVisit");
   };
+  const handleClick2=()=>{ 
+    setShow2(false);
+    navigator('/');
+  }
 
   return (
     <div>
       <div className="container mt-32 mx-auto flex items-center justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-2 mt-16 gap-24 max-h-screen w-full">
           <div className="flex items-center flex-col justify-center h-full">
-            <Button size={"lg"} className="customButton self-start">
+            <Button size={"lg"} className="customButton self-start" onClick={handleClick2}>
               {" "}
-              <Link to="/">
+              
                 <span className="text-lg flex items-center">
                   <IoMdArrowBack />
                   Back to All Post
                 </span>{" "}
-              </Link>
+              
             </Button>
             <img
               src={policeData.image}
