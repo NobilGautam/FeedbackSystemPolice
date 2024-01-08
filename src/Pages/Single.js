@@ -14,7 +14,7 @@ import TabReviews from "../components/TabReviews";
 import TabData from "../components/TabData";
 import { useSupabase } from "../context/SupabaseContext";
 import { Link } from "react-router-dom";
-import { IoMdArrowBack } from "react-icons/io";
+import { IoMdArrowBack } from "react-icons/io"; //
 function Single() {
   const { id } = useParams();
   const {show2,setShow2,QR,setQR, tableData: policeStations, setIndividual } = useSupabase();
