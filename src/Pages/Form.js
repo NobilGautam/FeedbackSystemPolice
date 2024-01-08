@@ -66,7 +66,9 @@ function Form() {
     psname: policeData[0].name,
     purpose: "",
     feedback: "",
-    rating: '3'
+    overallRating: '3',
+    time: '',
+    pbehaviour: '',
   });
 
   useEffect(() => {
@@ -78,7 +80,9 @@ function Form() {
       psname: individual.policeStation,
       purpose: "",
       feedback: individual.feedback || "",
-      rating: individual.rating || '3',
+      overallRating: individual.rating || '3',
+      time: individual.time || "Immediately",
+      pbehaviour: individual.pbehaviour || 'Abusive',
     });
   }, [individual]);
 
@@ -86,6 +90,9 @@ function Form() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+
+    console.log(form.time);
+    console.log(form.pbehaviour);
 
     const updatedFormData = {
       name: form.fname,
@@ -96,7 +103,9 @@ function Form() {
       feedback: encrypt(form.feedback,toString(process.env.SECRET_KEY)),
       purpose: form.purpose,
       Feel: sentiment.analyze(form.feedback, options).score,
-      rating: rating,
+      overallRating: rating,
+      time: time,
+      pbehaviour: pbehaviour,
     };
 
     // If documentId exists, update the existing visit
@@ -126,13 +135,16 @@ function Form() {
         psname: policeData[0].name,
         purpose: "",
         feedback: "",
-        rating: '3',
+        overallRating: '3',
+        time: 'Immediately',
+        pbehaviour: 'Abusive',
       });
     }, 5000);
   };
 console.log(encrypt(4,SECRET_KEY));
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(name, value);
     setForm({ ...form, [name]: value });
   };
 
@@ -148,6 +160,22 @@ console.log(encrypt(4,SECRET_KEY));
   const stringg="divyam";
   const secretKey="abc"
   const [rating, setRating] = useState(3);
+  const [time, setTime] = useState('Immediately');
+  const [pbehaviour, setPbehaviour] = useState('Abusive');
+
+  const timeTaken = [
+    "Immediately",
+    "5 Mins",
+    "10 Mins",
+    "15 Mins",
+    "More than 15 Mins"
+  ]
+
+  const behaviour = [
+    "Abusive",
+    "Rude",
+    "Polite",
+  ]
   
 
   return (
@@ -275,29 +303,71 @@ console.log(encrypt(4,SECRET_KEY));
             </div>
 
             <div className="flex justify-start flex-wrap flex-row">
-        <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2 ml-[5%]">
-          <span className="font-bold">Rating: </span>
-          <div className="flex items-center ml-2">
-            {[1, 2, 3, 4, 5].map((value) => (
-              <label key={value} className="flex items-center mr-4">
-                <input
-                  type="radio"
-                  name="rating"
-                  value={value}
-                  checked={rating === value}
-                  onChange={() => setRating(value)}
-                  className="mr-1"
-                />
-                {value === 1 && "Very Dissatisfied"}
-                {value === 2 && "Dissatisfied"}
-                {value === 3 && "Neutral"}
-                {value === 4 && "Satisfied"}
-                {value === 5 && "Very Satisfied"}
+              <label className="flex flex-col gap-2 mt-5 mb-2 ml-[5%]">
+                <span className="font-bold">After how much time you were heard in police station: </span>
+                <div className="flex items-center ml-2">
+                  {timeTaken.map((value) => (
+                    <label key={value} className="flex items-center mr-4">
+                      <input
+                        type="radio"
+                        name="time"
+                        value={value}
+                        checked={time === value}
+                        onChange={() => setTime(value)}
+                        className="mr-1"
+                      />
+                      {value}
+                    </label>
+                  ))}
+                </div>
               </label>
-            ))}
-          </div>
-        </label>
-      </div>
+            </div>
+
+            <div className="flex justify-start flex-wrap flex-row">
+              <label className="flex flex-col gap-2 mt-5 mb-2 ml-[5%]">
+                <span className="font-bold">How do you rate the behaviour of the police officers: </span>
+                <div className="flex items-center ml-2">
+                  {behaviour.map((value) => (
+                    <label key={value} className="flex items-center mr-4">
+                      <input
+                        type="radio"
+                        name="pbehaviour"
+                        value={value}
+                        checked={pbehaviour === value}
+                        onChange={() => setPbehaviour(value)}
+                        className="mr-1"
+                      />
+                      {value}
+                    </label>
+                  ))}
+                </div>
+              </label>
+            </div>
+
+            <div className="flex justify-start flex-wrap flex-row">
+              <label className="flex flex-col gap-2 mt-5 mb-2 ml-[5%]">
+                <span className="font-bold">Overall Experience with the Police Station: </span>
+                <div className="flex items-center ml-2">
+                  {[1, 2, 3, 4, 5].map((value) => (
+                    <label key={value} className="flex items-center mr-4">
+                      <input
+                        type="radio"
+                        name="overallRating"
+                        value={value}
+                        checked={rating === value}
+                        onChange={() => setRating(value)}
+                        className="mr-1"
+                      />
+                      {value === 1 && "Very Dissatisfied"}
+                      {value === 2 && "Dissatisfied"}
+                      {value === 3 && "Neutral"}
+                      {value === 4 && "Satisfied"}
+                      {value === 5 && "Very Satisfied"}
+                    </label>
+                  ))}
+                </div>
+              </label>
+            </div>
 
             <div className="flex flex-initial justify-start flex-wrap flex-col">
               <label className="flex flex-col mt-5 mb-2 ml-[5%]">
