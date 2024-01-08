@@ -10,6 +10,7 @@ import Error from "./Pages/Error";
 import NewVisit from "./Pages/NewVisit";
 import MyVisits from "./Pages/MyVisits";
 import ChatBot from "react-simple-chatbot";
+import QR from "./Pages/QR";
 
 const steps = [
   {
@@ -37,6 +38,7 @@ function App() {
         {user && <Route path="/myVisits" element={<MyVisits />}></Route>}
         {user && <Route path="/newFeedback/:documentId" element={<Form />} />}
         <Route path="/newVisit" element={<NewVisit />} />
+        <Route path="/QR/:id" element={<QR />} />
         {user && <Route path="/form" element={<Form />}></Route>}
         {/* { user && <Route path="/chat" element={<Chat/>}></Route>}
          */}
