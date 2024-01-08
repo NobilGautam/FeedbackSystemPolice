@@ -17,9 +17,9 @@ function SingleCommPost({ item }) {
  
  useEffect(()=>{
 let number=0;
-console.log(allPolice.length);
+
   for(var i=0; i<allPolice.length; i++){
-    console.log(i);
+
     if(allPolice[i].policeStation===item.name){
      
       number=allPolice[i].ps_Rating;

@@ -11,6 +11,9 @@ const NewVisit = () => {
   const { handleSubmit, individual } = useSupabase();
   const [ phoneNumber, setPhoneNumber ] = useState('');
   const [userLocation, setUserLocation] = useState(null);
+  const [isInProximity, setIsInProximity] = useState(false);
+  const policeStationLocation = { latitude: 40.7128, longitude: -74.0060 };
+
   const [user]=useAuthState(Auth);
 
 
@@ -95,6 +98,41 @@ const NewVisit = () => {
   useEffect(()=>{
     getUserLocation();
   },[user])
+  const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 6371; // Radius of the Earth in kilometers
+    const dLat = toRadians(lat2 - lat1);
+    const dLon = toRadians(lon2 - lon1);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+    return distance;
+  };
+
+  const toRadians = (degree) => {
+    return degree * (Math.PI / 180);
+  };
+
+  useEffect(() => {
+    getUserLocation();
+  }, []);
+
+  useEffect(() => {
+    if (userLocation) {
+      const distance = calculateDistance(
+        userLocation.latitude,
+        userLocation.longitude,
+        policeStationLocation.latitude,
+        policeStationLocation.longitude
+      );
+
+      // Set a threshold distance (in kilometers) to determine proximity
+      const proximityThreshold = 5; // Adjust as needed
+
+      setIsInProximity(distance <= proximityThreshold);
+    }
+  }, [userLocation]);
 if(!userLocation){
   return <h1 className="mt-32 text-center text-[#8c4e1d] text-3xl h-[80vh] flex justify-center items-center my-auto">You got to provide your location</h1>
 }
