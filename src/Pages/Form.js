@@ -7,7 +7,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useParams } from "react-router";
 import { useSupabase } from "../context/SupabaseContext";
 import { Auth } from "../Firebase";
-
+import ReCAPTCHA from "react-google-recaptcha";
 import {
   Alert,
   AlertDescription,
@@ -55,7 +55,7 @@ function Form() {
       }
     };
     fetchDocument();
-  }, []);
+  }, [  visits]);
 
   const [form, setForm] = useState({
     fname: "",
@@ -91,6 +91,10 @@ function Form() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
+    if(!captcha){
+      alert("CHECK THE CAPTCHA ");
+      return;
+    }
     console.log(form.time);
     console.log(form.pbehaviour);
 
@@ -141,7 +145,11 @@ function Form() {
       });
     }, 5000);
   };
-console.log(encrypt(4,SECRET_KEY));
+// console.log(encrypt(4,SECRET_KEY));
+const handleRecaptchaVerify=()=>{
+  setCaptcha(true);
+
+}
   const handleChange = (e) => {
     const { name, value } = e.target;
     console.log(name, value);
@@ -162,6 +170,7 @@ console.log(encrypt(4,SECRET_KEY));
   const [rating, setRating] = useState(3);
   const [time, setTime] = useState('Immediately');
   const [pbehaviour, setPbehaviour] = useState('Abusive');
+   const [captcha,setCaptcha]=useState(false);
 
   const timeTaken = [
     "Immediately",
@@ -381,6 +390,13 @@ console.log(encrypt(4,SECRET_KEY));
                   placeholder="Enter your feedback"
                   className="xl:w-[550px] mr-2 mt-1 xl:mt-0 bg-gray-100 rounded-md p-2"
                 />
+              </label>
+            </div>
+            <div className="flex flex-initial justify-start flex-wrap flex-col">
+              <label className="flex flex-col  mb-2 ml-[5%]">
+               
+              <ReCAPTCHA sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+        onChange={handleRecaptchaVerify}></ReCAPTCHA>
               </label>
             </div>
 
