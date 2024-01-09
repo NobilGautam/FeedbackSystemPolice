@@ -55,7 +55,7 @@ function Form() {
       }
     };
     fetchDocument();
-  }, [ individual, documentId, visits]);
+  }, [  visits]);
 
   const [form, setForm] = useState({
     fname: "",
