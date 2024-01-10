@@ -17,6 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { encrypt,decrypt } from "n-krypta";
 
+
 var Sentiment = require("sentiment");
 var sentiment = new Sentiment();
  const SECRET_KEY='ABC'

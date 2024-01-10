@@ -6,8 +6,14 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 import { SupabaseProvider } from "./context/SupabaseContext";
+import Modal from 'react-modal';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const appElement = document.getElementById('root'); // replace with the id of your root element
+if (appElement) {
+  Modal.setAppElement(appElement);
+}
+
 root.render(
   <SupabaseProvider>
     <ChakraProvider>
