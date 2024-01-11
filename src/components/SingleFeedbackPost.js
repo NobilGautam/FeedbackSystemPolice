@@ -3,9 +3,16 @@ import React from "react";
 import "../index.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { Card, CardBody, CardFooter, Heading, Image, Stack } from "@chakra-ui/react";
 import { encrypt,decrypt } from "n-krypta";
+import { Share } from "react-twitter-widgets";
+import Customtweet from "./Customtweet";
+import { renderToString } from 'react-dom/server';
+
+// import { FacebookShareButton } from 'react-simple-share';
+
+
 const SECRET_KEY='ABC'
 
 function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
@@ -13,7 +20,22 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
     AOS.init({ duration: 1000 });
   }, []);
 
+  // const captureAndShareScreenshot = () => {
+  //   const feedbackContainer = document.getElementById('feedback-container');
 
+  //   html2canvas(feedbackContainer).then((canvas) => {
+  //     // Convert canvas to blob
+  //     canvas.toBlob((blob) => {
+  //       // Save blob as a file
+  //       saveAs(blob, 'feedback-screenshot.png');
+  //     });
+  //   });
+
+  // };
+  const tweetOptions = {
+    text: renderToString(<Customtweet item={item} />),
+    
+  };
   const formatTimestamp = (timestamp) => {
     const date = timestamp ? new Date(timestamp) : null;
 
@@ -71,7 +93,12 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
               <p className={` ${
             item.Feel < 0 ? "text-red-600" : "text-green-700"
             }`}>{decrypt(item.feedback,toString(process.env.SECRET_KEY))}</p>
+
             </div>
+
+<Share url="https://feedback-system-police-private.vercel.app/" options={{text:`Here is the Summary of my recent visit to  the Police station ${item.policeStation}:\n  My Purpose:${item.name} \n My Feedback:${decrypt(item.feedback,toString(process.env.SECRET_KEY))}\n @${item.policeStation} \n #${item.policeStation} #RajasThanPolice } \n`}}
+></Share>
+          
           </CardFooter>
         </Stack>
       </Card>
