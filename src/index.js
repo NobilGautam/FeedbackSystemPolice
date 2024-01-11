@@ -10,11 +10,10 @@ import Modal from 'react-modal';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const appElement = document.getElementById('root'); // replace with the id of your root element
-if (appElement) {
-  Modal.setAppElement(appElement);
-}
+
 
 root.render(
+  
   <SupabaseProvider>
     <ChakraProvider>
       <BrowserRouter>

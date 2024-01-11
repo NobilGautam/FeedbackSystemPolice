@@ -9,6 +9,10 @@ import { encrypt,decrypt } from "n-krypta";
 import { Share } from "react-twitter-widgets";
 import Customtweet from "./Customtweet";
 import { renderToString } from 'react-dom/server';
+import html2canvas from 'html2canvas';
+import domtoimage from 'dom-to-image';
+
+
 
 // import { FacebookShareButton } from 'react-simple-share';
 
@@ -20,22 +24,59 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
     AOS.init({ duration: 1000 });
   }, []);
 
-  // const captureAndShareScreenshot = () => {
-  //   const feedbackContainer = document.getElementById('feedback-container');
-
-  //   html2canvas(feedbackContainer).then((canvas) => {
-  //     // Convert canvas to blob
-  //     canvas.toBlob((blob) => {
-  //       // Save blob as a file
-  //       saveAs(blob, 'feedback-screenshot.png');
-  //     });
-  //   });
-
-  // };
-  const tweetOptions = {
-    text: renderToString(<Customtweet item={item} />),
+    const captureAndDownload = async (targetElementId) => {
+      const targetElement = document.getElementById(targetElementId);
+      console.log(targetElement);
+     
+      if (targetElement) {
+        try {
+          // Use dom-to-image to capture the target element
+          const dataUrl = await domtoimage.toPng(targetElement, { width: 800, height: 600 });
+  
+  
+          // Create a download link for the image
+          const downloadLink = document.createElement('a');
+          downloadLink.href = dataUrl;
+          downloadLink.download = 'captured_image.png'; // Specify the desired file name
+  
+          // Append the link to the body and simulate a click
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+  
+          // Remove the link from the body
+          document.body.removeChild(downloadLink);
+        } catch (error) {
+          console.error('Error capturing image:', error);
+        }
+      }
     
-  };
+  // const handleSnapshotClick = () => {
+  //   const targetElement = document.getElementById('#feedback');
+  //   if (targetElement) {
+  //     html2canvas(targetElement)
+  //       .then((canvas) => {
+  //         // Convert canvas to data URL
+  //         const dataUrl = canvas.toDataURL('image/png');
+  
+  //         // Create a download link for the snapshot
+  //         const downloadLink = document.createElement('a');
+  //         downloadLink.href = dataUrl;
+  //         downloadLink.download = 'snapshot.png';
+  
+  //         // Trigger the download after a short delay
+  //         setTimeout(() => {
+  //           downloadLink.click();
+  //         }, 100); // Adjust the delay if needed
+  //       })
+  //       .catch((error) => {
+  //         console.error('Error capturing snapshot:', error);
+  //       });
+  //   }
+  // };
+ 
+    }
+
+
   const formatTimestamp = (timestamp) => {
     const date = timestamp ? new Date(timestamp) : null;
 
@@ -59,7 +100,7 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
   };
 
   return (
-    <div data-aos="fade-up">
+    <div data-aos="fade-up" id='feedback'>
       <Card 
         direction={{base: 'column', sm: 'row'}}  
         overflow='hidden'
@@ -98,9 +139,18 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
 
 <Share url="https://feedback-system-police-private.vercel.app/" options={{text:`Here is the Summary of my recent visit to  the Police station ${item.policeStation}:\n  My Purpose:${item.name} \n My Feedback:${decrypt(item.feedback,toString(process.env.SECRET_KEY))}\n @${item.policeStation} \n #${item.policeStation} #RajasThanPolice } \n`}}
 ></Share>
-          
+
+   
+   
+
+ <button onClick={()=>{
+  
+ }}>
+      Click to Snapshot
+    </button> 
           </CardFooter>
         </Stack>
+        
       </Card>
     </div>
   );
