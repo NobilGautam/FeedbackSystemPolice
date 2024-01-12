@@ -22,13 +22,14 @@ var Sentiment = require("sentiment");
 var sentiment = new Sentiment();
  const SECRET_KEY='ABC'
 
+
 function Form() {
   var options = {
     extras: {
       not: -2,
     },
   };
-
+  const [refreshFlag,setRefresh]=useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [user] = useAuthState(Auth);
   const {
@@ -41,7 +42,10 @@ function Form() {
     tableData: policeData,
   } = useSupabase(); // Use the Supabase context
 
+
   const { documentId } = useParams();
+
+
 
   useEffect(() => {
     const fetchDocument = async () => {
@@ -55,8 +59,8 @@ function Form() {
         }
       }
     };
-    fetchDocument();
-  }, [documentId]);
+ fetchDocument();
+  }, []);
 
   const [form, setForm] = useState({
     fname: "",
