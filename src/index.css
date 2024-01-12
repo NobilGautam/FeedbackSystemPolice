@@ -74,3 +74,12 @@ blockquote.yes{
   padding: 10px;
 
 }
+.helpline{
+  position: fixed !important;
+  right: 0 !important;
+  transform: rotate(-90deg) !important;
+  top:50%!important;
+  z-index: 10;
+  margin-right: -34px;
+
+}

@@ -4,7 +4,7 @@ import { Button, Input } from "@chakra-ui/react";
 import { ThreeDots } from "react-loader-spinner";
 import { useSupabase } from "../context/SupabaseContext";
 import { ColorRing } from "react-loader-spinner";
-
+import { ModalOverlay,useDisclosure,ModalContent,ModalCloseButton,Text,ModalBody,ModalHeader,ModalFooter,Modal} from "@chakra-ui/react";
 function Home() {
   const { tableData: PoliceData } = useSupabase();
   const [searchResults, setSearchResults] = useState(PoliceData);
@@ -70,6 +70,19 @@ function Home() {
     rating_dsc: { method: "rating" },
     day_visited:{method:""}
   };
+  const OverlayOne = () => (
+    <ModalOverlay
+      bg='none'
+      
+      backdropFilter='blur(10px)'
+      backdropBlur='10px'
+    />
+  )
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [showModal,setShowModal]=useState(true);
+  const [overlay, setOverlay] = useState(<OverlayOne />)
+
+
 
   return (
     <div>
@@ -99,6 +112,12 @@ function Home() {
           <Button className="customButton mx-4" onClick={() => sort(sortState)}>
             Sort
           </Button>
+          {/* <Button
+        onClick={() => {
+          setOverlay(<OverlayOne />)
+          onOpen()
+        }}
+      /> */}
         </div>
       </div>
 
@@ -160,8 +179,24 @@ function Home() {
               No Police Stations found!!
             </h1>
           )}
+          
         </div>
       )}
+      { showModal &&
+       <Modal isCentered isOpen={isOpen} onClose={onClose}>
+        {overlay}
+        <ModalContent>
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>Custom backdrop filters!</Text>
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={onClose}>Close</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+}
     </div>
   );
 }
