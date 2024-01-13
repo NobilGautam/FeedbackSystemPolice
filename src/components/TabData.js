@@ -2,13 +2,14 @@ import React, { useEffect } from "react";
 import { useSupabase } from "../context/SupabaseContext";
 import { ArcElement, Chart as ChartJs, Legend, Tooltip } from "chart.js";
 import { Pie } from "react-chartjs-2";
+
 ChartJs.register(ArcElement, Tooltip, Legend);
 function TabData({ policeData }) {
   const { fetchStats, stats } = useSupabase();
 
   useEffect(() => {
     fetchStats(policeData.name);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [policeData.name]);
 
   if (!stats) {
@@ -17,11 +18,11 @@ function TabData({ policeData }) {
   const customOptions = {
     responsive: false, // Set to false to use custom height and width
     maintainAspectRatio: false, // Set to false to allow custom height and width
-    height: 300, // Set the desired height
+    height: 400, // Set the desired height
     width: 800, // Set the desired width
   };
 
-  const data = {
+  const follow_data = {
     labels: ["No Response", "Resolved", "Resolving"],
     datasets: [
       {
@@ -30,17 +31,40 @@ function TabData({ policeData }) {
           stats[0].Follow_Resolved,
           stats[0].Follow_Resolving,
         ],
-        backgroundColor: ["red", "orange", "purple"],
+        backgroundColor: ["red", "green", "orange"],
+      },
+    ],
+  };
+  const gender_data = {
+    labels: ["Male", "Female", "Others"],
+    datasets: [
+      {
+        data: [
+          stats[0].Gender_Male,
+          stats[0].Gender_Female,
+          stats[0].Gender_Others,
+        ],
+        backgroundColor: ["blue", "green", "grey"],
+      },
+    ],
+  };
+  const feedback_data = {
+    labels: ["Positive", "Negative"],
+    datasets: [
+      {
+        data: [stats[0].Positive_Feedback, stats[0].Negative_Feedback],
+        backgroundColor: ["green", "red"],
       },
     ],
   };
 
   return (
-    <div className="grid sm:grid-cols-2 w-[100%] py-5 justify-center">
-      <Pie data={data} options={customOptions} className="hello"></Pie>
-      <Pie data={data} options={customOptions} className="hello"></Pie>
-      <Pie data={data} options={customOptions} className="hello"></Pie>
-      <Pie data={data} options={customOptions} className="hello"></Pie>
+    <div>
+      <div className="grid sm:grid-cols-2 w-[100%] py-5 justify-center">
+        <Pie data={gender_data} options={customOptions}></Pie>
+      <Pie data={feedback_data} options={customOptions}></Pie>
+      </div>
+        <Pie data={follow_data} options={customOptions}></Pie>
     </div>
   );
 } //

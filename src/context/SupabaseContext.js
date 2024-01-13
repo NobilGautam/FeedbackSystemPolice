@@ -132,6 +132,10 @@ export const SupabaseProvider = ({ children }) => {
     }
   };
 
+  const updateStats = async (psName) => {
+    
+  }
+
   const updateVisit = async (documentId, form) => {
     try {
       const { data, error } = await supabase
@@ -181,7 +185,7 @@ export const SupabaseProvider = ({ children }) => {
     }
   };
 
-  const [selectedLink , setSelectedLink] = useState();
+  const [selectedLink, setSelectedLink] = useState();
 
   const handleNavClick = (link) => {
     console.log("link.name is: ", link.name);
@@ -189,9 +193,8 @@ export const SupabaseProvider = ({ children }) => {
       const newlink = link.name;
       setSelectedLink(newlink);
     });
-    console.log('selected link: ', selectedLink);
-
-  }
+    console.log("selected link: ", selectedLink);
+  };
 
   return (
     <SupabaseContext.Provider
