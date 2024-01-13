@@ -83,3 +83,6 @@ blockquote.yes{
   margin-right: -34px;
 
 }
+.chakra-modal__content{
+  background-color: #F8E2CF !important;
+}
