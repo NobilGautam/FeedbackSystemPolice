@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Auth, Provider } from "../Firebase";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
@@ -8,11 +8,16 @@ import close from "../assets/close.svg";
 import menu from "../assets/menu.svg";
 import rpLogo from "../assets/rplogo.png";
 import emblem from "../assets/emblem.png";
+import PDF from "./PDF";
+import AnimatedUnderline from "./AnimatedUnderline";
+import { useSupabase } from "../context/SupabaseContext";
 
 function Navbar() {
   const navigator = useNavigate();
   const [open, setOpen] = useState(false);
   const [user] = useAuthState(Auth);
+
+  const { selectedLink, setSelectedLink, handleNavClick } = useSupabase();
 
   const [showTooltip, setShowTooltip] = useState(false);
 
@@ -86,14 +91,18 @@ function Navbar() {
                     key={link.name}
                     onClick={() => {
                       setOpen(!open);
+                      handleNavClick(link);
                     }}
                     className="md:ml-8  text-base md:my-0 my-3"
                   >
                     <Link
                       to={link.link}
                       className="text-black hover:text-gray-400 duration-500"
+                      onClick={() => {
+                        setOpen(!open);
+                      }}
                     >
-                      {link.name}
+                      <p className={`hover:border-b-[3px] ${selectedLink === link.name ? 'border-b-[3px]' : ''} border-white duration-100 pb-2`}>{link.name}</p>
                     </Link>
                   </li>
                 ))}
@@ -135,10 +144,10 @@ function Navbar() {
             <li key={link.name} className="md:ml-8 text-xl md:my-0 my-7">
               <Link
                 to={link.link}
-                onClick={link.name === "LOGIN" ? signIN : ""}
+                onClick={(link.name === "LOGIN" ? signIN : "") && setSelectedLink(link.name) && console.log(selectedLink)}
                 className="text-white hover:text-gray-400 duration-500"
               >
-                {link.name}
+                <p className={`hover:border-b-[3px] ${selectedLink === link.name ? 'border-b-[3px]' : ''} border-white duration-100 pb-2`}>{link.name}</p>
               </Link>
             </li>
           ))}
