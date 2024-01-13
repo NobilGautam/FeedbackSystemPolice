@@ -43,7 +43,7 @@ function Navbar() {
   ];
 
   
-  const [selectedLink , setSelectedLink] = useState();
+  const [selectedLink , setSelectedLink] = useState('Home');
 
   const handleNavClick = (link) => {
 
