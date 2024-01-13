@@ -92,7 +92,6 @@ function Navbar() {
                     onClick={() => {
                       setOpen(!open);
                       handleNavClick(link);
-                      console.log("hi");
                     }}
                     className="md:ml-8  text-base md:my-0 my-3"
                   >

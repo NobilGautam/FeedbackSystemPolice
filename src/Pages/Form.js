@@ -8,7 +8,7 @@ import { useParams } from "react-router";
 import { useSupabase } from "../context/SupabaseContext";
 import { Auth } from "../Firebase";
 import ReCAPTCHA from "react-google-recaptcha";
-import { useToast } from "@chakra-ui/react";
+import { Button, useToast } from "@chakra-ui/react";
 import { encrypt } from "n-krypta";
 
 var Sentiment = require("sentiment");
@@ -186,17 +186,17 @@ function Form() {
 
   return (
     <>
-      <div className="flex h-[100%] lg:flex-row justify-center flex-col items-center flex-wrap lg:mt-0 mt-[190px]">
+      <div className="flex md:flex-row justify-center flex-col items-center flex-wrap mt-24 p-6 md:mt-0">
         <div
           initial="hidden"
           animate="show"
           variants={slideInRightAndFadeIn}
-          className=" lg:w-[90%] mx-auto lg:mt-28 justify-center flex"
+          className="w-full md:w-[90%] mx-auto md:mt-28 justify-center flex"
         >
           <form
             id="feedbackForm"
             onSubmit={handleSubmit}
-            className="mt-12 flex flex-col gap-8 w-[90%] lg:mb-10 bg-slate-50 rounded-md shadow-xl shadow-[#5e5d5d]"
+            className="mt-12 flex flex-col w-full md:w-[90%] md:mb-10 bg-slate-50 rounded-md shadow-md shadow-[#5e5d5d]"
             style={{
               background: `url(${formBG})`,
               backgroundSize: "cover",
@@ -204,7 +204,7 @@ function Form() {
               backgroundPosition: "center",
             }}
           >
-            <div className="flex mt-10 lg:flow-row flex-col flex-wrap w-[90%] justify-between mx-[5%]">
+            <div className="flex mt-10 md:flow-row flex-col flex-wrap w-[90%] justify-between mx-[5%]">
               <label className="flex flex-row mt-5 mb-2">
                 <span className="font-bold">Full Name: </span>
                 <input
@@ -213,12 +213,12 @@ function Form() {
                   required
                   onChange={handleChange}
                   placeholder="Enter your first name"
-                  className="rounded-md sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
+                  className="rounded-md ml-2 sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
                   disabled
                 />
               </label>
 
-              <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
+              <label className="flex flex-row md:items-center mt-5 mb-2">
                 <span className="font-bold">Age: </span>
                 <input
                   name="age"
@@ -227,19 +227,19 @@ function Form() {
                   onChange={handleChange}
                   placeholder="Enter your age"
                   type="number"
-                  className="rounded-md sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
+                  className="rounded-md ml-2 sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
                   disabled
                 />
               </label>
 
-              <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
+              <label className="flex flex-row md:items-center mt-5 mb-2">
                 <span className="font-bold">Gender: </span>
                 <select
                   name="gender"
                   form="feedbackForm"
                   onChange={handleChange}
                   value={form.gender}
-                  className="bg-transparent sm:mt-1 xl:mt-0 xl:ml-2"
+                  className="bg-transparent ml-2 sm:mt-1 xl:mt-0 xl:ml-2"
                 >
                   <option value="male">Male</option>
                   <option value="female">Female</option>
@@ -247,14 +247,14 @@ function Form() {
                 </select>
               </label>
 
-              <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
-                <span className="font-bold">Select Police Station: </span>
+              <label className="flex flex-row md:items-center mt-5 mb-2">
+                <span className="font-bold">Police Station: </span>
                 <select
                   name="psname"
                   form="feedbackForm"
                   value={form.psname}
                   onChange={handleChange}
-                  className="bg-transparent sm:mt-1 xl:mt-0 xl:ml-2"
+                  className="bg-transparent ml-2 w-[50%] sm:mt-1 xl:mt-0 xl:ml-2"
                   disabled
                 >
                   {policeData.map((data) => (
@@ -265,10 +265,10 @@ function Form() {
                 </select>
               </label>
             </div>
-
-            <div className="flex flex-col lg:flow-row justify-between mx-[5%] w-[100%]">
+            <hr class="my-6 bg-[#8C4E1D] self-center w-[90%] h-[3px]"/>
+            <div className="flex flex-col md:flow-row justify-between mx-[5%] w-[100%]">
               <div className="flex justify-start flex-wrap flex-row">
-                <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
+                <label className="flex flex-col md:flex-row md:items-center mt-5 mb-2">
                   <span className="font-bold">Purpose of visit: </span>
                   <input
                     type="text"
@@ -277,12 +277,12 @@ function Form() {
                     required
                     onChange={handleChange}
                     placeholder="Enter your purpose of visit in not more than one line"
-                    className="w-[550px] sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
+                    className="w-[300px] md:w-[550px] sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
                   />
                 </label>
               </div>
               <div className="flex justify-start flex-wrap flex-row">
-                <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
+                <label className="flex flex-col md:flex-row md:items-center mt-5 mb-2">
                   <span className="font-bold">Email </span>
                   <input
                     type="email"
@@ -297,12 +297,11 @@ function Form() {
                 </label>
               </div>
             </div>
-
-            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+            <label className="flex flex-col md:flex-row gap-2 mt-5 mb-2 ml-[5%]">
               <span className="font-bold">
                 After how much time you were heard in police station:{" "}
               </span>
-              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+              <div className="flex md:items-center flex-col items-start md:flex-row ml-2">
                 {timeTaken.map((value) => (
                   <label key={value} className="flex items-center mr-4">
                     <input
@@ -319,11 +318,11 @@ function Form() {
               </div>
             </label>
 
-            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+            <label className="flex flex-col md:flex-row gap-2 mt-5 mb-2 ml-[5%]">
               <span className="font-bold">
                 How do you rate the behaviour of the police officers:{" "}
               </span>
-              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+              <div className="flex md:items-center flex-col items-start md:flex-row ml-2">
                 {behaviour.map((value) => (
                   <label key={value} className="flex items-center mr-4">
                     <input
@@ -340,11 +339,11 @@ function Form() {
               </div>
             </label>
 
-            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+            <label className="flex flex-col md:flex-row gap-2 mt-5 mb-2 ml-[5%]">
               <span className="font-bold">
                 Guidance received at the police station:{" "}
               </span>
-              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+              <div className="flex md:items-center flex-col items-start md:flex-row ml-2">
                 {feedback.map((value) => (
                   <label key={value} className="flex items-center mr-4">
                     <input
@@ -361,11 +360,11 @@ function Form() {
               </div>
             </label>
 
-            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+            <label className="flex flex-col md:flex-row gap-2 mt-5 mb-2 ml-[5%]">
               <span className="font-bold">
                 Courtesy and helpfullness of the staff at the police station:{" "}
               </span>
-              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+              <div className="flex md:items-center flex-col items-start md:flex-row ml-2">
                 {feedback.map((value) => (
                   <label key={value} className="flex items-center mr-4">
                     <input
@@ -382,11 +381,11 @@ function Form() {
               </div>
             </label>
 
-            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+            <label className="flex flex-col md:flex-row gap-2 mt-5 mb-2 ml-[5%]">
               <span className="font-bold">
                 Infrastructure at the police station:{" "}
               </span>
-              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+              <div className="flex md:items-center flex-col items-start md:flex-row ml-2">
                 {feedback.map((value) => (
                   <label key={value} className="flex items-center mr-4">
                     <input
@@ -403,11 +402,11 @@ function Form() {
               </div>
             </label>
 
-            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+            <label className="flex flex-col md:flex-row gap-2 mt-5 mb-2 ml-[5%]">
               <span className="font-bold">
                 Overall Experience with the Police Station:{" "}
               </span>
-              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+              <div className="flex md:items-center flex-col items-start md:flex-row ml-2">
                 {[1, 2, 3, 4, 5].map((value) => (
                   <label key={value} className="flex items-center mr-4">
                     <input
@@ -429,7 +428,7 @@ function Form() {
             </label>
 
             <div className="flex flex-initial justify-start flex-wrap flex-col">
-              <label className="flex flex-col lg:flex-row items-center gap-[5%] mt-5 mb-2 ml-[5%]">
+              <label className="flex flex-col md:flex-row items-center gap-[5%] mt-5 mb-2 ml-[5%]">
                 <span className="font-bold">Your feedback: </span>
                 <textarea
                   type="text"
@@ -443,7 +442,7 @@ function Form() {
               </label>
             </div>
             <div className="flex flex-initial justify-start flex-wrap flex-col">
-              <label className="flex flex-col  mb-2 ml-[5%]">
+              <label className="flex flex-col mb-2 ml-[5%]">
                 <ReCAPTCHA
                   sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
                   onChange={handleRecaptchaVerify}
@@ -451,13 +450,13 @@ function Form() {
               </label>
             </div>
 
-            <button
+            <Button
               type="submit"
-              className="bg-gray-300 hover:bg-gray-400 ml-[5%] py-3 px-8 mb-3 outline-none w-fit text-black font-bold shadow-md shadow-primary rounded-xl"
+              className="mx-5 mt-2 md:mx-16 md:mt-8 mb-5 w-fit customButton"
               onClick={handleFormSubmit}
             >
               Submit
-            </button>
+            </Button>
           </form>
         </div>
       </div>
