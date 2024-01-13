@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSupabase } from "../context/SupabaseContext";
 import { ArcElement, Chart as ChartJs, Legend, Tooltip } from "chart.js";
 import { Pie } from "react-chartjs-2";
+import { Select } from "@chakra-ui/react";
 
 ChartJs.register(ArcElement, Tooltip, Legend);
 function TabData({ policeData }) {
   const { fetchStats, stats } = useSupabase();
+  const [selectedChart, setSelectedChart] = useState("Feedback");
 
   useEffect(() => {
     fetchStats(policeData.name);
@@ -16,10 +18,18 @@ function TabData({ policeData }) {
     return null;
   }
   const customOptions = {
-    responsive: false, // Set to false to use custom height and width
     maintainAspectRatio: false, // Set to false to allow custom height and width
-    height: 400, // Set the desired height
-    width: 800, // Set the desired width
+    height: 800, // Set the desired height
+    width: 1200, // Set the desired width
+    plugins: {
+      legend: {
+        display: true,
+        position: "chartArea",
+        labels: {
+          boxWidth: 10, // Set the width of the colored boxes in the legend
+        },
+      },
+    },
   };
 
   const follow_data = {
@@ -152,21 +162,60 @@ function TabData({ policeData }) {
     ],
   };
 
+  const chartData = [
+    { data: gender_data, label: "Gender" },
+    { data: feedback_data, label: "Feedback" },
+    { data: follow_data, label: "Follow" },
+    { data: wait_data, label: "Waiting Period" },
+    { data: behavior_data, label: "Behavior" },
+    { data: guidance_data, label: "Guidance" },
+    { data: help_data, label: "Help" },
+    { data: infra_data, label: "Infrastructure" },
+    { data: rating_data, label: "Overall Rating" },
+  ];
+
+  const handleChartChange = (event) => {
+    setSelectedChart(event.target.value);
+  };
+
   return (
-    <div className="overflow-scroll max-h-full">
-      <div className="grid sm:grid-cols-2 w-[100%] py-5 justify-center">
-        <Pie data={gender_data} options={customOptions}></Pie>
-        <Pie data={feedback_data} options={customOptions}></Pie>
-        <Pie data={follow_data} options={customOptions}></Pie>
-        <Pie data={wait_data} options={customOptions}></Pie>
-        <Pie data={behavior_data} options={customOptions}></Pie>
-        <Pie data={guidance_data} options={customOptions}></Pie>
-        <Pie data={help_data} options={customOptions}></Pie>
-        <Pie data={infra_data} options={customOptions}></Pie>
-        <Pie data={rating_data} options={customOptions}></Pie>
+    <div className="h-full p-4">
+      <div className="">
+        <label htmlFor="chartSelector" className="mr-2">
+          Select Data
+        </label>
+        <Select
+          id="chartSelector"
+          value={selectedChart}
+          onChange={handleChartChange}
+          className="bg-gray-300"
+        >
+          {chartData.map((chart, index) => (
+            <option key={index} value={chart.label}>
+              {chart.label}
+            </option>
+          ))}
+        </Select>
+      </div>
+      <div className="mt-12">
+        {chartData.map((chart, index) => (
+          <div
+            key={index}
+            style={{
+              display: selectedChart === chart.label ? "block" : "none",
+            }}
+            className="h-full"
+          >
+            <Pie
+              className="w-full h-full"
+              data={chart.data}
+              options={customOptions}
+            ></Pie>
+          </div>
+        ))}
       </div>
     </div>
   );
-} //
+}
 
 export default TabData;
