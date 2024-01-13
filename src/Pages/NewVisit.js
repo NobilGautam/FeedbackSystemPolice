@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import formBG from "../assets/formBG.jpg";
-import PoliceData from "../components/data";
 import { useSupabase } from "../context/SupabaseContext";
 import { useToast } from "@chakra-ui/react";
 import axios from "axios";
@@ -10,7 +9,7 @@ import { Auth } from "../Firebase";
 import { useNavigate } from "react-router";
 
 const NewVisit = () => {
-  const { setShow2, show2, setQR, handleSubmit, individual } = useSupabase();
+  const { setShow2, show2, setQR, handleSubmit, individual, tableData:PoliceData } = useSupabase();
   const [show, setShow] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
   const navigator = useNavigate();
