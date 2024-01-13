@@ -153,6 +153,9 @@ export const SupabaseProvider = ({ children }) => {
             rating: form.overallRating,
             time: form.time,
             behaviour: form.pbehaviour,
+            guidance: form.pguidance,
+            helpfulness: form.phelpful,
+            infrastructure: form.infra,
           },
         ])
         .match({ documentID: documentId });
