@@ -17,7 +17,6 @@ function Navbar() {
   const [open, setOpen] = useState(false);
   const [user] = useAuthState(Auth);
 
-  const { selectedLink, setSelectedLink, handleNavClick } = useSupabase();
 
   const [showTooltip, setShowTooltip] = useState(false);
 
@@ -43,6 +42,15 @@ function Navbar() {
     user && { name: "My Visits", link: "/myVisits" },
   ];
 
+  
+  const [selectedLink , setSelectedLink] = useState('Home');
+
+  const handleNavClick = (link) => {
+
+    setSelectedLink(link.name);
+
+
+  }
   return (
     <div className="shadow-md w-full fixed z-20 top-0 left-0">
       <div className="md:flex items-center justify-between py-4 md:px-10 px-7 bg-[#8C4E1D]">
@@ -92,6 +100,7 @@ function Navbar() {
                     onClick={() => {
                       setOpen(!open);
                       handleNavClick(link);
+                      console.log("hi")
                     }}
                     className="md:ml-8  text-base md:my-0 my-3"
                   >
@@ -102,7 +111,7 @@ function Navbar() {
                         setOpen(!open);
                       }}
                     >
-                      <p className={`hover:border-b-[3px] ${selectedLink === link.name ? 'border-b-[3px]' : ''} border-white duration-100 pb-2`}>{link.name}</p>
+                      <p className={`hover:border-b-[3px] ${selectedLink === link.name ? 'border-b-[3px]' : ''} border-black duration-100 pb-2`}>{link.name}</p>
                     </Link>
                   </li>
                 ))}
@@ -141,7 +150,9 @@ function Navbar() {
         </div>
         <ul className="hidden font-medium flex-row md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-[#8C4E1D] md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in">
           {Links.filter((link) => link).map((link) => (
-            <li key={link.name} className="md:ml-8 text-xl md:my-0 my-7">
+            <li key={link.name} className="md:ml-8 text-xl md:my-0 my-7" onClick={()=>{
+              handleNavClick(link);
+            }}>
               <Link
                 to={link.link}
                 onClick={(link.name === "LOGIN" ? signIN : "") && setSelectedLink(link.name) && console.log(selectedLink)}
