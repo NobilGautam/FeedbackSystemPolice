@@ -194,25 +194,12 @@ export const SupabaseProvider = ({ children }) => {
     }
   }
 
-  const [selectedLink , setSelectedLink] = useState();
-
-  const handleNavClick = (link) => {
-    console.log("link.name is: ", link.name);
-    setSelectedLink(() => {
-      const newlink = link.name;
-      setSelectedLink(newlink);
-    });
-    console.log('selected link: ', selectedLink);
-
-  }
 
   return (
     <SupabaseContext.Provider
       value={{
         globalVisits,
-        selectedLink,
-        setSelectedLink,
-        handleNavClick,
+     
         tableData,
         loading,
         individual,
