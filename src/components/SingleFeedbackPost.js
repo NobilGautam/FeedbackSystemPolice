@@ -15,7 +15,6 @@ import {
 import { decrypt } from "n-krypta";
 import { Share } from "react-twitter-widgets";
 
-
 function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -77,7 +76,7 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
             <div>
               <p className="font-semibold">Feedback:</p>
               <p
-                className={` ${
+                className={`${
                   item.Feel < 0 ? "text-red-600" : "text-green-700"
                 }`}
               >

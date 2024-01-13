@@ -17,7 +17,6 @@ function SingleCommPost({ item }) {
     for (var i = 0; i < allPolice.length; i++) {
       if (allPolice[i].policeStation === item.name) {
         number = allPolice[i].ps_Rating;
-
         break;
       }
     }

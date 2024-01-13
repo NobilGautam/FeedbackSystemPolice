@@ -52,18 +52,12 @@ function TabData({ policeData }) {
           stats[0].Waiting_Fifteen,
           stats[0].Waiting_More_Fifteen,
         ],
-        backgroundColor: ["red", "green", "orange","blue","grey"],
+        backgroundColor: ["red", "green", "orange", "blue", "grey"],
       },
     ],
   };
   const guidance_data = {
-    labels: [
-      "Poor",
-      "Below Average",
-      "Average",
-      "Good", 
-      "Excellent"
-    ],
+    labels: ["Poor", "Below Average", "Average", "Good", "Excellent"],
     datasets: [
       {
         data: [
@@ -73,18 +67,12 @@ function TabData({ policeData }) {
           stats[0].Guidance_Good,
           stats[0].Guidance_Excellent,
         ],
-        backgroundColor: ["red", "green", "orange","blue","grey"],
+        backgroundColor: ["red", "green", "orange", "blue", "grey"],
       },
     ],
   };
   const infra_data = {
-    labels: [
-      "Poor",
-      "Below Average",
-      "Average",
-      "Good", 
-      "Excellent"
-    ],
+    labels: ["Poor", "Below Average", "Average", "Good", "Excellent"],
     datasets: [
       {
         data: [
@@ -94,18 +82,12 @@ function TabData({ policeData }) {
           stats[0].Infra_Good,
           stats[0].Infra_Excellent,
         ],
-        backgroundColor: ["red", "green", "orange","blue","grey"],
+        backgroundColor: ["red", "green", "orange", "blue", "grey"],
       },
     ],
   };
   const rating_data = {
-    labels: [
-      "Poor",
-      "Below Average",
-      "Average",
-      "Good", 
-      "Excellent"
-    ],
+    labels: ["Poor", "Below Average", "Average", "Good", "Excellent"],
     datasets: [
       {
         data: [
@@ -115,18 +97,12 @@ function TabData({ policeData }) {
           stats[0].Overall_Good,
           stats[0].Overall_Excellent,
         ],
-        backgroundColor: ["red", "green", "orange","blue","grey"],
+        backgroundColor: ["red", "green", "orange", "blue", "grey"],
       },
     ],
   };
   const help_data = {
-    labels: [
-      "Poor",
-      "Below Average",
-      "Average",
-      "Good", 
-      "Excellent"
-    ],
+    labels: ["Poor", "Below Average", "Average", "Good", "Excellent"],
     datasets: [
       {
         data: [
@@ -136,16 +112,12 @@ function TabData({ policeData }) {
           stats[0].Help_Good,
           stats[0].Help_Excellent,
         ],
-        backgroundColor: ["red", "green", "orange","blue","grey"],
+        backgroundColor: ["red", "green", "orange", "blue", "grey"],
       },
     ],
   };
   const behavior_data = {
-    labels: [
-      "Abusive",
-      "Rude",
-      "Polite",
-    ],
+    labels: ["Abusive", "Rude", "Polite"],
     datasets: [
       {
         data: [

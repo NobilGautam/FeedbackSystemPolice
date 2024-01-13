@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
-function Customtweet({item}) {
-  return (
-    <>{item.feedback}</>
-  )
+function Customtweet({ item }) {
+  return <>{item.feedback}</>;
 }
 
-export default Customtweet
+export default Customtweet;

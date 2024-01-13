@@ -57,12 +57,12 @@ function Form() {
     psname: policeData[0].name,
     purpose: "",
     feedback: "",
-    overallRating: '3',
-    time: '',
-    pbehaviour: '',
-    pguidance: '',
-    phelpful: '',
-    infra: '',
+    overallRating: "3",
+    time: "",
+    pbehaviour: "",
+    pguidance: "",
+    phelpful: "",
+    infra: "",
   });
 
   useEffect(() => {
@@ -76,10 +76,10 @@ function Form() {
       feedback: individual.feedback || "",
       overallRating: individual.rating || "3",
       time: individual.time || "Immediately",
-      pbehaviour: individual.pbehaviour || 'Abusive',
-      pguidance: individual.pguidance || 'Excellent',
-      phelpful: individual.phelpful || 'Excellent',
-      infra: individual.infra || 'Excellent',
+      pbehaviour: individual.pbehaviour || "Abusive",
+      pguidance: individual.pguidance || "Excellent",
+      phelpful: individual.phelpful || "Excellent",
+      infra: individual.infra || "Excellent",
     });
   }, [individual]);
 
@@ -137,12 +137,12 @@ function Form() {
         psname: policeData[0].name,
         purpose: "",
         feedback: "",
-        overallRating: '3',
-        time: 'Immediately',
-        pbehaviour: 'Abusive',
-        pguidance: 'Excellent',
-        phelpful: 'Excellent',
-        infra: 'Excellent',
+        overallRating: "3",
+        time: "Immediately",
+        pbehaviour: "Abusive",
+        pguidance: "Excellent",
+        phelpful: "Excellent",
+        infra: "Excellent",
       });
     }, 5000);
   };
@@ -165,12 +165,12 @@ function Form() {
   };
 
   const [rating, setRating] = useState(3);
-  const [time, setTime] = useState('Immediately');
-  const [pbehaviour, setPbehaviour] = useState('Abusive');
-  const [pguidance, setPguidance] = useState('Excellent');
-  const [phelpful, setPhelpful] = useState('Excellent');
-  const [infra, setInfra] = useState('Excellent');
-   const [captcha,setCaptcha]=useState(false);
+  const [time, setTime] = useState("Immediately");
+  const [pbehaviour, setPbehaviour] = useState("Abusive");
+  const [pguidance, setPguidance] = useState("Excellent");
+  const [phelpful, setPhelpful] = useState("Excellent");
+  const [infra, setInfra] = useState("Excellent");
+  const [captcha, setCaptcha] = useState(false);
 
   const timeTaken = [
     "Immediately",
@@ -180,20 +180,9 @@ function Form() {
     "More than 15 Mins",
   ];
 
-  const behaviour = [
-    "Abusive",
-    "Rude",
-    "Polite",
-  ]
+  const behaviour = ["Abusive", "Rude", "Polite"];
 
-  const feedback = [
-    "Poor",
-    "Below Average",
-    "Average",
-    "Good", 
-    "Excellent"
-  ]
-  
+  const feedback = ["Poor", "Below Average", "Average", "Good", "Excellent"];
 
   return (
     <>
@@ -216,65 +205,65 @@ function Form() {
             }}
           >
             <div className="flex mt-10 lg:flow-row flex-col flex-wrap w-[90%] justify-between mx-[5%]">
-                <label className="flex flex-row mt-5 mb-2">
-                  <span className="font-bold">Full Name: </span>
-                  <input
-                    name="fname"
-                    value={form.fname}
-                    required
-                    onChange={handleChange}
-                    placeholder="Enter your first name"
-                    className="rounded-md sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
-                    disabled
-                  />
-                </label>
+              <label className="flex flex-row mt-5 mb-2">
+                <span className="font-bold">Full Name: </span>
+                <input
+                  name="fname"
+                  value={form.fname}
+                  required
+                  onChange={handleChange}
+                  placeholder="Enter your first name"
+                  className="rounded-md sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
+                  disabled
+                />
+              </label>
 
               <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
-                  <span className="font-bold">Age: </span>
-                  <input
-                    name="age"
-                    required
-                    value={form.age}
-                    onChange={handleChange}
-                    placeholder="Enter your age"
-                    type="number"
-                    className="rounded-md sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
-                    disabled
-                  />
-                </label>
-
-                <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
-                  <span className="font-bold">Gender: </span>
-                  <select
-                    name="gender"
-                    form="feedbackForm"
-                    onChange={handleChange}
-                    value={form.gender}
-                    className="bg-transparent sm:mt-1 xl:mt-0 xl:ml-2"
-                  >
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="others">Others</option>
-                  </select>
-                </label>
+                <span className="font-bold">Age: </span>
+                <input
+                  name="age"
+                  required
+                  value={form.age}
+                  onChange={handleChange}
+                  placeholder="Enter your age"
+                  type="number"
+                  className="rounded-md sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
+                  disabled
+                />
+              </label>
 
               <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
-                  <span className="font-bold">Select Police Station: </span>
-                  <select
-                    name="psname"
-                    form="feedbackForm"
-                    value={form.psname}
-                    onChange={handleChange}
-                    className="bg-transparent sm:mt-1 xl:mt-0 xl:ml-2"
-                    disabled
-                  >
-                    {policeData.map((data) => (
-                      <option key={data.id} value={data.name}>
-                        {data.name}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                <span className="font-bold">Gender: </span>
+                <select
+                  name="gender"
+                  form="feedbackForm"
+                  onChange={handleChange}
+                  value={form.gender}
+                  className="bg-transparent sm:mt-1 xl:mt-0 xl:ml-2"
+                >
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="others">Others</option>
+                </select>
+              </label>
+
+              <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
+                <span className="font-bold">Select Police Station: </span>
+                <select
+                  name="psname"
+                  form="feedbackForm"
+                  value={form.psname}
+                  onChange={handleChange}
+                  className="bg-transparent sm:mt-1 xl:mt-0 xl:ml-2"
+                  disabled
+                >
+                  {policeData.map((data) => (
+                    <option key={data.id} value={data.name}>
+                      {data.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
             </div>
 
             <div className="flex flex-col lg:flow-row justify-between mx-[5%] w-[100%]">
@@ -309,127 +298,135 @@ function Form() {
               </div>
             </div>
 
-            
-              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">After how much time you were heard in police station: </span>
-                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
-                  {timeTaken.map((value) => (
-                    <label key={value} className="flex items-center mr-4">
-                      <input
-                        type="radio"
-                        name="time"
-                        value={value}
-                        checked={time === value}
-                        onChange={() => setTime(value)}
-                        className="mr-1"
-                      />
-                      {value}
-                    </label>
-                  ))}
-                </div>
-              </label>
+            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+              <span className="font-bold">
+                After how much time you were heard in police station:{" "}
+              </span>
+              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+                {timeTaken.map((value) => (
+                  <label key={value} className="flex items-center mr-4">
+                    <input
+                      type="radio"
+                      name="time"
+                      value={value}
+                      checked={time === value}
+                      onChange={() => setTime(value)}
+                      className="mr-1"
+                    />
+                    {value}
+                  </label>
+                ))}
+              </div>
+            </label>
 
-            
-              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">How do you rate the behaviour of the police officers: </span>
-                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
-                  {behaviour.map((value) => (
-                    <label key={value} className="flex items-center mr-4">
-                      <input
-                        type="radio"
-                        name="pbehaviour"
-                        value={value}
-                        checked={pbehaviour === value}
-                        onChange={() => setPbehaviour(value)}
-                        className="mr-1"
-                      />
-                      {value}
-                    </label>
-                  ))}
-                </div>
-              </label>
+            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+              <span className="font-bold">
+                How do you rate the behaviour of the police officers:{" "}
+              </span>
+              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+                {behaviour.map((value) => (
+                  <label key={value} className="flex items-center mr-4">
+                    <input
+                      type="radio"
+                      name="pbehaviour"
+                      value={value}
+                      checked={pbehaviour === value}
+                      onChange={() => setPbehaviour(value)}
+                      className="mr-1"
+                    />
+                    {value}
+                  </label>
+                ))}
+              </div>
+            </label>
 
-            
-              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">Guidance received at the police station: </span>
-                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
-                  {feedback.map((value) => (
-                    <label key={value} className="flex items-center mr-4">
-                      <input
-                        type="radio"
-                        name="pguidnace"
-                        value={value}
-                        checked={pguidance === value}
-                        onChange={() => setPguidance(value)}
-                        className="mr-1"
-                      />
-                      {value}
-                    </label>
-                  ))}
-                </div>
-              </label>
+            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+              <span className="font-bold">
+                Guidance received at the police station:{" "}
+              </span>
+              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+                {feedback.map((value) => (
+                  <label key={value} className="flex items-center mr-4">
+                    <input
+                      type="radio"
+                      name="pguidnace"
+                      value={value}
+                      checked={pguidance === value}
+                      onChange={() => setPguidance(value)}
+                      className="mr-1"
+                    />
+                    {value}
+                  </label>
+                ))}
+              </div>
+            </label>
 
-            
-              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">Courtesy and helpfullness of the staff at the police station: </span>
-                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
-                  {feedback.map((value) => (
-                    <label key={value} className="flex items-center mr-4">
-                      <input
-                        type="radio"
-                        name="phelpful"
-                        value={value}
-                        checked={phelpful === value}
-                        onChange={() => setPhelpful(value)}
-                        className="mr-1"
-                      />
-                      {value}
-                    </label>
-                  ))}
-                </div>
-              </label>
+            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+              <span className="font-bold">
+                Courtesy and helpfullness of the staff at the police station:{" "}
+              </span>
+              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+                {feedback.map((value) => (
+                  <label key={value} className="flex items-center mr-4">
+                    <input
+                      type="radio"
+                      name="phelpful"
+                      value={value}
+                      checked={phelpful === value}
+                      onChange={() => setPhelpful(value)}
+                      className="mr-1"
+                    />
+                    {value}
+                  </label>
+                ))}
+              </div>
+            </label>
 
-              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">Infrastructure at the police station: </span>
-                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
-                  {feedback.map((value) => (
-                    <label key={value} className="flex items-center mr-4">
-                      <input
-                        type="radio"
-                        name="infra"
-                        value={value}
-                        checked={infra === value}
-                        onChange={() => setInfra(value)}
-                        className="mr-1"
-                      />
-                      {value}
-                    </label>
-                  ))}
-                </div>
-              </label>
+            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+              <span className="font-bold">
+                Infrastructure at the police station:{" "}
+              </span>
+              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+                {feedback.map((value) => (
+                  <label key={value} className="flex items-center mr-4">
+                    <input
+                      type="radio"
+                      name="infra"
+                      value={value}
+                      checked={infra === value}
+                      onChange={() => setInfra(value)}
+                      className="mr-1"
+                    />
+                    {value}
+                  </label>
+                ))}
+              </div>
+            </label>
 
-              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">Overall Experience with the Police Station: </span>
-                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
-                  {[1, 2, 3, 4, 5].map((value) => (
-                    <label key={value} className="flex items-center mr-4">
-                      <input
-                        type="radio"
-                        name="overallRating"
-                        value={value}
-                        checked={rating === value}
-                        onChange={() => setRating(value)}
-                        className="mr-1"
-                      />
-                      {value === 1 && "Very Dissatisfied"}
-                      {value === 2 && "Dissatisfied"}
-                      {value === 3 && "Neutral"}
-                      {value === 4 && "Satisfied"}
-                      {value === 5 && "Very Satisfied"}
-                    </label>
-                  ))}
-                </div>
-              </label>
+            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+              <span className="font-bold">
+                Overall Experience with the Police Station:{" "}
+              </span>
+              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+                {[1, 2, 3, 4, 5].map((value) => (
+                  <label key={value} className="flex items-center mr-4">
+                    <input
+                      type="radio"
+                      name="overallRating"
+                      value={value}
+                      checked={rating === value}
+                      onChange={() => setRating(value)}
+                      className="mr-1"
+                    />
+                    {value === 1 && "Very Dissatisfied"}
+                    {value === 2 && "Dissatisfied"}
+                    {value === 3 && "Neutral"}
+                    {value === 4 && "Satisfied"}
+                    {value === 5 && "Very Satisfied"}
+                  </label>
+                ))}
+              </div>
+            </label>
 
             <div className="flex flex-initial justify-start flex-wrap flex-col">
               <label className="flex flex-col lg:flex-row items-center gap-[5%] mt-5 mb-2 ml-[5%]">

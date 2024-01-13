@@ -6,7 +6,7 @@ function TabReviews({ policeStationName }) {
   const { fetchReviews, reviews, reviewLoader } = useSupabase();
   useEffect(() => {
     fetchReviews(policeStationName);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [policeStationName]);
 
   function convertToISTAndFormatDate(inputDate) {
