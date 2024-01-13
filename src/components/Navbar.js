@@ -8,7 +8,6 @@ import close from "../assets/close.svg";
 import menu from "../assets/menu.svg";
 import rpLogo from "../assets/rplogo.png";
 import emblem from "../assets/emblem.png";
-import PDF from "./PDF";
 
 function Navbar() {
   const navigator = useNavigate();
@@ -159,7 +158,6 @@ function Navbar() {
                   >
                     Logout
                   </Link>
-                  {/* <PDF/> */}
                 </div>
               )}
             </li>

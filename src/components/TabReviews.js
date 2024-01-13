@@ -1,36 +1,20 @@
 import React, { useEffect } from "react";
 import { useSupabase } from "../context/SupabaseContext";
-// import { ColorRing } from "react-loader-spinner";
-// import { useState } from "react";
 import { Spinner } from "@chakra-ui/react";
-import { decrypt, encrypt } from "n-krypta";
-// import { ThreeDots } from "react-loader-spinner";
+import { decrypt } from "n-krypta";
 function TabReviews({ policeStationName }) {
   const { fetchReviews, reviews, reviewLoader } = useSupabase();
   useEffect(() => {
     fetchReviews(policeStationName);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  // const [index, setIndex] = useState(4);
-  // const [loader, setLoader] = useState(false);
-
-  // const showLoader = () => {
-  //   setLoader(true);
-  //   setTimeout(() => {
-  //     setLoader(false);
-  //     setIndex((prevIndex) => prevIndex + 6);
-  //   }, 1000);
-  // };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [policeStationName]);
 
   function convertToISTAndFormatDate(inputDate) {
-    // Convert input string to Date object
     const inputDateTime = new Date(inputDate);
 
-    // Convert to IST (Indian Standard Time)
     inputDateTime.setUTCHours(inputDateTime.getUTCHours() + 5);
     inputDateTime.setUTCMinutes(inputDateTime.getUTCMinutes() + 30);
 
-    // Format date as "Numeric Day, short Month Year"
     const options = {
       year: "numeric",
       month: "short",
@@ -54,13 +38,6 @@ function TabReviews({ policeStationName }) {
       </div>
     );
   }
-
-
-
-
-  // const data=encrypt('dddddddddddddddddd',toString(process.env.REACT_APP_SECRET_KEY));
-  // console.log(data);
-  // console.log(decrypt(data,toString(process.env.REACT_APP_SECRET_KEY)));
 
   return (
     <div className="p-4">
@@ -88,35 +65,16 @@ function TabReviews({ policeStationName }) {
                   </h1>
                 </div>
                 <hr></hr>
-                <h1 className="mt-2">{decrypt(item.feedback,toString(process.env.REACT_APP_SECRET_KEY))}</h1>
+                <h1 className="mt-2">
+                  {decrypt(
+                    item.feedback,
+                    toString(process.env.REACT_APP_SECRET_KEY)
+                  )}
+                </h1>
               </div>
             ))
         )}
       </div>
-        {/* <div className="flex justify-center">
-          {!loader ? (
-            <div>
-              {index < reviews.length ? (
-                <Button onClick={showLoader} className="customButton">
-                  Load More
-                </Button>
-              ) : (
-                ""
-              )}
-            </div>
-          ) : (
-            <h1>
-              <ThreeDots
-                visible={true}
-                height="80"
-                width="80"
-                color="#8C4E1D"
-                radius="9"
-                ariaLabel="three-dots-loading"
-              />
-            </h1>
-          )}
-        </div> */}
     </div>
   );
 }

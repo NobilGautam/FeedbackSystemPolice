@@ -5,7 +5,14 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Card, CardBody, CardFooter, Heading, Image, Stack, Text } from "@chakra-ui/react";
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  Heading,
+  Image,
+  Stack,
+} from "@chakra-ui/react";
 
 function SingleVisitPost({ item, ImgLinks, addressLinks, documentId }) {
   useEffect(() => {
@@ -36,39 +43,47 @@ function SingleVisitPost({ item, ImgLinks, addressLinks, documentId }) {
 
   return (
     <div data-aos="fade-up">
-      <Card 
-        direction={{base: 'column', sm: 'row'}}  
-        overflow='hidden'
-        variant='outline'
+      <Card
+        direction={{ base: "column", sm: "row" }}
+        overflow="hidden"
+        variant="outline"
         className="my-4 mx-10 md:mx-20 rounded-2xl hover:scale-105 duration-300"
-        background='#F0F0F0'
-        borderRadius='[20px]'
+        background="#F0F0F0"
+        borderRadius="[20px]"
         border={"solid"}
         borderColor={"#8C4E1D"}
       >
-        <Image 
-          objectFit='cover'
-          maxW={{base:'100%', sm:'30%'}}
+        <Image
+          objectFit="cover"
+          maxW={{ base: "100%", sm: "30%" }}
           src={ImgLinks.get(item.policeStation)}
           alt={`${item.name} Police Station Picture`}
         />
 
         <Stack>
           <CardBody>
-            <Heading size='md'>{item.policeStation}</Heading>
+            <Heading size="md">{item.policeStation}</Heading>
             <p className="py-2">
-              <span className="font-semibold">Address - </span>{addressLinks.get(item.policeStation)}
+              <span className="font-semibold">Address - </span>
+              {addressLinks.get(item.policeStation)}
             </p>
             <p className="py-2">
-            <span className="font-semibold">Reporting Date & Time - </span>{formatTimestamp(item.created_at)}
+              <span className="font-semibold">Reporting Date & Time - </span>
+              {formatTimestamp(item.created_at)}
             </p>
           </CardBody>
           <CardFooter>
             <div className="mb-4">
               {item.feedback !== null ? (
-                <span className="bg-[#c69665] text-white p-4 rounded-xl font-semibold">Feedback Added!</span>
+                <span className="bg-[#c69665] text-white p-4 rounded-xl font-semibold">
+                  Feedback Added!
+                </span>
               ) : (
-                <Link to={`/newFeedback/${documentId}`}><span className="bg-[#c69665] text-white p-4 rounded-xl font-semibold duration-300">Add Feedback</span></Link>
+                <Link to={`/newFeedback/${documentId}`}>
+                  <span className="bg-[#c69665] text-white p-4 rounded-xl font-semibold duration-300">
+                    Add Feedback
+                  </span>
+                </Link>
               )}
             </div>
           </CardFooter>

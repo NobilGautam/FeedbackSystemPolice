@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { encrypt,decrypt } from "n-krypta";
 
 const SupabaseContext = createContext();
 
@@ -15,22 +14,21 @@ export const SupabaseProvider = ({ children }) => {
 
   const policeStationTableName = "policeStations";
   const visitsTableName = "visits";
-  const psStats="psStats"
+  const psStats = "psStats";
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [visits, setVisits] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [individual, setIndividual] = useState("");
-  const [reviewLoader,setReviewLoader]=useState(true);
-  const [visitsLoader,setVisitsLoader]=useState(true);
-  const[globalVisits,setGlobalVisits]=useState([]);
-  const [feedback,setFeedback]=useState([]);
-  const [stats,setStats]=useState(null);
-  const [allPolice,setAllPolice]=useState([]);
-  const [statsLoading,setStatsLoading]=useState(true);
-  const [QR,setQR]=useState(false);
-  const [show2,setShow2]=useState(false);
-
+  const [reviewLoader, setReviewLoader] = useState(true);
+  const [visitsLoader, setVisitsLoader] = useState(true);
+  const [globalVisits, setGlobalVisits] = useState([]);
+  const [feedback, setFeedback] = useState([]);
+  const [stats, setStats] = useState(null);
+  const [allPolice, setAllPolice] = useState([]);
+  const [statsLoading, setStatsLoading] = useState(true);
+  const [QR, setQR] = useState(false);
+  const [show2, setShow2] = useState(false);
 
   useEffect(() => {
     const fetchTableData = async () => {
@@ -53,30 +51,26 @@ export const SupabaseProvider = ({ children }) => {
 
     fetchTableData();
   }, []);
-  useEffect(()=>{
-    const fetchAllStats=async()=>{
+  useEffect(() => {
+    const fetchAllStats = async () => {
       try {
         const { data, error } = await supabase
           .from(psStats)
           .select("*")
           .order("id");
-        
-          
-  
+
         if (error) {
           console.error("Error fetching visits:", error.message);
         } else {
-         setAllPolice(data);
-       
-         setStatsLoading(false);
+          setAllPolice(data);
+          setStatsLoading(false);
         }
       } catch (error) {
         console.error("Error fetching visits:", error.message);
       }
-  
-    }
+    };
     fetchAllStats();
-  },[])
+  }, []);
 
   const fetchVisits = async (userEmail) => {
     try {
@@ -88,41 +82,35 @@ export const SupabaseProvider = ({ children }) => {
       if (error) {
         console.error("Error fetching visits:", error.message);
       } else {
-       
         setVisits(data || []);
-        
-        setGlobalVisits(data||[]);
-        setFeedback(data||[]);
+
+        setGlobalVisits(data || []);
+        setFeedback(data || []);
         setVisitsLoader(false);
       }
     } catch (error) {
       console.error("Error fetching visits:", error.message);
     }
   };
-  const fetchStats=async(ps)=>{
+  const fetchStats = async (ps) => {
     try {
       const { data, error } = await supabase
         .from(psStats)
         .select("*")
         .filter("policeStation", "eq", ps);
-        
 
       if (error) {
         console.error("Error fetching visits:", error.message);
       } else {
-       setStats(data);
-     
+        setStats(data);
       }
     } catch (error) {
       console.error("Error fetching visits:", error.message);
     }
-
-  }
-
+  };
 
   const handleSubmit = async (form) => {
     try {
-      // Send form data to the "visits" table in Supabase
       const { data, error } = await supabase.from(visitsTableName).upsert([
         {
           name: form.name,
@@ -130,7 +118,7 @@ export const SupabaseProvider = ({ children }) => {
           email: form.email,
           policeStation: form.pstation,
           created_at: new Date().toISOString(),
-          mobile:form.mobile
+          mobile: form.mobile,
         },
       ]);
 
@@ -146,7 +134,6 @@ export const SupabaseProvider = ({ children }) => {
 
   const updateVisit = async (documentId, form) => {
     try {
-      // Update visit data in the "visits" table in Supabase
       const { data, error } = await supabase
         .from(visitsTableName)
         .update([
@@ -192,7 +179,7 @@ export const SupabaseProvider = ({ children }) => {
     } catch (error) {
       console.error("Error fetching visits:", error.message);
     }
-  }
+  };
 
   return (
     <SupabaseContext.Provider
@@ -221,7 +208,6 @@ export const SupabaseProvider = ({ children }) => {
         setQR,
         show2,
         setShow2,
-    
       }}
     >
       {children}

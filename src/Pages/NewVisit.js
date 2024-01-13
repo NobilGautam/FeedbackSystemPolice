@@ -1,24 +1,20 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import formBG from "../assets/formBG.jpg";
 import PoliceData from "../components/data";
 import { useSupabase } from "../context/SupabaseContext";
 import { useToast } from "@chakra-ui/react";
-import axios from 'axios';
+import axios from "axios";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Auth } from "../Firebase";
 import { useNavigate } from "react-router";
 
 const NewVisit = () => {
-  const {setShow2,show2,setQR, QR,handleSubmit, individual } = useSupabase();
-  const [show,setShow]=useState(false);
-  const [ phoneNumber, setPhoneNumber ] = useState('');
-  const [userLocation, setUserLocation] = useState(null);
-  const [isInProximity, setIsInProximity] = useState(false);
-  const navigator=useNavigate();
-  const policeStationLocation = { latitude: 40.7128, longitude: -74.0060 };
-
-  const [user]=useAuthState(Auth);
-
+  const { setShow2, show2, setQR, handleSubmit, individual } = useSupabase();
+  const [show, setShow] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const navigator = useNavigate();
+  const [user] = useAuthState(Auth);
 
   const [form, setForm] = useState({
     name: "",
@@ -30,30 +26,27 @@ const NewVisit = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'mobile') {
+    if (name === "mobile") {
       setPhoneNumber(value);
     }
     setForm({ ...form, [name]: value });
-    console.log(form.mobile);
   };
 
-  const toast = useToast()
+  const toast = useToast();
 
   const handleSendSMS = async () => {
     try {
-      const response = await axios.get('https://f4eedback-server-59l6.onrender.com/send-text', {
-        params: {
-          recipient: phoneNumber
-        },
-        responseType: 'json',
-      });
-  
-      console.log('SMS Sent:', response.data);
-    } catch (error) {
-      console.error('Error sending SMS:', error.response?.data || error.message);
-    }
+      const response = await axios.get(
+        "https://f4eedback-server-59l6.onrender.com/send-text",
+        {
+          params: {
+            recipient: phoneNumber,
+          },
+          responseType: "json",
+        }
+      );
+    } catch (error) {}
   };
-  
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -73,87 +66,25 @@ const NewVisit = () => {
       mobile: "",
       pstation: individual || "",
     });
-    navigator('/myVisits')
+    navigator("/myVisits");
   };
-  useEffect(()=>{
-    if(show2){
+  useEffect(() => {
+    if (show2) {
       setShow(true);
       setShow2(false);
       setQR(false);
     }
-  },[])
-  // const getUserLocation = () => {
-  //   // if geolocation is supported by the users browser
-  //   if (navigator.geolocation) {
-  //     // get the current users location
-  //     navigator.geolocation.getCurrentPosition(
-  //       (position) => {
-  //         // save the geolocation coordinates in two variables
-  //         const { latitude, longitude } = position.coords;
-  //         console.log(latitude,longitude);
-  //         // update the value of userlocation variable
-  //         setUserLocation({ latitude, longitude });
-          
-  //       },
-  //       // if there was an error getting the users location
-  //       (error) => {
-  //         console.error('Error getting user location:', error);
-  //       }
-  //     );
-  //   }
-  //   // if geolocation is not supported by the users browser
-  //   else {
-  //     console.error('Geolocation is not supported by this browser.');
-  //   }
-  // };
-  // // useEffect(()=>{
-  //   navigator('/');
-  // },[])
-  // useEffect(()=>{
-  //   getUserLocation();
-  // },[user])
-  // const calculateDistance = (lat1, lon1, lat2, lon2) => {
-  //   const R = 6371; // Radius of the Earth in kilometers
-  //   const dLat = toRadians(lat2 - lat1);
-  //   const dLon = toRadians(lon2 - lon1);
-  //   const a =
-  //     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-  //     Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-  //   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  //   const distance = R * c;
-  //   return distance;
-  // };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  // const toRadians = (degree) => {
-  //   return degree * (Math.PI / 180);
-  // };
-
-  // useEffect(() => {
-  //   getUserLocation();
-  // }, []);
-
-  // useEffect(() => {
-  //   if (userLocation) {
-  //     const distance = calculateDistance(
-  //       userLocation.latitude,
-  //       userLocation.longitude,
-  //       policeStationLocation.latitude,
-  //       policeStationLocation.longitude
-  //     );
-
-  //     // Set a threshold distance (in kilometers) to determine proximity
-  //     const proximityThreshold = 5; // Adjust as needed
-
-  //     setIsInProximity(distance <= proximityThreshold);
-  //   }
-  // }, [userLocation]);
-  if(!show){
-    return <h1 className="mt-32 text-center text-[#8c4e1d] text-3xl h-[80vh] flex justify-center items-center my-auto">You got to  scan QR</h1>
+  if (!show) {
+    return (
+      <h1 className="mt-32 text-center text-[#8c4e1d] text-3xl h-[80vh] flex justify-center items-center my-auto">
+        You got to scan QR
+      </h1>
+    );
   }
-  
-// if(!userLocation){
-//   return <h1 className="mt-32 text-center text-[#8c4e1d] text-3xl h-[80vh] flex justify-center items-center my-auto">You got to provide your location</h1>
-// }
+
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="lg:w-[50%] w-[90%] mx-auto mt-28">

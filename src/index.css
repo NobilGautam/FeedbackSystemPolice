@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* Tailwind base, components, and utilities */
 
 @media screen and (max-width: 600px) {
@@ -27,8 +26,8 @@ body {
 .logout {
   color: white !important;
 }
-@media (max-width:420px){
-  .hatade{
+@media (max-width: 420px) {
+  .hatade {
     display: none;
   }
 }
@@ -38,19 +37,19 @@ body {
   padding-left: 1.2rem !important;
   padding-right: 1.2rem !important;
 }
-.sc-fjdhpX{
+.sc-fjdhpX {
   background-color: #8c4e1d !important;
 }
-.sc-gqjmRU{
+.sc-gqjmRU {
   background-color: #8c4e1d !important;
 }
-.sc-bZQynM{
+.sc-bZQynM {
   background-color: #8c4e1d !important;
 }
-.rsc-os-option-element{
+.rsc-os-option-element {
   background-color: #8c4e1d !important;
 }
-.rsc-ts-bubble{
+.rsc-ts-bubble {
   color: white !important;
 }
 
@@ -76,20 +75,18 @@ body {
   height: unset !important;
 
 } */
-blockquote.yes{
+blockquote.yes {
   padding: 10px;
-
 }
-.helpline{
+.helpline {
   position: fixed !important;
   right: 0 !important;
   transform: rotate(-90deg) !important;
-  top:50%!important;
+  top: 50% !important;
   z-index: 10;
   margin-right: -34px;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important; 
-
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
 }
-.chakra-modal__content{
-  background-color: #F8E2CF !important;
+.chakra-modal__content {
+  background-color: #f8e2cf !important;
 }

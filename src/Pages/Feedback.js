@@ -5,10 +5,17 @@ import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import SingleFeedbackPost from "../components/SingleFeedbackPost";
 import { useSupabase } from "../context/SupabaseContext";
-import { Button,Input } from "@chakra-ui/react";
+import { Button, Input } from "@chakra-ui/react";
 
 const Feedback = () => {
-  const { fetchVisits, visits,setVisits, globalVisits,feedback,setFeedback,tableData: PoliceData } = useSupabase();
+  const {
+    fetchVisits,
+    visits,
+    globalVisits,
+    feedback,
+    setFeedback,
+    tableData: PoliceData,
+  } = useSupabase();
   const [policeStations, setPoliceStations] = useState(PoliceData);
   const [user] = useAuthState(Auth);
   const [ImgLinks, setImgLinks] = useState(new Map());
@@ -17,16 +24,13 @@ const Feedback = () => {
   const [flag, setFlag] = useState(true);
   const [sortState, setSortState] = useState("name");
 
-  
   const sortMethods = {
     none: { method: null },
     name: { method: "policeStation" },
     name_dsc: { method: "policeStation" },
 
-   
-    day_Reported:{method:"created_at"}
+    day_Reported: { method: "created_at" },
   };
-
 
   useEffect(() => {
     if (user) {
@@ -35,12 +39,15 @@ const Feedback = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const sort = (sortState) => {
-    if (sortState === "name" || sortState === "rating" || sortState==="day_Reported" )
-        feedback.sort(sortBy(sortMethods[sortState].method));
+    if (
+      sortState === "name" ||
+      sortState === "rating" ||
+      sortState === "day_Reported"
+    )
+      feedback.sort(sortBy(sortMethods[sortState].method));
     else feedback.sort(sortByRev(sortMethods[sortState].method));
     setFlag(!flag);
   };
-
 
   useEffect(() => {
     const matching_PS = [];
@@ -61,43 +68,33 @@ const Feedback = () => {
     }
     setImgLinks(ImgUrls);
     setAddressLinks(Address);
-
-
   }, [PoliceData, policeStations, visits]);
-  
-  
+
   const sortBy = (field) => (a, b) =>
     (a[field] > b[field]) - (a[field] < b[field]);
   const sortByRev = (field) => (a, b) =>
     (a[field] < b[field]) - (a[field] > b[field]);
 
-    
-
   const handlechange = (e) => {
     setSearchTerm(e.target.value);
   };
-const handleSubmit=(e)=>{
-
-  e.preventDefault();
-  console.log(searchTerm);
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (searchTerm.trimStart().length === 0) {
-    alert("Please type a valid Police Station");
-    return;
-  }
-console.log(visits);
-  const temp = globalVisits.filter((item) =>
-    item.policeStation.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  console.log(temp);
- 
-  setFeedback(temp);
-}
-   
-  
+      alert("Please type a valid Police Station");
+      return;
+    }
+    const temp = globalVisits.filter((item) =>
+      item.policeStation.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    setFeedback(temp);
+  };
+
   return (
     <div className="mt-24 py-10 ">
-        <div className="w-[80%] mx-auto  flex flex-col md:flex-row items-center pt-3 justify-between" >
-      <form className="flex w-full md:w-[50%]" onSubmit={handleSubmit}>
+      <div className="w-[80%] mx-auto  flex flex-col md:flex-row items-center pt-3 justify-between">
+        <form className="flex w-full md:w-[50%]" onSubmit={handleSubmit}>
           <Input
             placeholder="Search Police Stations"
             onChange={handlechange}
@@ -120,13 +117,13 @@ console.log(visits);
             <option value="rating_dsc">Rating Dsc</option>
             <option value="day_Reported">Day Reported</option>
           </select>
-          <Button className="customButton mx-4" onClick={() => {
-            console.log(sortState);
-
-            sort(sortState)
-            console.log(visits);}}>
+          <Button
+            className="customButton mx-4"
+            onClick={() => {
+              sort(sortState);
+            }}
+          >
             Sort
-
           </Button>
         </div>
       </div>
