@@ -1,0 +1,46 @@
+{
+    "navbar": {
+      "english": "English"
+    },
+    "form": {
+      "fullname": "Full Name",
+      "age": "Age",
+      "gender": "Gender",
+      "policeStation": "Select Police Station",
+      "purpose": "Purpose of visit",
+      "email": "Email",
+      "time": "After how much time you were heard in police station",
+      "pbehaviour": "How do you rate the behaviour of the police officers",
+      "pguidance": "Guidance received at the police station",
+      "phelpful": "Courtesy and helpfulness of the staff at the police station",
+      "infra": "Infrastructure at the police station",
+      "overallExperience": "Overall Experience with the Police Station",
+      "veryDissatisfied": "Very Dissatisfied",
+      "dissatisfied": "Dissatisfied",
+      "neutral": "Neutral",
+      "satisfied": "Satisfied",
+      "verySatisfied": "Very Satisfied",
+      "feedback": "Your feedback",
+      "submitButton": "Submit",
+      "timeTaken": {
+        "immediately": "Immediately",
+        "5minutes": "5 Minutes",
+        "10minutes": "10 Minutes",
+        "15minutes": "15 Minutes",
+        "moreThan15minutes": "More than 15 Minutes"
+      },
+      "behaviour": {
+        "abusive": "Abusive",
+        "rude": "Rude",
+        "polite": "Polite"
+      },
+      "feedbackRating": {
+        "poor": "Poor",
+        "belowAverage": "Below Average",
+        "average": "Average",
+        "good": "Good",
+        "excellent": "Excellent"
+      }
+    }
+}
+  

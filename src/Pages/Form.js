@@ -16,6 +16,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { encrypt,decrypt } from "n-krypta";
+import { useTranslation } from "react-i18next";
 
 
 var Sentiment = require("sentiment");
@@ -24,6 +25,7 @@ var sentiment = new Sentiment();
 
 
 function Form() {
+  const { t } = useTranslation();
   var options = {
     extras: {
       not: -2,
@@ -193,25 +195,25 @@ const handleRecaptchaVerify=()=>{
    const [captcha,setCaptcha]=useState(false);
 
   const timeTaken = [
-    "Immediately",
-    "5 Mins",
-    "10 Mins",
-    "15 Mins",
-    "More than 15 Mins"
+    "immediately",
+    "5mins",
+    "10mins",
+    "15mins",
+    "moreThan15mins"
   ]
 
   const behaviour = [
-    "Abusive",
-    "Rude",
-    "Polite",
+    "abusive",
+    "rude",
+    "polite",
   ]
 
   const feedback = [
-    "Poor",
-    "Below Average",
-    "Average",
-    "Good", 
-    "Excellent"
+    "poor",
+    "belowAverage",
+    "average",
+    "good", 
+    "excellent"
   ]
   
 
@@ -237,7 +239,7 @@ const handleRecaptchaVerify=()=>{
           >
             <div className="flex mt-10 lg:flow-row flex-col flex-wrap w-[90%] justify-between mx-[5%]">
                 <label className="flex flex-row mt-5 mb-2">
-                  <span className="font-bold">Full Name: </span>
+                  <span className="font-bold">{`${t("form.fullname")}: `}</span>
                   <input
                     name="fname"
                     value={form.fname}
@@ -250,7 +252,7 @@ const handleRecaptchaVerify=()=>{
                 </label>
 
               <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
-                  <span className="font-bold">Age: </span>
+                  <span className="font-bold">{`${t("form.age")}: `}</span>
                   <input
                     name="age"
                     required
@@ -264,7 +266,7 @@ const handleRecaptchaVerify=()=>{
                 </label>
 
                 <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
-                  <span className="font-bold">Gender: </span>
+                  <span className="font-bold">{`${t("form.gender")}: `}</span>
                   <select
                     name="gender"
                     form="feedbackForm"
@@ -279,7 +281,7 @@ const handleRecaptchaVerify=()=>{
                 </label>
 
               <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
-                  <span className="font-bold">Select Police Station: </span>
+                  <span className="font-bold">{`${t("form.policeStation")}: `}</span>
                   <select
                     name="psname"
                     form="feedbackForm"
@@ -300,7 +302,7 @@ const handleRecaptchaVerify=()=>{
             <div className="flex flex-col lg:flow-row justify-between mx-[5%] w-[100%]">
               <div className="flex justify-start flex-wrap flex-row">
                 <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
-                  <span className="font-bold">Purpose of visit: </span>
+                  <span className="font-bold">{`${t("form.purpose")}: `}</span>
                   <input
                     type="text"
                     name="purpose"
@@ -314,7 +316,7 @@ const handleRecaptchaVerify=()=>{
               </div>
               <div className="flex justify-start flex-wrap flex-row">
                 <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
-                  <span className="font-bold">Email </span>
+                  <span className="font-bold">{`${t("form.email")}: `}</span>
                   <input
                     type="email"
                     name="email"
@@ -331,7 +333,7 @@ const handleRecaptchaVerify=()=>{
 
             
               <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">After how much time you were heard in police station: </span>
+                <span className="font-bold">{`${t("form.time")}: `}</span>
                 <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
                   {timeTaken.map((value) => (
                     <label key={value} className="flex items-center mr-4">
@@ -343,7 +345,7 @@ const handleRecaptchaVerify=()=>{
                         onChange={() => setTime(value)}
                         className="mr-1"
                       />
-                      {value}
+                        {t(`form.timeTaken.${value}`)}
                     </label>
                   ))}
                 </div>
@@ -351,7 +353,7 @@ const handleRecaptchaVerify=()=>{
 
             
               <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">How do you rate the behaviour of the police officers: </span>
+                <span className="font-bold">{`${t("form.pbehaviour")}: `}</span>
                 <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
                   {behaviour.map((value) => (
                     <label key={value} className="flex items-center mr-4">
@@ -363,7 +365,7 @@ const handleRecaptchaVerify=()=>{
                         onChange={() => setPbehaviour(value)}
                         className="mr-1"
                       />
-                      {value}
+                        {t(`form.behaviour.${value}`)}
                     </label>
                   ))}
                 </div>
@@ -371,19 +373,19 @@ const handleRecaptchaVerify=()=>{
 
             
               <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">Guidance received at the police station: </span>
+                <span className="font-bold">{`${t("form.pguidance")}: `}</span>
                 <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
                   {feedback.map((value) => (
                     <label key={value} className="flex items-center mr-4">
                       <input
                         type="radio"
-                        name="pguidnace"
+                        name="pguidance"
                         value={value}
                         checked={pguidance === value}
                         onChange={() => setPguidance(value)}
                         className="mr-1"
                       />
-                      {value}
+                      {t(`form.feedbackRating.${value}`)}
                     </label>
                   ))}
                 </div>
@@ -391,7 +393,7 @@ const handleRecaptchaVerify=()=>{
 
             
               <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">Courtesy and helpfullness of the staff at the police station: </span>
+                <span className="font-bold">{`${t("form.phelpful")}: `}</span>
                 <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
                   {feedback.map((value) => (
                     <label key={value} className="flex items-center mr-4">
@@ -403,14 +405,14 @@ const handleRecaptchaVerify=()=>{
                         onChange={() => setPhelpful(value)}
                         className="mr-1"
                       />
-                      {value}
+                      {t(`form.feedbackRating.${value}`)}
                     </label>
                   ))}
                 </div>
               </label>
 
               <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">Infrastructure at the police station: </span>
+                <span className="font-bold">{`${t("form.infra")}: `}</span>
                 <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
                   {feedback.map((value) => (
                     <label key={value} className="flex items-center mr-4">
@@ -422,14 +424,14 @@ const handleRecaptchaVerify=()=>{
                         onChange={() => setInfra(value)}
                         className="mr-1"
                       />
-                      {value}
+                      {t(`form.feedbackRating.${value}`)}
                     </label>
                   ))}
                 </div>
               </label>
 
               <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">Overall Experience with the Police Station: </span>
+                <span className="font-bold">{`${t("form.overallExperience")}: `}</span>
                 <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
                   {[1, 2, 3, 4, 5].map((value) => (
                     <label key={value} className="flex items-center mr-4">
@@ -453,7 +455,7 @@ const handleRecaptchaVerify=()=>{
 
             <div className="flex flex-initial justify-start flex-wrap flex-col">
               <label className="flex flex-col lg:flex-row items-center gap-[5%] mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">Your feedback: </span>
+                <span className="font-bold">{`${t("form.feedback")}: `}</span>
                 <textarea
                   type="text"
                   name="feedback"
@@ -478,7 +480,7 @@ const handleRecaptchaVerify=()=>{
               className="bg-gray-300 hover:bg-gray-400 ml-[5%] py-3 px-8 mb-3 outline-none w-fit text-black font-bold shadow-md shadow-primary rounded-xl"
               onClick={handleFormSubmit}
             >
-              Submit
+              {`${t("form.submitButton")}: `}
             </button>
           </form>
         </div>

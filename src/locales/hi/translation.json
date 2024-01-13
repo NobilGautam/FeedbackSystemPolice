@@ -1,0 +1,45 @@
+{
+  "navbar": {
+    "hindi": "Hindi"
+  },
+  "form": {
+    "fullname": "पूरा नाम",
+    "age": "आयु",
+    "gender": "लिंग",
+    "policeStation": "पुलिस स्टेशन चुनें",
+    "purpose": "यात्रा का उद्देश्य",
+    "email": "ईमेल",
+    "time": "पुलिस स्टेशन में सुना जाने के बाद कितने समय बाद",
+    "pbehaviour": "पुलिस अधिकारियों के व्यवहार का आप मूल्यांकन कैसे करें",
+    "pguidance": "पुलिस स्टेशन पर प्राप्त मार्गदर्शन",
+    "phelpful": "कर्मचारियों की शिष्टाचार और सहायकता",
+    "infra": "पुलिस स्टेशन का अवसर",
+    "overallExperience": "पुलिस स्टेशन के साथ कुल अनुभव",
+    "veryDissatisfied": "बहुत असंतुष्ट",
+    "dissatisfied": "असंतुष्ट",
+    "neutral": "तटस्थ",
+    "satisfied": "संतुष्ट",
+    "verySatisfied": "बहुत संतुष्ट",
+    "feedback": "आपकी प्रतिक्रिया",
+    "submitButton": "प्रस्तुत करें",
+    "timeTaken": {
+      "immediately": "तुरंत",
+      "5minutes": "5 मिनट",
+      "10minutes": "10 मिनट",
+      "15minutes": "15 मिनट से अधिक",
+      "moreThan15minutes": "15 मिनट से अधिक"
+    },
+    "behaviour": {
+      "abusive": "अपमानजनक",
+      "rude": "अशिष्ट",
+      "polite": "शिष्ट"
+    },
+    "feedbackRating": {
+      "poor": "खराब",
+      "belowAverage": "औसत से कम",
+      "average": "औसत",
+      "good": "अच्छा",
+      "excellent": "उत्कृष्ट"
+    }
+  }
+}
