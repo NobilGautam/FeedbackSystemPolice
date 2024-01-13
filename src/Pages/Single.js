@@ -53,7 +53,7 @@ function Single() {
 
   return (
     <div>
-      <div className="container mt-12 p-6 md:p-0 md:mt-32 mx-auto flex items-center justify-center">
+      <div className="container mt-12 p-6 pb-12 md:p-0 md:mt-32 mx-auto flex items-center justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-2 mt-16 gap-24 max-h-screen w-full">
           <div className="flex items-center flex-col justify-center h-full">
             <Button
