@@ -53,7 +53,7 @@ function Single() {
 
   return (
     <div>
-      <div className="container mt-32 mx-auto flex items-center justify-center">
+      <div className="container mt-12 p-6 md:p-0 md:mt-32 mx-auto flex items-center justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-2 mt-16 gap-24 max-h-screen w-full">
           <div className="flex items-center flex-col justify-center h-full">
             <Button
@@ -79,11 +79,11 @@ function Single() {
                 onClick={handleClick}
               >
                 {" "}
-                <span className="text-xl">Mark as Visited</span>{" "}
+                <span className="text-lg md:text-xl">Mark as Visited</span>{" "}
               </Button>
               <Button size={"lg"} isDisabled={true} className="w-[48%]">
                 {" "}
-                <span className="text-xl">Fill Feedback</span>
+                <span className="text-lg md:text-xl">Fill Feedback</span>
               </Button>
             </div>
           </div>
@@ -93,7 +93,7 @@ function Single() {
             defaultIndex={0}
             isFitted
             variant="enclosed"
-            className="mt-10"
+            className="md:mt-10"
           >
             <TabList>
               <Tab _selected={{ color: "white", bg: "#8C4E1D" }}>
