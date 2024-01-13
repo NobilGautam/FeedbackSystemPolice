@@ -217,17 +217,17 @@ const handleRecaptchaVerify=()=>{
 
   return (
     <>
-      <div className="flex h-[100%] lg:flex-row justify-center flex-col items-center flex-wrap lg:mt-0 mt-[90px]">
+      <div className="flex h-[100%] lg:flex-row justify-center flex-col items-center flex-wrap lg:mt-0 mt-[190px]">
         <div
           initial="hidden"
           animate="show"
           variants={slideInRightAndFadeIn}
-          className=" lg:w-[90%] mx-auto lg:mt-28"
+          className=" lg:w-[90%] mx-auto lg:mt-28 justify-center flex"
         >
           <form
             id="feedbackForm"
             onSubmit={handleSubmit}
-            className="mt-12 flex flex-col gap-8 lg:mb-10 bg-slate-50 rounded-md shadow-xl shadow-[#5e5d5d]"
+            className="mt-12 flex flex-col gap-8 w-[90%] lg:mb-10 bg-slate-50 rounded-md shadow-xl shadow-[#5e5d5d]"
             style={{
               background: `url(${formBG})`,
               backgroundSize: "cover",
@@ -235,105 +235,104 @@ const handleRecaptchaVerify=()=>{
               backgroundPosition: "center",
             }}
           >
-            <div className="flex flex-row justify-start flex-wrap">
-              <label className="w-[45%] ml-[5%] flex flex-col mt-5 mb-2">
-                <span className="font-bold">Full Name: </span>
-                <input
-                  name="fname"
-                  value={form.fname}
-                  required
-                  onChange={handleChange}
-                  placeholder="Enter your first name"
-                  className="rounded-md mt-1 bg-transparent"
-                  disabled
-                />
-              </label>
-            </div>
+            <div className="flex mt-10 lg:flow-row flex-col flex-wrap w-[90%] justify-between mx-[5%]">
+                <label className="flex flex-row mt-5 mb-2">
+                  <span className="font-bold">Full Name: </span>
+                  <input
+                    name="fname"
+                    value={form.fname}
+                    required
+                    onChange={handleChange}
+                    placeholder="Enter your first name"
+                    className="rounded-md sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
+                    disabled
+                  />
+                </label>
 
-            <div className="flex justify-start flex-wrap flex-row">
-              <label className="flex flex-col lg:flex-row w-[45%] lg:items-center ml-[5%] mt-5 mb-2">
-                <span className="font-bold">Age: </span>
-                <input
-                  name="age"
-                  required
-                  value={form.age}
-                  onChange={handleChange}
-                  placeholder="Enter your age"
-                  type="number"
-                  className="rounded-md sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
-                  disabled
-                />
-              </label>
               <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
-                <span className="font-bold">Gender: </span>
-                <select
-                  name="gender"
-                  form="feedbackForm"
-                  onChange={handleChange}
-                  value={form.gender}
-                  className="bg-transparent sm:mt-1 xl:mt-0 xl:ml-2"
-                >
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="others">Others</option>
-                </select>
-              </label>
+                  <span className="font-bold">Age: </span>
+                  <input
+                    name="age"
+                    required
+                    value={form.age}
+                    onChange={handleChange}
+                    placeholder="Enter your age"
+                    type="number"
+                    className="rounded-md sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
+                    disabled
+                  />
+                </label>
+
+                <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
+                  <span className="font-bold">Gender: </span>
+                  <select
+                    name="gender"
+                    form="feedbackForm"
+                    onChange={handleChange}
+                    value={form.gender}
+                    className="bg-transparent sm:mt-1 xl:mt-0 xl:ml-2"
+                  >
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="others">Others</option>
+                  </select>
+                </label>
+
+              <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
+                  <span className="font-bold">Select Police Station: </span>
+                  <select
+                    name="psname"
+                    form="feedbackForm"
+                    value={form.psname}
+                    onChange={handleChange}
+                    className="bg-transparent sm:mt-1 xl:mt-0 xl:ml-2"
+                    disabled
+                  >
+                    {policeData.map((data) => (
+                      <option key={data.id} value={data.name}>
+                        {data.name}
+                      </option>
+                    ))}
+                  </select>
+                </label>
             </div>
 
-            <div className="flex justify-start flex-wrap flex-row">
-              <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">Select Police Station: </span>
-                <select
-                  name="psname"
-                  form="feedbackForm"
-                  value={form.psname}
-                  onChange={handleChange}
-                  className="bg-transparent sm:mt-1 xl:mt-0 xl:ml-2"
-                  disabled
-                >
-                  {policeData.map((data) => (
-                    <option key={data.id} value={data.name}>
-                      {data.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
+            <div className="flex flex-col lg:flow-row justify-between mx-[5%] w-[100%]">
+              <div className="flex justify-start flex-wrap flex-row">
+                <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
+                  <span className="font-bold">Purpose of visit: </span>
+                  <input
+                    type="text"
+                    name="purpose"
+                    value={form.purpose}
+                    required
+                    onChange={handleChange}
+                    placeholder="Enter your purpose of visit in not more than one line"
+                    className="w-[550px] sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
+                  />
+                </label>
+              </div>
+              <div className="flex justify-start flex-wrap flex-row">
+                <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
+                  <span className="font-bold">Email </span>
+                  <input
+                    type="email"
+                    name="email"
+                    value={form.email}
+                    required
+                    onChange={handleChange}
+                    placeholder="Enter your Email"
+                    className="w-[550px] sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
+                    disabled
+                  />
+                </label>
+              </div>
             </div>
 
-            <div className="flex justify-start flex-wrap flex-row">
-              <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">Purpose of visit: </span>
-                <input
-                  type="text"
-                  name="purpose"
-                  value={form.purpose}
-                  required
-                  onChange={handleChange}
-                  placeholder="Enter your purpose of visit in not more than one line"
-                  className="w-[550px] sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
-                />
-              </label>
-            </div>
-            <div className="flex justify-start flex-wrap flex-row">
-              <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">Email </span>
-                <input
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  required
-                  onChange={handleChange}
-                  placeholder="Enter your Email"
-                  className="w-[550px] sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
-                  disabled
-                />
-              </label>
-            </div>
-
-            <div className="flex justify-start flex-wrap flex-row">
-              <label className="flex flex-col gap-2 mt-5 mb-2 ml-[5%]">
+            
+              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
                 <span className="font-bold">After how much time you were heard in police station: </span>
-                <div className="flex items-center ml-2">
+                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
                   {timeTaken.map((value) => (
                     <label key={value} className="flex items-center mr-4">
                       <input
@@ -349,12 +348,11 @@ const handleRecaptchaVerify=()=>{
                   ))}
                 </div>
               </label>
-            </div>
 
-            <div className="flex justify-start flex-wrap flex-row">
-              <label className="flex flex-col gap-2 mt-5 mb-2 ml-[5%]">
+            
+              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
                 <span className="font-bold">How do you rate the behaviour of the police officers: </span>
-                <div className="flex items-center ml-2">
+                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
                   {behaviour.map((value) => (
                     <label key={value} className="flex items-center mr-4">
                       <input
@@ -370,12 +368,11 @@ const handleRecaptchaVerify=()=>{
                   ))}
                 </div>
               </label>
-            </div>
 
-            <div className="flex justify-start flex-wrap flex-row">
-              <label className="flex flex-col gap-2 mt-5 mb-2 ml-[5%]">
+            
+              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
                 <span className="font-bold">Guidance received at the police station: </span>
-                <div className="flex items-center ml-2">
+                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
                   {feedback.map((value) => (
                     <label key={value} className="flex items-center mr-4">
                       <input
@@ -391,12 +388,11 @@ const handleRecaptchaVerify=()=>{
                   ))}
                 </div>
               </label>
-            </div>
 
-            <div className="flex justify-start flex-wrap flex-row">
-              <label className="flex flex-col gap-2 mt-5 mb-2 ml-[5%]">
+            
+              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
                 <span className="font-bold">Courtesy and helpfullness of the staff at the police station: </span>
-                <div className="flex items-center ml-2">
+                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
                   {feedback.map((value) => (
                     <label key={value} className="flex items-center mr-4">
                       <input
@@ -412,12 +408,10 @@ const handleRecaptchaVerify=()=>{
                   ))}
                 </div>
               </label>
-            </div>
 
-            <div className="flex justify-start flex-wrap flex-row">
-              <label className="flex flex-col gap-2 mt-5 mb-2 ml-[5%]">
+              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
                 <span className="font-bold">Infrastructure at the police station: </span>
-                <div className="flex items-center ml-2">
+                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
                   {feedback.map((value) => (
                     <label key={value} className="flex items-center mr-4">
                       <input
@@ -433,12 +427,10 @@ const handleRecaptchaVerify=()=>{
                   ))}
                 </div>
               </label>
-            </div>
 
-            <div className="flex justify-start flex-wrap flex-row">
-              <label className="flex flex-col gap-2 mt-5 mb-2 ml-[5%]">
+              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
                 <span className="font-bold">Overall Experience with the Police Station: </span>
-                <div className="flex items-center ml-2">
+                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
                   {[1, 2, 3, 4, 5].map((value) => (
                     <label key={value} className="flex items-center mr-4">
                       <input
@@ -458,10 +450,9 @@ const handleRecaptchaVerify=()=>{
                   ))}
                 </div>
               </label>
-            </div>
 
             <div className="flex flex-initial justify-start flex-wrap flex-col">
-              <label className="flex flex-col mt-5 mb-2 ml-[5%]">
+              <label className="flex flex-col lg:flex-row items-center gap-[5%] mt-5 mb-2 ml-[5%]">
                 <span className="font-bold">Your feedback: </span>
                 <textarea
                   type="text"
@@ -470,7 +461,7 @@ const handleRecaptchaVerify=()=>{
                   value={form.feedback}
                   onChange={handleChange}
                   placeholder="Enter your feedback"
-                  className="xl:w-[550px] mr-2 mt-1 xl:mt-0 bg-gray-100 rounded-md p-2"
+                  className="xl:w-[550px] w-[90%] mr-2 mt-1 xl:mt-0 bg-gray-100 rounded-md p-2"
                 />
               </label>
             </div>
