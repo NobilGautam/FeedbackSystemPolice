@@ -30,7 +30,7 @@ export const SupabaseProvider = ({ children }) => {
   const [statsLoading,setStatsLoading]=useState(true);
   const [QR,setQR]=useState(false);
   const [show2,setShow2]=useState(false);
-  const [modalFlag,setModalFlag]=useState(true);
+
 
   useEffect(() => {
     const fetchTableData = async () => {
@@ -221,8 +221,7 @@ export const SupabaseProvider = ({ children }) => {
         setQR,
         show2,
         setShow2,
-        modalFlag,
-        setModalFlag
+    
       }}
     >
       {children}
