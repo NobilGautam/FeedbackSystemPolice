@@ -74,6 +74,9 @@ function Form() {
     overallRating: '3',
     time: '',
     pbehaviour: '',
+    pguidance: '',
+    phelpful: '',
+    infra: '',
   });
 
   useEffect(() => {
@@ -88,6 +91,9 @@ function Form() {
       overallRating: individual.rating || '3',
       time: individual.time || "Immediately",
       pbehaviour: individual.pbehaviour || 'Abusive',
+      pguidance: individual.pguidance || 'Excellent',
+      phelpful: individual.phelpful || 'Excellent',
+      infra: individual.infra || 'Excellent',
     });
   }, [individual]);
 
@@ -115,6 +121,9 @@ function Form() {
       overallRating: rating,
       time: time,
       pbehaviour: pbehaviour,
+      pguidance: pguidance,
+      phelpful: phelpful,
+      infra: infra,
     };
 
     // If documentId exists, update the existing visit
@@ -147,6 +156,9 @@ function Form() {
         overallRating: '3',
         time: 'Immediately',
         pbehaviour: 'Abusive',
+        pguidance: 'Excellent',
+        phelpful: 'Excellent',
+        infra: 'Excellent',
       });
     }, 5000);
   };
@@ -175,6 +187,9 @@ const handleRecaptchaVerify=()=>{
   const [rating, setRating] = useState(3);
   const [time, setTime] = useState('Immediately');
   const [pbehaviour, setPbehaviour] = useState('Abusive');
+  const [pguidance, setPguidance] = useState('Excellent');
+  const [phelpful, setPhelpful] = useState('Excellent');
+  const [infra, setInfra] = useState('Excellent');
    const [captcha,setCaptcha]=useState(false);
 
   const timeTaken = [
@@ -190,25 +205,24 @@ const handleRecaptchaVerify=()=>{
     "Rude",
     "Polite",
   ]
+
+  const feedback = [
+    "Poor",
+    "Below Average",
+    "Average",
+    "Good", 
+    "Excellent"
+  ]
   
 
   return (
     <>
       <div className="flex h-[100%] lg:flex-row justify-center flex-col items-center flex-wrap lg:mt-0 mt-[90px]">
-        <motion.div
-          initial="hidden"
-          animate="show"
-          variants={slideInLeftAndFadeIn}
-          className="w-[30%] flex mx-auto justify-center items-center"
-        >
-          <h1 className="text-9xl">Fill</h1>
-          <h1 className="text-5xl">YOUR FEEDBACK</h1>
-        </motion.div>
-        <motion.div
+        <div
           initial="hidden"
           animate="show"
           variants={slideInRightAndFadeIn}
-          className=" lg:w-[50%] mx-auto lg:mt-28"
+          className=" lg:w-[90%] mx-auto lg:mt-28"
         >
           <form
             id="feedbackForm"
@@ -360,6 +374,69 @@ const handleRecaptchaVerify=()=>{
 
             <div className="flex justify-start flex-wrap flex-row">
               <label className="flex flex-col gap-2 mt-5 mb-2 ml-[5%]">
+                <span className="font-bold">Guidance received at the police station: </span>
+                <div className="flex items-center ml-2">
+                  {feedback.map((value) => (
+                    <label key={value} className="flex items-center mr-4">
+                      <input
+                        type="radio"
+                        name="pguidnace"
+                        value={value}
+                        checked={pguidance === value}
+                        onChange={() => setPguidance(value)}
+                        className="mr-1"
+                      />
+                      {value}
+                    </label>
+                  ))}
+                </div>
+              </label>
+            </div>
+
+            <div className="flex justify-start flex-wrap flex-row">
+              <label className="flex flex-col gap-2 mt-5 mb-2 ml-[5%]">
+                <span className="font-bold">Courtesy and helpfullness of the staff at the police station: </span>
+                <div className="flex items-center ml-2">
+                  {feedback.map((value) => (
+                    <label key={value} className="flex items-center mr-4">
+                      <input
+                        type="radio"
+                        name="phelpful"
+                        value={value}
+                        checked={phelpful === value}
+                        onChange={() => setPhelpful(value)}
+                        className="mr-1"
+                      />
+                      {value}
+                    </label>
+                  ))}
+                </div>
+              </label>
+            </div>
+
+            <div className="flex justify-start flex-wrap flex-row">
+              <label className="flex flex-col gap-2 mt-5 mb-2 ml-[5%]">
+                <span className="font-bold">Infrastructure at the police station: </span>
+                <div className="flex items-center ml-2">
+                  {feedback.map((value) => (
+                    <label key={value} className="flex items-center mr-4">
+                      <input
+                        type="radio"
+                        name="infra"
+                        value={value}
+                        checked={infra === value}
+                        onChange={() => setInfra(value)}
+                        className="mr-1"
+                      />
+                      {value}
+                    </label>
+                  ))}
+                </div>
+              </label>
+            </div>
+
+            <div className="flex justify-start flex-wrap flex-row">
+              <label className="flex flex-col gap-2 mt-5 mb-2 ml-[5%]">
                 <span className="font-bold">Overall Experience with the Police Station: </span>
                 <div className="flex items-center ml-2">
                   {[1, 2, 3, 4, 5].map((value) => (
@@ -413,7 +490,7 @@ const handleRecaptchaVerify=()=>{
               Submit
             </button>
           </form>
-        </motion.div>
+        </div>
       </div>
     </>
   );
