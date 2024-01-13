@@ -34,7 +34,6 @@ function Single() {
           break;
         }
       }
-
       setPoliceData(temp);
     }
   }, [id, policeStations]);

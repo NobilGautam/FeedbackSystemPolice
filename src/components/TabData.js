@@ -35,6 +35,128 @@ function TabData({ policeData }) {
       },
     ],
   };
+  const wait_data = {
+    labels: [
+      "Immediately",
+      "5 Mins",
+      "10 Mins",
+      "15 Mins",
+      "More than 15 Mins",
+    ],
+    datasets: [
+      {
+        data: [
+          stats[0].Waiting_None,
+          stats[0].Waiting_Five,
+          stats[0].Waiting_Ten,
+          stats[0].Waiting_Fifteen,
+          stats[0].Waiting_More_Fifteen,
+        ],
+        backgroundColor: ["red", "green", "orange","blue","grey"],
+      },
+    ],
+  };
+  const guidance_data = {
+    labels: [
+      "Poor",
+      "Below Average",
+      "Average",
+      "Good", 
+      "Excellent"
+    ],
+    datasets: [
+      {
+        data: [
+          stats[0].Guidance_Poor,
+          stats[0].Guidance_Below_Average,
+          stats[0].Guidance_Average,
+          stats[0].Guidance_Good,
+          stats[0].Guidance_Excellent,
+        ],
+        backgroundColor: ["red", "green", "orange","blue","grey"],
+      },
+    ],
+  };
+  const infra_data = {
+    labels: [
+      "Poor",
+      "Below Average",
+      "Average",
+      "Good", 
+      "Excellent"
+    ],
+    datasets: [
+      {
+        data: [
+          stats[0].Infra_Poor,
+          stats[0].Infra_Below_Average,
+          stats[0].Infra_Average,
+          stats[0].Infra_Good,
+          stats[0].Infra_Excellent,
+        ],
+        backgroundColor: ["red", "green", "orange","blue","grey"],
+      },
+    ],
+  };
+  const rating_data = {
+    labels: [
+      "Poor",
+      "Below Average",
+      "Average",
+      "Good", 
+      "Excellent"
+    ],
+    datasets: [
+      {
+        data: [
+          stats[0].Overall_Poor,
+          stats[0].Overall_Below_Average,
+          stats[0].Overall_Average,
+          stats[0].Overall_Good,
+          stats[0].Overall_Excellent,
+        ],
+        backgroundColor: ["red", "green", "orange","blue","grey"],
+      },
+    ],
+  };
+  const help_data = {
+    labels: [
+      "Poor",
+      "Below Average",
+      "Average",
+      "Good", 
+      "Excellent"
+    ],
+    datasets: [
+      {
+        data: [
+          stats[0].Help_Poor,
+          stats[0].Help_Below_Average,
+          stats[0].Help_Average,
+          stats[0].Help_Good,
+          stats[0].Help_Excellent,
+        ],
+        backgroundColor: ["red", "green", "orange","blue","grey"],
+      },
+    ],
+  };
+  const behavior_data = {
+    labels: [
+      "Abusive",
+      "Rude",
+      "Polite",
+    ],
+    datasets: [
+      {
+        data: [
+          stats[0].Behaviour_Abusive,
+          stats[0].Behaviour_Rude,
+          stats[0].Behaviour_Polite,
+        ],
+        backgroundColor: ["red", "green", "orange"],
+      },
+    ],
+  };
   const gender_data = {
     labels: ["Male", "Female", "Others"],
     datasets: [
@@ -59,12 +181,18 @@ function TabData({ policeData }) {
   };
 
   return (
-    <div>
+    <div className="overflow-scroll max-h-full">
       <div className="grid sm:grid-cols-2 w-[100%] py-5 justify-center">
         <Pie data={gender_data} options={customOptions}></Pie>
-      <Pie data={feedback_data} options={customOptions}></Pie>
-      </div>
+        <Pie data={feedback_data} options={customOptions}></Pie>
         <Pie data={follow_data} options={customOptions}></Pie>
+        <Pie data={wait_data} options={customOptions}></Pie>
+        <Pie data={behavior_data} options={customOptions}></Pie>
+        <Pie data={guidance_data} options={customOptions}></Pie>
+        <Pie data={help_data} options={customOptions}></Pie>
+        <Pie data={infra_data} options={customOptions}></Pie>
+        <Pie data={rating_data} options={customOptions}></Pie>
+      </div>
     </div>
   );
 } //

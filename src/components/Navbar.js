@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Auth, Provider } from "../Firebase";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
@@ -8,9 +8,6 @@ import close from "../assets/close.svg";
 import menu from "../assets/menu.svg";
 import rpLogo from "../assets/rplogo.png";
 import emblem from "../assets/emblem.png";
-import PDF from "./PDF";
-import AnimatedUnderline from "./AnimatedUnderline";
-import { useSupabase } from "../context/SupabaseContext";
 
 function Navbar() {
   const navigator = useNavigate();
