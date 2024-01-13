@@ -54,7 +54,7 @@ let number=0;
     AOS.init({ duration: 1000 });
   }, []);
 
-console.log(stars);
+
   return (
     <div data-aos="fade-up">
       <ImageCard ImgSrc={item.image}>

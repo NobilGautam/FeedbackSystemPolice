@@ -108,7 +108,7 @@ const MyVisits = () => {
     );
   }
   
-console.log(visits);
+
   return (
     <div className="mt-24 py-10">
       {visits.length === 0 ? (
