@@ -47,6 +47,12 @@ body {
 .sc-bZQynM{
   background-color: #8c4e1d !important;
 }
+.rsc-os-option-element{
+  background-color: #8c4e1d !important;
+}
+.rsc-ts-bubble{
+  color: white !important;
+}
 
 .tooltip {
   position: absolute;
@@ -81,5 +87,9 @@ blockquote.yes{
   top:50%!important;
   z-index: 10;
   margin-right: -34px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important; 
 
+}
+.chakra-modal__content{
+  background-color: #F8E2CF !important;
 }
