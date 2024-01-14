@@ -169,51 +169,47 @@ function Form() {
   const [captcha, setCaptcha] = useState(false);
 
   const timeTaken = [
-    "immediately",
-    "5minutes",
-    "10minutes",
-    "15minutes",
-    "moreThan15minutes",
+    "Immediately",
+    "5 Mins",
+    "10 Mins",
+    "15 Mins",
+    "More than 15 Mins",
   ];
 
-  const behaviour = ["abusive", "rude", "polite"];
+  const behaviour = ["Abusive", "Rude", "Polite"];
 
-  const feedback = ["poor", "belowAverage", "average", "good", "excellent"];
+  const feedback = ["Poor", "Below Average", "Average", "Good", "Excellent"];
 
   const getFeedbackKey = (value) => {
     switch (value) {
       case 1:
-        return "veryDissatisfied";
+        return "Very Dissatisfied";
       case 2:
-        return "dissatisfied";
+        return "Dissatisfied";
       case 3:
-        return "neutral";
+        return "Neutral";
       case 4:
-        return "satisfied";
+        return "Satisfied";
       case 5:
-        return "verySatisfied";
+        return "Very Satisfied";
       default:
         return "";
     }
   };
 
-  const changeLanguage = (lang) => {
-    i18n.changeLanguage(lang);
-  };
-
   return (
     <>
-      <div className="flex h-[100%] lg:flex-row justify-center flex-col items-center flex-wrap lg:mt-0 mt-[190px]">
+      <div className="flex h-[100%] md:flex-row justify-center flex-col items-center flex-wrap md:mt-0 mt-32">
         <div
           initial="hidden"
           animate="show"
           variants={slideInRightAndFadeIn}
-          className=" lg:w-[90%] mx-auto lg:mt-28 justify-center flex"
+          className=" md:w-[90%] mx-auto md:mt-28 justify-center flex"
         >
           <form
             id="feedbackForm"
             onSubmit={handleSubmit}
-            className="mt-12 flex flex-col gap-8 w-[90%] lg:mb-10 bg-slate-50 rounded-md shadow-xl shadow-[#5e5d5d]"
+            className="mt-12 flex flex-col gap-8 w-[90%] md:mb-10 bg-slate-50 rounded-md shadow-xl shadow-[#5e5d5d]"
             style={{
               background: `url(${formBG})`,
               backgroundSize: "cover",
@@ -221,8 +217,8 @@ function Form() {
               backgroundPosition: "center",
             }}
           >
-            <div className="flex mt-10 lg:flow-row flex-col flex-wrap w-[90%] justify-between mx-[5%]">
-              <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
+            <div className="flex mt-10 md:flow-row flex-col flex-wrap w-[90%] justify-between mx-[5%]">
+              <label className="flex flex-col md:flex-row md:items-center mt-5 mb-2">
                 <span className="font-bold">{`${t("form.fullname")}: `}</span>
                 <input
                   name="fname"
@@ -235,7 +231,7 @@ function Form() {
                 />
               </label>
 
-              <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
+              <label className="flex flex-col md:flex-row md:items-center mt-5 mb-2">
                 <span className="font-bold">{`${t("form.age")}: `}</span>
                 <input
                   name="age"
@@ -249,7 +245,7 @@ function Form() {
                 />
               </label>
 
-              <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
+              <label className="flex flex-col md:flex-row md:items-center mt-5 mb-2">
                 <span className="font-bold">{`${t("form.gender")}: `}</span>
                 <select
                   name="gender"
@@ -264,7 +260,7 @@ function Form() {
                 </select>
               </label>
 
-              <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
+              <label className="flex flex-col md:flex-row md:items-center mt-5 mb-2">
                 <span className="font-bold">{`${t(
                   "form.policeStation"
                 )}: `}</span>
@@ -285,9 +281,9 @@ function Form() {
               </label>
             </div>
 
-            <div className="flex flex-col lg:flow-row justify-between mx-[5%] w-[100%]">
+            <div className="flex flex-col md:flow-row justify-between mx-[5%] w-[90%]">
               <div className="flex justify-start flex-wrap flex-row">
-                <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
+                <label className="flex flex-col md:flex-row md:items-center mt-5 mb-2">
                   <span className="font-bold">{`${t("form.purpose")}: `}</span>
                   <input
                     type="text"
@@ -296,12 +292,12 @@ function Form() {
                     required
                     onChange={handleChange}
                     placeholder="Enter your purpose of visit in not more than one line"
-                    className="w-[550px] sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
+                    className="w-full sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
                   />
                 </label>
               </div>
               <div className="flex justify-start flex-wrap flex-row">
-                <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
+                <label className="flex flex-col md:flex-row md:items-center mt-5 mb-2">
                   <span className="font-bold">{`${t("form.email")}: `}</span>
                   <input
                     type="email"
@@ -310,16 +306,16 @@ function Form() {
                     required
                     onChange={handleChange}
                     placeholder="Enter your Email"
-                    className="w-[550px] sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
+                    className="w-full sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
                     disabled
                   />
                 </label>
               </div>
             </div>
 
-            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+            <label className="flex flex-col md:flex-row gap-2 mt-5 mb-2 ml-[5%]">
               <span className="font-bold">{`${t("form.time")}: `}</span>
-              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+              <div className="flex md:items-center flex-col items-start md:flex-row ml-2">
                 {timeTaken.map((value) => (
                   <label key={value} className="flex items-center mr-4">
                     <input
@@ -336,9 +332,9 @@ function Form() {
               </div>
             </label>
 
-            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+            <label className="flex flex-col md:flex-row gap-2 mt-5 mb-2 ml-[5%]">
               <span className="font-bold">{`${t("form.pbehaviour")}: `}</span>
-              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+              <div className="flex md:items-center flex-col items-start md:flex-row ml-2">
                 {behaviour.map((value) => (
                   <label key={value} className="flex items-center mr-4">
                     <input
@@ -355,9 +351,9 @@ function Form() {
               </div>
             </label>
 
-            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+            <label className="flex flex-col md:flex-row gap-2 mt-5 mb-2 ml-[5%]">
               <span className="font-bold">{`${t("form.pguidance")}: `}</span>
-              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+              <div className="flex md:items-center flex-col items-start md:flex-row ml-2">
                 {feedback.map((value) => (
                   <label key={value} className="flex items-center mr-4">
                     <input
@@ -374,9 +370,9 @@ function Form() {
               </div>
             </label>
 
-            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+            <label className="flex flex-col md:flex-row gap-2 mt-5 mb-2 ml-[5%]">
               <span className="font-bold">{`${t("form.phelpful")}: `}</span>
-              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+              <div className="flex md:items-center flex-col items-start md:flex-row ml-2">
                 {feedback.map((value) => (
                   <label key={value} className="flex items-center mr-4">
                     <input
@@ -393,9 +389,9 @@ function Form() {
               </div>
             </label>
 
-            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+            <label className="flex flex-col md:flex-row gap-2 mt-5 mb-2 ml-[5%]">
               <span className="font-bold">{`${t("form.infra")}: `}</span>
-              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+              <div className="flex md:items-center flex-col items-start md:flex-row ml-2">
                 {feedback.map((value) => (
                   <label key={value} className="flex items-center mr-4">
                     <input
@@ -412,11 +408,11 @@ function Form() {
               </div>
             </label>
 
-            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+            <label className="flex flex-col md:flex-row gap-2 mt-5 mb-2 ml-[5%]">
               <span className="font-bold">{`${t(
                 "form.overallExperience"
               )}: `}</span>
-              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+              <div className="flex md:items-center flex-col items-start md:flex-row ml-2">
                 {[1, 2, 3, 4, 5].map((value) => (
                   <label key={value} className="flex items-center mr-4">
                     <input
@@ -434,7 +430,7 @@ function Form() {
             </label>
 
             <div className="flex flex-initial justify-start flex-wrap flex-col">
-              <label className="flex flex-col lg:flex-row items-center gap-[5%] mt-5 mb-2 ml-[5%]">
+              <label className="flex flex-col md:flex-row items-center gap-[5%] mt-5 mb-2 ml-[5%]">
                 <span className="font-bold">{`${t("form.feedback")}: `}</span>
                 <textarea
                   type="text"
