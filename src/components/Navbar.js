@@ -46,7 +46,7 @@ function Navbar() {
   ];
 
   console.log(link);
-  const [selectedLink, setSelectedLink] = useState(`${link.pathname=='/myfeedback'?"My Feedbacks":link.pathname==='/myVisits'?"My Visits":"Home"}`);
+  const [selectedLink, setSelectedLink] = useState(`${link.pathname==='/myfeedback'?"My Feedbacks":link.pathname==='/myVisits'?"My Visits":"Home"}`);
 
 
   const handleNavClick = (link) => {
