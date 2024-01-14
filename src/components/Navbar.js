@@ -54,12 +54,17 @@ function Navbar() {
     i18n.changeLanguage(lang);
   };
 
+  const handleImgclick=()=>{
+    navigator('/');
+  }
   return (
     <div className="shadow-md w-full fixed z-20 top-0 left-0">
       <div className="md:flex items-center justify-between py-4 md:px-10 px-7 bg-[#8C4E1D]">
         <div className="font-semibold text-2xl cursor-pointer flex items-center text-gray-800">
-          <img src={emblem} alt="Emblem" className="w-[50px] hatade mr-4" />
-          <img src={rpLogo} className="w-[15%] mr-4" alt="Logo" />
+          
+          <img src={emblem} alt="Emblem" className="w-[50px] hatade mr-4" onClick={handleImgclick}/>
+          <img src={rpLogo} className="w-[15%] mr-4" alt="Logo"  onClick={handleImgclick}/>
+          {/* </Link> */}
           <span className="text-white text-base md:text-2xl">
             Rajasthan Police Feedback
           </span>
