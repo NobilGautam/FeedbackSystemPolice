@@ -15,31 +15,31 @@
     "phelpful": "कर्मचारियों की शिष्टाचार और सहायकता",
     "infra": "पुलिस स्टेशन का इंफ्रास्ट्रक्चर",
     "overallExperience": "पुलिस स्टेशन के साथ कुल अनुभव",
-    "veryDissatisfied": "बहुत असंतुष्ट",
-    "dissatisfied": "असंतुष्ट",
-    "neutral": "तटस्थ",
-    "satisfied": "संतुष्ट",
-    "verySatisfied": "बहुत संतुष्ट",
+    "Very Dissatisfied": "बहुत असंतुष्ट",
+    "Dissatisfied": "असंतुष्ट",
+    "Neutral": "तटस्थ",
+    "Satisfied": "संतुष्ट",
+    "Very Satisfied": "बहुत संतुष्ट",
     "feedback": "आपकी प्रतिक्रिया",
     "submitButton": "जमा करें",
     "timeTaken": {
-      "immediately": "तुरंत",
-      "5minutes": "5 मिनट",
-      "10minutes": "10 मिनट",
-      "15minutes": "15 मिनट से अधिक",
-      "moreThan15minutes": "15 मिनट से अधिक"
+      "Immediately": "तुरंत",
+      "5 Mins": "5 मिनट",
+      "10 Mins": "10 मिनट",
+      "15 Mins": "15 मिनट से अधिक",
+      "More than 15 Mins": "15 मिनट से अधिक"
     },
     "behaviour": {
-      "abusive": "अपमानजनक",
-      "rude": "अशिष्ट",
-      "polite": "शिष्ट"
+      "Abusive": "अपमानजनक",
+      "Rude": "अशिष्ट",
+      "Polite": "शिष्ट"
     },
     "feedbackRating": {
-      "poor": "खराब",
-      "belowAverage": "औसत से कम",
-      "average": "औसत",
-      "good": "अच्छा",
-      "excellent": "उत्कृष्ट"
+      "Poor": "खराब",
+      "Below Average": "औसत से कम",
+      "Average": "औसत",
+      "Good": "अच्छा",
+      "Excellent": "उत्कृष्ट"
     }
   }
 }
