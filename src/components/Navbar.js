@@ -13,7 +13,10 @@ import {
   MenuDivider,
   MenuGroup,
   MenuItem,
+  MenuItemOption,
   MenuList,
+  MenuOptionGroup,
+  Select,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
@@ -91,6 +94,23 @@ function Navbar() {
                     </Link>
                   </MenuItem>
                 )}
+                <MenuOptionGroup
+                  className="text-sm"
+                  defaultValue="English"
+                  title="Language"
+                  type="radio"
+                  onChange={(selectedValue) => {
+                    console.log(selectedValue); // NOBIL IDHAR KARDE KI LANGUAGE CHANGE HOJAYE
+                  }}
+                >
+                  <MenuItemOption className="text-sm" value="English">
+                    English
+                  </MenuItemOption>
+                  <MenuItemOption className="text-sm" value="Hindi">
+                    Hindi
+                  </MenuItemOption>
+                </MenuOptionGroup>
+                <MenuDivider />
                 {Links.filter((link) => link).map((link) => (
                   <MenuItem key={link.name}>
                     <Link
@@ -122,6 +142,18 @@ function Navbar() {
           </div>
         </div>
         <ul className="hidden font-medium flex-row md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-[#8C4E1D] md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in">
+          <li>
+            <Select
+              style={{ backgroundColor: "#F0F0F0" }}
+              onChange={(event) => {
+                const selectedLanguage = event.target.value;
+                console.log(selectedLanguage); // NOBIL IDHAR KARDE KI LANGUAGE CHANGE HOJAYE
+              }}
+            >
+              <option value="English">English</option>
+              <option value="Hindi">Hindi</option>
+            </Select>
+          </li>
           {Links.filter((link) => link).map((link) => (
             <li
               key={link.name}

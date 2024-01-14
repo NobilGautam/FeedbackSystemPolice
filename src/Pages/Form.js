@@ -2,7 +2,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import formBG from "../assets/formBG.jpg";
-import { motion } from "framer-motion";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useParams } from "react-router";
 import { useSupabase } from "../context/SupabaseContext";
