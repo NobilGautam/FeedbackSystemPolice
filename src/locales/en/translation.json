@@ -41,6 +41,42 @@
         "Good": "Good",
         "Excellent": "Excellent"
       }
+    },
+    "policeStation": {
+      "AJMER": "AJMER",
+      "ALWAR": "ALWAR",
+      "BANSWARA": "BANSWARA",
+      "BARAN": "BARAN",
+      "BARMER": "BARMER",
+      "BHARATPUR": "BHARATPUR",
+      "BHILWARA": "BHILWARA",
+      "BIKANER": "BIKANER",
+      "BUNDI": "BUNDI",
+      "CHITTORGARH": "CHITTORGARH",
+      "CHURU": "CHURU",
+      "DAUSA": "DAUSA",
+      "DHOLPUR": "DHOLPUR",
+      "DUNGARPUR": "DUNGARPUR",
+      "HANUMANGARH": "HANUMANGARH",
+      "JAIPUR": "JAIPUR",
+      "JAISALMER": "JAISALMER",
+      "JALOR": "JALOR",
+      "JHALAWAR": "JHALAWAR",
+      "JHUJHUNU": "JHUJHUNU",
+      "JODHPUR": "JODHPUR",
+      "KARAULI": "KARAULI",
+      "KOTA": "KOTA",
+      "NAGAUR": "NAGAUR",
+      "PALI": "PALI",
+      "PRATAPGHAR": "PRATAPGHAR",
+      "RAJSAMAND": "RAJSAMAND",
+      "SAWAI MADHOPUR": "SAWAI MADHOPUR",
+      "SIKAR": "SIKAR",
+      "SIROHI": "SIROHI",
+      "SRI GANGANAGAR": "SRI GANGANAGAR",
+      "SRIGANGANAGAR": "SRIGANGANAGAR",
+      "TONK": "TONK",
+      "UDAIPUR": "UDAIPUR"
     }
 }
   
