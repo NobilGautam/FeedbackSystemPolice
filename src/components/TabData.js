@@ -16,7 +16,6 @@ import {
   Modal,
 } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/react";
-import { UseDisclosure } from "@chakra-ui/react";
 ChartJs.register(ArcElement, Tooltip, Legend);
 function TabData({ policeData }) {
   const OverlayOne = () => (
@@ -25,7 +24,6 @@ function TabData({ policeData }) {
 
   const { fetchStats, stats } = useSupabase();
   const [selectedChart, setSelectedChart] = useState("Feedback");
-  const [loader,setLoader]=useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [overlay, setOverlay] = useState(<OverlayOne />);
   const [status, setStatus] = useState("Connecting to server...");
@@ -193,44 +191,40 @@ function TabData({ policeData }) {
     { data: infra_data, label: "Infrastructure" },
     { data: rating_data, label: "Overall Rating" },
   ];
- 
 
   const handleChartChange = (event) => {
     setSelectedChart(event.target.value);
   };
-  const handleClick=async()=>{
+  const handleClick = async () => {
     setOverlay(<OverlayOne />);
-          onOpen();
+    onOpen();
 
-    try{
-     
+    try {
       setStatus("Connecting to server...");
 
-      
+      const data = await fetch(
+        `https://flask-api-render-gzze.onrender.com/fetch_stats?send_email=false&ps=${policeData.name}`
+      );
 
-  const data=await fetch(`https://flask-api-render-gzze.onrender.com/fetch_stats?send_email=false&ps=${policeData.name}`);
-
-  setStatus("Creating file...");
+      setStatus("Creating file...");
 
       const blob = await data.blob();
       const url = window.URL.createObjectURL(new Blob([blob]));
 
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `${policeData.name}.pdf`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  
-  setStatus("Download complete!");
-  onClose();
-} catch (error) {
-  console.error('Error downloading PDF:', error);
-}
-    }
-    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${policeData.name}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
 
-  
+      setStatus("Download complete!");
+      onClose();
+    } catch (error) {
+      console.error("Error downloading PDF:", error);
+    }
+  };
+
   return (
     <div className="h-full p-4">
       <div className="">
@@ -267,42 +261,37 @@ function TabData({ policeData }) {
           </div>
         ))}
       </div>
-      <Button className="customButton" onClick={handleClick}>Download Detailed Anylysis</Button>
+      <Button className="customButton" onClick={handleClick}>
+        Download Detailed PDF
+      </Button>
       <Modal
         isCentered
         onClose={onClose}
         isOpen={isOpen}
-        motionPreset='slideInBottom'
+        motionPreset="slideInBottom"
       >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-          <h1 className="text-2xl text-[#8C4E1D] font-sans font-semibold">
+            <h1 className="text-2xl text-[#8C4E1D] font-sans font-semibold">
               {" "}
               Rajasthan Police
             </h1>
-            </ModalHeader>
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-          <div className="flex items-center justify-center h-full">
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="#8C4E1D"
-          size="xl"
-        />
-     
-
-      </div>
-      <div className="text-center text-xl text-[#8C4E1D]">
-        {status}
-        </div>
+            <div className="flex items-center justify-center h-full">
+              <Spinner
+                thickness="4px"
+                speed="0.65s"
+                emptyColor="gray.200"
+                color="#8C4E1D"
+                size="xl"
+              />
+            </div>
+            <div className="text-center text-xl text-[#8C4E1D]">{status}</div>
           </ModalBody>
-          <ModalFooter>
-            
-           
-          </ModalFooter>
+          <ModalFooter></ModalFooter>
         </ModalContent>
       </Modal>
     </div>
