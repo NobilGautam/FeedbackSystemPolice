@@ -80,7 +80,7 @@ function TabData({ policeData }) {
           stats[0].Waiting_Fifteen,
           stats[0].Waiting_More_Fifteen,
         ],
-        backgroundColor: ["red", "green", "orange", "blue", "grey"],
+        backgroundColor: ["green", "orange", "blue", "grey", "red"],
       },
     ],
   };
@@ -95,7 +95,7 @@ function TabData({ policeData }) {
           stats[0].Guidance_Good,
           stats[0].Guidance_Excellent,
         ],
-        backgroundColor: ["red", "green", "orange", "blue", "grey"],
+        backgroundColor: ["red", "grey", "blue", "orange", "green"],
       },
     ],
   };
@@ -110,7 +110,7 @@ function TabData({ policeData }) {
           stats[0].Infra_Good,
           stats[0].Infra_Excellent,
         ],
-        backgroundColor: ["red", "green", "orange", "blue", "grey"],
+        backgroundColor:  ["red", "grey", "blue", "orange", "green"],
       },
     ],
   };
@@ -125,7 +125,7 @@ function TabData({ policeData }) {
           stats[0].Overall_Good,
           stats[0].Overall_Excellent,
         ],
-        backgroundColor: ["red", "green", "orange", "blue", "grey"],
+        backgroundColor: ["red", "grey", "blue", "orange", "green"],
       },
     ],
   };
@@ -140,7 +140,7 @@ function TabData({ policeData }) {
           stats[0].Help_Good,
           stats[0].Help_Excellent,
         ],
-        backgroundColor: ["red", "green", "orange", "blue", "grey"],
+        backgroundColor: ["red", "grey", "blue", "orange", "green"],
       },
     ],
   };
@@ -153,7 +153,7 @@ function TabData({ policeData }) {
           stats[0].Behaviour_Rude,
           stats[0].Behaviour_Polite,
         ],
-        backgroundColor: ["red", "green", "orange"],
+        backgroundColor: ["red", "grey", "green"],
       },
     ],
   };
