@@ -169,29 +169,29 @@ function Form() {
   const [captcha, setCaptcha] = useState(false);
 
   const timeTaken = [
-    "immediately",
-    "5minutes",
-    "10minutes",
-    "15minutes",
-    "moreThan15minutes",
+    "Immediately",
+    "5 Mins",
+    "10 Mins",
+    "15 Mins",
+    "More than 15 Mins",
   ];
 
-  const behaviour = ["abusive", "rude", "polite"];
+  const behaviour = ["Abusive", "Rude", "Polite"];
 
-  const feedback = ["poor", "belowAverage", "average", "good", "excellent"];
+  const feedback = ["Poor", "Below Average", "Average", "Good", "Excellent"];
 
   const getFeedbackKey = (value) => {
     switch (value) {
       case 1:
-        return "veryDissatisfied";
+        return "Very Dissatisfied";
       case 2:
-        return "dissatisfied";
+        return "Dissatisfied";
       case 3:
-        return "neutral";
+        return "Neutral";
       case 4:
-        return "satisfied";
+        return "Satisfied";
       case 5:
-        return "verySatisfied";
+        return "Very Satisfied";
       default:
         return "";
     }
