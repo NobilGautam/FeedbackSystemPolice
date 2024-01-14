@@ -19,10 +19,12 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
+import { useTranslation } from "react-i18next";
 
 function Navbar() {
   const navigator = useNavigate();
   const [user] = useAuthState(Auth);
+  const { i18n } = useTranslation();
 
   const signIN = () => {
     signInWithPopup(Auth, Provider)
@@ -46,6 +48,10 @@ function Navbar() {
 
   const handleNavClick = (link) => {
     setSelectedLink(link.name);
+  };
+
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
   };
 
   return (
@@ -100,7 +106,8 @@ function Navbar() {
                   title="Language"
                   type="radio"
                   onChange={(selectedValue) => {
-                    console.log(selectedValue); // NOBIL IDHAR KARDE KI LANGUAGE CHANGE HOJAYE
+                    let lang = selectedValue === 'English' ? 'en' : 'hi'
+                    changeLanguage(lang) 
                   }}
                 >
                   <MenuItemOption className="text-sm" value="English">
@@ -148,10 +155,11 @@ function Navbar() {
               onChange={(event) => {
                 const selectedLanguage = event.target.value;
                 console.log(selectedLanguage); // NOBIL IDHAR KARDE KI LANGUAGE CHANGE HOJAYE
+                changeLanguage(selectedLanguage);
               }}
             >
-              <option value="English">English</option>
-              <option value="Hindi">Hindi</option>
+              <option value="en">English</option>
+              <option value="hi">Hindi</option>
             </Select>
           </li>
           {Links.filter((link) => link).map((link) => (
