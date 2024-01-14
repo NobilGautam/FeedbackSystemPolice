@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Auth, Provider } from "../Firebase";
 import { signInWithPopup, signOut } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import rpLogo from "../assets/rplogo.png";
@@ -26,6 +26,7 @@ function Navbar() {
   const [user] = useAuthState(Auth);
   const { i18n } = useTranslation();
 
+  const link=useLocation();
   const signIN = () => {
     signInWithPopup(Auth, Provider)
       .then(() => console.log("Sign in successful"))
@@ -44,7 +45,9 @@ function Navbar() {
     user && { name: "My Visits", link: "/myVisits" },
   ];
 
-  const [selectedLink, setSelectedLink] = useState("Home");
+  console.log(link);
+  const [selectedLink, setSelectedLink] = useState(`${link.pathname=='/myfeedback'?"My Feedbacks":link.pathname==='/myVisits'?"My Visits":"Home"}`);
+
 
   const handleNavClick = (link) => {
     setSelectedLink(link.name);
@@ -57,6 +60,7 @@ function Navbar() {
   const handleImgclick=()=>{
     navigator('/');
   }
+  
   return (
     <div className="shadow-md w-full fixed z-20 top-0 left-0">
       <div className="md:flex items-center justify-between py-4 md:px-10 px-7 bg-[#8C4E1D]">
