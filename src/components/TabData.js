@@ -3,7 +3,7 @@ import { useSupabase } from "../context/SupabaseContext";
 import { ArcElement, Chart as ChartJs, Legend, Tooltip } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import { Select } from "@chakra-ui/react";
-
+import { Button } from "@chakra-ui/react";
 ChartJs.register(ArcElement, Tooltip, Legend);
 function TabData({ policeData }) {
   const { fetchStats, stats } = useSupabase();
@@ -177,8 +177,31 @@ function TabData({ policeData }) {
   const handleChartChange = (event) => {
     setSelectedChart(event.target.value);
   };
+  const handleClick=async()=>{
+
+    try{
+      alert(policeData.name)
+  const data=await fetch(`https://flask-api-render-gzze.onrender.com/fetch_stats?send_email=false&ps=${policeData.name}`);
+
+
+  const blob = await data.blob();
+  const url = window.URL.createObjectURL(new Blob([blob]));
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${policeData.name}.pdf`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+} catch (error) {
+  console.error('Error downloading PDF:', error);
+}
+    }
+
+  
 
   return (
+    
     <div className="h-full p-4">
       <div className="">
         <label htmlFor="chartSelector" className="mr-2">
@@ -214,6 +237,7 @@ function TabData({ policeData }) {
           </div>
         ))}
       </div>
+      <Button className="customButton" onClick={handleClick}>Download Detailed Anylysis</Button>
     </div>
   );
 }
