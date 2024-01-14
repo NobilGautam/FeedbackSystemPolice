@@ -77,6 +77,14 @@
       "SRIGANGANAGAR": "SRIGANGANAGAR",
       "TONK": "TONK",
       "UDAIPUR": "UDAIPUR"
+    },
+    "home": {
+      "viewMore": "View More",
+      "helpLines": "HelpLines",
+      "search": "Search",
+      "sort": "Sort",
+      "loadMore": "Load More",
+      "searchPlaceholder": "Search Police Stations"
     }
 }
   

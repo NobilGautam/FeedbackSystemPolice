@@ -15,6 +15,7 @@ import {
   ModalFooter,
   Modal,
 } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
 function Home() {
   const { tableData: PoliceData } = useSupabase();
   const [searchResults, setSearchResults] = useState(PoliceData);
@@ -23,6 +24,7 @@ function Home() {
   const [flag, setFlag] = useState(true);
   const [loader, setLoader] = useState(false);
   const { loading, statsLoading } = useSupabase();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setSearchResults(PoliceData);
@@ -90,13 +92,13 @@ function Home() {
       <div className="w-[80%] mx-auto mt-20 md:mt-28 flex flex-col md:flex-row items-center pt-10 justify-between">
         <form className="flex w-full md:w-[50%]" onSubmit={handleSubmit}>
           <Input
-            placeholder="Search Police Stations"
+            placeholder={t("home.searchPlaceholder")}
             onChange={handlechange}
             className="searchBar shadow-md"
           />
 
           <Button className="customButton mx-4" type="submit">
-            Search
+            {t("home.search")}
           </Button>
         </form>
         <div className="flex mt-4 md:mt-0">
@@ -111,7 +113,7 @@ function Home() {
             <option value="rating_dsc">Rating Dsc</option>
           </select>
           <Button className="customButton mx-4" onClick={() => sort(sortState)}>
-            Sort
+            {t("home.sort")}
           </Button>
         </div>
       </div>
@@ -159,7 +161,7 @@ function Home() {
                   onClick={showLoader}
                   className="mx-auto justify-center mt-6 p-8 text-2xl customButton"
                 >
-                  Load More
+                  {t("home.loadMore")}
                 </Button>
               ) : (
                 ""

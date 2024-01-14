@@ -68,7 +68,7 @@ function SingleCommPost({ item }) {
             <ButtonGroup>
               <Link to={`/single/${item.id}`}>
                 <Button variant="solid" bg="#F4BC77" fontWeight="bold">
-                  View more
+                  {t("home.viewMore")}
                 </Button>
               </Link>
             </ButtonGroup>

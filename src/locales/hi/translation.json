@@ -77,5 +77,13 @@
     "SRIGANGANAGAR": "श्रीगंगानगर",
     "TONK": "टोंक",
     "UDAIPUR": "उदयपुर"
-  }  
+  },
+  "home": {
+    "viewMore": "और देखें",
+    "helpLines": "हेल्पलाइनें",
+    "search": "खोजें",
+    "sort": "क्रमबद्ध करें",
+    "loadMore": "और लोड करें",
+    "searchPlaceholder": "पुलिस स्टेशन खोजें"
+  }
 }
