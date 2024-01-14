@@ -3,12 +3,30 @@ import { useSupabase } from "../context/SupabaseContext";
 import { ArcElement, Chart as ChartJs, Legend, Tooltip } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import { Select } from "@chakra-ui/react";
-
+import { Button } from "@chakra-ui/react";
+import {
+  ModalOverlay,
+  useDisclosure,
+  ModalContent,
+  ModalCloseButton,
+  Text,
+  ModalBody,
+  ModalHeader,
+  ModalFooter,
+  Modal,
+} from "@chakra-ui/react";
+import { Spinner } from "@chakra-ui/react";
 ChartJs.register(ArcElement, Tooltip, Legend);
 function TabData({ policeData }) {
+  const OverlayOne = () => (
+    <ModalOverlay bg="none" backdropFilter="blur(10px)" backdropBlur="10px" />
+  );
+
   const { fetchStats, stats } = useSupabase();
   const [selectedChart, setSelectedChart] = useState("Feedback");
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [overlay, setOverlay] = useState(<OverlayOne />);
+  const [status, setStatus] = useState("Connecting to server...");
   useEffect(() => {
     fetchStats(policeData.name);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -177,6 +195,35 @@ function TabData({ policeData }) {
   const handleChartChange = (event) => {
     setSelectedChart(event.target.value);
   };
+  const handleClick = async () => {
+    setOverlay(<OverlayOne />);
+    onOpen();
+
+    try {
+      setStatus("Connecting to server...");
+
+      const data = await fetch(
+        `https://flask-api-render-gzze.onrender.com/fetch_stats?send_email=false&ps=${policeData.name}`
+      );
+
+      setStatus("Creating file...");
+
+      const blob = await data.blob();
+      const url = window.URL.createObjectURL(new Blob([blob]));
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${policeData.name}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      setStatus("Download complete!");
+      onClose();
+    } catch (error) {
+      console.error("Error downloading PDF:", error);
+    }
+  };
 
   return (
     <div className="h-full p-4">
@@ -214,6 +261,39 @@ function TabData({ policeData }) {
           </div>
         ))}
       </div>
+      <Button className="customButton" onClick={handleClick}>
+        Download Detailed PDF
+      </Button>
+      <Modal
+        isCentered
+        onClose={onClose}
+        isOpen={isOpen}
+        motionPreset="slideInBottom"
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <h1 className="text-2xl text-[#8C4E1D] font-sans font-semibold">
+              {" "}
+              Rajasthan Police
+            </h1>
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <div className="flex items-center justify-center h-full">
+              <Spinner
+                thickness="4px"
+                speed="0.65s"
+                emptyColor="gray.200"
+                color="#8C4E1D"
+                size="xl"
+              />
+            </div>
+            <div className="text-center text-xl text-[#8C4E1D]">{status}</div>
+          </ModalBody>
+          <ModalFooter></ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 }
