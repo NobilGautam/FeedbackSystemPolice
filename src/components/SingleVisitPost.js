@@ -13,8 +13,13 @@ import {
   Image,
   Stack,
 } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
 
 function SingleVisitPost({ item, ImgLinks, addressLinks, documentId }) {
+  const { t } = useTranslation();
+  const match = item.policeStation.match(/(\d+)$/);
+  const cityNumber = match ? match[1] : null;
+  const cityName = item.policeStation.replace(/\d+$/, '').trim();
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
@@ -62,13 +67,13 @@ function SingleVisitPost({ item, ImgLinks, addressLinks, documentId }) {
 
         <Stack>
           <CardBody>
-            <Heading size="md">{item.policeStation}</Heading>
+            <Heading size="md">{`${t(`policeStation.${cityName}`)} ${cityNumber}`}</Heading>
             <p className="py-2">
-              <span className="font-semibold">Address - </span>
+              <span className="font-semibold">{t("home.address")} - </span>
               {addressLinks.get(item.policeStation)}
             </p>
             <p className="py-2">
-              <span className="font-semibold">Reporting Date & Time - </span>
+              <span className="font-semibold">{t("myFeedback.rdt")}</span>
               {formatTimestamp(item.created_at)}
             </p>
           </CardBody>
@@ -76,12 +81,12 @@ function SingleVisitPost({ item, ImgLinks, addressLinks, documentId }) {
             <div className="mb-4">
               {item.feedback !== null ? (
                 <span className="bg-[#c69665] text-white p-4 rounded-xl font-semibold">
-                  Feedback Added!
+                  {t("myVisits.feedbackAdded")}
                 </span>
               ) : (
                 <Link to={`/newFeedback/${documentId}`}>
                   <span className="bg-[#c69665] text-white p-4 rounded-xl font-semibold duration-300">
-                    Add Feedback
+                    {t("myVisits.addFeedback")}
                   </span>
                 </Link>
               )}

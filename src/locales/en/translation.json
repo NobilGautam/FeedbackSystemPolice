@@ -90,6 +90,10 @@
     "myFeedback": {
       "rdt": "Reporting Date & Time: ",
       "feedback": "Feedback:"
+    }, 
+    "myVisits": {
+      "addFeedback": "Add Feedback",
+      "feedbackAdded": "Feedback Added!"
     }
 }
   

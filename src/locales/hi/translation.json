@@ -90,5 +90,10 @@
   "myFeedback": {
     "rdt": "रिपोर्टिंग दिनांक और समय: ",
     "feedback": "प्रतिक्रिया:"
+  },
+  "myVisits": {
+    "addFeedback": "फीडबैक जोड़ें",
+    "feedbackAdded": "फीडबैक जोड़ा गया!"
   }
+  
 }
