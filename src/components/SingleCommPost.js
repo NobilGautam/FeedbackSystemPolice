@@ -8,52 +8,41 @@ import "aos/dist/aos.css";
 import ImageCard from "./ImageCard";
 import { useSupabase } from "../context/SupabaseContext";
 
-
 function SingleCommPost({ item }) {
+  const { allPolice } = useSupabase();
+  const [stars, setStars] = useState([]);
 
-  const {allPolice}=useSupabase();
-  const[stars,setStars]=useState([]);
-  // console.log(allPolice);
- 
- useEffect(()=>{
-let number=0;
-
-  for(var i=0; i<allPolice.length; i++){
-
-    if(allPolice[i].policeStation===item.name){
-     
-      number=allPolice[i].ps_Rating;
-    
-      break;
+  useEffect(() => {
+    let number = 0;
+    for (var i = 0; i < allPolice.length; i++) {
+      if (allPolice[i].policeStation === item.name) {
+        number = allPolice[i].ps_Rating;
+        break;
+      }
     }
-  }
-  const temp = [];
-  for (var i = 0; i < 5; i++) {
-    if (i < number) {
-      temp.push(
-        <span key={i}>
-          <BsStarFill color="gold" />
-        </span>
-      );
-    } else {
-      temp.push(
-        <span key={i}>
-          <BsStarFill color="grey" />
-        </span>
-      );
+    const temp = [];
+    // eslint-disable-next-line no-redeclare
+    for (var i = 0; i < 5; i++) {
+      if (i < number) {
+        temp.push(
+          <span key={i}>
+            <BsStarFill color="gold" />
+          </span>
+        );
+      } else {
+        temp.push(
+          <span key={i}>
+            <BsStarFill color="grey" />
+          </span>
+        );
+      }
     }
-  }
-  setStars(temp);
-
- },[allPolice])
-  
-
- 
+    setStars(temp);
+  }, [allPolice, item.name]);
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
-
 
   return (
     <div data-aos="fade-up">

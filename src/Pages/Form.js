@@ -8,21 +8,12 @@ import { useParams } from "react-router";
 import { useSupabase } from "../context/SupabaseContext";
 import { Auth } from "../Firebase";
 import ReCAPTCHA from "react-google-recaptcha";
-import {
-  Alert,
-  AlertDescription,
-  AlertIcon,
-  AlertTitle,
-  useToast,
-} from "@chakra-ui/react";
-import { encrypt,decrypt } from "n-krypta";
-import { useTranslation } from "react-i18next";
-
+import { useToast } from "@chakra-ui/react";
+import { encrypt } from "n-krypta";
 
 var Sentiment = require("sentiment");
 var sentiment = new Sentiment();
- const SECRET_KEY='ABC'
-
+const SECRET_KEY = "ABC";
 
 function Form() {
   const { t } = useTranslation();
@@ -31,8 +22,6 @@ function Form() {
       not: -2,
     },
   };
-  const [refreshFlag,setRefresh]=useState(false);
-  const [showAlert, setShowAlert] = useState(false);
   const [user] = useAuthState(Auth);
   const {
     individual,
@@ -44,24 +33,20 @@ function Form() {
     tableData: policeData,
   } = useSupabase(); // Use the Supabase context
 
-
   const { documentId } = useParams();
-
-
 
   useEffect(() => {
     const fetchDocument = async () => {
       fetchVisits(user?.email); // Fetch visits for the logged-in user
 
       if (documentId) {
-        // If documentId exists, set individual visit for editing
         const visit = visits.find((v) => v.documentID === documentId);
         if (visit) {
           setIndividual(visit);
         }
       }
     };
- fetchDocument();
+    fetchDocument();
   }, []);
 
   const [form, setForm] = useState({
@@ -73,12 +58,12 @@ function Form() {
     psname: policeData[0].name,
     purpose: "",
     feedback: "",
-    overallRating: '3',
-    time: '',
-    pbehaviour: '',
-    pguidance: '',
-    phelpful: '',
-    infra: '',
+    overallRating: "3",
+    time: "",
+    pbehaviour: "",
+    pguidance: "",
+    phelpful: "",
+    infra: "",
   });
 
   useEffect(() => {
@@ -90,12 +75,12 @@ function Form() {
       psname: individual.policeStation,
       purpose: "",
       feedback: individual.feedback || "",
-      overallRating: individual.rating || '3',
+      overallRating: individual.rating || "3",
       time: individual.time || "Immediately",
-      pbehaviour: individual.pbehaviour || 'Abusive',
-      pguidance: individual.pguidance || 'Excellent',
-      phelpful: individual.phelpful || 'Excellent',
-      infra: individual.infra || 'Excellent',
+      pbehaviour: individual.pbehaviour || "Abusive",
+      pguidance: individual.pguidance || "Excellent",
+      phelpful: individual.phelpful || "Excellent",
+      infra: individual.infra || "Excellent",
     });
   }, [individual]);
 
@@ -104,12 +89,10 @@ function Form() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    if(!captcha){
+    if (!captcha) {
       alert("CHECK THE CAPTCHA ");
       return;
     }
-    console.log(form.time);
-    console.log(form.pbehaviour);
 
     const updatedFormData = {
       name: form.fname,
@@ -117,7 +100,7 @@ function Form() {
       email: form.email,
       pstation: form.psname,
       gender: form.gender,
-      feedback: encrypt(form.feedback,toString(process.env.SECRET_KEY)),
+      feedback: encrypt(form.feedback, toString(process.env.SECRET_KEY)),
       purpose: form.purpose,
       Feel: sentiment.analyze(form.feedback, options).score,
       overallRating: rating,
@@ -129,7 +112,7 @@ function Form() {
     };
 
     // If documentId exists, update the existing visit
-    
+
     if (documentId) {
       toast.promise(updateVisit(documentId, updatedFormData), {
         success: { title: "Feedback Recorded", description: "Looks great" },
@@ -155,23 +138,20 @@ function Form() {
         psname: policeData[0].name,
         purpose: "",
         feedback: "",
-        overallRating: '3',
-        time: 'Immediately',
-        pbehaviour: 'Abusive',
-        pguidance: 'Excellent',
-        phelpful: 'Excellent',
-        infra: 'Excellent',
+        overallRating: "3",
+        time: "Immediately",
+        pbehaviour: "Abusive",
+        pguidance: "Excellent",
+        phelpful: "Excellent",
+        infra: "Excellent",
       });
     }, 5000);
   };
-// console.log(encrypt(4,SECRET_KEY));
-const handleRecaptchaVerify=()=>{
-  setCaptcha(true);
-
-}
+  const handleRecaptchaVerify = () => {
+    setCaptcha(true);
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setForm({ ...form, [name]: value });
   };
 
@@ -184,15 +164,14 @@ const handleRecaptchaVerify=()=>{
     hidden: { opacity: 0, x: "100%" },
     show: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeOut" } },
   };
-  const stringg="divyam";
-  const secretKey="abc"
+
   const [rating, setRating] = useState(3);
-  const [time, setTime] = useState('Immediately');
-  const [pbehaviour, setPbehaviour] = useState('Abusive');
-  const [pguidance, setPguidance] = useState('Excellent');
-  const [phelpful, setPhelpful] = useState('Excellent');
-  const [infra, setInfra] = useState('Excellent');
-   const [captcha,setCaptcha]=useState(false);
+  const [time, setTime] = useState("Immediately");
+  const [pbehaviour, setPbehaviour] = useState("Abusive");
+  const [pguidance, setPguidance] = useState("Excellent");
+  const [phelpful, setPhelpful] = useState("Excellent");
+  const [infra, setInfra] = useState("Excellent");
+  const [captcha, setCaptcha] = useState(false);
 
   const timeTaken = [
     "immediately",
@@ -469,9 +448,10 @@ const handleRecaptchaVerify=()=>{
             </div>
             <div className="flex flex-initial justify-start flex-wrap flex-col">
               <label className="flex flex-col  mb-2 ml-[5%]">
-               
-              <ReCAPTCHA sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
-        onChange={handleRecaptchaVerify}></ReCAPTCHA>
+                <ReCAPTCHA
+                  sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+                  onChange={handleRecaptchaVerify}
+                ></ReCAPTCHA>
               </label>
             </div>
 
