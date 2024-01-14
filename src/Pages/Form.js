@@ -21,11 +21,66 @@ import { useTranslation } from "react-i18next";
 
 var Sentiment = require("sentiment");
 var sentiment = new Sentiment();
- const SECRET_KEY='ABC'
+const SECRET_KEY='ABC'
+
+ const LanguageSwitcher = ({ changeLanguage }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div className="relative inline-block text-left">
+      <div>
+        <button
+          type="button"
+          className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          id="options-menu"
+          onClick={toggleDropdown}
+        >
+          Language
+        </button>
+      </div>
+
+      {isOpen && (
+        <div
+          className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="options-menu"
+        >
+          <div className="py-1" role="none">
+            <button
+              onClick={() => {
+                changeLanguage("en");
+                toggleDropdown(); 
+              }}
+              className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              role="menuitem"
+            >
+              English
+            </button>
+            <button
+              onClick={() => {
+                changeLanguage("hi");
+                toggleDropdown(); 
+              }}
+              className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              role="menuitem"
+            >
+              Hindi
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 
 function Form() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   var options = {
     extras: {
       not: -2,
@@ -233,9 +288,14 @@ const handleRecaptchaVerify=()=>{
     }
   };
 
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+  };
+
   return (
     <>
       <div className="flex h-[100%] lg:flex-row justify-center flex-col items-center flex-wrap lg:mt-0 mt-[190px]">
+        
         <div
           initial="hidden"
           animate="show"
@@ -253,6 +313,9 @@ const handleRecaptchaVerify=()=>{
               backgroundPosition: "center",
             }}
           >
+            <div className="mx-auto pt-4">
+              <LanguageSwitcher changeLanguage={changeLanguage} />
+            </div>
             <div className="flex mt-10 lg:flow-row flex-col flex-wrap w-[90%] justify-between mx-[5%]">
                 <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
                   <span className="font-bold">{`${t("form.fullname")}: `}</span>
