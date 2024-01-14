@@ -190,8 +190,6 @@ export const SupabaseProvider = ({ children }) => {
     else if(formData.pguidance === "Rude") data[0].Behaviour_Rude++;
     else data[0].Behaviour_Polite++;
 
-    data[0].NP_Ratio = data[0].Positive_Feedback/data[0].Negative_Feedback
-
     try {
       const { error } = await supabase
         .from(psStats)
