@@ -84,6 +84,11 @@
     "search": "खोजें",
     "sort": "क्रमबद्ध करें",
     "loadMore": "और लोड करें",
-    "searchPlaceholder": "पुलिस स्टेशन खोजें"
+    "searchPlaceholder": "पुलिस स्टेशन खोजें",
+    "address": "पता"
+  },
+  "myFeedback": {
+    "rdt": "रिपोर्टिंग दिनांक और समय: ",
+    "feedback": "प्रतिक्रिया:"
   }
 }

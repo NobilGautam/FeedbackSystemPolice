@@ -84,7 +84,12 @@
       "search": "Search",
       "sort": "Sort",
       "loadMore": "Load More",
-      "searchPlaceholder": "Search Police Stations"
+      "searchPlaceholder": "Search Police Stations",
+      "address": "Address"
+    },
+    "myFeedback": {
+      "rdt": "Reporting Date & Time: ",
+      "feedback": "Feedback:"
     }
 }
   
