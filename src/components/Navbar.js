@@ -10,6 +10,7 @@ import {
   IconButton,
   Menu,
   MenuButton,
+  MenuDivider,
   MenuGroup,
   MenuItem,
   MenuList,
@@ -57,30 +58,30 @@ function Navbar() {
             <Menu>
               <MenuButton
                 as={IconButton}
-                icon={
-                  user ? (
-                    <img
-                      src={user.photoURL}
-                      className="rounded-full"
-                      alt={user.displayName}
-                      style={{
-                        width: "36px",
-                        height: "36px",
-                        objectFit: "cover", 
-                      }}
-                    />
-                  ) : (
-                    <HamburgerIcon />
-                  )
-                }
+                icon={<HamburgerIcon />}
                 style={{
-                  backgroundColor: "#F0F0F0", 
+                  backgroundColor: "#F0F0F0",
                   borderRadius: "50%",
                 }}
               />
               <MenuList>
                 {user ? (
-                  <MenuGroup title={`Namaste, ${user.displayName}`} />
+                  <>
+                      <MenuItem className="flex justify-between">
+                        <div className="text-sm">Namaste, <br/> {user.displayName}</div>
+                        <img
+                          src={user.photoURL}
+                          className="rounded-full"
+                          alt={user.displayName}
+                          style={{
+                            width: "40px",
+                            height: "40px",
+                            objectFit: "cover",
+                          }}
+                        />
+                      </MenuItem>
+                    <MenuDivider />
+                  </>
                 ) : (
                   <MenuItem>
                     <Link className="text-sm text-green-600" onClick={signIN}>
@@ -158,13 +159,13 @@ function Navbar() {
                     alt={user.displayName}
                     style={{
                       width: "40px",
-                      height: "40px", 
+                      height: "40px",
                       objectFit: "cover",
                     }}
                   />
                 }
                 style={{
-                  backgroundColor: "#F0F0F0", 
+                  backgroundColor: "#F0F0F0",
                   borderRadius: "50%",
                 }}
                 size="lg"
