@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Auth, Provider } from "../Firebase";
 import { signInWithPopup, signOut } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import rpLogo from "../assets/rplogo.png";
@@ -18,7 +18,7 @@ import {
   MenuOptionGroup,
   Select,
 } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
+import { IoCheckmarkCircleOutline, IoDocumentOutline, IoHomeOutline, IoLanguageOutline, IoLogInOutline, IoLogOutOutline, IoMenu } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 
 function Navbar() {
@@ -26,6 +26,7 @@ function Navbar() {
   const [user] = useAuthState(Auth);
   const { i18n } = useTranslation();
 
+  const link=useLocation();
   const signIN = () => {
     signInWithPopup(Auth, Provider)
       .then(() => console.log("Sign in successful"))
@@ -39,12 +40,14 @@ function Navbar() {
   };
 
   const Links = [
-    { name: "Home", link: "/" },
-    user && { name: "My Feedbacks", link: "/myfeedback" },
-    user && { name: "My Visits", link: "/myVisits" },
+    { name: "Home", link: "/" , icon: <IoHomeOutline/>},
+    user && { name: "My Feedbacks", link: "/myfeedback", icon: <IoDocumentOutline/> },
+    user && { name: "My Visits", link: "/myVisits", icon: <IoCheckmarkCircleOutline/> },
   ];
 
-  const [selectedLink, setSelectedLink] = useState("Home");
+  console.log(link);
+  const [selectedLink, setSelectedLink] = useState(`${link.pathname=='/myfeedback'?"My Feedbacks":link.pathname==='/myVisits'?"My Visits":"Home"}`);
+
 
   const handleNavClick = (link) => {
     setSelectedLink(link.name);
@@ -54,12 +57,18 @@ function Navbar() {
     i18n.changeLanguage(lang);
   };
 
+  const handleImgclick=()=>{
+    navigator('/');
+  }
+  
   return (
     <div className="shadow-md w-full fixed z-20 top-0 left-0">
       <div className="md:flex items-center justify-between py-4 md:px-10 px-7 bg-[#8C4E1D]">
         <div className="font-semibold text-2xl cursor-pointer flex items-center text-gray-800">
-          <img src={emblem} alt="Emblem" className="w-[50px] hatade mr-4" />
-          <img src={rpLogo} className="w-[15%] mr-4" alt="Logo" />
+          
+          <img src={emblem} alt="Emblem" className="w-[50px] hatade mr-4" onClick={handleImgclick}/>
+          <img src={rpLogo} className="w-[15%] mr-4" alt="Logo"  onClick={handleImgclick}/>
+          {/* </Link> */}
           <span className="text-white text-base md:text-2xl">
             Rajasthan Police Feedback
           </span>
@@ -67,7 +76,7 @@ function Navbar() {
             <Menu>
               <MenuButton
                 as={IconButton}
-                icon={<HamburgerIcon />}
+                icon={<IoMenu />}
                 style={{
                   backgroundColor: "#F0F0F0",
                   borderRadius: "50%",
@@ -95,7 +104,8 @@ function Navbar() {
                   </>
                 ) : (
                   <MenuItem>
-                    <Link className="text-sm text-green-600" onClick={signIN}>
+                  <IoLogInOutline/>
+                    <Link className="text-sm ml-2 w-full text-green-600" onClick={signIN}>
                       Login
                     </Link>
                   </MenuItem>
@@ -110,20 +120,21 @@ function Navbar() {
                     changeLanguage(lang) 
                   }}
                 >
-                  <MenuItemOption className="text-sm" value="English">
+                  <MenuItemOption className="text-sm w-full" value="English">
                     English
                   </MenuItemOption>
-                  <MenuItemOption className="text-sm" value="Hindi">
+                  <MenuItemOption className="text-sm w-full" value="Hindi">
                     Hindi
                   </MenuItemOption>
                 </MenuOptionGroup>
                 <MenuDivider />
                 {Links.filter((link) => link).map((link) => (
                   <MenuItem key={link.name}>
+                    {link.icon}
                     <Link
                       as={Link}
                       to={link.link}
-                      className="text-sm"
+                      className="text-sm ml-2 w-full"
                       onClick={() => {
                         handleNavClick(link);
                       }}
@@ -134,9 +145,10 @@ function Navbar() {
                 ))}
                 {user ? (
                   <MenuItem>
+                  <IoLogOutOutline/>
                     <Link
                       onClick={signout}
-                      className="text-red-500 text-sm hover:text-gray-400 duration-500"
+                      className="text-red-500 ml-2 w-full text-sm hover:text-gray-400 duration-500"
                     >
                       Logout
                     </Link>
@@ -154,7 +166,6 @@ function Navbar() {
               style={{ backgroundColor: "#F0F0F0" }}
               onChange={(event) => {
                 const selectedLanguage = event.target.value;
-                console.log(selectedLanguage); // NOBIL IDHAR KARDE KI LANGUAGE CHANGE HOJAYE
                 changeLanguage(selectedLanguage);
               }}
             >
@@ -217,14 +228,16 @@ function Navbar() {
                   <MenuGroup title={`Namaste, ${user.displayName}`} />
                 ) : (
                   <MenuItem>
+                  <IoLogInOutline/>
                     <Link onClick={signIN}>Login</Link>
                   </MenuItem>
                 )}
                 <MenuItem>
+                <IoLogOutOutline/>
                   <Link
                     onClick={signout}
-                    className="text-red-500 hover:text-gray-400 duration-500"
-                  >
+                    className="text-red-500 w-full ml-2 hover:text-gray-400 duration-500"
+                    >
                     Logout
                   </Link>
                 </MenuItem>
