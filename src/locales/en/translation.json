@@ -15,31 +15,31 @@
       "phelpful": "Courtesy and helpfulness of the staff at the police station",
       "infra": "Infrastructure at the police station",
       "overallExperience": "Overall Experience with the Police Station",
-      "veryDissatisfied": "Very Dissatisfied",
-      "dissatisfied": "Dissatisfied",
-      "neutral": "Neutral",
-      "satisfied": "Satisfied",
-      "verySatisfied": "Very Satisfied",
+      "Very Dissatisfied": "Very Dissatisfied",
+      "Dissatisfied": "Dissatisfied",
+      "Neutral": "Neutral",
+      "Satisfied": "Satisfied",
+      "Very Satisfied": "Very Satisfied",
       "feedback": "Your feedback",
       "submitButton": "Submit",
       "timeTaken": {
-        "immediately": "Immediately",
-        "5minutes": "5 Minutes",
-        "10minutes": "10 Minutes",
-        "15minutes": "15 Minutes",
-        "moreThan15minutes": "More than 15 Minutes"
+        "Immediately": "Immediately",
+        "5 Mins": "5 Minutes",
+        "10 Mins": "10 Minutes",
+        "15 Mins": "15 Minutes",
+        "More than 15 Mins": "More than 15 Minutes"
       },
       "behaviour": {
-        "abusive": "Abusive",
-        "rude": "Rude",
-        "polite": "Polite"
+        "Abusive": "Abusive",
+        "Rude": "Rude",
+        "Polite": "Polite"
       },
       "feedbackRating": {
-        "poor": "Poor",
-        "belowAverage": "Below Average",
-        "average": "Average",
-        "good": "Good",
-        "excellent": "Excellent"
+        "Poor": "Poor",
+        "Below Average": "Below Average",
+        "Average": "Average",
+        "Good": "Good",
+        "Excellent": "Excellent"
       }
     }
 }
