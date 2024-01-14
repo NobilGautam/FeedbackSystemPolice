@@ -8,7 +8,7 @@ import { useParams } from "react-router";
 import { useSupabase } from "../context/SupabaseContext";
 import { Auth } from "../Firebase";
 import ReCAPTCHA from "react-google-recaptcha";
-import { useToast } from "@chakra-ui/react";
+import { Button, useToast } from "@chakra-ui/react";
 import { encrypt } from "n-krypta";
 
 var Sentiment = require("sentiment");
@@ -198,17 +198,17 @@ function Form() {
 
   return (
     <>
-      <div className="flex h-[100%] lg:flex-row justify-center flex-col items-center flex-wrap lg:mt-0 mt-[190px]">
+      <div className="flex md:flex-row justify-center flex-col items-center flex-wrap mt-24 p-6 md:mt-0">
         <div
           initial="hidden"
           animate="show"
           variants={slideInRightAndFadeIn}
-          className=" lg:w-[90%] mx-auto lg:mt-28 justify-center flex"
+          className="w-full md:w-[90%] mx-auto md:mt-28 justify-center flex"
         >
           <form
             id="feedbackForm"
             onSubmit={handleSubmit}
-            className="mt-12 flex flex-col gap-8 w-[90%] lg:mb-10 bg-slate-50 rounded-md shadow-xl shadow-[#5e5d5d]"
+            className="mt-12 flex flex-col w-full md:w-[90%] md:mb-10 bg-slate-50 rounded-md shadow-md shadow-[#5e5d5d]"
             style={{
               background: `url(${formBG})`,
               backgroundSize: "cover",
@@ -217,71 +217,71 @@ function Form() {
             }}
           >
             <div className="flex mt-10 lg:flow-row flex-col flex-wrap w-[90%] justify-between mx-[5%]">
-                <label className="flex flex-row mt-5 mb-2">
-                  <span className="font-bold">{`${t("form.fullname")}: `}</span>
-                  <input
-                    name="fname"
-                    value={form.fname}
-                    required
-                    onChange={handleChange}
-                    placeholder="Enter your first name"
-                    className="rounded-md sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
-                    disabled
-                  />
-                </label>
+              <label className="flex flex-row mt-5 mb-2">
+                <span className="font-bold">Full Name: </span>
+                <input
+                  name="fname"
+                  value={form.fname}
+                  required
+                  onChange={handleChange}
+                  placeholder="Enter your first name"
+                  className="rounded-md sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
+                  disabled
+                />
+              </label>
 
               <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
-                  <span className="font-bold">{`${t("form.age")}: `}</span>
-                  <input
-                    name="age"
-                    required
-                    value={form.age}
-                    onChange={handleChange}
-                    placeholder="Enter your age"
-                    type="number"
-                    className="rounded-md sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
-                    disabled
-                  />
-                </label>
-
-                <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
-                  <span className="font-bold">{`${t("form.gender")}: `}</span>
-                  <select
-                    name="gender"
-                    form="feedbackForm"
-                    onChange={handleChange}
-                    value={form.gender}
-                    className="bg-transparent sm:mt-1 xl:mt-0 xl:ml-2"
-                  >
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="others">Others</option>
-                  </select>
-                </label>
+                <span className="font-bold">Age: </span>
+                <input
+                  name="age"
+                  required
+                  value={form.age}
+                  onChange={handleChange}
+                  placeholder="Enter your age"
+                  type="number"
+                  className="rounded-md sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
+                  disabled
+                />
+              </label>
 
               <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
-                  <span className="font-bold">{`${t("form.policeStation")}: `}</span>
-                  <select
-                    name="psname"
-                    form="feedbackForm"
-                    value={form.psname}
-                    onChange={handleChange}
-                    className="bg-transparent sm:mt-1 xl:mt-0 xl:ml-2"
-                    disabled
-                  >
-                    {policeData.map((data) => (
-                      <option key={data.id} value={data.name}>
-                        {data.name}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                <span className="font-bold">Gender: </span>
+                <select
+                  name="gender"
+                  form="feedbackForm"
+                  onChange={handleChange}
+                  value={form.gender}
+                  className="bg-transparent sm:mt-1 xl:mt-0 xl:ml-2"
+                >
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="others">Others</option>
+                </select>
+              </label>
+
+              <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
+                <span className="font-bold">Select Police Station: </span>
+                <select
+                  name="psname"
+                  form="feedbackForm"
+                  value={form.psname}
+                  onChange={handleChange}
+                  className="bg-transparent sm:mt-1 xl:mt-0 xl:ml-2"
+                  disabled
+                >
+                  {policeData.map((data) => (
+                    <option key={data.id} value={data.name}>
+                      {data.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
             </div>
-
-            <div className="flex flex-col lg:flow-row justify-between mx-[5%] w-[100%]">
+            <hr class="my-6 bg-[#8C4E1D] self-center w-[90%] h-[3px]"/>
+            <div className="flex flex-col md:flow-row justify-between mx-[5%] w-[100%]">
               <div className="flex justify-start flex-wrap flex-row">
                 <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
-                  <span className="font-bold">{`${t("form.purpose")}: `}</span>
+                  <span className="font-bold">Purpose of visit: </span>
                   <input
                     type="text"
                     name="purpose"
@@ -289,13 +289,13 @@ function Form() {
                     required
                     onChange={handleChange}
                     placeholder="Enter your purpose of visit in not more than one line"
-                    className="w-[550px] sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
+                    className="w-[300px] md:w-[550px] sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
                   />
                 </label>
               </div>
               <div className="flex justify-start flex-wrap flex-row">
                 <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
-                  <span className="font-bold">{`${t("form.email")}: `}</span>
+                  <span className="font-bold">Email </span>
                   <input
                     type="email"
                     name="email"
@@ -310,131 +310,139 @@ function Form() {
               </div>
             </div>
 
-            
-              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">{`${t("form.time")}: `}</span>
-                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
-                  {timeTaken.map((value) => (
-                    <label key={value} className="flex items-center mr-4">
-                      <input
-                        type="radio"
-                        name="time"
-                        value={value}
-                        checked={time === value}
-                        onChange={() => setTime(value)}
-                        className="mr-1"
-                      />
-                        {t(`form.timeTaken.${value}`)}
-                    </label>
-                  ))}
-                </div>
-              </label>
+            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+              <span className="font-bold">
+                After how much time you were heard in police station:{" "}
+              </span>
+              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+                {timeTaken.map((value) => (
+                  <label key={value} className="flex items-center mr-4">
+                    <input
+                      type="radio"
+                      name="time"
+                      value={value}
+                      checked={time === value}
+                      onChange={() => setTime(value)}
+                      className="mr-1"
+                    />
+                    {value}
+                  </label>
+                ))}
+              </div>
+            </label>
 
-            
-              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">{`${t("form.pbehaviour")}: `}</span>
-                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
-                  {behaviour.map((value) => (
-                    <label key={value} className="flex items-center mr-4">
-                      <input
-                        type="radio"
-                        name="pbehaviour"
-                        value={value}
-                        checked={pbehaviour === value}
-                        onChange={() => setPbehaviour(value)}
-                        className="mr-1"
-                      />
-                        {t(`form.behaviour.${value}`)}
-                    </label>
-                  ))}
-                </div>
-              </label>
+            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+              <span className="font-bold">
+                How do you rate the behaviour of the police officers:{" "}
+              </span>
+              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+                {behaviour.map((value) => (
+                  <label key={value} className="flex items-center mr-4">
+                    <input
+                      type="radio"
+                      name="pbehaviour"
+                      value={value}
+                      checked={pbehaviour === value}
+                      onChange={() => setPbehaviour(value)}
+                      className="mr-1"
+                    />
+                    {value}
+                  </label>
+                ))}
+              </div>
+            </label>
 
-            
-              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">{`${t("form.pguidance")}: `}</span>
-                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
-                  {feedback.map((value) => (
-                    <label key={value} className="flex items-center mr-4">
-                      <input
-                        type="radio"
-                        name="pguidance"
-                        value={value}
-                        checked={pguidance === value}
-                        onChange={() => setPguidance(value)}
-                        className="mr-1"
-                      />
-                      {t(`form.feedbackRating.${value}`)}
-                    </label>
-                  ))}
-                </div>
-              </label>
+            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+              <span className="font-bold">
+                Guidance received at the police station:{" "}
+              </span>
+              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+                {feedback.map((value) => (
+                  <label key={value} className="flex items-center mr-4">
+                    <input
+                      type="radio"
+                      name="pguidnace"
+                      value={value}
+                      checked={pguidance === value}
+                      onChange={() => setPguidance(value)}
+                      className="mr-1"
+                    />
+                    {value}
+                  </label>
+                ))}
+              </div>
+            </label>
 
-            
-              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">{`${t("form.phelpful")}: `}</span>
-                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
-                  {feedback.map((value) => (
-                    <label key={value} className="flex items-center mr-4">
-                      <input
-                        type="radio"
-                        name="phelpful"
-                        value={value}
-                        checked={phelpful === value}
-                        onChange={() => setPhelpful(value)}
-                        className="mr-1"
-                      />
-                      {t(`form.feedbackRating.${value}`)}
-                    </label>
-                  ))}
-                </div>
-              </label>
+            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+              <span className="font-bold">
+                Courtesy and helpfullness of the staff at the police station:{" "}
+              </span>
+              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+                {feedback.map((value) => (
+                  <label key={value} className="flex items-center mr-4">
+                    <input
+                      type="radio"
+                      name="phelpful"
+                      value={value}
+                      checked={phelpful === value}
+                      onChange={() => setPhelpful(value)}
+                      className="mr-1"
+                    />
+                    {value}
+                  </label>
+                ))}
+              </div>
+            </label>
 
-              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">{`${t("form.infra")}: `}</span>
-                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
-                  {feedback.map((value) => (
-                    <label key={value} className="flex items-center mr-4">
-                      <input
-                        type="radio"
-                        name="infra"
-                        value={value}
-                        checked={infra === value}
-                        onChange={() => setInfra(value)}
-                        className="mr-1"
-                      />
-                      {t(`form.feedbackRating.${value}`)}
-                    </label>
-                  ))}
-                </div>
-              </label>
+            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+              <span className="font-bold">
+                Infrastructure at the police station:{" "}
+              </span>
+              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+                {feedback.map((value) => (
+                  <label key={value} className="flex items-center mr-4">
+                    <input
+                      type="radio"
+                      name="infra"
+                      value={value}
+                      checked={infra === value}
+                      onChange={() => setInfra(value)}
+                      className="mr-1"
+                    />
+                    {value}
+                  </label>
+                ))}
+              </div>
+            </label>
 
-              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">{`${t("form.overallExperience")}: `}</span>
-                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
-                  {[1, 2, 3, 4, 5].map((value) => (
-                    <label key={value} className="flex items-center mr-4">
-                      <input
-                        type="radio"
-                        name="overallRating"
-                        value={value}
-                        checked={rating === value}
-                        onChange={() => setRating(value)}
-                        className="mr-1"
-                      />
-                      {value === 1 && "Very Dissatisfied"}
-                      {value === 2 && "Dissatisfied"}
-                      {value === 3 && "Neutral"}
-                      {value === 4 && "Satisfied"}
-                      {value === 5 && "Very Satisfied"}
-                    </label>
-                  ))}
-                </div>
-              </label>
+            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+              <span className="font-bold">
+                Overall Experience with the Police Station:{" "}
+              </span>
+              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+                {[1, 2, 3, 4, 5].map((value) => (
+                  <label key={value} className="flex items-center mr-4">
+                    <input
+                      type="radio"
+                      name="overallRating"
+                      value={value}
+                      checked={rating === value}
+                      onChange={() => setRating(value)}
+                      className="mr-1"
+                    />
+                    {value === 1 && "Very Dissatisfied"}
+                    {value === 2 && "Dissatisfied"}
+                    {value === 3 && "Neutral"}
+                    {value === 4 && "Satisfied"}
+                    {value === 5 && "Very Satisfied"}
+                  </label>
+                ))}
+              </div>
+            </label>
 
             <div className="flex flex-initial justify-start flex-wrap flex-col">
               <label className="flex flex-col lg:flex-row items-center gap-[5%] mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">{`${t("form.feedback")}: `}</span>
+                <span className="font-bold">Your feedback: </span>
                 <textarea
                   type="text"
                   name="feedback"
@@ -447,7 +455,7 @@ function Form() {
               </label>
             </div>
             <div className="flex flex-initial justify-start flex-wrap flex-col">
-              <label className="flex flex-col  mb-2 ml-[5%]">
+              <label className="flex flex-col mb-2 ml-[5%]">
                 <ReCAPTCHA
                   sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
                   onChange={handleRecaptchaVerify}
@@ -455,12 +463,12 @@ function Form() {
               </label>
             </div>
 
-            <button
+            <Button
               type="submit"
-              className="bg-gray-300 hover:bg-gray-400 ml-[5%] py-3 px-8 mb-3 outline-none w-fit text-black font-bold shadow-md shadow-primary rounded-xl"
+              className="mx-5 mt-2 md:mx-16 md:mt-8 mb-5 w-fit customButton"
               onClick={handleFormSubmit}
             >
-              {`${t("form.submitButton")}: `}
+              Submit
             </button>
           </form>
         </div>

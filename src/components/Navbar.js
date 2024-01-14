@@ -153,28 +153,30 @@ function Navbar() {
                   <></>
                 )}
                 {Links.filter((link) => link).map((link) => (
-                  <div>
-                    <LanguageSwitcher changeLanguage={changeLanguage} />
-                    <li
-                      key={link.name}
+                  <li
+                    key={link.name}
+                    onClick={() => {
+                      setOpen(!open);
+                      handleNavClick(link);
+                    }}
+                    className="md:ml-8  text-base md:my-0 my-3"
+                  >
+                    <Link
+                      to={link.link}
+                      className="text-black hover:text-gray-400 duration-500"
                       onClick={() => {
                         setOpen(!open);
-                        handleNavClick(link);
-                        console.log("hi")
                       }}
-                      className="md:ml-8  text-base md:my-0 my-3"
                     >
-                      <Link
-                        to={link.link}
-                        className="text-black hover:text-gray-400 duration-500"
-                        onClick={() => {
-                          setOpen(!open);
-                        }}
+                      <p
+                        className={`hover:border-b-[3px] ${
+                          selectedLink === link.name ? "border-b-[3px]" : ""
+                        } border-black duration-100 pb-2`}
                       >
-                        <p className={`hover:border-b-[3px] ${selectedLink === link.name ? 'border-b-[3px]' : ''} border-black duration-100 pb-2`}>{link.name}</p>
-                      </Link>
-                    </li>
-                  </div>
+                        {link.name}
+                      </p>
+                    </Link>
+                  </li>
                 ))}
                 {user ? (
                   <li
