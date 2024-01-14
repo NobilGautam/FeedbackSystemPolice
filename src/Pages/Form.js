@@ -8,22 +8,14 @@ import { useParams } from "react-router";
 import { useSupabase } from "../context/SupabaseContext";
 import { Auth } from "../Firebase";
 import ReCAPTCHA from "react-google-recaptcha";
-import {
-  Alert,
-  AlertDescription,
-  AlertIcon,
-  AlertTitle,
-  useToast,
-} from "@chakra-ui/react";
-import { encrypt,decrypt } from "n-krypta";
+import { useToast } from "@chakra-ui/react";
+import { encrypt } from "n-krypta";
 import { useTranslation } from "react-i18next";
-
 
 var Sentiment = require("sentiment");
 var sentiment = new Sentiment();
-const SECRET_KEY='ABC'
 
- const LanguageSwitcher = ({ changeLanguage }) => {
+const LanguageSwitcher = ({ changeLanguage }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -54,7 +46,7 @@ const SECRET_KEY='ABC'
             <button
               onClick={() => {
                 changeLanguage("en");
-                toggleDropdown(); 
+                toggleDropdown();
               }}
               className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
@@ -64,7 +56,7 @@ const SECRET_KEY='ABC'
             <button
               onClick={() => {
                 changeLanguage("hi");
-                toggleDropdown(); 
+                toggleDropdown();
               }}
               className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
@@ -78,7 +70,6 @@ const SECRET_KEY='ABC'
   );
 };
 
-
 function Form() {
   const { t, i18n } = useTranslation();
   var options = {
@@ -86,8 +77,7 @@ function Form() {
       not: -2,
     },
   };
-  const [refreshFlag,setRefresh]=useState(false);
-  const [showAlert, setShowAlert] = useState(false);
+
   const [user] = useAuthState(Auth);
   const {
     individual,
@@ -97,26 +87,21 @@ function Form() {
     visits,
     updateVisit,
     tableData: policeData,
-  } = useSupabase(); // Use the Supabase context
-
+  } = useSupabase();
 
   const { documentId } = useParams();
 
-
-
   useEffect(() => {
     const fetchDocument = async () => {
-      fetchVisits(user?.email); // Fetch visits for the logged-in user
-
+      fetchVisits(user?.email);
       if (documentId) {
-        // If documentId exists, set individual visit for editing
         const visit = visits.find((v) => v.documentID === documentId);
         if (visit) {
           setIndividual(visit);
         }
       }
     };
- fetchDocument();
+    fetchDocument();
   }, []);
 
   const [form, setForm] = useState({
@@ -128,12 +113,12 @@ function Form() {
     psname: policeData[0].name,
     purpose: "",
     feedback: "",
-    overallRating: '3',
-    time: '',
-    pbehaviour: '',
-    pguidance: '',
-    phelpful: '',
-    infra: '',
+    overallRating: "3",
+    time: "",
+    pbehaviour: "",
+    pguidance: "",
+    phelpful: "",
+    infra: "",
   });
 
   useEffect(() => {
@@ -145,12 +130,12 @@ function Form() {
       psname: individual.policeStation,
       purpose: "",
       feedback: individual.feedback || "",
-      overallRating: individual.rating || '3',
+      overallRating: individual.rating || "3",
       time: individual.time || "Immediately",
-      pbehaviour: individual.pbehaviour || 'Abusive',
-      pguidance: individual.pguidance || 'Excellent',
-      phelpful: individual.phelpful || 'Excellent',
-      infra: individual.infra || 'Excellent',
+      pbehaviour: individual.pbehaviour || "Abusive",
+      pguidance: individual.pguidance || "Excellent",
+      phelpful: individual.phelpful || "Excellent",
+      infra: individual.infra || "Excellent",
     });
   }, [individual]);
 
@@ -159,7 +144,7 @@ function Form() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    if(!captcha){
+    if (!captcha) {
       alert("CHECK THE CAPTCHA ");
       return;
     }
@@ -172,7 +157,7 @@ function Form() {
       email: form.email,
       pstation: form.psname,
       gender: form.gender,
-      feedback: encrypt(form.feedback,toString(process.env.SECRET_KEY)),
+      feedback: encrypt(form.feedback, toString(process.env.SECRET_KEY)),
       purpose: form.purpose,
       Feel: sentiment.analyze(form.feedback, options).score,
       overallRating: rating,
@@ -183,8 +168,6 @@ function Form() {
       infra: infra,
     };
 
-    // If documentId exists, update the existing visit
-    
     if (documentId) {
       toast.promise(updateVisit(documentId, updatedFormData), {
         success: { title: "Feedback Recorded", description: "Looks great" },
@@ -192,7 +175,6 @@ function Form() {
         loading: { title: "Recording Feedback", description: "Please wait" },
       });
     } else {
-      // Otherwise, submit a new visit
       toast.promise(handleSubmit(updatedFormData), {
         success: { title: "Feedback Recorded", description: "Looks great" },
         error: { title: "Error", description: "Something wrong" },
@@ -210,67 +192,50 @@ function Form() {
         psname: policeData[0].name,
         purpose: "",
         feedback: "",
-        overallRating: '3',
-        time: 'Immediately',
-        pbehaviour: 'Abusive',
-        pguidance: 'Excellent',
-        phelpful: 'Excellent',
-        infra: 'Excellent',
+        overallRating: "3",
+        time: "Immediately",
+        pbehaviour: "Abusive",
+        pguidance: "Excellent",
+        phelpful: "Excellent",
+        infra: "Excellent",
       });
     }, 5000);
   };
-// console.log(encrypt(4,SECRET_KEY));
-const handleRecaptchaVerify=()=>{
-  setCaptcha(true);
 
-}
+  const handleRecaptchaVerify = () => {
+    setCaptcha(true);
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     console.log(name, value);
     setForm({ ...form, [name]: value });
   };
 
-  const slideInLeftAndFadeIn = {
-    hidden: { opacity: 0, x: "-100%" },
-    show: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeOut" } },
-  };
-
   const slideInRightAndFadeIn = {
     hidden: { opacity: 0, x: "100%" },
     show: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeOut" } },
   };
-  const stringg="divyam";
-  const secretKey="abc"
+
   const [rating, setRating] = useState(3);
-  const [time, setTime] = useState('Immediately');
-  const [pbehaviour, setPbehaviour] = useState('Abusive');
-  const [pguidance, setPguidance] = useState('Excellent');
-  const [phelpful, setPhelpful] = useState('Excellent');
-  const [infra, setInfra] = useState('Excellent');
-   const [captcha,setCaptcha]=useState(false);
+  const [time, setTime] = useState("Immediately");
+  const [pbehaviour, setPbehaviour] = useState("Abusive");
+  const [pguidance, setPguidance] = useState("Excellent");
+  const [phelpful, setPhelpful] = useState("Excellent");
+  const [infra, setInfra] = useState("Excellent");
+  const [captcha, setCaptcha] = useState(false);
 
   const timeTaken = [
     "immediately",
     "5minutes",
     "10minutes",
     "15minutes",
-    "moreThan15minutes"
-  ]
+    "moreThan15minutes",
+  ];
 
-  const behaviour = [
-    "abusive",
-    "rude",
-    "polite",
-  ]
+  const behaviour = ["abusive", "rude", "polite"];
 
-  const feedback = [
-    "poor",
-    "belowAverage",
-    "average",
-    "good", 
-    "excellent"
-  ]
-  
+  const feedback = ["poor", "belowAverage", "average", "good", "excellent"];
+
   const getFeedbackKey = (value) => {
     switch (value) {
       case 1:
@@ -295,7 +260,6 @@ const handleRecaptchaVerify=()=>{
   return (
     <>
       <div className="flex h-[100%] lg:flex-row justify-center flex-col items-center flex-wrap lg:mt-0 mt-[190px]">
-        
         <div
           initial="hidden"
           animate="show"
@@ -317,65 +281,67 @@ const handleRecaptchaVerify=()=>{
               <LanguageSwitcher changeLanguage={changeLanguage} />
             </div>
             <div className="flex mt-10 lg:flow-row flex-col flex-wrap w-[90%] justify-between mx-[5%]">
-                <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
-                  <span className="font-bold">{`${t("form.fullname")}: `}</span>
-                  <input
-                    name="fname"
-                    value={form.fname}
-                    required
-                    onChange={handleChange}
-                    placeholder="Enter your first name"
-                    className="rounded-md sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
-                    disabled
-                  />
-                </label>
+              <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
+                <span className="font-bold">{`${t("form.fullname")}: `}</span>
+                <input
+                  name="fname"
+                  value={form.fname}
+                  required
+                  onChange={handleChange}
+                  placeholder="Enter your first name"
+                  className="rounded-md sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
+                  disabled
+                />
+              </label>
 
               <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
-                  <span className="font-bold">{`${t("form.age")}: `}</span>
-                  <input
-                    name="age"
-                    required
-                    value={form.age}
-                    onChange={handleChange}
-                    placeholder="Enter your age"
-                    type="number"
-                    className="rounded-md sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
-                    disabled
-                  />
-                </label>
-
-                <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
-                  <span className="font-bold">{`${t("form.gender")}: `}</span>
-                  <select
-                    name="gender"
-                    form="feedbackForm"
-                    onChange={handleChange}
-                    value={form.gender}
-                    className="bg-transparent sm:mt-1 xl:mt-0 xl:ml-2"
-                  >
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="others">Others</option>
-                  </select>
-                </label>
+                <span className="font-bold">{`${t("form.age")}: `}</span>
+                <input
+                  name="age"
+                  required
+                  value={form.age}
+                  onChange={handleChange}
+                  placeholder="Enter your age"
+                  type="number"
+                  className="rounded-md sm:mt-1 xl:mt-0 xl:ml-2 bg-transparent"
+                  disabled
+                />
+              </label>
 
               <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
-                  <span className="font-bold">{`${t("form.policeStation")}: `}</span>
-                  <select
-                    name="psname"
-                    form="feedbackForm"
-                    value={form.psname}
-                    onChange={handleChange}
-                    className="bg-transparent sm:mt-1 xl:mt-0 xl:ml-2"
-                    disabled
-                  >
-                    {policeData.map((data) => (
-                      <option key={data.id} value={data.name}>
-                        {data.name}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                <span className="font-bold">{`${t("form.gender")}: `}</span>
+                <select
+                  name="gender"
+                  form="feedbackForm"
+                  onChange={handleChange}
+                  value={form.gender}
+                  className="bg-transparent sm:mt-1 xl:mt-0 xl:ml-2"
+                >
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="others">Others</option>
+                </select>
+              </label>
+
+              <label className="flex flex-col lg:flex-row lg:items-center mt-5 mb-2">
+                <span className="font-bold">{`${t(
+                  "form.policeStation"
+                )}: `}</span>
+                <select
+                  name="psname"
+                  form="feedbackForm"
+                  value={form.psname}
+                  onChange={handleChange}
+                  className="bg-transparent sm:mt-1 xl:mt-0 xl:ml-2"
+                  disabled
+                >
+                  {policeData.map((data) => (
+                    <option key={data.id} value={data.name}>
+                      {data.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
             </div>
 
             <div className="flex flex-col lg:flow-row justify-between mx-[5%] w-[100%]">
@@ -410,123 +376,121 @@ const handleRecaptchaVerify=()=>{
               </div>
             </div>
 
-            
-              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">{`${t("form.time")}: `}</span>
-                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
-                  {timeTaken.map((value) => (
-                    <label key={value} className="flex items-center mr-4">
-                      <input
-                        type="radio"
-                        name="time"
-                        value={value}
-                        checked={time === value}
-                        onChange={() => setTime(value)}
-                        className="mr-1"
-                      />
-                        {t(`form.timeTaken.${value}`)}
-                    </label>
-                  ))}
-                </div>
-              </label>
+            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+              <span className="font-bold">{`${t("form.time")}: `}</span>
+              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+                {timeTaken.map((value) => (
+                  <label key={value} className="flex items-center mr-4">
+                    <input
+                      type="radio"
+                      name="time"
+                      value={value}
+                      checked={time === value}
+                      onChange={() => setTime(value)}
+                      className="mr-1"
+                    />
+                    {t(`form.timeTaken.${value}`)}
+                  </label>
+                ))}
+              </div>
+            </label>
 
-            
-              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">{`${t("form.pbehaviour")}: `}</span>
-                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
-                  {behaviour.map((value) => (
-                    <label key={value} className="flex items-center mr-4">
-                      <input
-                        type="radio"
-                        name="pbehaviour"
-                        value={value}
-                        checked={pbehaviour === value}
-                        onChange={() => setPbehaviour(value)}
-                        className="mr-1"
-                      />
-                        {t(`form.behaviour.${value}`)}
-                    </label>
-                  ))}
-                </div>
-              </label>
+            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+              <span className="font-bold">{`${t("form.pbehaviour")}: `}</span>
+              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+                {behaviour.map((value) => (
+                  <label key={value} className="flex items-center mr-4">
+                    <input
+                      type="radio"
+                      name="pbehaviour"
+                      value={value}
+                      checked={pbehaviour === value}
+                      onChange={() => setPbehaviour(value)}
+                      className="mr-1"
+                    />
+                    {t(`form.behaviour.${value}`)}
+                  </label>
+                ))}
+              </div>
+            </label>
 
-            
-              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">{`${t("form.pguidance")}: `}</span>
-                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
-                  {feedback.map((value) => (
-                    <label key={value} className="flex items-center mr-4">
-                      <input
-                        type="radio"
-                        name="pguidance"
-                        value={value}
-                        checked={pguidance === value}
-                        onChange={() => setPguidance(value)}
-                        className="mr-1"
-                      />
-                      {t(`form.feedbackRating.${value}`)}
-                    </label>
-                  ))}
-                </div>
-              </label>
+            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+              <span className="font-bold">{`${t("form.pguidance")}: `}</span>
+              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+                {feedback.map((value) => (
+                  <label key={value} className="flex items-center mr-4">
+                    <input
+                      type="radio"
+                      name="pguidance"
+                      value={value}
+                      checked={pguidance === value}
+                      onChange={() => setPguidance(value)}
+                      className="mr-1"
+                    />
+                    {t(`form.feedbackRating.${value}`)}
+                  </label>
+                ))}
+              </div>
+            </label>
 
-            
-              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">{`${t("form.phelpful")}: `}</span>
-                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
-                  {feedback.map((value) => (
-                    <label key={value} className="flex items-center mr-4">
-                      <input
-                        type="radio"
-                        name="phelpful"
-                        value={value}
-                        checked={phelpful === value}
-                        onChange={() => setPhelpful(value)}
-                        className="mr-1"
-                      />
-                      {t(`form.feedbackRating.${value}`)}
-                    </label>
-                  ))}
-                </div>
-              </label>
+            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+              <span className="font-bold">{`${t("form.phelpful")}: `}</span>
+              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+                {feedback.map((value) => (
+                  <label key={value} className="flex items-center mr-4">
+                    <input
+                      type="radio"
+                      name="phelpful"
+                      value={value}
+                      checked={phelpful === value}
+                      onChange={() => setPhelpful(value)}
+                      className="mr-1"
+                    />
+                    {t(`form.feedbackRating.${value}`)}
+                  </label>
+                ))}
+              </div>
+            </label>
 
-              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">{`${t("form.infra")}: `}</span>
-                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
-                  {feedback.map((value) => (
-                    <label key={value} className="flex items-center mr-4">
-                      <input
-                        type="radio"
-                        name="infra"
-                        value={value}
-                        checked={infra === value}
-                        onChange={() => setInfra(value)}
-                        className="mr-1"
-                      />
-                      {t(`form.feedbackRating.${value}`)}
-                    </label>
-                  ))}
-                </div>
-              </label>
+            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+              <span className="font-bold">{`${t("form.infra")}: `}</span>
+              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+                {feedback.map((value) => (
+                  <label key={value} className="flex items-center mr-4">
+                    <input
+                      type="radio"
+                      name="infra"
+                      value={value}
+                      checked={infra === value}
+                      onChange={() => setInfra(value)}
+                      className="mr-1"
+                    />
+                    {t(`form.feedbackRating.${value}`)}
+                  </label>
+                ))}
+              </div>
+            </label>
 
-              <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
-                <span className="font-bold">{`${t("form.overallExperience")}: `}</span>
-                <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
-                  {[1, 2, 3, 4, 5].map((value) => (
-                    <label key={value} className="flex items-center mr-4">
-                      <input
-                        type="radio"
-                        name="overallRating"
-                        value={value}
-                        checked={rating === value}
-                        onChange={() => setRating(value)}
-                        className="mr-1"
-                      />
-                      {t(`form.${getFeedbackKey(value)}`)}
-                    </label>
-                  ))}
-                </div>
-              </label>
+            <label className="flex flex-col lg:flex-row gap-2 mt-5 mb-2 ml-[5%]">
+              <span className="font-bold">{`${t(
+                "form.overallExperience"
+              )}: `}</span>
+              <div className="flex lg:items-center flex-col items-start lg:flex-row ml-2">
+                {[1, 2, 3, 4, 5].map((value) => (
+                  <label key={value} className="flex items-center mr-4">
+                    <input
+                      type="radio"
+                      name="overallRating"
+                      value={value}
+                      checked={rating === value}
+                      onChange={() => setRating(value)}
+                      className="mr-1"
+                    />
+                    {t(`form.${getFeedbackKey(value)}`)}
+                  </label>
+                ))}
+              </div>
+            </label>
 
             <div className="flex flex-initial justify-start flex-wrap flex-col">
               <label className="flex flex-col lg:flex-row items-center gap-[5%] mt-5 mb-2 ml-[5%]">
@@ -544,9 +508,10 @@ const handleRecaptchaVerify=()=>{
             </div>
             <div className="flex flex-initial justify-start flex-wrap flex-col">
               <label className="flex flex-col  mb-2 ml-[5%]">
-               
-              <ReCAPTCHA sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
-        onChange={handleRecaptchaVerify}></ReCAPTCHA>
+                <ReCAPTCHA
+                  sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+                  onChange={handleRecaptchaVerify}
+                ></ReCAPTCHA>
               </label>
             </div>
 
