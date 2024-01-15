@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import SingleCommPost from "../components/SingleCommPost";
-import { Button, Input } from "@chakra-ui/react";
+import { Button, Input, Spinner } from "@chakra-ui/react";
 import { ThreeDots } from "react-loader-spinner";
 import { useSupabase } from "../context/SupabaseContext";
-import { ColorRing } from "react-loader-spinner";
+import { useTranslation } from "react-i18next";
 
 function Home() {
   const { tableData: PoliceData } = useSupabase();
@@ -12,13 +12,12 @@ function Home() {
   const [index, setIndex] = useState(6);
   const [flag, setFlag] = useState(true);
   const [loader, setLoader] = useState(false);
-  const { loading ,statsLoading} = useSupabase();
+  const { loading, statsLoading } = useSupabase();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setSearchResults(PoliceData);
   }, [PoliceData]);
-
-
 
   const handlechange = (e) => {
     setSearchTerm(e.target.value);
@@ -54,6 +53,7 @@ function Home() {
     setSearchResults(temp);
   };
   const sort = (sortState) => {
+    console.log(searchResults)
     if (sortState === "name" || sortState === "rating")
       searchResults.sort(sortBy(sortMethods[sortState].method));
     else searchResults.sort(sortByRev(sortMethods[sortState].method));
@@ -68,22 +68,21 @@ function Home() {
     name_dsc: { method: "name" },
     rating: { method: "rating" },
     rating_dsc: { method: "rating" },
-    day_visited:{method:""}
+    day_visited: { method: "" },
   };
-
 
   return (
     <div>
       <div className="w-[80%] mx-auto mt-20 md:mt-28 flex flex-col md:flex-row items-center pt-10 justify-between">
         <form className="flex w-full md:w-[50%]" onSubmit={handleSubmit}>
           <Input
-            placeholder="Search Police Stations"
+            placeholder={t("home.searchPlaceholder")}
             onChange={handlechange}
             className="searchBar shadow-md"
           />
 
           <Button className="customButton mx-4" type="submit">
-            Search
+            {t("home.search")}
           </Button>
         </form>
         <div className="flex mt-4 md:mt-0">
@@ -98,28 +97,20 @@ function Home() {
             <option value="rating_dsc">Rating Dsc</option>
           </select>
           <Button className="customButton mx-4" onClick={() => sort(sortState)}>
-            Sort
+            {t("home.sort")}
           </Button>
-          {/* <Button
-        onClick={() => {
-          setOverlay(<OverlayOne />)
-          onOpen()
-        }}
-      /> */}
         </div>
       </div>
 
-      {(loading||statsLoading) ? (
+      {loading || statsLoading ? (
         <div className="flex justify-center">
           <h1 className="mt-32 text-center text-[#8c4e1d] text-5xl">
-            <ColorRing
-              visible={true}
-              height="80"
-              width="80"
-              ariaLabel="color-ring-loading"
-              wrapperStyle={{}}
-              wrapperClass="color-ring-wrapper"
-              colors={["#8C4E1D", "#8C4E1D", "#8C4E1D", "#8C4E1D", "#8C4E1D"]}
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="#8C4E1D"
+              size="xl"
             />
           </h1>
         </div>
@@ -152,7 +143,7 @@ function Home() {
                   onClick={showLoader}
                   className="mx-auto justify-center mt-6 p-8 text-2xl customButton"
                 >
-                  Load More
+                  {t("home.loadMore")}
                 </Button>
               ) : (
                 ""
@@ -164,15 +155,11 @@ function Home() {
         <div>
           {!loading && (
             <h1 className="mt-5 text-[#8C4E1D] text-center text-3xl">
-              No Police Stations found!!
+              No Police Stations Found
             </h1>
           )}
-          
         </div>
       )}
-    
-      
-
     </div>
   );
 }

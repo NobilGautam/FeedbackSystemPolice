@@ -26,6 +26,7 @@ import {
 } from "@chakra-ui/react";
 import { steps } from "./components/steps";
 import { helplines } from "./components/helpline";
+import { IoCallOutline } from "react-icons/io5";
 
 function App() {
   const OverlayOne = () => (
@@ -34,7 +35,6 @@ function App() {
   const [user] = useAuthState(Auth);
   const [overlay, setOverlay] = useState(<OverlayOne />);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  
 
   return (
     <div>
@@ -48,7 +48,8 @@ function App() {
           onOpen();
         }}
       >
-        HelpLines
+        <IoCallOutline />
+        <span className="ml-2">Helplines</span>
       </Button>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
@@ -66,21 +67,38 @@ function App() {
       <Modal isCentered isOpen={isOpen} onClose={onClose}>
         {overlay}
         <ModalContent className="border-solid border-2 border-[#8C4E1D]">
-          <ModalHeader>
-            <h1 className="text-2xl text-[#8C4E1D] font-sans font-semibold">
+          <ModalHeader className="bg-[#8C4E1D]">
+            <h1 className="text-2xl text-white font-sans font-semibold">
               {" "}
-              Rajasthan Police HelpLines
+              Rajasthan Police Helplines
             </h1>
           </ModalHeader>
-          <ModalCloseButton />
           <ModalBody>
             <Text>
               {helplines.map((item, index) => {
                 return (
                   <div key={index} className="py-2">
                     <h2 className="text-[#8C4E1D] font-sans font-bold text-md">
-                      {item.name}:&nbsp;{item.number}
-                      {item.number2 ? `/${item.number2}` : ""}
+                      {item.name}:&nbsp;
+                      <>
+                        <a
+                          href={"tel:" + item.number}
+                          className="text-blue-500 underline"
+                        >
+                          {item.number}
+                        </a>
+                      </>
+                      {item.number2 && (
+                        <>
+                          {" "}/{" "}
+                          <a
+                            href={"tel:" + item.number}
+                            className="text-blue-500 underline"
+                          >
+                            {item.number}
+                          </a>
+                        </>
+                      )}
                     </h2>
                   </div>
                 );
