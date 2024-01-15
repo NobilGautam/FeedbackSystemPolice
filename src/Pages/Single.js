@@ -13,11 +13,13 @@ import TabAbout from "../components/TabAbout";
 import TabReviews from "../components/TabReviews";
 import TabData from "../components/TabData";
 import { useSupabase } from "../context/SupabaseContext";
-import { IoMdArrowBack } from "react-icons/io"; //
+import { IoMdArrowBack } from "react-icons/io"; 
+import { useTranslation } from "react-i18next";
 import AOS from "aos";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Auth } from "../Firebase";
 import { Spinner } from "@chakra-ui/react";
+import { IoCheckmarkDoneCircleOutline, IoDocumentTextOutline } from "react-icons/io5";
 function Single() {
   const [user]=useAuthState(Auth);
   const { id } = useParams();
@@ -35,6 +37,7 @@ function Single() {
   const [flag,setFlag]=useState(false);
   const [docu,setDocu]=useState('');
   const navigator = useNavigate();
+  const { t } = useTranslation();
   useEffect(() => {
     if (user) {
       fetchVisits(user.email);
@@ -93,12 +96,12 @@ var dou='';
     setShow2(false);
     navigator("/");
   };
-  const handleClickfeed=()=>{
-    navigator(`/newFeedback/${docu}`)
-  }
 // if(visits.length===0){
 //   return null;
 // }
+const handleClickFeed=()=>{
+  navigator(`/newFeedback/${docu}`)
+}
 
 if (visitsLoader) {
   return (
@@ -124,9 +127,9 @@ if (visitsLoader) {
               onClick={handleClick2}
             >
               {" "}
-              <span className="text-lg flex items-center">
                 <IoMdArrowBack />
-                Back to All Post
+              <span className="text-lg ml-2">
+                {t("single.backToAllPosts")}
               </span>{" "}
             </Button>
             <img
@@ -140,10 +143,10 @@ if (visitsLoader) {
                 className="w-[48%] customButton"
                 onClick={handleClick}
               >
-                {" "}
-                <span className="text-lg md:text-xl">Mark as Visited</span>{" "}
+                <IoCheckmarkDoneCircleOutline/>
+                <span className="text-lg ml-2 md:text-xl">{t("single.markAsVisited")}</span>{" "}
               </Button>
-              <Button size={"lg"} isDisabled={flag?true:false} className="w-[48%]" onClick={handleClickfeed}>
+              <Button size={"lg"} isDisabled={flag?true:false} className="w-[48%]" onClick={handleClickFeed}>
                 {" "}
           
                 <span className="text-lg md:text-xl">Fill Feedback</span>
@@ -160,13 +163,13 @@ if (visitsLoader) {
           >
             <TabList>
               <Tab _selected={{ color: "white", bg: "#8C4E1D" }}>
-                <span className="text-xl font-semibold">About</span>
+                <span className="text-xl font-semibold">{t("single.about")}</span>
               </Tab>
               <Tab _selected={{ color: "white", bg: "#8C4E1D" }}>
-                <span className="text-xl font-semibold">Reviews</span>
+                <span className="text-xl font-semibold">{t("single.reviews")}</span>
               </Tab>
               <Tab _selected={{ color: "white", bg: "#8C4E1D" }}>
-                <span className="text-xl font-semibold">Data</span>
+                <span className="text-xl font-semibold">{t("single.data")}</span>
               </Tab>
             </TabList>
             <TabPanels className="drop-shadow-lg h-[90%]">

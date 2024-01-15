@@ -7,10 +7,15 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import ImageCard from "./ImageCard";
 import { useSupabase } from "../context/SupabaseContext";
+import { useTranslation } from "react-i18next";
 
 function SingleCommPost({ item }) {
   const { allPolice } = useSupabase();
   const [stars, setStars] = useState([]);
+  const { t } = useTranslation();
+  const match = item.name.match(/(\d+)$/);
+  const cityNumber = match ? match[1] : null;
+  const cityName = item.name.replace(/\d+$/, '').trim();
 
   useEffect(() => {
     let number = 0;
@@ -49,7 +54,7 @@ function SingleCommPost({ item }) {
       <ImageCard ImgSrc={item.image}>
         <div className="w-full h-full flex justify-between items-center">
           <div>
-            <h1 className="font-sans font-bold text-2xl">{item.name}</h1>
+            <h1 className="font-sans font-bold text-2xl">{`${t(`policeStation.${cityName}`)} ${cityNumber}`}</h1>
             <div className="flex w-full items-center justify-start">
               <Text className="mr-2">{item.address}</Text>
               <Text color="blue.600" fontSize="sm" className="flex">
@@ -63,7 +68,7 @@ function SingleCommPost({ item }) {
             <ButtonGroup>
               <Link to={`/single/${item.id}`}>
                 <Button variant="solid" bg="#F4BC77" fontWeight="bold">
-                  View more
+                  {t("home.viewMore")}
                 </Button>
               </Link>
             </ButtonGroup>

@@ -9,13 +9,13 @@ import {
   useDisclosure,
   ModalContent,
   ModalCloseButton,
-  Text,
   ModalBody,
   ModalHeader,
   ModalFooter,
   Modal,
 } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/react";
+import { IoDownloadOutline } from "react-icons/io5";
 ChartJs.register(ArcElement, Tooltip, Legend);
 function TabData({ policeData }) {
   const OverlayOne = () => (
@@ -261,8 +261,9 @@ function TabData({ policeData }) {
           </div>
         ))}
       </div>
-      <Button className="customButton" onClick={handleClick}>
-        Download Detailed PDF
+      <Button className="customButton mt-5" onClick={handleClick}>
+        <IoDownloadOutline/>
+        <span className="ml-2">Download Detailed PDF</span>
       </Button>
       <Modal
         isCentered
