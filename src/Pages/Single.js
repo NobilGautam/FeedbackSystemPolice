@@ -15,6 +15,7 @@ import TabData from "../components/TabData";
 import { useSupabase } from "../context/SupabaseContext";
 import { IoMdArrowBack } from "react-icons/io"; 
 import { useTranslation } from "react-i18next";
+import AOS from "aos";
 function Single() {
   const { id } = useParams();
   const {
@@ -26,7 +27,9 @@ function Single() {
   const [policeData, setPoliceData] = useState({});
   const navigator = useNavigate();
   const { t } = useTranslation();
-
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
   useEffect(() => {
     if (policeStations) {
       let temp = {};
@@ -48,13 +51,15 @@ function Single() {
 
     navigator("/newVisit");
   };
+  
   const handleClick2 = () => {
     setShow2(false);
     navigator("/");
   };
 
+
   return (
-    <div>
+    <div data-aos="fade-up">
       <div className="container mt-12 p-6 pb-12 md:p-0 md:mt-32 mx-auto flex items-center justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-2 mt-16 gap-24 max-h-screen w-full">
           <div className="flex items-center flex-col justify-center h-full">
