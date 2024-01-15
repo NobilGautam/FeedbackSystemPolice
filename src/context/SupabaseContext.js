@@ -82,11 +82,15 @@ export const SupabaseProvider = ({ children }) => {
       if (error) {
         console.error("Error fetching visits:", error.message);
       } else {
-        setVisits(data || []);
+        const visitsData = data || [];
+        console.log(data);
+        setVisits(visitsData);
+   
 
-        setGlobalVisits(data || []);
-        setFeedback(data || []);
+        setGlobalVisits(visitsData);
+        setFeedback(visitsData);
         setVisitsLoader(false);
+        
       }
     } catch (error) {
       console.error("Error fetching visits:", error.message);

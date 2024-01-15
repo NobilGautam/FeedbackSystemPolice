@@ -36,13 +36,16 @@ const MyVisits = () => {
   useEffect(() => {
     if (user) {
       fetchVisits(user.email);
+      console.log(visits)
     }
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     const matching_PS = [];
     setPoliceStations(PoliceData);
+ 
 
     for (var i = 0; i < visits.length; i++) {
       const Ps = visits[i].policeStation;
