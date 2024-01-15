@@ -4,17 +4,6 @@ import { Button, Input } from "@chakra-ui/react";
 import { ThreeDots } from "react-loader-spinner";
 import { useSupabase } from "../context/SupabaseContext";
 import { ColorRing } from "react-loader-spinner";
-import {
-  ModalOverlay,
-  useDisclosure,
-  ModalContent,
-  ModalCloseButton,
-  Text,
-  ModalBody,
-  ModalHeader,
-  ModalFooter,
-  Modal,
-} from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
 function Home() {

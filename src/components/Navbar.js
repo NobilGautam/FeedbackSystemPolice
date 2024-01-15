@@ -68,7 +68,6 @@ function Navbar() {
           
           <img src={emblem} alt="Emblem" className="w-[50px] hatade mr-4" onClick={handleImgclick}/>
           <img src={rpLogo} className="w-[15%] mr-4" alt="Logo"  onClick={handleImgclick}/>
-          {/* </Link> */}
           <span className="text-white text-base md:text-2xl">
             Rajasthan Police Feedback
           </span>
