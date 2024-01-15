@@ -15,6 +15,8 @@ import {
   ModalFooter,
   Modal,
 } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
+
 function Home() {
   const { tableData: PoliceData } = useSupabase();
   const [searchResults, setSearchResults] = useState(PoliceData);
@@ -23,10 +25,13 @@ function Home() {
   const [flag, setFlag] = useState(true);
   const [loader, setLoader] = useState(false);
   const { loading, statsLoading } = useSupabase();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setSearchResults(PoliceData);
   }, [PoliceData]);
+
+
 
   const handlechange = (e) => {
     setSearchTerm(e.target.value);
@@ -76,27 +81,22 @@ function Home() {
     name_dsc: { method: "name" },
     rating: { method: "rating" },
     rating_dsc: { method: "rating" },
-    day_visited: { method: "" },
+    day_visited:{method:""}
   };
-  const OverlayOne = () => (
-    <ModalOverlay bg="none" backdropFilter="blur(10px)" backdropBlur="10px" />
-  );
-  const { isOpen, onClose } = useDisclosure();
-  const [showModal] = useState(true);
-  const [overlay] = useState(<OverlayOne />);
+
 
   return (
     <div>
       <div className="w-[80%] mx-auto mt-20 md:mt-28 flex flex-col md:flex-row items-center pt-10 justify-between">
         <form className="flex w-full md:w-[50%]" onSubmit={handleSubmit}>
           <Input
-            placeholder="Search Police Stations"
+            placeholder={t("home.searchPlaceholder")}
             onChange={handlechange}
             className="searchBar shadow-md"
           />
 
           <Button className="customButton mx-4" type="submit">
-            Search
+            {t("home.search")}
           </Button>
         </form>
         <div className="flex mt-4 md:mt-0">
@@ -111,12 +111,18 @@ function Home() {
             <option value="rating_dsc">Rating Dsc</option>
           </select>
           <Button className="customButton mx-4" onClick={() => sort(sortState)}>
-            Sort
+            {t("home.sort")}
           </Button>
+          {/* <Button
+        onClick={() => {
+          setOverlay(<OverlayOne />)
+          onOpen()
+        }}
+      /> */}
         </div>
       </div>
 
-      {loading || statsLoading ? (
+      {(loading||statsLoading) ? (
         <div className="flex justify-center">
           <h1 className="mt-32 text-center text-[#8c4e1d] text-5xl">
             <ColorRing
@@ -159,7 +165,7 @@ function Home() {
                   onClick={showLoader}
                   className="mx-auto justify-center mt-6 p-8 text-2xl customButton"
                 >
-                  Load More
+                  {t("home.loadMore")}
                 </Button>
               ) : (
                 ""
@@ -174,23 +180,12 @@ function Home() {
               No Police Stations found!!
             </h1>
           )}
+          
         </div>
       )}
-      {showModal && (
-        <Modal isCentered isOpen={isOpen} onClose={onClose}>
-          {overlay}
-          <ModalContent>
-            <ModalHeader>Modal Title</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <Text>Custom backdrop filters!</Text>
-            </ModalBody>
-            <ModalFooter>
-              <Button onClick={onClose}>Close</Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-      )}
+    
+      
+
     </div>
   );
 }

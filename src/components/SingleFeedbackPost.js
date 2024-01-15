@@ -14,8 +14,13 @@ import {
 } from "@chakra-ui/react";
 import { decrypt } from "n-krypta";
 import { Share } from "react-twitter-widgets";
+import { useTranslation } from "react-i18next";
 
 function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
+  const { t } = useTranslation();
+  const match = item.policeStation.match(/(\d+)$/);
+  const cityNumber = match ? match[1] : null;
+  const cityName = item.policeStation.replace(/\d+$/, '').trim();
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
@@ -62,19 +67,19 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
 
         <Stack>
           <CardBody>
-            <Heading size="md">{item.policeStation}</Heading>
+            <Heading size="md">{`${t(`policeStation.${cityName}`)} ${cityNumber}`}</Heading>
             <p className="py-2">
-              <span className="font-semibold">Address </span>
+              <span className="font-semibold">{t("home.address")} </span>
               {addressLinks.get(item.policeStation)}
             </p>
             <p className="py-2">
-              <span className="font-semibold">Reporting Date & Time - </span>
+              <span className="font-semibold">{t("myFeedback.rdt")}</span>
               {formatTimestamp(item.created_at)}
             </p>
           </CardBody>
           <CardFooter>
             <div>
-              <p className="font-semibold">Feedback:</p>
+              <p className="font-semibold">{t("myFeedback.feedback")}</p>
               <p
                 className={`${
                   item.Feel < 0 ? "text-red-600" : "text-green-700"
