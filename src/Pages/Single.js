@@ -33,6 +33,7 @@ function Single() {
   } = useSupabase();
   const [policeData, setPoliceData] = useState({});
   const [flag,setFlag]=useState(false);
+  const [docu,setDocu]=useState('');
   const navigator = useNavigate();
   useEffect(() => {
     if (user) {
@@ -50,13 +51,17 @@ function Single() {
 
 useEffect(()=>{
 var ff=true;
+var dou='';
   for(var i=0; i<visits.length; i++){
     if(visits[i].policeStation===policeData.name && visits[i].feedback===null){
+      
       ff=false;
+      dou=visits[i].documentID;
       break;
     }
   }
   setFlag(ff);
+  setDocu(dou);
 }
 ,[PoliceData, policeStations,user,visitsLoader,visits])
   useEffect(() => {
@@ -88,6 +93,9 @@ var ff=true;
     setShow2(false);
     navigator("/");
   };
+  const handleClickfeed=()=>{
+    navigator(`/newFeedback/${docu}`)
+  }
 // if(visits.length===0){
 //   return null;
 // }
@@ -135,7 +143,7 @@ if (visitsLoader) {
                 {" "}
                 <span className="text-lg md:text-xl">Mark as Visited</span>{" "}
               </Button>
-              <Button size={"lg"} isDisabled={flag?true:false} className="w-[48%]">
+              <Button size={"lg"} isDisabled={flag?true:false} className="w-[48%]" onClick={handleClickfeed}>
                 {" "}
           
                 <span className="text-lg md:text-xl">Fill Feedback</span>
