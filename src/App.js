@@ -26,6 +26,7 @@ import {
 } from "@chakra-ui/react";
 import { steps } from "./components/steps";
 import { helplines } from "./components/helpline";
+import { IoCallOutline, IoPhoneLandscapeOutline } from "react-icons/io5";
 
 function App() {
   const OverlayOne = () => (
@@ -48,7 +49,8 @@ function App() {
           onOpen();
         }}
       >
-        HelpLines
+        <IoCallOutline/>
+        <span className="ml-2">HelpLines</span>
       </Button>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>

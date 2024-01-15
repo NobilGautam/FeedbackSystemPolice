@@ -16,6 +16,7 @@ import { useSupabase } from "../context/SupabaseContext";
 import { IoMdArrowBack } from "react-icons/io"; 
 import { useTranslation } from "react-i18next";
 import AOS from "aos";
+import { IoCheckmarkDoneCircleOutline, IoDocumentTextOutline } from "react-icons/io5";
 function Single() {
   const { id } = useParams();
   const {
@@ -69,8 +70,8 @@ function Single() {
               onClick={handleClick2}
             >
               {" "}
-              <span className="text-lg flex items-center">
                 <IoMdArrowBack />
+              <span className="text-lg ml-2">
                 {t("single.backToAllPosts")}
               </span>{" "}
             </Button>
@@ -85,12 +86,12 @@ function Single() {
                 className="w-[48%] customButton"
                 onClick={handleClick}
               >
-                {" "}
-                <span className="text-lg md:text-xl">{t("single.markAsVisited")}</span>{" "}
+                <IoCheckmarkDoneCircleOutline/>
+                <span className="text-lg ml-2 md:text-xl">{t("single.markAsVisited")}</span>{" "}
               </Button>
               <Button size={"lg"} isDisabled={true} className="w-[48%]">
-                {" "}
-                <span className="text-lg md:text-xl">{t("single.fillFeedback")}</span>
+                <IoDocumentTextOutline/>
+                <span className="text-lg ml-2 md:text-xl">{t("single.fillFeedback")}</span>
               </Button>
             </div>
           </div>
