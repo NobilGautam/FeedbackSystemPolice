@@ -254,9 +254,10 @@ function Form() {
                   value={form.gender}
                   className="bg-transparent sm:mt-1 xl:mt-0 xl:ml-2"
                 >
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="others">Others</option>
+                 
+                  <option value="male">{`${t("Male")} `}</option>
+                  <option value="female">{`${t("Female")} `}</option>
+                  <option value="others">{`${t("Others")} `}</option>
                 </select>
               </label>
 
