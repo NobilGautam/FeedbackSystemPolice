@@ -94,6 +94,15 @@
   "myVisits": {
     "addFeedback": "फीडबैक जोड़ें",
     "feedbackAdded": "फीडबैक जोड़ा गया!"
+  },
+  "single": {
+    "markAsVisited": "यात्रा के रूप में चिह्नित करें",
+    "fillFeedback": "फीडबैक भरें",
+    "about": "जानकारी",
+    "reviews": "समीक्षाएँ",
+    "data": "डेटा",
+    "backToAllPosts": "सभी पोस्ट्स पर वापस जाएं"
   }
+  
   
 }

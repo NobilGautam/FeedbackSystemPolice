@@ -94,6 +94,14 @@
     "myVisits": {
       "addFeedback": "Add Feedback",
       "feedbackAdded": "Feedback Added!"
+    }, 
+    "single": {
+      "markAsVisited": "Mark As Visited",
+      "fillFeedback": "Fill Feedback",
+      "about": "About",
+      "reviews": "Reviews",
+      "data": "Data",
+      "backToAllPosts": "Back to All Posts"
     }
 }
   
