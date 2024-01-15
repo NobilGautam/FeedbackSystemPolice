@@ -190,6 +190,14 @@ export const SupabaseProvider = ({ children }) => {
     else if(formData.pguidance === "Rude") data[0].Behaviour_Rude++;
     else data[0].Behaviour_Polite++;
 
+    data[0].ps_Rating = Math.max(1, Math.min(5, Math.floor(
+      (data[0].Overall_Excellent + 2 * data[0].Overall_Good + 3 * data[0].Overall_Average + 4 * data[0].Overall_Below_Average + 5 * data[0].Overall_Poor) /
+      (data[0].Overall_Excellent + data[0].Overall_Good + data[0].Overall_Average + data[0].Overall_Below_Average + data[0].Overall_Poor)
+  )));
+
+  if(formData.overallRating >= 3) data[0].Positive_Feedback++;
+  else data[0].Negative_Feedback++;
+  
     try {
       const { error } = await supabase
         .from(psStats)
