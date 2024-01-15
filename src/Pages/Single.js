@@ -16,21 +16,52 @@ import { useSupabase } from "../context/SupabaseContext";
 import { IoMdArrowBack } from "react-icons/io"; 
 import { useTranslation } from "react-i18next";
 import AOS from "aos";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Auth } from "../Firebase";
+import { Spinner } from "@chakra-ui/react";
 import { IoCheckmarkDoneCircleOutline, IoDocumentTextOutline } from "react-icons/io5";
 function Single() {
+  const [user]=useAuthState(Auth);
   const { id } = useParams();
   const {
     setShow2,
     QR,
     tableData: policeStations,
     setIndividual,
+    fetchVisits,
+    visits,
+    visitsLoader,
+    tableData: PoliceData,
   } = useSupabase();
   const [policeData, setPoliceData] = useState({});
+  const [flag,setFlag]=useState(false);
   const navigator = useNavigate();
   const { t } = useTranslation();
   useEffect(() => {
+    if (user) {
+      fetchVisits(user.email);
+      console.log(visits)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+  }, [PoliceData, policeStations,user,visitsLoader]);
+
+  
+  useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
+
+useEffect(()=>{
+var ff=true;
+  for(var i=0; i<visits.length; i++){
+    if(visits[i].policeStation===policeData.name && visits[i].feedback===null){
+      ff=false;
+      break;
+    }
+  }
+  setFlag(ff);
+}
+,[PoliceData, policeStations,user,visitsLoader,visits])
   useEffect(() => {
     if (policeStations) {
       let temp = {};
@@ -43,7 +74,10 @@ function Single() {
       setPoliceData(temp);
     }
   }, [id, policeStations]);
+
+  
   if (!policeData) return null;
+  
   const handleClick = () => {
     setIndividual(policeData.name);
     if (QR) {
@@ -58,7 +92,19 @@ function Single() {
     navigator("/");
   };
 
-
+if (visitsLoader) {
+  return (
+    <h1 className="mt-32 text-center text-[#8c4e1d] text-5xl">
+      <Spinner
+        thickness="4px"
+        speed="0.65s"
+        emptyColor="gray.200"
+        color="#8C4E1D"
+        size="xl"
+      />
+    </h1>
+  );
+}
   return (
     <div data-aos="fade-up">
       <div className="container mt-12 p-6 pb-12 md:p-0 md:mt-32 mx-auto flex items-center justify-center">
@@ -89,7 +135,7 @@ function Single() {
                 <IoCheckmarkDoneCircleOutline/>
                 <span className="text-lg ml-2 md:text-xl">{t("single.markAsVisited")}</span>{" "}
               </Button>
-              <Button size={"lg"} isDisabled={true} className="w-[48%]">
+              <Button size={"lg"} isDisabled={flag?true:false} className="w-[48%]">
                 <IoDocumentTextOutline/>
                 <span className="text-lg ml-2 md:text-xl">{t("single.fillFeedback")}</span>
               </Button>
