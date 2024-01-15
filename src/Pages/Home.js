@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import SingleCommPost from "../components/SingleCommPost";
-import { Button, Input } from "@chakra-ui/react";
+import { Button, Input, Spinner } from "@chakra-ui/react";
 import { ThreeDots } from "react-loader-spinner";
 import { useSupabase } from "../context/SupabaseContext";
-import { ColorRing } from "react-loader-spinner";
 import { useTranslation } from "react-i18next";
 
 function Home() {
@@ -19,8 +18,6 @@ function Home() {
   useEffect(() => {
     setSearchResults(PoliceData);
   }, [PoliceData]);
-
-
 
   const handlechange = (e) => {
     setSearchTerm(e.target.value);
@@ -70,9 +67,8 @@ function Home() {
     name_dsc: { method: "name" },
     rating: { method: "rating" },
     rating_dsc: { method: "rating" },
-    day_visited:{method:""}
+    day_visited: { method: "" },
   };
-
 
   return (
     <div>
@@ -102,26 +98,18 @@ function Home() {
           <Button className="customButton mx-4" onClick={() => sort(sortState)}>
             {t("home.sort")}
           </Button>
-          {/* <Button
-        onClick={() => {
-          setOverlay(<OverlayOne />)
-          onOpen()
-        }}
-      /> */}
         </div>
       </div>
 
-      {(loading||statsLoading) ? (
+      {loading || statsLoading ? (
         <div className="flex justify-center">
           <h1 className="mt-32 text-center text-[#8c4e1d] text-5xl">
-            <ColorRing
-              visible={true}
-              height="80"
-              width="80"
-              ariaLabel="color-ring-loading"
-              wrapperStyle={{}}
-              wrapperClass="color-ring-wrapper"
-              colors={["#8C4E1D", "#8C4E1D", "#8C4E1D", "#8C4E1D", "#8C4E1D"]}
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="#8C4E1D"
+              size="xl"
             />
           </h1>
         </div>
@@ -169,12 +157,8 @@ function Home() {
               No Police Stations found!!
             </h1>
           )}
-          
         </div>
       )}
-    
-      
-
     </div>
   );
 }
