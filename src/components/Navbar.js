@@ -18,7 +18,7 @@ import {
   MenuOptionGroup,
   Select,
 } from "@chakra-ui/react";
-import { IoCheckmarkCircleOutline, IoDocumentOutline, IoHomeOutline, IoLanguageOutline, IoLogInOutline, IoLogOutOutline, IoMenu } from "react-icons/io5";
+import { IoCheckmarkCircleOutline, IoDocumentOutline, IoHomeOutline, IoLogInOutline, IoLogOutOutline, IoMenu } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 
 function Navbar() {
