@@ -6,6 +6,7 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
+  Button,
   Card,
   CardBody,
   CardFooter,
@@ -80,14 +81,14 @@ function SingleVisitPost({ item, ImgLinks, addressLinks, documentId }) {
           <CardFooter>
             <div className="mb-4">
               {item.feedback !== null ? (
-                <span className="bg-[#c69665] text-white p-4 rounded-xl font-semibold">
+                <Button isDisabled className="customButton">
                   {t("myVisits.feedbackAdded")}
-                </span>
+                  </Button>
               ) : (
                 <Link to={`/newFeedback/${documentId}`}>
-                  <span className="bg-[#c69665] text-white p-4 rounded-xl font-semibold duration-300">
+                  <Button className="customButton">
                     {t("myVisits.addFeedback")}
-                  </span>
+                  </Button>
                 </Link>
               )}
             </div>
