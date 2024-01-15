@@ -13,7 +13,8 @@ import TabAbout from "../components/TabAbout";
 import TabReviews from "../components/TabReviews";
 import TabData from "../components/TabData";
 import { useSupabase } from "../context/SupabaseContext";
-import { IoMdArrowBack } from "react-icons/io"; //
+import { IoMdArrowBack } from "react-icons/io"; 
+import { useTranslation } from "react-i18next";
 import AOS from "aos";
 function Single() {
   const { id } = useParams();
@@ -25,6 +26,7 @@ function Single() {
   } = useSupabase();
   const [policeData, setPoliceData] = useState({});
   const navigator = useNavigate();
+  const { t } = useTranslation();
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
@@ -69,7 +71,7 @@ function Single() {
               {" "}
               <span className="text-lg flex items-center">
                 <IoMdArrowBack />
-                Back to All Post
+                {t("single.backToAllPosts")}
               </span>{" "}
             </Button>
             <img
@@ -84,11 +86,11 @@ function Single() {
                 onClick={handleClick}
               >
                 {" "}
-                <span className="text-lg md:text-xl">Mark as Visited</span>{" "}
+                <span className="text-lg md:text-xl">{t("single.markAsVisited")}</span>{" "}
               </Button>
               <Button size={"lg"} isDisabled={true} className="w-[48%]">
                 {" "}
-                <span className="text-lg md:text-xl">Fill Feedback</span>
+                <span className="text-lg md:text-xl">{t("single.fillFeedback")}</span>
               </Button>
             </div>
           </div>
@@ -102,13 +104,13 @@ function Single() {
           >
             <TabList>
               <Tab _selected={{ color: "white", bg: "#8C4E1D" }}>
-                <span className="text-xl font-semibold">About</span>
+                <span className="text-xl font-semibold">{t("single.about")}</span>
               </Tab>
               <Tab _selected={{ color: "white", bg: "#8C4E1D" }}>
-                <span className="text-xl font-semibold">Reviews</span>
+                <span className="text-xl font-semibold">{t("single.reviews")}</span>
               </Tab>
               <Tab _selected={{ color: "white", bg: "#8C4E1D" }}>
-                <span className="text-xl font-semibold">Data</span>
+                <span className="text-xl font-semibold">{t("single.data")}</span>
               </Tab>
             </TabList>
             <TabPanels className="drop-shadow-lg h-[90%]">

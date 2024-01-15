@@ -41,5 +41,68 @@
       "Good": "अच्छा",
       "Excellent": "उत्कृष्ट"
     }
+  }, 
+  "policeStation": {
+    "AJMER": "अजमेर",
+    "ALWAR": "अलवर",
+    "BANSWARA": "बांसवाड़ा",
+    "BARAN": "बारां",
+    "BARMER": "बाड़मेर",
+    "BHARATPUR": "भरतपुर",
+    "BHILWARA": "भीलवाड़ा",
+    "BIKANER": "बीकानेर",
+    "BUNDI": "बूंदी",
+    "CHITTORGARH": "चित्तौड़गढ़",
+    "CHURU": "चूरू",
+    "DAUSA": "दौसा",
+    "DHOLPUR": "धौलपुर",
+    "DUNGARPUR": "डूंगरपुर",
+    "HANUMANGARH": "हनुमानगढ़",
+    "JAIPUR": "जयपुर",
+    "JAISALMER": "जैसलमेर",
+    "JALOR": "जालोर",
+    "JHALAWAR": "झालावाड़",
+    "JHUJHUNU": "झुंझुनू",
+    "JODHPUR": "जोधपुर",
+    "KARAULI": "करौली",
+    "KOTA": "कोटा",
+    "NAGAUR": "नागौर",
+    "PALI": "पाली",
+    "PRATAPGHAR": "प्रतापगढ़",
+    "RAJSAMAND": "राजसमंद",
+    "SAWAI MADHOPUR": "सवाई माधोपुर",
+    "SIKAR": "सीकर",
+    "SIROHI": "सिरोही",
+    "SRI GANGANAGAR": "श्री गंगानगर",
+    "SRIGANGANAGAR": "श्रीगंगानगर",
+    "TONK": "टोंक",
+    "UDAIPUR": "उदयपुर"
+  },
+  "home": {
+    "viewMore": "और देखें",
+    "helpLines": "हेल्पलाइनें",
+    "search": "खोजें",
+    "sort": "क्रमबद्ध करें",
+    "loadMore": "और लोड करें",
+    "searchPlaceholder": "पुलिस स्टेशन खोजें",
+    "address": "पता"
+  },
+  "myFeedback": {
+    "rdt": "रिपोर्टिंग दिनांक और समय: ",
+    "feedback": "प्रतिक्रिया:"
+  },
+  "myVisits": {
+    "addFeedback": "फीडबैक जोड़ें",
+    "feedbackAdded": "फीडबैक जोड़ा गया!"
+  },
+  "single": {
+    "markAsVisited": "यात्रा के रूप में चिह्नित करें",
+    "fillFeedback": "फीडबैक भरें",
+    "about": "जानकारी",
+    "reviews": "समीक्षाएँ",
+    "data": "डेटा",
+    "backToAllPosts": "सभी पोस्ट्स पर वापस जाएं"
   }
+  
+  
 }

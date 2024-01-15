@@ -6,6 +6,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import SingleFeedbackPost from "../components/SingleFeedbackPost";
 import { useSupabase } from "../context/SupabaseContext";
 import { Button, Input } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
 
 const Feedback = () => {
   const {
@@ -23,6 +24,7 @@ const Feedback = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [flag, setFlag] = useState(true);
   const [sortState, setSortState] = useState("name");
+  const { t } = useTranslation();
 
   const sortMethods = {
     none: { method: null },
@@ -96,13 +98,13 @@ const Feedback = () => {
       <div className="w-[80%] mx-auto mb-10 flex flex-col md:flex-row items-center pt-3 justify-between">
         <form className="flex w-full md:w-[50%]" onSubmit={handleSubmit}>
           <Input
-            placeholder="Search Police Stations"
+            placeholder={t("home.searchPlaceholder")}
             onChange={handlechange}
             className="searchBar shadow-md"
           />
 
           <Button className="customButton mx-4" type="submit">
-            Search
+            {t("home.search")}
           </Button>
         </form>
         <div className="flex mt-4 md:mt-0">
@@ -123,7 +125,7 @@ const Feedback = () => {
               sort(sortState);
             }}
           >
-            Sort
+            {t("home.sort")}
           </Button>
         </div>
       </div>
