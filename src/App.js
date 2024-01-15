@@ -81,8 +81,15 @@ function App() {
                 return (
                   <div key={index} className="py-2">
                     <h2 className="text-[#8C4E1D] font-sans font-bold text-md">
-                      {item.name}:&nbsp;{item.number}
-                      {item.number2 ? `/${item.number2}` : ""}
+                      {item.name}:&nbsp;
+                      <>
+                        <a href={"tel:" + item.number} className="hover:border-b-2 border-[#8C4E1D]">{item.number}</a>
+                      </>
+                      {item.number2 && (
+                        <>
+                          / <a href={"tel:" + item.number} className="hover:border-b-2 border-[#8C4E1D]">{item.number}</a>
+                        </>
+                      )}
                     </h2>
                   </div>
                 );
