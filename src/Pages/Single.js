@@ -35,6 +35,7 @@ function Single() {
   } = useSupabase();
   const [policeData, setPoliceData] = useState({});
   const [flag,setFlag]=useState(false);
+  const [docu,setDocu]=useState('');
   const navigator = useNavigate();
   const { t } = useTranslation();
   useEffect(() => {
@@ -53,13 +54,17 @@ function Single() {
 
 useEffect(()=>{
 var ff=true;
+var dou='';
   for(var i=0; i<visits.length; i++){
     if(visits[i].policeStation===policeData.name && visits[i].feedback===null){
+      
       ff=false;
+      dou=visits[i].documentID;
       break;
     }
   }
   setFlag(ff);
+  setDocu(dou);
 }
 ,[PoliceData, policeStations,user,visitsLoader,visits])
   useEffect(() => {
@@ -91,6 +96,12 @@ var ff=true;
     setShow2(false);
     navigator("/");
   };
+// if(visits.length===0){
+//   return null;
+// }
+const handleClickFeed=()=>{
+  navigator(`/newFeedback/${docu}`)
+}
 
 if (visitsLoader) {
   return (
@@ -135,9 +146,10 @@ if (visitsLoader) {
                 <IoCheckmarkDoneCircleOutline/>
                 <span className="text-lg ml-2 md:text-xl">{t("single.markAsVisited")}</span>{" "}
               </Button>
-              <Button size={"lg"} isDisabled={flag?true:false} className="w-[48%]">
-                <IoDocumentTextOutline/>
-                <span className="text-lg ml-2 md:text-xl">{t("single.fillFeedback")}</span>
+              <Button size={"lg"} isDisabled={flag?true:false} className="w-[48%]" onClick={handleClickFeed}>
+                {" "}
+          
+                <span className="text-lg md:text-xl">Fill Feedback</span>
               </Button>
             </div>
           </div>
