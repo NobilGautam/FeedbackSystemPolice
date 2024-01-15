@@ -49,7 +49,7 @@ function App() {
         }}
       >
         <IoCallOutline />
-        <span className="ml-2">HelpLines</span>
+        <span className="ml-2">Helplines</span>
       </Button>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
@@ -70,7 +70,7 @@ function App() {
           <ModalHeader className="bg-[#8C4E1D]">
             <h1 className="text-2xl text-white font-sans font-semibold">
               {" "}
-              Rajasthan Police HelpLines
+              Rajasthan Police Helplines
             </h1>
           </ModalHeader>
           <ModalBody>
@@ -90,7 +90,7 @@ function App() {
                       </>
                       {item.number2 && (
                         <>
-                          /{" "}
+                          {" "}/{" "}
                           <a
                             href={"tel:" + item.number}
                             className="text-blue-500 underline"

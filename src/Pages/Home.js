@@ -53,6 +53,7 @@ function Home() {
     setSearchResults(temp);
   };
   const sort = (sortState) => {
+    console.log(searchResults)
     if (sortState === "name" || sortState === "rating")
       searchResults.sort(sortBy(sortMethods[sortState].method));
     else searchResults.sort(sortByRev(sortMethods[sortState].method));
@@ -154,7 +155,7 @@ function Home() {
         <div>
           {!loading && (
             <h1 className="mt-5 text-[#8C4E1D] text-center text-3xl">
-              No Police Stations found!!
+              No Police Stations Found
             </h1>
           )}
         </div>
