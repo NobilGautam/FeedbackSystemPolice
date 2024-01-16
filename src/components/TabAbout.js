@@ -5,6 +5,7 @@ import { Text } from "@chakra-ui/react";
 import { BsStarFill } from "react-icons/bs";
 import map from "../assets/map.png";
 import { useSupabase } from "../context/SupabaseContext";
+import { IoCallOutline, IoMailOutline } from "react-icons/io5";
 function TabAbout({ policeData }) {
   const [stars, setStars] = useState([]);
   const { allPolice } = useSupabase();
@@ -58,6 +59,16 @@ function TabAbout({ policeData }) {
       <div className="map-container mt-5">
         <h1 className="text-[#8c4e1d] text-lg md:text-xl font-semibold">Location</h1>
         <img src={map} alt="Map" className="text-2xl"></img>
+      </div>
+      <div className="mt-10 flex flex-row gap-2">
+        <IoCallOutline />
+        <span className="text-[#8c4e1d] font-semibold">Contact Number: </span>
+        <a href="tel:8527556708" className="hover:text-[#886ef1] duration-200">8527556708</a>
+      </div>
+      <div className="flex flex-row gap-2 mt-2">
+        <IoMailOutline/>
+        <span className="text-[#8c4e1d] font-semibold">Contact Email: </span>
+        <a href="mailto:alwarpolice@rajasthanpolice.com" className="hover:text-[#886ef1] duration-200">alwarpolice@rajasthanpolice.com</a>
       </div>
     </div>
   );
