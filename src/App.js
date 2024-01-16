@@ -25,7 +25,7 @@ import {
 } from "@chakra-ui/react";
 import { steps } from "./components/steps";
 import { helplines } from "./components/helpline";
-import { IoCallOutline } from "react-icons/io5";
+import { IoCallOutline, IoClose } from "react-icons/io5";
 
 function App() {
   const OverlayOne = () => (
@@ -70,11 +70,10 @@ function App() {
         <ModalContent className="border-solid border-2 border-[#8C4E1D]">
           <ModalHeader className="bg-[#8C4E1D] flex justify-between">
             <h1 className="text-2xl text-white font-sans font-semibold">
-              {" "}
               Rajasthan Police Helplines
             </h1>
             <Button className="customButton" onClick={onClose}>
-              Close
+              <IoClose/>
             </Button>
           </ModalHeader>
           <ModalBody>

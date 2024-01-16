@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSupabase } from "../context/SupabaseContext";
 import { ArcElement, Chart as ChartJs, Legend, Tooltip } from "chart.js";
 import { Pie } from "react-chartjs-2";
-import { Select } from "@chakra-ui/react";
+import { Select, useToast } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import {
   ModalOverlay,
@@ -16,8 +16,10 @@ import {
 } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/react";
 import { IoDownloadOutline } from "react-icons/io5";
+
 ChartJs.register(ArcElement, Tooltip, Legend);
 function TabData({ policeData }) {
+  const toast = useToast();
   const OverlayOne = () => (
     <ModalOverlay bg="none" backdropFilter="blur(10px)" backdropBlur="10px" />
   );
@@ -110,7 +112,7 @@ function TabData({ policeData }) {
           stats[0].Infra_Good,
           stats[0].Infra_Excellent,
         ],
-        backgroundColor:  ["red", "grey", "blue", "orange", "green"],
+        backgroundColor: ["red", "grey", "blue", "orange", "green"],
       },
     ],
   };
@@ -195,6 +197,7 @@ function TabData({ policeData }) {
   const handleChartChange = (event) => {
     setSelectedChart(event.target.value);
   };
+
   const handleClick = async () => {
     setOverlay(<OverlayOne />);
     onOpen();
@@ -220,8 +223,26 @@ function TabData({ policeData }) {
 
       setStatus("Download complete!");
       onClose();
+
+      // Display success toast
+      toast({
+        title: "Download Complete",
+        description: `${policeData.name}.pdf has been downloaded successfully.`,
+        status: "success",
+        duration: 5000, // Toast duration in milliseconds
+        isClosable: true,
+      });
     } catch (error) {
       console.error("Error downloading PDF:", error);
+
+      // Display error toast
+      toast({
+        title: "Error",
+        description: "An error occurred while downloading the PDF.",
+        status: "error",
+        duration: 5000, // Toast duration in milliseconds
+        isClosable: true,
+      });
     }
   };
 
@@ -262,7 +283,7 @@ function TabData({ policeData }) {
         ))}
       </div>
       <Button className="customButton mt-5" onClick={handleClick}>
-        <IoDownloadOutline/>
+        <IoDownloadOutline />
         <span className="ml-2">Download Detailed PDF</span>
       </Button>
       <Modal

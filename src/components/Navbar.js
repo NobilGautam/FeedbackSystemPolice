@@ -18,7 +18,14 @@ import {
   MenuOptionGroup,
   Select,
 } from "@chakra-ui/react";
-import { IoCheckmarkCircleOutline, IoDocumentOutline, IoHomeOutline, IoLogInOutline, IoLogOutOutline, IoMenu } from "react-icons/io5";
+import {
+  IoCheckmarkCircleOutline,
+  IoDocumentOutline,
+  IoHomeOutline,
+  IoLogInOutline,
+  IoLogOutOutline,
+  IoMenu,
+} from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 
 function Navbar() {
@@ -26,7 +33,7 @@ function Navbar() {
   const [user] = useAuthState(Auth);
   const { t, i18n } = useTranslation();
 
-  const link=useLocation();
+  const link = useLocation();
   const signIN = () => {
     signInWithPopup(Auth, Provider)
       .then(() => console.log("Sign in successful"))
@@ -40,14 +47,29 @@ function Navbar() {
   };
 
   const Links = [
-    { name: t("navbar.home"), link: "/" , icon: <IoHomeOutline/>},
-    user && { name: t("navbar.myFeedbacks"), link: "/myfeedback", icon: <IoDocumentOutline/> },
-    user && { name: t("navbar.myVisits"), link: "/myVisits", icon: <IoCheckmarkCircleOutline/> },
+    { name: t("navbar.home"), link: "/", icon: <IoHomeOutline /> },
+    user && {
+      name: t("navbar.myFeedbacks"),
+      link: "/myfeedback",
+      icon: <IoDocumentOutline />,
+    },
+    user && {
+      name: t("navbar.myVisits"),
+      link: "/myVisits",
+      icon: <IoCheckmarkCircleOutline />,
+    },
   ];
 
   console.log(link);
-  const [selectedLink, setSelectedLink] = useState(`${link.pathname==='/myfeedback'?"My Feedbacks":link.pathname==='/myVisits'?"My Visits":"Home"}`);
-
+  const [selectedLink, setSelectedLink] = useState(
+    `${
+      link.pathname === "/myfeedback"
+        ? "My Feedbacks"
+        : link.pathname === "/myVisits"
+        ? "My Visits"
+        : "Home"
+    }`
+  );
 
   const handleNavClick = (link) => {
     setSelectedLink(link.name);
@@ -57,18 +79,30 @@ function Navbar() {
     i18n.changeLanguage(lang);
   };
 
-  const handleImgclick=()=>{
-    navigator('/');
-  }
-  
+  const handleImgclick = () => {
+    navigator("/");
+  };
+
   return (
     <div className="shadow-md w-full fixed z-20 top-0 left-0">
       <div className="md:flex items-center justify-between py-4 md:px-10 px-7 bg-[#8C4E1D]">
         <div className="font-semibold text-2xl cursor-pointer flex items-center text-gray-800">
-          
-          <img src={emblem} alt="Emblem" className="w-[50px] hatade mr-4" onClick={handleImgclick}/>
-          <img src={rpLogo} className="w-[15%] mr-4" alt="Logo"  onClick={handleImgclick}/>
-          <span onClick={handleImgclick} className="text-white text-base md:text-2xl">
+          <img
+            src={emblem}
+            alt="Emblem"
+            className="w-[50px] hatade mr-4"
+            onClick={handleImgclick}
+          />
+          <img
+            src={rpLogo}
+            className="w-[15%] mr-4"
+            alt="Logo"
+            onClick={handleImgclick}
+          />
+          <span
+            onClick={handleImgclick}
+            className="text-white text-base md:text-2xl"
+          >
             {t("navbar.rpf")}
           </span>
           <div className="md:hidden flex flex-1 justify-end items-center">
@@ -103,8 +137,11 @@ function Navbar() {
                   </>
                 ) : (
                   <MenuItem>
-                  <IoLogInOutline/>
-                    <Link className="text-sm ml-2 w-full text-green-600" onClick={signIN}>
+                    <IoLogInOutline />
+                    <Link
+                      className="text-sm ml-2 w-full text-green-600"
+                      onClick={signIN}
+                    >
                       {t("navbar.login")}
                     </Link>
                   </MenuItem>
@@ -115,8 +152,8 @@ function Navbar() {
                   title="Language"
                   type="radio"
                   onChange={(selectedValue) => {
-                    let lang = selectedValue === 'English' ? 'en' : 'hi'
-                    changeLanguage(lang) 
+                    let lang = selectedValue === "English" ? "en" : "hi";
+                    changeLanguage(lang);
                   }}
                 >
                   <MenuItemOption className="text-sm w-full" value="English">
@@ -144,7 +181,7 @@ function Navbar() {
                 ))}
                 {user ? (
                   <MenuItem>
-                  <IoLogOutOutline/>
+                    <IoLogOutOutline />
                     <Link
                       onClick={signout}
                       className="text-red-500 ml-2 w-full text-sm hover:text-gray-400 duration-500"
@@ -227,16 +264,16 @@ function Navbar() {
                   <MenuGroup title={`Namaste, ${user.displayName}`} />
                 ) : (
                   <MenuItem>
-                  <IoLogInOutline/>
+                    <IoLogInOutline />
                     <Link onClick={signIN}>{t("navbar.login")}</Link>
                   </MenuItem>
                 )}
                 <MenuItem>
-                <IoLogOutOutline/>
+                  <IoLogOutOutline />
                   <Link
                     onClick={signout}
                     className="text-red-500 w-full ml-2 hover:text-gray-400 duration-500"
-                    >
+                  >
                     {t("navbar.logout")}
                   </Link>
                 </MenuItem>
