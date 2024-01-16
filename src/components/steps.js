@@ -65,17 +65,17 @@ export const steps = [
   component:<ChatBotNearest/>,
     trigger: "options",
   },
-  // { id:"report",
-  //   message:"Please provide me with the name of the district you would want to get a report of",
-  //   trigger:"reportinput",
+  { id:"report",
+    message:"Please provide me with the name of the district you would want to get a report of",
+    trigger:"reportinput",
 
-  // },
+  },
 
-  // { id:"report",
-  // message:"Please provide me with the name of the district you would want to get a report of",
-  // trigger:"reportinput",
+  { id:"reportinput",
+  message:"input",
+trigger:"options"
 
-// },
+},
 
 
 ];
