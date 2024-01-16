@@ -39,7 +39,6 @@ const MyVisits = () => {
   useEffect(() => {
     if (user) {
       fetchVisits(user.email);
-      console.log(visits)
     }
     
     // eslint-disable-next-line react-hooks/exhaustive-deps

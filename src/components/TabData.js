@@ -224,23 +224,21 @@ function TabData({ policeData }) {
       setStatus("Download complete!");
       onClose();
 
-      // Display success toast
       toast({
         title: "Download Complete",
         description: `${policeData.name}.pdf has been downloaded successfully.`,
         status: "success",
-        duration: 5000, // Toast duration in milliseconds
+        duration: 5000,
         isClosable: true,
       });
     } catch (error) {
       console.error("Error downloading PDF:", error);
 
-      // Display error toast
       toast({
         title: "Error",
         description: "An error occurred while downloading the PDF.",
         status: "error",
-        duration: 5000, // Toast duration in milliseconds
+        duration: 5000,
         isClosable: true,
       });
     }

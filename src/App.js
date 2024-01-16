@@ -26,6 +26,7 @@ import {
 import { steps } from "./components/steps";
 import { helplines } from "./components/helpline";
 import { IoCallOutline, IoClose } from "react-icons/io5";
+import FollowupForm from "./Pages/FollowupForm";
 
 function App() {
   const OverlayOne = () => (
@@ -61,6 +62,8 @@ function App() {
         <Route path="/newVisit" element={<NewVisit />} />
         <Route path="/QR/:id" element={<QR />} />
         {user && <Route path="/form" element={<Form />}></Route>}
+        {user && <Route path="/followupform" element={<FollowupForm />}></Route>}
+        {user && <Route path="/grivance" element={<FollowupForm />}></Route>}
         {/* { user && <Route path="/chat" element={<Chat/>}></Route>}
          */}
         <Route path="*" element={<Error />}></Route>
