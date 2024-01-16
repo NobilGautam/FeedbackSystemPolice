@@ -36,7 +36,7 @@ const NewVisit = () => {
   const handleSendSMS = async () => {
     try {
       const response = await axios.get(
-        "https://f4eedback-server-59l6.onrender.com/send-text",
+        "https://feedback-server-59l6.onrender.com/send-text",
         {
           params: {
             recipient: phoneNumber,
