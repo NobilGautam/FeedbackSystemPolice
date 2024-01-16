@@ -6,6 +6,7 @@ import { BsStarFill } from "react-icons/bs";
 import map from "../assets/map.png";
 import { useSupabase } from "../context/SupabaseContext";
 import { IoCallOutline, IoMailOutline } from "react-icons/io5";
+import { GoogleMap, useJsApiLoader, useLoadScript } from '@react-google-maps/api';
 function TabAbout({ policeData }) {
   const [stars, setStars] = useState([]);
   const { allPolice } = useSupabase();
@@ -35,6 +36,10 @@ function TabAbout({ policeData }) {
     }
     setStars(temp);
   }, [policeData, allPolice]);
+
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_KEY,
+  });
   return (
     <div className="p-4">
       <div className="flex flex-col md:flex-row w-[52%] justify-between">
@@ -58,7 +63,17 @@ function TabAbout({ policeData }) {
       </Text>
       <div className="map-container mt-5">
         <h1 className="text-[#8c4e1d] text-lg md:text-xl font-semibold">Location</h1>
-        <img src={map} alt="Map" className="text-2xl"></img>
+        {
+          isLoaded ? (
+            <GoogleMap
+              center={{ lat: 40.3947365, lng: 49.6898045 }}
+              zoom={10}
+              mapContainerStyle={{width:"100%",height:"100%"}}
+            >
+
+            </GoogleMap>
+          ) : <img src={map} alt="Map" className="text-2xl"></img>
+        }
       </div>
       <div className="mt-10 flex flex-col md:flex-row gap-2">
         <div className="flex flex-row gap-2">
