@@ -1,7 +1,8 @@
 import ChatBotFeedback from "./ChatBotFeedback";
 import ChatBotHelpLines from "./ChatBotHelpLines"
 import ChatBotNearest from "./ChatBotNearest";
-
+import ChatBotDistrict from "./ChatBotDistrict";
+import ChatBotHandlePolice from "./ChatBotHandlePolice";
 export const steps = [
   {
     id: "0",
@@ -72,10 +73,32 @@ export const steps = [
   },
 
   { id:"reportinput",
-  message:"input",
-trigger:"options"
+   user:true,
+   trigger:"renderdistrict",
 
 },
+{ id:"renderdistrict",
+  component:<ChatBotDistrict/>,
+  trigger:"choose",
+
+},
+{
+  id:"choose",
+  message:"Please type a suitable Police Station name you would want to get report",
+  trigger:"userinputpolice",
+},
+{
+  id:"userinputpolice",
+  user:true,
+  trigger:"handlepolice"
+},
+{
+  id:"handlepolice",
+  component:<ChatBotHandlePolice/>,
+  trigger:"options",
+}
+
+
 
 
 ];
