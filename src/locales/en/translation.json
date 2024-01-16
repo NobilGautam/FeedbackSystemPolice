@@ -109,7 +109,43 @@
       "about": "About",
       "reviews": "Reviews",
       "data": "Data",
-      "backToAllPosts": "Back to All Posts"
+      "backToAllPosts": "Back to All Posts",
+      "pincode": "PINCODE",
+      "location": "Location",
+      "contactNumber": "Contact Number",
+      "contactEmail": "Contact Email",
+      "anonymous": "Anonymous",
+      "selectData": "Select Data",
+      "downloadDetailedPDF": "Download Detailed PDF"
+    }, 
+    "sort": {
+      "name": "Name",
+      "nameDesc": "Name Desc",
+      "rating": "Rating",
+      "ratingDesc": "Rating Desc", 
+      "gender": "Gender",
+      "feedback": "Feedback",
+      "follow": "Follow",
+      "waitingPeriod": "Waiting Period",
+      "behaviour": "Behaviour",
+      "guidance": "Guidance",
+      "help": "Help",
+      "infrastructure": "Infrastructure",
+      "overallRating": "Overall Rating",
+      "dayReported": "Day Reported"
+    }, 
+    "modal": {
+      "pcr": "Police Control Room",
+      "trafficPolice": "Traffic Police",
+      "wsc": "Women and Senior Citizen",
+      "fireBrigade": "Fire Brigade",
+      "ambulance": "Ambulance",
+      "emergencyServices": "Emergency Services",
+      "helpSCST": "Help for SC/ST",
+      "sampark": "Sampark",
+      "helpline": "Helpline",
+      "acb": "ACB",
+      "cyberCrime": "Cyber Crime"
     }
 }
   
