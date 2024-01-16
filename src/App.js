@@ -85,7 +85,7 @@ function App() {
                 return (
                   <div key={index} className="py-2">
                     <h2 className="text-[#8C4E1D] font-sans font-bold text-md">
-                      {item.name}:&nbsp;
+                      {t("modal."+item.name)}:&nbsp;
                       <>
                         <a
                           href={"tel:" + item.number}

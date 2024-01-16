@@ -106,7 +106,7 @@ function Home() {
             <option value="name">{t("sort.name")}</option>
             <option value="name_dsc">{t("sort.nameDesc")}</option>
             <option value="rating">{t("sort.rating")}</option>
-            <option value="rating_dsc">{t("sort.ratingDesc")} Dsc</option>
+            <option value="rating_dsc">{t("sort.ratingDesc")}</option>
           </select>
           <Button className="customButton mx-4" onClick={() => sort(sortState)}>
             {t("home.sort")}
