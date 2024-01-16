@@ -28,7 +28,7 @@ function ChatBotHandlePolice({previousStep}) {
           document.body.removeChild(a);
     
           setStatus("Download complete!");
-          setDownload(false);
+          setDownload(false); //
 
        }
        catch(e){
