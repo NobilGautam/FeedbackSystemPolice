@@ -149,7 +149,7 @@ if (visitsLoader) {
               <Button size={"lg"} isDisabled={flag?true:false} className="w-[48%]" onClick={handleClickFeed}>
                 {" "}
           
-                <span className="text-lg md:text-xl">Fill Feedback</span>
+                <span className="text-lg md:text-xl">{t("single.fillFeedback")}</span>
               </Button>
             </div>
           </div>

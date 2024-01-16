@@ -1,27 +1,27 @@
 {
   "navbar": {
-    "english": "English",
+    "english": "अंग्रेज़ी",
     "hindi": "हिन्दी",
     "home": "होम",
     "myFeedbacks": "मेरी प्रतिक्रियाएँ",
     "myVisits": "मेरी यात्राएँ",
     "login": "लॉगिन",
     "logout": "लॉगआउट",
-    "rpf": "राजस्थान पुलिस फीडबैक",
+    "rpf": "राजस्थान पुलिस प्रतिक्रिया",
     "helplines": "हेल्पलाइन्स"
   },
   "form": {
     "fullname": "पूरा नाम",
     "age": "आयु",
     "gender": "लिंग",
-    "policeStation": "पुलिस स्टेशन चुनें",
-    "purpose": "आने का उद्देश्य",
+    "policeStation": "पुलिस स्टेशन का चयन करें",
+    "purpose": "यात्रा का उद्देश्य",
     "email": "ईमेल",
-    "time": "कितने देर बाद थाने में आपकी सुनवाई हुई",
-    "pbehaviour": "पुलिस अधिकारियों के व्यवहार का आप मूल्यांकन कैसे करें",
+    "time": "पुलिस स्टेशन में सुना जाने के बाद कितने समय बाद",
+    "pbehaviour": "पुलिस अधिकारियों के व्यवहार का आपका मूल्यांकन कैसा है",
     "pguidance": "पुलिस स्टेशन पर प्राप्त मार्गदर्शन",
-    "phelpful": "कर्मचारियों की शिष्टाचार और सहायकता",
-    "infra": "पुलिस स्टेशन का इंफ्रास्ट्रक्चर",
+    "phelpful": "पुलिस स्टेशन के कर्मचारियों की शिष्टता और सहायकता",
+    "infra": "पुलिस स्टेशन का अवसान",
     "overallExperience": "पुलिस स्टेशन के साथ कुल अनुभव",
     "Very Dissatisfied": "बहुत असंतुष्ट",
     "Dissatisfied": "असंतुष्ट",
@@ -29,27 +29,27 @@
     "Satisfied": "संतुष्ट",
     "Very Satisfied": "बहुत संतुष्ट",
     "feedback": "आपकी प्रतिक्रिया",
-    "submitButton": "जमा करें",
+    "submitButton": "प्रस्तुत करें",
     "timeTaken": {
-      "Immediately": "तुरंत",
+      "Immediately": "तत्काल",
       "5 Mins": "5 मिनट",
       "10 Mins": "10 मिनट",
-      "15 Mins": "15 मिनट से अधिक",
+      "15 Mins": "15 मिनट",
       "More than 15 Mins": "15 मिनट से अधिक"
     },
     "behaviour": {
       "Abusive": "अपमानजनक",
-      "Rude": "अशिष्ट",
+      "Rude": "कठिन",
       "Polite": "शिष्ट"
     },
     "feedbackRating": {
       "Poor": "खराब",
       "Below Average": "औसत से कम",
-      "Average": "औसत",
+      "Average": "सामान्य",
       "Good": "अच्छा",
       "Excellent": "उत्कृष्ट"
     }
-  }, 
+  },
   "policeStation": {
     "AJMER": "अजमेर",
     "ALWAR": "अलवर",
@@ -61,7 +61,7 @@
     "BIKANER": "बीकानेर",
     "BUNDI": "बूंदी",
     "CHITTORGARH": "चित्तौड़गढ़",
-    "CHURU": "चूरू",
+    "CHURU": "चुरु",
     "DAUSA": "दौसा",
     "DHOLPUR": "धौलपुर",
     "DUNGARPUR": "डूंगरपुर",
@@ -70,7 +70,7 @@
     "JAISALMER": "जैसलमेर",
     "JALOR": "जालोर",
     "JHALAWAR": "झालावाड़",
-    "JHUJHUNU": "झुंझुनू",
+    "JHUJHUNU": "झुंझुनूं",
     "JODHPUR": "जोधपुर",
     "KARAULI": "करौली",
     "KOTA": "कोटा",
@@ -88,29 +88,65 @@
   },
   "home": {
     "viewMore": "और देखें",
-    "helpLines": "हेल्पलाइनें",
-    "search": "खोजें",
+    "helpLines": "हेल्पलाइन्स",
+    "search": "खोज",
     "sort": "क्रमबद्ध करें",
     "loadMore": "और लोड करें",
     "searchPlaceholder": "पुलिस स्टेशन खोजें",
     "address": "पता"
   },
   "myFeedback": {
-    "rdt": "रिपोर्टिंग दिनांक और समय: ",
+    "rdt": "रिपोर्टिंग तारीख और समय: ",
     "feedback": "प्रतिक्रिया:"
   },
   "myVisits": {
-    "addFeedback": "फीडबैक जोड़ें",
-    "feedbackAdded": "फीडबैक जोड़ा गया!"
+    "addFeedback": "प्रतिक्रिया जोड़ें",
+    "feedbackAdded": "प्रतिक्रिया जोड़ी गई है!"
   },
   "single": {
     "markAsVisited": "यात्रा के रूप में चिह्नित करें",
-    "fillFeedback": "फीडबैक भरें",
-    "about": "जानकारी",
+    "fillFeedback": "प्रतिक्रिया भरें",
+    "about": "के बारे में",
     "reviews": "समीक्षाएँ",
     "data": "डेटा",
-    "backToAllPosts": "सभी पोस्ट्स पर वापस जाएं"
-  }
+    "backToAllPosts": "सभी पोस्ट्स पर वापस जाएं",
+    "pincode": "पिनकोड",
+    "location": "स्थान",
+    "contactNumber": "संपर्क नंबर",
+    "contactEmail": "संपर्क ईमेल",
+    "anonymous": "अनामक",
+    "selectData": "डेटा चयन करें",
+    "downloadDetailedPDF": "विस्तृत पीडीएफ डाउनलोड करें"
+  },
+  "sort": {
+    "name": "नाम",
+    "nameDesc": "नाम अवरोही",
+    "rating": "रेटिंग",
+    "ratingDesc": "रेटिंग अवरोही",
+    "gender": "लिंग",
+    "feedback": "सुझाव",
+    "follow": "फॉलो करें",
+    "waitingPeriod": "प्रतीक्षा काल",
+    "behaviour": "व्यवहार",
+    "guidance": "मार्गदर्शन",
+    "help": "मदद",
+    "infrastructure": "बुनियादी सुविधाएँ",
+    "overallRating": "कुल रेटिंग",
+    "dayReported": "रिपोर्ट किया गया दिन"
+},
+"modal": {
+  "Police Control Room": "पुलिस नियंत्रण कक्ष",
+  "Traffic Police": "ट्रैफिक पुलिस",
+  "Women and Senior Citizen": "महिला और वरिष्ठ नागरिक",
+  "Fire Brigade": "फायर ब्रिगेड",
+  "Ambulance": "एम्बुलेंस",
+  "Emergency Services": "आपातकालीन सेवाएँ",
+  "Help For SC/ST": "एससी / एसटी के लिए मदद",
+  "Sampark 181 Helpline": "सम्पर्क 181 हेल्पलाइन",
+  "ACB": "एसीबी",
+  "Cyber Crime": "साइबर अपराध"
+}
+
   
   
 }

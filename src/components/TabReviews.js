@@ -2,8 +2,10 @@ import React, { useEffect } from "react";
 import { useSupabase } from "../context/SupabaseContext";
 import { Spinner } from "@chakra-ui/react";
 import { decrypt } from "n-krypta";
+import { useTranslation } from "react-i18next";
 function TabReviews({ policeStationName }) {
   const { fetchReviews, reviews, reviewLoader } = useSupabase();
+  const { t } = useTranslation();
   useEffect(() => {
     fetchReviews(policeStationName);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -59,7 +61,7 @@ function TabReviews({ policeStationName }) {
                 }
               >
                 <div className="flex justify-between">
-                  <h1 className="font-bold">Anonymous</h1>
+                  <h1 className="font-bold">{t("single.anonymous")}</h1>
                   <h1 className="text-gray-500">
                     {convertToISTAndFormatDate(item.created_at)}
                   </h1>
