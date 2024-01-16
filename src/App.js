@@ -18,11 +18,9 @@ import {
   ModalOverlay,
   useDisclosure,
   ModalContent,
-  ModalCloseButton,
   Text,
   ModalBody,
   ModalHeader,
-  ModalFooter,
   Modal,
 } from "@chakra-ui/react";
 import { steps } from "./components/steps";
@@ -70,11 +68,14 @@ function App() {
       <Modal isCentered isOpen={isOpen} onClose={onClose}>
         {overlay}
         <ModalContent className="border-solid border-2 border-[#8C4E1D]">
-          <ModalHeader className="bg-[#8C4E1D]">
+          <ModalHeader className="bg-[#8C4E1D] flex justify-between">
             <h1 className="text-2xl text-white font-sans font-semibold">
               {" "}
               Rajasthan Police Helplines
             </h1>
+            <Button className="customButton" onClick={onClose}>
+              Close
+            </Button>
           </ModalHeader>
           <ModalBody>
             <Text>
@@ -93,7 +94,8 @@ function App() {
                       </>
                       {item.number2 && (
                         <>
-                          {" "}/{" "}
+                          {" "}
+                          /{" "}
                           <a
                             href={"tel:" + item.number}
                             className="text-blue-500 underline"
@@ -108,11 +110,6 @@ function App() {
               })}
             </Text>
           </ModalBody>
-          <ModalFooter>
-            <Button className="customButton" onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </div>

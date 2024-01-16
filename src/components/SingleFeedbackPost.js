@@ -20,7 +20,7 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
   const { t } = useTranslation();
   const match = item.policeStation.match(/(\d+)$/);
   const cityNumber = match ? match[1] : null;
-  const cityName = item.policeStation.replace(/\d+$/, '').trim();
+  const cityName = item.policeStation.replace(/\d+$/, "").trim();
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
@@ -67,7 +67,9 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
 
         <Stack>
           <CardBody>
-            <Heading size="md">{`${t(`policeStation.${cityName}`)} ${cityNumber}`}</Heading>
+            <Heading size="md">{`${t(
+              `policeStation.${cityName}`
+            )} ${cityNumber}`}</Heading>
             <p className="py-2">
               <span className="font-semibold">{t("home.address")} </span>
               {addressLinks.get(item.policeStation)}
@@ -92,14 +94,12 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
                   className="tweet"
                   url="https://feedback-system-police-private.vercel.app/"
                   options={{
-                    text: `Here is the Summary of my recent visit to  the Police station ${
-                      item.policeStation
-                    }:\n  My Purpose:${item.name} \n My Feedback:${decrypt(
+                    text: `During my recent visit to the #${
+                      item.policeStation.replace(' ','')
+                    } Police station regarding ${item.purpose}, \nI experienced ${decrypt(
                       item.feedback,
                       toString(process.env.SECRET_KEY)
-                    )}\n @${item.policeStation} \n #${
-                      item.policeStation
-                    } #RajasThanPolice } \n`,
+                    )}\n@PoliceRajasthan @RajPoliceHelp \n I submitted and am sharing this feedback using Rajasthan Police Station Feedback Portal `,
                     size: "large",
                   }}
                 ></Share>
