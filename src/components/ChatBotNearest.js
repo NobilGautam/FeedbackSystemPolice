@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useSupabase } from '../context/SupabaseContext';
 import map from "../assets/map.png";
 function ChatBotNearest({previousStep}) {
-    console.log(previousStep.message);
+    // console.log(previousStep.message);
     const {tableData}=useSupabase();
-    console.log(tableData);
+    // console.log(tableData);
     const [data,setData]=useState(null);
     const [loading,setLoading]=useState(true);
     useEffect(()=>{

@@ -9,11 +9,61 @@ import { Auth } from "../Firebase";
 import { useNavigate } from "react-router";
 
 const NewVisit = () => {
+  const [userLocation, setUserLocation] = useState(null);
+  const [error, setError] = useState(null);
+  const [showForm, setShowForm] = useState(false);
   const { setShow2, show2, setQR, handleSubmit, individual, tableData:PoliceData } = useSupabase();
   const [show, setShow] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
-  const navigator = useNavigate();
+  const navigatorr = useNavigate();
   const [user] = useAuthState(Auth);
+
+  
+  const policeStationLocation = {
+    latitude:  26.866866376682413,  // Replace with the actual latitude of the police station
+    longitude:  75.81917399765078,  // Replace with the actual longitude of the police station
+   
+  };
+
+  const thresholdDistance = 5; // Replace with your desired threshold distance in kilometers
+
+  useEffect(() => {
+    // Get user's location using Geolocation API
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setUserLocation({ latitude, longitude });
+        },
+        (error) => {
+          setError('Error getting user location. Please enable location services.');
+        }
+      );
+    } else {
+      setError('Geolocation is not supported by your browser.');
+    }
+  }, []);
+
+  useEffect(() => {
+    // Check if user is within the threshold distance from the police station
+    if (userLocation) {
+      const distance = calculateDistance(userLocation, policeStationLocation);
+      setShowForm(distance <= thresholdDistance);
+    }
+  }, [userLocation]);
+  const calculateDistance = (location1, location2) => {
+    const radlat1 = (Math.PI * location1.latitude) / 180;
+    const radlat2 = (Math.PI * location2.latitude) / 180;
+    const theta = location1.longitude - location2.longitude;
+    const radtheta = (Math.PI * theta) / 180;
+    let distance =
+      Math.sin(radlat1) * Math.sin(radlat2) +
+      Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    distance = Math.acos(distance);
+    distance = (distance * 180) / Math.PI;
+    distance = distance * 60 * 1.1515 * 1.609344; // Convert to kilometers
+    return distance;
+  };
 
   const [form, setForm] = useState({
     name: "",
@@ -36,7 +86,7 @@ const NewVisit = () => {
   const handleSendSMS = async () => {
     try {
       const response = await axios.get(
-        "https://f4eedback-server-59l6.onrender.com/send-text",
+        "https://feedback-server-59l6.onrender.com/send-text",
         {
           params: {
             recipient: phoneNumber,
@@ -85,7 +135,9 @@ const NewVisit = () => {
   }
 
   return (
+    
     <div className="flex flex-col justify-center items-center">
+      {userLocation && showForm?
       <div className="lg:w-[50%] w-[90%] mx-auto mt-28">
         <form
           className="mt-12 flex flex-col px-2 gap-8 lg:mb-10 bg-slate-50 rounded-md shadow-md shadow-[#5e5d5d]"
@@ -168,7 +220,8 @@ const NewVisit = () => {
             </button>
           </div>
         </form>
-      </div>
+      </div>:<h1  className="mt-32 text-[#8c4e1d] text-xl ">Your Location doesnt match the police station vicinity</h1>
+}
     </div>
   );
 };
