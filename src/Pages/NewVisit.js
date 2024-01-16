@@ -33,6 +33,7 @@ const NewVisit = () => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
+          console.log(latitude,longitude);
           setUserLocation({ latitude, longitude });
         },
         (error) => {
@@ -47,23 +48,23 @@ const NewVisit = () => {
   useEffect(() => {
     // Check if user is within the threshold distance from the police station
     if (userLocation) {
-      const distance = calculateDistance(userLocation, policeStationLocation);
+      const distance = calculateDistance(userLocation.latitude,userLocation.longitude, policeStationLocation.latitude,policeStationLocation.longitude);
       setShowForm(distance <= thresholdDistance);
     }
   }, [userLocation]);
-  const calculateDistance = (location1, location2) => {
-    const radlat1 = (Math.PI * location1.latitude) / 180;
-    const radlat2 = (Math.PI * location2.latitude) / 180;
-    const theta = location1.longitude - location2.longitude;
-    const radtheta = (Math.PI * theta) / 180;
-    let distance =
-      Math.sin(radlat1) * Math.sin(radlat2) +
-      Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-    distance = Math.acos(distance);
-    distance = (distance * 180) / Math.PI;
-    distance = distance * 60 * 1.1515 * 1.609344; // Convert to kilometers
-    return distance;
-  };
+  function calculateDistance(lat1, lon1, lat2, lon2) {
+    console.log(lat1);
+    console.log()
+    const latDelta = lat2- lat1;
+    const lonDelta = Number(lon2) - Number(lon1);
+    console.log(latDelta);
+    console.log(lonDelta);
+
+  
+    const distance = Math.sqrt(latDelta * latDelta + lonDelta * lonDelta);
+    console.log(distance/1000);
+    return distance/1000;
+  }
 
   const [form, setForm] = useState({
     name: "",
@@ -115,7 +116,7 @@ const NewVisit = () => {
       mobile: "",
       pstation: individual || "",
     });
-    navigator("/myVisits");
+    navigatorr("/myVisits");
   };
   useEffect(() => {
     if (show2) {
