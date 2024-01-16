@@ -89,11 +89,9 @@ function Form() {
     e.preventDefault();
 
     if (!captcha) {
-      alert("CHECK THE CAPTCHA ");
+      alert("CHECK THE CAPTCHA");
       return;
     }
-    console.log(form.time);
-    console.log(form.pbehaviour);
 
     const updatedFormData = {
       name: form.fname,
@@ -151,7 +149,6 @@ function Form() {
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setForm({ ...form, [name]: value });
   };
 
