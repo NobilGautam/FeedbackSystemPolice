@@ -60,15 +60,19 @@ function TabAbout({ policeData }) {
         <h1 className="text-[#8c4e1d] text-lg md:text-xl font-semibold">Location</h1>
         <img src={map} alt="Map" className="text-2xl"></img>
       </div>
-      <div className="mt-10 flex flex-row gap-2">
+      <div className="mt-10 flex flex-col md:flex-row gap-2">
+        <div className="flex flex-row gap-2">
         <IoCallOutline />
         <span className="text-[#8c4e1d] font-semibold">Contact Number: </span>
-        <a href="tel:8527556708" className="hover:text-[#886ef1] duration-200">8527556708</a>
+        </div>
+        <a href="tel:8527556708" className="ml-[8%] md:ml-0 hover:text-[#886ef1] duration-200">8527556708</a>
       </div>
-      <div className="flex flex-row gap-2 mt-2">
+      <div className="flex flex-col md:flex-row gap-2 mt-2">
+        <div className="flex flex-row gap-2">
         <IoMailOutline/>
         <span className="text-[#8c4e1d] font-semibold">Contact Email: </span>
-        <a href="mailto:alwarpolice@rajasthanpolice.com" className="hover:text-[#886ef1] duration-200">alwarpolice@rajasthanpolice.com</a>
+        </div>
+        <a href="mailto:alwarpolice@rajasthanpolice.com" className="ml-[8%] md:ml-0 hover:text-[#886ef1] duration-200">alwarpolice@rajasthanpolice.com</a>
       </div>
     </div>
   );
