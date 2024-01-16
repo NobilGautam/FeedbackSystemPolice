@@ -65,14 +65,14 @@ function TabAbout({ policeData }) {
         <IoCallOutline />
         <span className="text-[#8c4e1d] font-semibold">Contact Number: </span>
         </div>
-        <a href="tel:8527556708" className="ml-[8%] md:ml-0 hover:text-[#886ef1] duration-200">8527556708</a>
+        <a href="tel:8527556708" className="ml-[8%] md:ml-0 hover:text-[#886ef1] duration-200">{policeData.Phone_Number}</a>
       </div>
       <div className="flex flex-col md:flex-row gap-2 mt-2">
         <div className="flex flex-row gap-2">
         <IoMailOutline/>
         <span className="text-[#8c4e1d] font-semibold">Contact Email: </span>
         </div>
-        <a href="mailto:alwarpolice@rajasthanpolice.com" className="ml-[8%] md:ml-0 hover:text-[#886ef1] duration-200">alwarpolice@rajasthanpolice.com</a>
+        <a href="mailto:alwarpolice@rajasthanpolice.com" className="ml-[8%] md:ml-0 hover:text-[#886ef1] duration-200">{policeData.email}</a>
       </div>
     </div>
   );
