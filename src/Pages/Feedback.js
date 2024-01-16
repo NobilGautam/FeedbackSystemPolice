@@ -7,6 +7,7 @@ import SingleFeedbackPost from "../components/SingleFeedbackPost";
 import { useSupabase } from "../context/SupabaseContext";
 import { Button, Input } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 const Feedback = () => {
   const {
@@ -77,9 +78,20 @@ const Feedback = () => {
   const sortByRev = (field) => (a, b) =>
     (a[field] < b[field]) - (a[field] > b[field]);
 
-  const handlechange = (e) => {
-    setSearchTerm(e.target.value);
-  };
+    const handlechange = async (e) => {
+      try {
+        const response = await axios.post('https://libretranslate.de/translate', {
+          q: e.target.value,
+          source: 'auto',
+          target: 'en',
+        });
+  
+        setSearchTerm(response.data.translatedText);
+      } catch (error) {
+        console.error('Error translating text:', error);
+        setSearchTerm(e.target.value); // Fallback to the original text on error
+      }
+    };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (searchTerm.trimStart().length === 0) {

@@ -1,6 +1,14 @@
 {
     "navbar": {
-      "english": "English"
+      "english": "English",
+      "hindi": "Hindi",
+      "home": "Home",
+      "myFeedbacks": "My Feedbacks",
+      "myVisits": "My Visits",
+      "login": "Login",
+      "logout": "Logout",
+      "rpf": "Rajasthan Police Feedback",
+      "helplines": "Helplines"    
     },
     "form": {
       "fullname": "Full Name",

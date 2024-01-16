@@ -24,7 +24,7 @@ import { useTranslation } from "react-i18next";
 function Navbar() {
   const navigator = useNavigate();
   const [user] = useAuthState(Auth);
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const link=useLocation();
   const signIN = () => {
@@ -40,9 +40,9 @@ function Navbar() {
   };
 
   const Links = [
-    { name: "Home", link: "/" , icon: <IoHomeOutline/>},
-    user && { name: "My Feedbacks", link: "/myfeedback", icon: <IoDocumentOutline/> },
-    user && { name: "My Visits", link: "/myVisits", icon: <IoCheckmarkCircleOutline/> },
+    { name: t("navbar.home"), link: "/" , icon: <IoHomeOutline/>},
+    user && { name: t("navbar.myFeedbacks"), link: "/myfeedback", icon: <IoDocumentOutline/> },
+    user && { name: t("navbar.myVisits"), link: "/myVisits", icon: <IoCheckmarkCircleOutline/> },
   ];
 
   console.log(link);
@@ -69,7 +69,7 @@ function Navbar() {
           <img src={emblem} alt="Emblem" className="w-[50px] hatade mr-4" onClick={handleImgclick}/>
           <img src={rpLogo} className="w-[15%] mr-4" alt="Logo"  onClick={handleImgclick}/>
           <span onClick={handleImgclick} className="text-white text-base md:text-2xl">
-            Rajasthan Police Feedback
+            {t("navbar.rpf")}
           </span>
           <div className="md:hidden flex flex-1 justify-end items-center">
             <Menu>
@@ -105,7 +105,7 @@ function Navbar() {
                   <MenuItem>
                   <IoLogInOutline/>
                     <Link className="text-sm ml-2 w-full text-green-600" onClick={signIN}>
-                      Login
+                      {t("navbar.login")}
                     </Link>
                   </MenuItem>
                 )}
@@ -120,10 +120,10 @@ function Navbar() {
                   }}
                 >
                   <MenuItemOption className="text-sm w-full" value="English">
-                    English
+                    {t("navbar.english")}
                   </MenuItemOption>
                   <MenuItemOption className="text-sm w-full" value="Hindi">
-                    Hindi
+                    {t("navbar.hindi")}
                   </MenuItemOption>
                 </MenuOptionGroup>
                 <MenuDivider />
@@ -149,7 +149,7 @@ function Navbar() {
                       onClick={signout}
                       className="text-red-500 ml-2 w-full text-sm hover:text-gray-400 duration-500"
                     >
-                      Logout
+                      {t("navbar.logout")}
                     </Link>
                   </MenuItem>
                 ) : (
@@ -168,8 +168,8 @@ function Navbar() {
                 changeLanguage(selectedLanguage);
               }}
             >
-              <option value="en">English</option>
-              <option value="hi">Hindi</option>
+              <option value="en">{t("navbar.english")}</option>
+              <option value="hi">{t("navbar.hindi")}</option>
             </Select>
           </li>
           {Links.filter((link) => link).map((link) => (
@@ -228,7 +228,7 @@ function Navbar() {
                 ) : (
                   <MenuItem>
                   <IoLogInOutline/>
-                    <Link onClick={signIN}>Login</Link>
+                    <Link onClick={signIN}>{t("navbar.login")}</Link>
                   </MenuItem>
                 )}
                 <MenuItem>
@@ -237,7 +237,7 @@ function Navbar() {
                     onClick={signout}
                     className="text-red-500 w-full ml-2 hover:text-gray-400 duration-500"
                     >
-                    Logout
+                    {t("navbar.logout")}
                   </Link>
                 </MenuItem>
               </MenuList>
@@ -248,7 +248,7 @@ function Navbar() {
                 onClick={signIN}
                 className="text-white hover:text-gray-400 duration-500"
               >
-                Login
+                {t("navbar.login")}
               </Link>
             </li>
           )}

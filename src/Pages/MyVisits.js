@@ -7,6 +7,7 @@ import { Spinner } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 const MyVisits = () => {
   const [user] = useAuthState(Auth);
@@ -95,8 +96,19 @@ const MyVisits = () => {
     setVisits(temp);
   };
 
-  const handleChange = (e) => {
-    setSearchTerm(e.target.value);
+  const handleChange = async (e) => {
+    try {
+      const response = await axios.post('https://libretranslate.de/translate', {
+        q: e.target.value,
+        source: 'auto',
+        target: 'en',
+      });
+
+      setSearchTerm(response.data.translatedText);
+    } catch (error) {
+      console.error('Error translating text:', error);
+      setSearchTerm(e.target.value); // Fallback to the original text on error
+    }
   };
 
   if (visitsLoader) {

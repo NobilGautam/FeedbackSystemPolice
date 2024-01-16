@@ -12,6 +12,7 @@ import Error from "./Pages/Error";
 import NewVisit from "./Pages/NewVisit";
 import MyVisits from "./Pages/MyVisits";
 import ChatBot from "react-simple-chatbot";
+import { useTranslation } from "react-i18next";
 import QR from "./Pages/QR";
 import {
   ModalOverlay,
@@ -36,6 +37,8 @@ function App() {
   const [overlay, setOverlay] = useState(<OverlayOne />);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const { t } = useTranslation();
+
   return (
     <div>
       <Navbar />
@@ -49,7 +52,7 @@ function App() {
         }}
       >
         <IoCallOutline />
-        <span className="ml-2">Helplines</span>
+        <span className="ml-2">{t("navbar.helplines")}</span>
       </Button>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
