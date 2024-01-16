@@ -1,6 +1,14 @@
 {
   "navbar": {
-    "hindi": "Hindi"
+    "english": "अंग्रेज़ी",
+    "hindi": "हिन्दी",
+    "home": "होम",
+    "myFeedbacks": "मेरी प्रतिक्रियाएँ",
+    "myVisits": "मेरी यात्राएँ",
+    "login": "लॉगिन",
+    "logout": "लॉगआउट",
+    "rpf": "राजस्थान पुलिस फीडबैक",
+    "helplines": "हेल्पलाइन्स"
   },
   "form": {
     "fullname": "पूरा नाम",
