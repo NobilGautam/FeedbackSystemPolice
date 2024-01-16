@@ -6,9 +6,14 @@ import { BsStarFill } from "react-icons/bs";
 import map from "../assets/map.png";
 import { useSupabase } from "../context/SupabaseContext";
 import { IoCallOutline, IoMailOutline } from "react-icons/io5";
+import MapComponent from "./MapComponent";
+
 function TabAbout({ policeData }) {
   const [stars, setStars] = useState([]);
   const { allPolice } = useSupabase();
+
+  //27.658927968783715, 76.59560895116964
+
   useEffect(() => {
     let number = 0;
     for (var i = 0; i < allPolice.length; i++) {
@@ -35,6 +40,7 @@ function TabAbout({ policeData }) {
     }
     setStars(temp);
   }, [policeData, allPolice]);
+
   return (
     <div className="p-4">
       <div className="flex flex-col md:flex-row w-[52%] justify-between">
@@ -58,7 +64,8 @@ function TabAbout({ policeData }) {
       </Text>
       <div className="map-container mt-5">
         <h1 className="text-[#8c4e1d] text-lg md:text-xl font-semibold">Location</h1>
-        <img src={map} alt="Map" className="text-2xl"></img>
+        {/* insert map component here */}
+        <MapComponent latitude={27.658927968783715} longitude={76.59560895116964} />
       </div>
       <div className="mt-10 flex flex-col md:flex-row gap-2">
         <div className="flex flex-row gap-2">

@@ -1,3 +1,7 @@
+import ChatBotFeedback from "./ChatBotFeedback";
+import ChatBotHelpLines from "./ChatBotHelpLines"
+import ChatBotNearest from "./ChatBotNearest";
+
 export const steps = [
   {
     id: "0",
@@ -19,7 +23,8 @@ export const steps = [
       },
       { value: 2, label: "Fill a Feedback", trigger: "feedback" },
       { value: 3, label: "Helplines", trigger: "helplines" },
-      { value: 4, label: "Nearest Police station near me", trigger: "police" },
+      { value: 4, label: "Nearest Police station near me", trigger: "ask" },
+      {value:5,label:"Get Report of Police Station",trigger:"report"}
     ],
   },
   {
@@ -30,16 +35,47 @@ export const steps = [
   {
     id: "feedback",
     message: `For Filling a feedback these are the steps you need to follow...`,
-    trigger: "options",
+    trigger: "fillafeedback",
+  },
+  {
+    id:"fillafeedback",
+    component:<ChatBotFeedback/>,
+    trigger:"options"
   },
   {
     id: "helplines",
-    message: "helplines",
-    trigger: "options",
+    
+  component:<ChatBotHelpLines/>,
+  trigger:"options"
   },
   {
+    id:"ask",
+    message:"Sure !,Please Provide me with your Area's Pincode",
+    trigger:"input"
+  },
+  {
+    id:"input",
+    user:true,
+    trigger:"police"
+
+  },
+  
+  {
     id: "police",
-    message: "police",
+  component:<ChatBotNearest/>,
     trigger: "options",
   },
+  { id:"report",
+    message:"Please provide me with the name of the district you would want to get a report of",
+    trigger:"reportinput",
+
+  },
+
+  { id:"reportinput",
+  message:"input",
+trigger:"options"
+
+},
+
+
 ];
