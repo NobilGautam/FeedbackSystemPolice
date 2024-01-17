@@ -19,7 +19,7 @@ import { IoDownloadOutline } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 
 ChartJs.register(ArcElement, Tooltip, Legend);
-function TabData({ policeData }) {
+function TabData({ policeStation }) {
   const toast = useToast();
   const OverlayOne = () => (
     <ModalOverlay bg="none" backdropFilter="blur(10px)" backdropBlur="10px" />
@@ -32,9 +32,10 @@ function TabData({ policeData }) {
   const [status, setStatus] = useState("Connecting to server...");
   const { t } = useTranslation();
   useEffect(() => {
-    fetchStats(policeData.name);
+    fetchStats(policeStation);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [policeData.name]);
+  }, [policeStation]);
+
 
   if (!stats) {
     return null;
@@ -208,7 +209,7 @@ function TabData({ policeData }) {
       setStatus("Connecting to server...");
 
       const data = await fetch(
-        `https://flask-api-render-gzze.onrender.com/fetch_stats?send_email=false&ps=${policeData.name}`
+        `https://flask-api-render-gzze.onrender.com/fetch_stats?send_email=false&ps=${policeStation}`
       );
 
       setStatus("Creating file...");
@@ -218,7 +219,7 @@ function TabData({ policeData }) {
 
       const a = document.createElement("a");
       a.href = url;
-      a.download = `${policeData.name}.pdf`;
+      a.download = `${policeStation}.pdf`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -228,7 +229,7 @@ function TabData({ policeData }) {
 
       toast({
         title: "Download Complete",
-        description: `${policeData.name}.pdf has been downloaded successfully.`,
+        description: `${policeStation}.pdf has been downloaded successfully.`,
         status: "success",
         duration: 5000,
         isClosable: true,

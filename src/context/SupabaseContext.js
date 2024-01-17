@@ -27,10 +27,11 @@ export const SupabaseProvider = ({ children }) => {
   const [stats, setStats] = useState(null);
   const [allPolice, setAllPolice] = useState([]);
   const [statsLoading, setStatsLoading] = useState(true);
+  const [psstatsLoading, setPsStatsLoading] = useState(true);
   const [QR, setQR] = useState(false);
   const [show2, setShow2] = useState(false);
-  const [gri,setGri] = useState([])
-  const [admin,setAdmin]=useState('');
+  const [gri, setGri] = useState([]);
+  const [admin, setAdmin] = useState("");
 
   useEffect(() => {
     const fetchTableData = async () => {
@@ -128,7 +129,7 @@ export const SupabaseProvider = ({ children }) => {
         console.error("Error fetching Grievance:", error.message);
         throw error;
       } else {
-        setGri(data)
+        setGri(data);
       }
     } catch (error) {
       console.error("Error fetching Grievance:", error.message);
@@ -184,6 +185,7 @@ export const SupabaseProvider = ({ children }) => {
   };
 
   const [statsData, updateData] = useState([]);
+  const [psStatsData, setPsStats] = useState([]);
   const [formData, setFormData] = useState([]);
   const fetchPSstats = async (form) => {
     try {
@@ -196,6 +198,25 @@ export const SupabaseProvider = ({ children }) => {
       } else {
         console.log("Data updated successfully");
         updateData(data);
+      }
+    } catch (error) {
+      console.error("Error updating visit:", error.message);
+    }
+  };
+
+  const fetchPSstatsName = async (ps) => {
+    try {
+      setPsStatsLoading(true)
+      const { data, error } = await supabase
+        .from(psStats)
+        .select("*")
+        .filter("policeStation", "eq", ps);
+      if (error) {
+        console.error("Error updating data:", error.message);
+      } else {
+        console.log("Data updated successfully");
+        setPsStats(data)
+        setPsStatsLoading(false)
       }
     } catch (error) {
       console.error("Error updating visit:", error.message);
@@ -368,6 +389,9 @@ export const SupabaseProvider = ({ children }) => {
         QR,
         show2,
         gri,
+        psStatsData,
+        psstatsLoading,
+        fetchPSstatsName,
         setIndividual,
         handleSubmit,
         fetchVisits,
@@ -380,7 +404,7 @@ export const SupabaseProvider = ({ children }) => {
         setQR,
         setShow2,
         fetchGri,
-        griSubmit
+        griSubmit,
       }}
     >
       {children}
