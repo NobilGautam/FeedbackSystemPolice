@@ -59,7 +59,11 @@ function Navbar({ isAdminLoggedIn, onAdminLogout }) {
       link: "/myVisits",
       icon: <IoCheckmarkCircleOutline />,
     },
-    user && { name: "Grievance", link: "/grievance", icon: <IoWarningOutline /> },
+    user && {
+      name: "Grievance",
+      link: "/grievance",
+      icon: <IoWarningOutline />,
+    },
   ];
 
   const [selectedLink, setSelectedLink] = useState(
@@ -237,97 +241,95 @@ function Navbar({ isAdminLoggedIn, onAdminLogout }) {
               </Link>
             </li>
           ))}
-          {!isAdminLoggedIn && !user?
-          
-          <>
-   <li className="md:ml-8 text-xl md:my-0 my-7">
-              <Link
-                onClick={signIN}
-                className="text-white hover:text-gray-400 duration-500"
-              >
-                {t("navbar.login")}
-              </Link>
-            </li>
-            <li className="md:ml-8 text-xl md:my-0 my-7">
-              <Link
-               to='/admin'
-                className="text-white hover:text-gray-400 duration-500"
-              >
-             Admin
-              </Link>
-            </li>
-          </>
-          
-          :
-          <>
-          { !isAdminLoggedIn?
-          <>
-          
-          {user ? (
-            <Menu>
-              <MenuButton
-                as={IconButton}
-                className="ml-5"
-                icon={
-                  <img
-                    src={user.photoURL}
-                    className="rounded-full"
-                    alt={user.displayName}
-                    style={{
-                      width: "40px",
-                      height: "40px",
-                      objectFit: "cover",
-                    }}
-                  />
-                }
-                style={{
-                  backgroundColor: "#F0F0F0",
-                  borderRadius: "50%",
-                }}
-                size="lg"
-              />
-              <MenuList>
-                {user ? (
-                  <MenuGroup title={`Namaste, ${user.displayName}`} />
-                ) : (
-                  <MenuItem>
-                    <IoLogInOutline />
-                    <Link onClick={signIN}>{t("navbar.login")}</Link>
-                  </MenuItem>
-                )}
-                <MenuItem>
-                  <IoLogOutOutline />
-                  <Link
-                    onClick={signout}
-                    className="text-red-500 w-full ml-2 hover:text-gray-400 duration-500"
-                  >
-                    {t("navbar.logout")}
-                  </Link>
-                </MenuItem>
-              </MenuList>
-            </Menu>
+          {!isAdminLoggedIn && !user ? (
+            <>
+              <li className="md:ml-8 text-xl md:my-0 my-7">
+                <Link
+                  onClick={signIN}
+                  className="text-white hover:text-gray-400 duration-500"
+                >
+                  {t("navbar.login")}
+                </Link>
+              </li>
+              <li className="md:ml-8 text-xl md:my-0 my-7">
+                <Link
+                  to="/admin"
+                  className="text-white hover:text-gray-400 duration-500"
+                >
+                  Admin
+                </Link>
+              </li>
+            </>
           ) : (
-            <li className="md:ml-8 text-xl md:my-0 my-7">
-              <Link
-                onClick={signIN}
-                className="text-white hover:text-gray-400 duration-500"
-              >
-                {t("navbar.login")}
-              </Link>
-            </li>
+            <>
+              {!isAdminLoggedIn ? (
+                <>
+                  {user ? (
+                    <Menu>
+                      <MenuButton
+                        as={IconButton}
+                        className="ml-5"
+                        icon={
+                          <img
+                            src={user.photoURL}
+                            className="rounded-full"
+                            alt={user.displayName}
+                            style={{
+                              width: "40px",
+                              height: "40px",
+                              objectFit: "cover",
+                            }}
+                          />
+                        }
+                        style={{
+                          backgroundColor: "#F0F0F0",
+                          borderRadius: "50%",
+                        }}
+                        size="lg"
+                      />
+                      <MenuList>
+                        {user ? (
+                          <MenuGroup title={`Namaste, ${user.displayName}`} />
+                        ) : (
+                          <MenuItem>
+                            <IoLogInOutline />
+                            <Link onClick={signIN}>{t("navbar.login")}</Link>
+                          </MenuItem>
+                        )}
+                        <MenuItem>
+                          <IoLogOutOutline />
+                          <Link
+                            onClick={signout}
+                            className="text-red-500 w-full ml-2 hover:text-gray-400 duration-500"
+                          >
+                            {t("navbar.logout")}
+                          </Link>
+                        </MenuItem>
+                      </MenuList>
+                    </Menu>
+                  ) : (
+                    <li className="md:ml-8 text-xl md:my-0 my-7">
+                      <Link
+                        onClick={signIN}
+                        className="text-white hover:text-gray-400 duration-500"
+                      >
+                        {t("navbar.login")}
+                      </Link>
+                    </li>
+                  )}
+                </>
+              ) : (
+                <li className="md:ml-8 text-xl md:my-0 my-7">
+                  <Link
+                    onClick={onAdminLogout}
+                    className="text-white hover:text-gray-400 duration-500"
+                  >
+                    Logout
+                  </Link>
+                </li>
+              )}
+            </>
           )}
-          </>
-          :<li className="md:ml-8 text-xl md:my-0 my-7">
-          <Link
-            onClick={onAdminLogout}
-            className="text-white hover:text-gray-400 duration-500"
-          >
-           Logout
-          </Link>
-        </li>
-}
-</>
-}
         </ul>
       </div>
     </div>

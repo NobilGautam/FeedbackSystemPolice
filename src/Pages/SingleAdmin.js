@@ -7,30 +7,31 @@ import TabData from "../components/TabData";
 import TabFeedbacks from "../components/TabFeedbacks";
 import TabGri from "../components/TabGri";
 
-
-
 function SingleAdmin({ isAdminLoggedin }) {
   // When the application starts
   const storedToken = sessionStorage.getItem("authToken");
-  
 
   const isAuthenticated = !!storedToken;
-  const { fetchPSstatsName, psstatsLoading ,psStatsData } = useSupabase();
+  const { fetchPSstatsName, psstatsLoading, psStatsData } = useSupabase();
   const { pincode } = useParams();
   const [ps, setPs] = useState([]);
   useEffect(() => {
     const fetching = async () => {
-      await fetchPSstatsName(pincode)
+      await fetchPSstatsName(pincode);
       setPs(psStatsData);
     };
-    fetching()
+    fetching();
   }, [pincode]);
 
-  console.log(psStatsData[0])
-  console.log(ps)
+  console.log(psStatsData[0]);
+  console.log(ps);
 
   if (!isAuthenticated) {
-    return <h1 className=" text-[#8C431D] font-semibold text-2xl text-center h-[100vh] flex items-center justify-center">ADMIN LOGGED OUT SUCCESSFULLY...</h1>;
+    return (
+      <h1 className=" text-[#8C431D] font-semibold text-2xl text-center h-[100vh] flex items-center justify-center">
+        ADMIN LOGGED OUT SUCCESSFULLY...
+      </h1>
+    );
   }
   if (psstatsLoading) {
     return <h1 className="mt-32">Loading...</h1>;
@@ -38,10 +39,11 @@ function SingleAdmin({ isAdminLoggedin }) {
 
   return (
     <div className="mt-32">
-       <div>
-            <h1 className="text-[#8c4e1d] text-3xl font-semibold">HI ADMIN_{psStatsData[0].policeStation}</h1>
-           
-        </div>
+      <div>
+        <h1 className="text-[#8c4e1d] text-3xl font-semibold">
+          HI ADMIN_{psStatsData[0].policeStation}
+        </h1>
+      </div>
       <Tabs
         isLazy
         defaultIndex={0}
@@ -65,10 +67,10 @@ function SingleAdmin({ isAdminLoggedin }) {
             <TabData policeStation={psStatsData[0].policeStation} />
           </TabPanel>
           <TabPanel bgColor={"#FFFFFF"}>
-            <TabFeedbacks policeStation={psStatsData[0].policeStation}/>
+            <TabFeedbacks policeStation={psStatsData[0].policeStation} />
           </TabPanel>
           <TabPanel bgColor={"#FFFFFF"}>
-            <TabGri/>
+            <TabGri />
           </TabPanel>
         </TabPanels>
       </Tabs>

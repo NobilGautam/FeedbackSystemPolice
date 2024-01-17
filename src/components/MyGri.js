@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSupabase } from "../context/SupabaseContext";
-import SingleFeedbackPost from "./SingleFeedbackPost";
 
 const MyGri = () => {
   const { fetchGri, gri } = useSupabase();
@@ -27,14 +26,16 @@ const MyGri = () => {
         <p>Loading...</p>
       ) : (
         data.map((item) => {
-            return <div>
-                <p>{item.created_at}</p>
-                <p>{item.name}</p>
-                <p>{item.email}</p>
-                <p>{item.policeStation}</p>
-                <p>{item.subject}</p>
-                <p>{item.explain}</p>
+          return (
+            <div>
+              <p>{item.created_at}</p>
+              <p>{item.name}</p>
+              <p>{item.email}</p>
+              <p>{item.policeStation}</p>
+              <p>{item.subject}</p>
+              <p>{item.explain}</p>
             </div>
+          );
         })
       )}
     </div>

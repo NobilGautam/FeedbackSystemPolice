@@ -15,7 +15,7 @@ function SingleCommPost({ item }) {
   const { t } = useTranslation();
   const match = item.name.match(/(\d+)$/);
   const cityNumber = match ? match[1] : null;
-  const cityName = item.name.replace(/\d+$/, '').trim();
+  const cityName = item.name.replace(/\d+$/, "").trim();
 
   useEffect(() => {
     let number = 0;
@@ -54,7 +54,9 @@ function SingleCommPost({ item }) {
       <ImageCard ImgSrc={item.image}>
         <div className="w-full h-full flex justify-between items-center">
           <div>
-            <h1 className="font-sans font-bold text-2xl">{`${t(`policeStation.${cityName}`)} ${cityNumber}`}</h1>
+            <h1 className="font-sans font-bold text-2xl">{`${t(
+              `policeStation.${cityName}`
+            )} ${cityNumber}`}</h1>
             <div className="flex w-full items-center justify-start">
               <Text className="mr-2">{item.address}</Text>
               <Text color="blue.600" fontSize="sm" className="flex">

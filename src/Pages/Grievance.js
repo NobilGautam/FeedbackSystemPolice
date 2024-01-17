@@ -86,10 +86,10 @@ function Grievance() {
   // };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    await griSubmit(formData)
-    console.log("Done",formData)
-  }
+    e.preventDefault();
+    await griSubmit(formData);
+    console.log("Done", formData);
+  };
 
   return (
     <Flex justify="center" align="center" h="100vh" className="mt-32">
@@ -136,8 +136,12 @@ function Grievance() {
             Select Police Station
           </FormLabel>
           <Select
-          value={formData.policeStation}
-          onChange={(e) => handleInputChange({ target: { name: 'policeStation', value: e.target.value } })}
+            value={formData.policeStation}
+            onChange={(e) =>
+              handleInputChange({
+                target: { name: "policeStation", value: e.target.value },
+              })
+            }
           >
             {policeData.map((data) => (
               <option key={data.id} value={data.name}>

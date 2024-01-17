@@ -1,14 +1,10 @@
 import React from "react";
 import { Input } from "@chakra-ui/react";
-import { useSSR, useTranslation } from "react-i18next";
 import { useState } from "react";
 import { Button } from "@chakra-ui/react";
-import { useSupabase } from "../context/SupabaseContext";
 import { useNavigate } from "react-router";
 
 function Admin({ handleAdminLogin }) {
-  const { t } = useTranslation();
-
   const [pincode, setPincode] = useState("");
   const [userpass, setUserPass] = useState("");
 

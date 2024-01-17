@@ -9,7 +9,7 @@ function QR() {
   useEffect(() => {
     setQR(true);
     navigator(`/single/${id}`);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return <></>;
 }

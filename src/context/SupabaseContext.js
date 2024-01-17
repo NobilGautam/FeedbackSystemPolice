@@ -306,12 +306,11 @@ export const SupabaseProvider = ({ children }) => {
     if (statsData.length !== 0) updatePSstats(statsData, formData);
   }, [statsData]);
 
-  const updateVisit = async (documentId, form, followup) => {
+  const updateVisit = async (documentId, form, followup,Comment) => {
     try {
       let updateData;
 
       if (form) {
-        // Code block for handling form data
         updateData = {
           name: form.name,
           age: form.age,
@@ -331,6 +330,10 @@ export const SupabaseProvider = ({ children }) => {
       } else if (followup) {
         updateData = {
           follow_up: followup,
+        };
+      } else if (Comment) {
+        updateData = {
+          comment: Comment,
         };
       } else {
         console.error("Neither form nor followup provided for update.");
