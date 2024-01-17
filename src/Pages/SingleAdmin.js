@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useParams } from "react-router";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import TabData from "../components/TabData";
+import TabFeedbacks from "../components/TabFeedbacks";
+import TabGri from "../components/TabGri";
 
 function SingleAdmin({ isAdminLoggedin }) {
   // When the application starts
@@ -32,11 +34,11 @@ function SingleAdmin({ isAdminLoggedin }) {
 
   return (
     <div className="mt-32">
-        <div>
+       <div>
             <h1 className="text-[#8c4e1d] text-3xl font-semibold">HI ADMIN_{psStatsData[0].policeStation}</h1>
             <p className="text-[#8C4E1D] font-semibold mt-5">Following are your Feedbacks</p>
         </div>
-          <Tabs
+      <Tabs
         isLazy
         defaultIndex={0}
         isFitted
@@ -58,8 +60,12 @@ function SingleAdmin({ isAdminLoggedin }) {
           <TabPanel bgColor={"#FFFFFF"}>
             <TabData policeStation={psStatsData[0].policeStation} />
           </TabPanel>
-          <TabPanel bgColor={"#FFFFFF"}></TabPanel>
-          <TabPanel bgColor={"#FFFFFF"}></TabPanel>
+          <TabPanel bgColor={"#FFFFFF"}>
+            <TabFeedbacks policeStation={psStatsData[0].policeStation}/>
+          </TabPanel>
+          <TabPanel bgColor={"#FFFFFF"}>
+            <TabGri/>
+          </TabPanel>
         </TabPanels>
       </Tabs>
     </div>
