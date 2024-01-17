@@ -25,15 +25,14 @@ const Feedback = () => {
   const [addressLinks, setAddressLinks] = useState(new Map());
   const [searchTerm, setSearchTerm] = useState("");
   const [flag, setFlag] = useState(true);
-  const [sortState, setSortState] = useState("name");
+  const [sortState, setSortState] = useState("day_Reported");
   const { t } = useTranslation();
-  const {documentID} = useParams()
+  const { documentID } = useParams();
   const blinkDoc = documentID || "";
   const sortMethods = {
     none: { method: null },
     name: { method: "policeStation" },
     name_dsc: { method: "policeStation" },
-
     day_Reported: { method: "created_at" },
   };
 
@@ -44,13 +43,13 @@ const Feedback = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const sort = (sortState) => {
-    if (
-      sortState === "name" ||
-      sortState === "rating" ||
-      sortState === "day_Reported"
-    )
+    if (sortState === "name" || sortState === "rating") {
       feedback.sort(sortBy(sortMethods[sortState].method));
-    else feedback.sort(sortByRev(sortMethods[sortState].method));
+    } else if (sortState === "day_Reported") {
+      feedback.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    } else {
+      feedback.reverse();
+    }
     setFlag(!flag);
   };
 
@@ -77,23 +76,21 @@ const Feedback = () => {
 
   const sortBy = (field) => (a, b) =>
     (a[field] > b[field]) - (a[field] < b[field]);
-  const sortByRev = (field) => (a, b) =>
-    (a[field] < b[field]) - (a[field] > b[field]);
 
-    const handlechange = async (e) => {
-      try {
-        const response = await axios.post('https://libretranslate.de/translate', {
-          q: e.target.value,
-          source: 'auto',
-          target: 'en',
-        });
-  
-        setSearchTerm(response.data.translatedText);
-      } catch (error) {
-        console.error('Error translating text:', error);
-        setSearchTerm(e.target.value);
-      }
-    };
+  const handlechange = async (e) => {
+    try {
+      const response = await axios.post("https://libretranslate.de/translate", {
+        q: e.target.value,
+        source: "auto",
+        target: "en",
+      });
+
+      setSearchTerm(response.data.translatedText);
+    } catch (error) {
+      console.error("Error translating text:", error);
+      setSearchTerm(e.target.value);
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (searchTerm.trimStart().length === 0) {
@@ -106,6 +103,10 @@ const Feedback = () => {
 
     setFeedback(temp);
   };
+
+  useEffect(() => {
+    sort(sortState)
+  },[feedback])
 
   return (
     <div className="mt-20 md:mt-24 pt-10">
@@ -123,9 +124,9 @@ const Feedback = () => {
         </form>
         <div className="flex mt-4 md:mt-0">
           <select
-            defaultValue="None"
+            defaultValue="day_Reported"
             className="border rounded px-4 py-2 shadow-md bg-white"
-            onChange={(e) => setSortState(e.target.value)}
+            onChange={(e) => sort(e.target.value)}
           >
             <option value="name">{t("sort.name")}</option>
             <option value="name_dsc">{t("sort.nameDesc")}</option>

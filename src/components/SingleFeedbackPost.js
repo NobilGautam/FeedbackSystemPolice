@@ -39,7 +39,7 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks, blink }) {
 
       const timeoutId = setTimeout(() => {
         setIsBlinking(false);
-      }, 2000);
+      }, 60000);
 
       return () => clearTimeout(timeoutId);
     }
