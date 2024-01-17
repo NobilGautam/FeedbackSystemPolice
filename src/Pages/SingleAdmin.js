@@ -24,7 +24,7 @@ function SingleAdmin({ isAdminLoggedin }) {
   console.log(ps)
 
   if (!isAuthenticated) {
-    return <h1 className="mt-32">Login admin first</h1>;
+    return <h1 className=" text-[#8C431D] font-semibold text-2xl text-center h-[100vh] flex items-center justify-center">ADMIN LOGGED OUT SUCCESSFULLY...</h1>;
   }
   if (psstatsLoading) {
     return <h1 className="mt-32">Loading...</h1>;
@@ -32,7 +32,11 @@ function SingleAdmin({ isAdminLoggedin }) {
 
   return (
     <div className="mt-32">
-      <Tabs
+        <div>
+            <h1 className="text-[#8c4e1d] text-3xl font-semibold">HI ADMIN_{psStatsData[0].policeStation}</h1>
+            <p className="text-[#8C4E1D] font-semibold mt-5">Following are your Feedbacks</p>
+        </div>
+          <Tabs
         isLazy
         defaultIndex={0}
         isFitted
