@@ -29,6 +29,7 @@ function Admin({handleAdminLogin}) {
         return alert("INVALID CREDITENTIAL");
     
     }
+    sessionStorage.setItem('authToken', 'your_token_here');
         handleAdminLogin();
         
         navigator(`/singleAdmin/${pincode}`);
