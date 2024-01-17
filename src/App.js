@@ -42,7 +42,7 @@ function App() {
     setTimeout(() => {
       setIntitalLoader(false);
       
-    }, 2000);
+    }, 2500);
   },[])
 
   const { t } = useTranslation();
