@@ -10,7 +10,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { useToast } from "@chakra-ui/react";
 import { encrypt } from "n-krypta";
 import { useTranslation } from "react-i18next";
-
+import axios from "axios";
 var Sentiment = require("sentiment");
 var sentiment = new Sentiment();
 
@@ -32,7 +32,7 @@ function Form() {
     updateVisit,
     tableData: policeData,
   } = useSupabase();
-
+  console.log(individual.mobile);
   const { documentId } = useParams();
 
   useEffect(() => {
@@ -95,7 +95,19 @@ function Form() {
   
     return randomString;
   }
-
+     const handleSendFollowup = async () => {
+    try {
+      const response = await axios.get(
+        "https://feedback-server-59l6.onrender.com/send-followup",
+        {
+          params: {
+            recipient: individual.mobile,
+          },
+          responseType: "json",
+        }
+      );
+    } catch (error) {}
+  };
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -103,6 +115,7 @@ function Form() {
       alert("CHECK THE CAPTCHA");
       return;
     }
+        
 
     const updatedFormData = {
       name: form.fname,
@@ -134,6 +147,8 @@ function Form() {
         loading: { title: "Recording Feedback", description: "Please wait" },
       });
     }
+ 
+  handleSendFollowup();
 
     setTimeout(() => {
       setForm({
