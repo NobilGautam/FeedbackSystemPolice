@@ -105,8 +105,8 @@ const Feedback = () => {
   };
 
   useEffect(() => {
-    sort(sortState)
-  },[feedback])
+    sort(sortState);
+  }, [feedback]);
 
   return (
     <div className="mt-20 md:mt-24 pt-10">
@@ -130,8 +130,6 @@ const Feedback = () => {
           >
             <option value="name">{t("sort.name")}</option>
             <option value="name_dsc">{t("sort.nameDesc")}</option>
-            <option value="rating">{t("sort.rating")}</option>
-            <option value="rating_dsc">{t("sort.ratingDesc")}</option>
             <option value="day_Reported">{t("sort.dayReported")}</option>
           </select>
           <Button

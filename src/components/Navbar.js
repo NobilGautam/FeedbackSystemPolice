@@ -25,6 +25,7 @@ import {
   IoLogInOutline,
   IoLogOutOutline,
   IoMenu,
+  IoWarningOutline,
 } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 
@@ -58,6 +59,7 @@ function Navbar() {
       link: "/myVisits",
       icon: <IoCheckmarkCircleOutline />,
     },
+    user && { name: "Grievance", link: "/grievance", icon: <IoWarningOutline /> },
   ];
 
   const [selectedLink, setSelectedLink] = useState(
