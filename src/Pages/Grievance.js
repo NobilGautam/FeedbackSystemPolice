@@ -11,7 +11,7 @@ import React, { useState } from "react";
 import emailjs from "emailjs-com";
 import { useSupabase } from "../context/SupabaseContext";
 
-function Grivance() {
+function Grievance() {
   const { tableData: policeData } = useSupabase();
   const [formData, setFormData] = useState({
     name: "",
@@ -157,4 +157,4 @@ function Grivance() {
   );
 }
 
-export default Grivance;
+export default Grievance;
