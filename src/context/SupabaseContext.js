@@ -27,8 +27,11 @@ export const SupabaseProvider = ({ children }) => {
   const [stats, setStats] = useState(null);
   const [allPolice, setAllPolice] = useState([]);
   const [statsLoading, setStatsLoading] = useState(true);
+  const [psstatsLoading, setPsStatsLoading] = useState(true);
   const [QR, setQR] = useState(false);
   const [show2, setShow2] = useState(false);
+  const [gri, setGri] = useState([]);
+  const [admin, setAdmin] = useState("");
 
   useEffect(() => {
     const fetchTableData = async () => {
@@ -75,17 +78,17 @@ export const SupabaseProvider = ({ children }) => {
   const fetchVisits = async (userEmail, documentID) => {
     try {
       let supabaseQuery = supabase.from(visitsTableName).select("*");
-  
+
       if (userEmail) {
         supabaseQuery = supabaseQuery.filter("email", "eq", userEmail);
       }
-  
+
       if (documentID) {
         supabaseQuery = supabaseQuery.filter("documentID", "eq", documentID);
       }
-  
+
       const { data, error } = await supabaseQuery;
-  
+
       if (error) {
         console.error("Error fetching visits:", error.message);
       } else {
@@ -94,13 +97,12 @@ export const SupabaseProvider = ({ children }) => {
         setGlobalVisits(visitsData);
         setFeedback(visitsData);
         setVisitsLoader(false);
-        return visitsData
+        return visitsData;
       }
     } catch (error) {
       console.error("Error fetching visits:", error.message);
     }
   };
-  
 
   const fetchStats = async (ps) => {
     try {
@@ -116,6 +118,22 @@ export const SupabaseProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("Error fetching visits:", error.message);
+    }
+  };
+
+  const fetchGri = async () => {
+    try {
+      const { data, error } = await supabase.from("gri").select("*");
+
+      if (error) {
+        console.error("Error fetching Grievance:", error.message);
+        throw error;
+      } else {
+        setGri(data);
+      }
+    } catch (error) {
+      console.error("Error fetching Grievance:", error.message);
+      throw error;
     }
   };
 
@@ -142,7 +160,32 @@ export const SupabaseProvider = ({ children }) => {
     }
   };
 
+  const griSubmit = async (formData) => {
+    try {
+      const { data, error } = await supabase.from("gri").insert([
+        {
+          name: formData.name,
+          created_at: new Date().toISOString(),
+          phoneNumber: formData.phoneNumber,
+          email: formData.email,
+          subject: formData.subject,
+          policeStation: formData.policeStation,
+          explanation: formData.explanation,
+        },
+      ]);
+
+      if (error) {
+        console.error("Error inserting data:", error.message);
+      } else {
+        console.log("Data inserted successfully:", data);
+      }
+    } catch (error) {
+      console.error("Error processing form submission:", error.message);
+    }
+  };
+
   const [statsData, updateData] = useState([]);
+  const [psStatsData, setPsStats] = useState([]);
   const [formData, setFormData] = useState([]);
   const fetchPSstats = async (form) => {
     try {
@@ -155,6 +198,25 @@ export const SupabaseProvider = ({ children }) => {
       } else {
         console.log("Data updated successfully");
         updateData(data);
+      }
+    } catch (error) {
+      console.error("Error updating visit:", error.message);
+    }
+  };
+
+  const fetchPSstatsName = async (ps) => {
+    try {
+      setPsStatsLoading(true)
+      const { data, error } = await supabase
+        .from(psStats)
+        .select("*")
+        .filter("policeStation", "eq", ps);
+      if (error) {
+        console.error("Error updating data:", error.message);
+      } else {
+        console.log("Data updated successfully");
+        setPsStats(data)
+        setPsStatsLoading(false)
       }
     } catch (error) {
       console.error("Error updating visit:", error.message);
@@ -247,7 +309,7 @@ export const SupabaseProvider = ({ children }) => {
   const updateVisit = async (documentId, form, followup) => {
     try {
       let updateData;
-  
+
       if (form) {
         // Code block for handling form data
         updateData = {
@@ -268,18 +330,18 @@ export const SupabaseProvider = ({ children }) => {
         };
       } else if (followup) {
         updateData = {
-          follow_up: followup
+          follow_up: followup,
         };
       } else {
         console.error("Neither form nor followup provided for update.");
         return;
       }
-  
+
       const { data, error } = await supabase
         .from(visitsTableName)
         .update([updateData])
         .match({ documentID: documentId });
-  
+
       if (error) {
         console.error("Error updating data:", error.message);
       } else {
@@ -291,7 +353,6 @@ export const SupabaseProvider = ({ children }) => {
       console.error("Error updating visit:", error.message);
     }
   };
-  
 
   const fetchReviews = async (policeStation) => {
     try {
@@ -327,6 +388,10 @@ export const SupabaseProvider = ({ children }) => {
         allPolice,
         QR,
         show2,
+        gri,
+        psStatsData,
+        psstatsLoading,
+        fetchPSstatsName,
         setIndividual,
         handleSubmit,
         fetchVisits,
@@ -338,6 +403,8 @@ export const SupabaseProvider = ({ children }) => {
         fetchStats,
         setQR,
         setShow2,
+        fetchGri,
+        griSubmit,
       }}
     >
       {children}

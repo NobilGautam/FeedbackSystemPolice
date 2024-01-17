@@ -25,10 +25,11 @@ import {
   IoLogInOutline,
   IoLogOutOutline,
   IoMenu,
+  IoWarningOutline,
 } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 
-function Navbar() {
+function Navbar({ isAdminLoggedIn, onAdminLogout }) {
   const navigator = useNavigate();
   const [user] = useAuthState(Auth);
   const { t, i18n } = useTranslation();
@@ -58,6 +59,7 @@ function Navbar() {
       link: "/myVisits",
       icon: <IoCheckmarkCircleOutline />,
     },
+    user && { name: "Grievance", link: "/grievance", icon: <IoWarningOutline /> },
   ];
 
   const [selectedLink, setSelectedLink] = useState(
@@ -235,6 +237,32 @@ function Navbar() {
               </Link>
             </li>
           ))}
+          {!isAdminLoggedIn && !user?
+          
+          <>
+   <li className="md:ml-8 text-xl md:my-0 my-7">
+              <Link
+                onClick={signIN}
+                className="text-white hover:text-gray-400 duration-500"
+              >
+                {t("navbar.login")}
+              </Link>
+            </li>
+            <li className="md:ml-8 text-xl md:my-0 my-7">
+              <Link
+               to='/admin'
+                className="text-white hover:text-gray-400 duration-500"
+              >
+             Admin
+              </Link>
+            </li>
+          </>
+          
+          :
+          <>
+          { !isAdminLoggedIn?
+          <>
+          
           {user ? (
             <Menu>
               <MenuButton
@@ -288,6 +316,18 @@ function Navbar() {
               </Link>
             </li>
           )}
+          </>
+          :<li className="md:ml-8 text-xl md:my-0 my-7">
+          <Link
+            onClick={onAdminLogout}
+            className="text-white hover:text-gray-400 duration-500"
+          >
+           Logout
+          </Link>
+        </li>
+}
+</>
+}
         </ul>
       </div>
     </div>
