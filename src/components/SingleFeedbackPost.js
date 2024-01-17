@@ -5,25 +5,35 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import {
+  Box,
   Card,
   CardBody,
   CardFooter,
   Heading,
+  IconButton,
   Image,
   Stack,
+  Text,
 } from "@chakra-ui/react";
 import { decrypt } from "n-krypta";
 import { Share } from "react-twitter-widgets";
 import { useTranslation } from "react-i18next";
+import { IoPencilOutline } from "react-icons/io5";
+import { useNavigate } from "react-router";
 
 function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
   const { t } = useTranslation();
   const match = item.policeStation.match(/(\d+)$/);
   const cityNumber = match ? match[1] : null;
   const cityName = item.policeStation.replace(/\d+$/, "").trim();
+  const navigator = useNavigate()
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
+
+  const navigate = () => {
+    navigator(`/followupform/${item.documentID}`)
+  }
 
   const formatTimestamp = (timestamp) => {
     const date = timestamp ? new Date(timestamp) : null;
@@ -71,13 +81,18 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
               `policeStation.${cityName}`
             )} ${cityNumber}`}</Heading>
             <p className="py-2">
-              <span className="font-semibold">{t("home.address")} </span>
+              <span className="font-semibold">{t("home.address")}: </span>
               {addressLinks.get(item.policeStation)}
             </p>
             <p className="py-2">
               <span className="font-semibold">{t("myFeedback.rdt")}</span>
               {formatTimestamp(item.created_at)}
             </p>
+            <span className="font-semibold">Status:</span>
+            <Box className="w-fit" border="1px solid #ccc" p={2} borderRadius="md" display="flex" alignItems="center">
+              <Text className="mr-4" flex="1">{item.follow_up || "No Status Set"}</Text>
+                <IconButton onClick={navigate} isDisabled={item.follow_up === "Resolved"} icon={<IoPencilOutline />} aria-label="Edit" colorScheme="orange"/>
+            </Box>
           </CardBody>
           <CardFooter>
             <div>

@@ -10,17 +10,24 @@ import {
   Flex,
   useToast,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSupabase } from "../context/SupabaseContext";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 function FollowupForm() {
-  const [documentId, setDocumentId] = useState("");
+  const { documentID } = useParams()
+  const [documentId, setDocumentId] = useState(documentID || "");
   const [status, setStatus] = useState("Resolved");
   const [isValidDocumentId, setIsValidDocumentId] = useState(true);
   const { fetchVisits, updateVisit } = useSupabase();
   const toast = useToast();
   const navigator = useNavigate();
+
+  console.log(documentID)
+
+  useEffect(() => {
+    setDocumentId(documentID || "");
+  }, [documentID]);
 
   const validateDocumentId = () => {
     const uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
@@ -100,6 +107,7 @@ function FollowupForm() {
             onChange={(e) => setDocumentId(e.target.value)}
             onBlur={validateDocumentId}
             isInvalid={!isValidDocumentId}
+            isDisabled={documentID}
           />
           <FormHelperText>
             You can find it in the Text Message received during the visit

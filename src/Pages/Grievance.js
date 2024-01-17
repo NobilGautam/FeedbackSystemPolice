@@ -11,7 +11,7 @@ import React, { useState } from "react";
 import emailjs from "emailjs-com";
 import { useSupabase } from "../context/SupabaseContext";
 
-function Grivance() {
+function Grievance() {
   const { tableData: policeData } = useSupabase();
   const [formData, setFormData] = useState({
     name: "",
@@ -84,7 +84,7 @@ function Grivance() {
   };
 
   return (
-    <Flex justify="center" align="center" h="100vh">
+    <Flex justify="center" align="center" h="100vh" className="mt-32">
       <form onSubmit={handleSubmit} className="w-[80%] bg-white p-4 rounded-md">
         <FormControl isRequired>
           <FormLabel>Name</FormLabel>
@@ -157,4 +157,4 @@ function Grivance() {
   );
 }
 
-export default Grivance;
+export default Grievance;

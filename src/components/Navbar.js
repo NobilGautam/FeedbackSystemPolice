@@ -60,7 +60,6 @@ function Navbar() {
     },
   ];
 
-  console.log(link);
   const [selectedLink, setSelectedLink] = useState(
     `${
       link.pathname === "/myfeedback"
