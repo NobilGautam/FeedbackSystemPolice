@@ -68,6 +68,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         {user && <Route path="/myfeedback" element={<Feedback />}></Route>}
+        {user && <Route path="/myfeedback/:documentID" element={<Feedback />}></Route>}
         <Route path="/single/:id" element={<Single />}></Route>
         {user && <Route path="/myVisits" element={<MyVisits />}></Route>}
         {user && <Route path="/newFeedback/:documentId" element={<Form />} />}

@@ -91,3 +91,19 @@ blockquote.yes {
   margin-left: 20px;
   margin-right: 20px;
 }
+
+@keyframes blinkAnimation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-blink {
+  animation: blinkAnimation 1s infinite; /* Adjust the duration as needed */
+}

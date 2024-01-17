@@ -7,17 +7,20 @@ import {
   Input,
   Select,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import emailjs from "emailjs-com";
 import { useSupabase } from "../context/SupabaseContext";
 
 function Grievance() {
   const { tableData: policeData } = useSupabase();
+  const [formPsEmail, setPsEmail] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     phoneNumber: "",
+    email: "",
     subject: "",
     policeStation: "",
+    ps_email: "",
     explanation: "",
     supportingMedia: null,
   });
@@ -38,6 +41,14 @@ function Grievance() {
     });
   };
 
+  useEffect(() => {
+    for(var i = 0;i < policeData.length;i++){
+      if(policeData[i].name === formData.policeStation){
+        setPsEmail(policeData[i].email)
+      }
+    }
+  },[policeData,formData.policeStation])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -49,6 +60,8 @@ function Grievance() {
       const data = {
         name: formData.name,
         phoneNumber: formData.phoneNumber,
+        email: formData.email,
+        ps_email: formPsEmail,
         subject: formData.subject,
         policeStation: formData.policeStation,
         explanation: formData.explanation,
@@ -105,6 +118,15 @@ function Grievance() {
             value={formData.phoneNumber}
             onChange={handleInputChange}
           />
+          <FormLabel className="mt-4">Email</FormLabel>
+          <Input
+            type="email"
+            size="sm"
+            placeholder="abc@gmail.com"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+          />
           <FormLabel className="mt-4" as="legend">
             Subject of Grivance
           </FormLabel>
@@ -118,7 +140,10 @@ function Grievance() {
           <FormLabel className="mt-4" as="legend">
             Select Police Station
           </FormLabel>
-          <Select>
+          <Select
+          value={formData.policeStation}
+          onChange={(e) => handleInputChange({ target: { name: 'policeStation', value: e.target.value } })}
+          >
             {policeData.map((data) => (
               <option key={data.id} value={data.name}>
                 {data.name}

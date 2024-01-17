@@ -8,6 +8,7 @@ import { useSupabase } from "../context/SupabaseContext";
 import { Button, Input } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
+import { useParams } from "react-router";
 
 const Feedback = () => {
   const {
@@ -26,7 +27,8 @@ const Feedback = () => {
   const [flag, setFlag] = useState(true);
   const [sortState, setSortState] = useState("name");
   const { t } = useTranslation();
-
+  const {documentID} = useParams()
+  const blinkDoc = documentID || "";
   const sortMethods = {
     none: { method: null },
     name: { method: "policeStation" },
@@ -89,7 +91,7 @@ const Feedback = () => {
         setSearchTerm(response.data.translatedText);
       } catch (error) {
         console.error('Error translating text:', error);
-        setSearchTerm(e.target.value); // Fallback to the original text on error
+        setSearchTerm(e.target.value);
       }
     };
   const handleSubmit = (e) => {
@@ -149,6 +151,7 @@ const Feedback = () => {
               ImgLinks={ImgLinks}
               addressLinks={addressLinks}
               item={item}
+              blink={blinkDoc === item.documentID}
             />
           );
         }

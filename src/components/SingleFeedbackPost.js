@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React from "react";
+import React, { useState } from "react";
 import "../index.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -21,7 +21,7 @@ import { useTranslation } from "react-i18next";
 import { IoPencilOutline } from "react-icons/io5";
 import { useNavigate } from "react-router";
 
-function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
+function SingleFeedbackPost({ item, ImgLinks, addressLinks, blink }) {
   const { t } = useTranslation();
   const match = item.policeStation.match(/(\d+)$/);
   const cityNumber = match ? match[1] : null;
@@ -30,6 +30,20 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
+
+  const [isBlinking, setIsBlinking] = useState(false);
+
+  useEffect(() => {
+    if (blink) {
+      setIsBlinking(true);
+
+      const timeoutId = setTimeout(() => {
+        setIsBlinking(false);
+      }, 2000);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [blink]);
 
   const navigate = () => {
     navigator(`/followupform/${item.documentID}`)
@@ -89,7 +103,7 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks }) {
               {formatTimestamp(item.created_at)}
             </p>
             <span className="font-semibold">Status:</span>
-            <Box className="w-fit" border="1px solid #ccc" p={2} borderRadius="md" display="flex" alignItems="center">
+            <Box className={`${isBlinking ? 'animate-blink' : ''} w-fit`} border="1px solid #ccc" p={2} borderRadius="md" display="flex" alignItems="center">
               <Text className="mr-4" flex="1">{item.follow_up || "No Status Set"}</Text>
                 <IconButton onClick={navigate} isDisabled={item.follow_up === "Resolved"} icon={<IoPencilOutline />} aria-label="Edit" colorScheme="orange"/>
             </Box>
