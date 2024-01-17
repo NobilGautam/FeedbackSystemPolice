@@ -98,7 +98,7 @@ function Form() {
      const handleSendFollowup = async () => {
     try {
       const response = await axios.get(
-        "https://feedback-server-59l6.onrender.com/send-followup",
+        `https://feedback-server-59l6.onrender.com/send-followup/${documentId}`,
         {
           params: {
             recipient: individual.mobile,
