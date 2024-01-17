@@ -30,6 +30,7 @@ function TabData({ policeData }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [overlay, setOverlay] = useState(<OverlayOne />);
   const [status, setStatus] = useState("Connecting to server...");
+  const { t } = useTranslation();
   useEffect(() => {
     fetchStats(policeData.name);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -244,8 +245,6 @@ function TabData({ policeData }) {
       });
     }
   };
-
-  const { t } = useTranslation();
 
   return (
     <div className="h-full p-4">
