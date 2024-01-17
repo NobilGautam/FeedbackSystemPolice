@@ -66,7 +66,7 @@ const FeedbackThread = () => {
                         />
                         </div>
                         {
-                            receiverMessage === '' ? (
+                            (receiverMessage === '' || receiverMessage === null) ? (
                                 <></>
                             ) : (
                                 <div className='flex flex-row w-[100%] justify-end gap-4'>
