@@ -8,7 +8,6 @@ import {
   Select,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import emailjs from "emailjs-com";
 import { useSupabase } from "../context/SupabaseContext";
 
 function Grievance() {
@@ -38,52 +37,6 @@ function Grievance() {
       supportingMedia: file,
     });
   };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   const serviceId = "service_iq3klrn";
-  //   const templateId = "template_grwkcgj";
-  //   const userId = "J7e9RNG6UyRKw69xz";
-
-  //   try {
-  //     const data = {
-  //       name: formData.name,
-  //       phoneNumber: formData.phoneNumber,
-  //       email: formData.email,
-  //       subject: formData.subject,
-  //       policeStation: formData.policeStation,
-  //       explanation: formData.explanation,
-  //     };
-
-  //     if (formData.supportingMedia) {
-  //       const file = formData.supportingMedia;
-  //       const reader = new FileReader();
-
-  //       reader.onloadend = function() {
-  //         const base64data = reader.result.split(",")[1];
-  //         const blob = new Blob([base64data], { type: file.type });
-
-  //         data.supportingMedia = blob;
-  //         emailjs.send(serviceId, templateId, data, userId).then(
-  //           (response) => {
-  //             console.log("Email sent successfully!", response);
-  //           },
-  //           (error) => {
-  //             console.error("Error sending email:", error);
-  //           }
-  //         );
-  //       };
-
-  //       reader.readAsDataURL(file);
-  //     } else {
-  //       await emailjs.send(serviceId, templateId, data, userId);
-  //       console.log("Email sent successfully!");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error sending email:", error);
-  //   }
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSupabase } from "../context/SupabaseContext";
 import { useState } from "react";
 import { useParams } from "react-router";
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import TabData from "../components/TabData";
 import TabFeedbacks from "../components/TabFeedbacks";
 import TabGri from "../components/TabGri";
@@ -38,7 +38,7 @@ function SingleAdmin({ isAdminLoggedin }) {
   }
 
   return (
-    <div className="mt-32">
+    <Flex justify="center" direction="column" align="center" h="100vh" className="mt-32">
       <div>
         <h1 className="text-[#8c4e1d] text-3xl font-semibold">
           HI ADMIN_{psStatsData[0].policeStation}
@@ -49,7 +49,7 @@ function SingleAdmin({ isAdminLoggedin }) {
         defaultIndex={0}
         isFitted
         variant="enclosed"
-        className="md:mt-10 w-[80%]"
+        className="md:mt-10 w-[80%] max-h-[80vh]"
       >
         <TabList>
           <Tab _selected={{ color: "white", bg: "#8C4E1D" }}>
@@ -74,7 +74,7 @@ function SingleAdmin({ isAdminLoggedin }) {
           </TabPanel>
         </TabPanels>
       </Tabs>
-    </div>
+    </Flex>
   );
 }
 
