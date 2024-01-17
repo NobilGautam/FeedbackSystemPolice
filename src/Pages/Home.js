@@ -103,10 +103,10 @@ function Home() {
             className="border rounded px-4 py-2 shadow-md bg-white"
             onChange={(e) => setSortState(e.target.value)}
           >
-            <option value="name">Name</option>
-            <option value="name_dsc">Name Dsc</option>
-            <option value="rating">Rating</option>
-            <option value="rating_dsc">Rating Dsc</option>
+            <option value="name">{t("sort.name")}</option>
+            <option value="name_dsc">{t("sort.nameDesc")}</option>
+            <option value="rating">{t("sort.rating")}</option>
+            <option value="rating_dsc">{t("sort.ratingDesc")}</option>
           </select>
           <Button className="customButton mx-4" onClick={() => sort(sortState)}>
             {t("home.sort")}

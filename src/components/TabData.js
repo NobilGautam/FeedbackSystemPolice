@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/react";
 import { IoDownloadOutline } from "react-icons/io5";
+import { useTranslation } from "react-i18next";
 
 ChartJs.register(ArcElement, Tooltip, Legend);
 function TabData({ policeData }) {
@@ -29,6 +30,7 @@ function TabData({ policeData }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [overlay, setOverlay] = useState(<OverlayOne />);
   const [status, setStatus] = useState("Connecting to server...");
+  const { t } = useTranslation();
   useEffect(() => {
     fetchStats(policeData.name);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -248,7 +250,7 @@ function TabData({ policeData }) {
     <div className="h-full p-4">
       <div className="">
         <label htmlFor="chartSelector" className="mr-2">
-          Select Data
+          {t("single.selectData")}
         </label>
         <Select
           id="chartSelector"
@@ -258,7 +260,7 @@ function TabData({ policeData }) {
         >
           {chartData.map((chart, index) => (
             <option key={index} value={chart.label}>
-              {chart.label}
+              {t(chart.label)}
             </option>
           ))}
         </Select>
@@ -282,7 +284,7 @@ function TabData({ policeData }) {
       </div>
       <Button className="customButton mt-5" onClick={handleClick}>
         <IoDownloadOutline />
-        <span className="ml-2">Download Detailed PDF</span>
+        <span className="ml-2">{t("single.downloadDetailedPDF")}</span>
       </Button>
       <Modal
         isCentered
