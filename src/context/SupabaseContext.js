@@ -30,6 +30,7 @@ export const SupabaseProvider = ({ children }) => {
   const [QR, setQR] = useState(false);
   const [show2, setShow2] = useState(false);
   const [gri,setGri] = useState([])
+  const [admin,setAdmin]=useState('');
 
   useEffect(() => {
     const fetchTableData = async () => {
