@@ -6,6 +6,7 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import {
   Box,
+  Button,
   Card,
   CardBody,
   CardFooter,
@@ -20,6 +21,7 @@ import { Share } from "react-twitter-widgets";
 import { useTranslation } from "react-i18next";
 import { IoPencilOutline } from "react-icons/io5";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 function SingleFeedbackPost({ item, ImgLinks, addressLinks, blink }) {
   const { t } = useTranslation();
@@ -66,10 +68,9 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks, blink }) {
       const formattedDateTime = date.toLocaleString("en-IN", options);
       return formattedDateTime;
     }
-
     return "N/A";
   };
-
+  console.log(item.documentID);
   return (
     <div data-aos="fade-up" id="feedback">
       <Card
@@ -118,7 +119,8 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks, blink }) {
               >
                 {decrypt(item.feedback, toString(process.env.SECRET_KEY))}
               </p>
-              <blockquote>
+              <blockquote className="my-2">
+              <Link to={`/feedbackThread/${item.documentID}`}><Button className="customButton my-2">Expand</Button></Link>
                 <Share
                   className="tweet"
                   url="https://feedback-system-police-private.vercel.app/"

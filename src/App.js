@@ -14,6 +14,7 @@ import MyVisits from "./Pages/MyVisits";
 import ChatBot from "react-simple-chatbot";
 import { useTranslation } from "react-i18next";
 import QR from "./Pages/QR";
+import FeedbackThread from "./Pages/FeedbackThread";
 import {
   ModalOverlay,
   useDisclosure,
@@ -78,6 +79,7 @@ function App() {
         {user && <Route path="/followupform/:documentID" element={<FollowupForm />}></Route>}
         { <Route path="/followupform" element={<FollowupForm />}></Route>}
         {user && <Route path="/grievance" element={<Grievance/>}></Route>}
+        {user && <Route path="/feedbackThread/:documentID" element={<FeedbackThread/>}></Route>}
         {/* { user && <Route path="/chat" element={<Chat/>}></Route>}
          */}
         <Route path="*" element={<Error />}></Route>
