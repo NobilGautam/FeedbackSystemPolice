@@ -52,7 +52,7 @@ function SingleAdmin({ isAdminLoggedin }) {
         </TabList>
         <TabPanels className="drop-shadow-lg h-[90%]">
           <TabPanel bgColor={"#FFFFFF"}>
-            <TabData policeData={psStatsData[0].policeStation} />
+            <TabData policeStation={psStatsData[0].policeStation} />
           </TabPanel>
           <TabPanel bgColor={"#FFFFFF"}></TabPanel>
           <TabPanel bgColor={"#FFFFFF"}></TabPanel>

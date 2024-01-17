@@ -31,9 +31,7 @@ function Single() {
     QR,
     tableData: policeStations,
     setIndividual,
-  
-    
- 
+
     tableData: PoliceData,
   } = useSupabase();
   const [policeData, setPoliceData] = useState({});
@@ -49,26 +47,25 @@ function Single() {
 
   // }, [PoliceData, policeStations,user,visitsLoader]);
 
-  
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
 
-// useEffect(()=>{
-// var ff=true;
-// var dou='';
-//   for(var i=0; i<visits.length; i++){
-//     if(visits[i].policeStation===policeData.name && visits[i].feedback===null){
-      
-//       ff=false;
-//       dou=visits[i].documentID;
-//       break;
-//     }
-//   }
-//   setFlag(ff);
-//   setDocu(dou);
-// }
-// ,[PoliceData, policeStations,user,visitsLoader,visits])
+  // useEffect(()=>{
+  // var ff=true;
+  // var dou='';
+  //   for(var i=0; i<visits.length; i++){
+  //     if(visits[i].policeStation===policeData.name && visits[i].feedback===null){
+
+  //       ff=false;
+  //       dou=visits[i].documentID;
+  //       break;
+  //     }
+  //   }
+  //   setFlag(ff);
+  //   setDocu(dou);
+  // }
+  // ,[PoliceData, policeStations,user,visitsLoader,visits])
   useEffect(() => {
     if (policeStations) {
       let temp = {};
@@ -97,13 +94,12 @@ function Single() {
     setShow2(false);
     navigator("/");
   };
-// if(visits.length===0){
-//   return null;
-// }
-// const handleClickFeed=()=>{
-//   navigator(`/newFeedback/${docu}`)
-// }
-
+  // if(visits.length===0){
+  //   return null;
+  // }
+  // const handleClickFeed=()=>{
+  //   navigator(`/newFeedback/${docu}`)
+  // }
 
   return (
     <div data-aos="fade-up">
@@ -137,10 +133,11 @@ function Single() {
                   {t("single.markAsVisited")}
                 </span>{" "}
               </Button>
-              <Button size={"lg"} isDisabled={true} className="w-[48%]" >
+              <Button size={"lg"} isDisabled={true} className="w-[48%]">
                 {" "}
-          
-                <span className="text-lg md:text-xl">{t("single.fillFeedback")}</span>
+                <span className="text-lg md:text-xl">
+                  {t("single.fillFeedback")}
+                </span>
               </Button>
             </div>
           </div>
@@ -177,7 +174,7 @@ function Single() {
                 <TabReviews policeStationName={policeData.name} />
               </TabPanel>
               <TabPanel className="h-full" bgColor={"#FFFFFF"}>
-                <TabData policeData={policeData.name} />
+                <TabData policeStation={policeData.name} />
               </TabPanel>
             </TabPanels>
           </Tabs>

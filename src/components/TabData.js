@@ -36,7 +36,6 @@ function TabData({ policeStation }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [policeStation]);
 
-
   if (!stats) {
     return null;
   }
