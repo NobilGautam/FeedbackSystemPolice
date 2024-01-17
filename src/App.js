@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@chakra-ui/react";
 import Feedback from "./Pages/Feedback";
 import Navbar from "./components/Navbar";
@@ -27,6 +27,7 @@ import { steps } from "./components/steps";
 import { helplines } from "./components/helpline";
 import { IoCallOutline, IoClose } from "react-icons/io5";
 import FollowupForm from "./Pages/FollowupForm";
+import IntialLoader from "./components/IntialLoader";
 import Grievance from "./Pages/Grievance";
 
 function App() {
@@ -36,11 +37,21 @@ function App() {
   const [user] = useAuthState(Auth);
   const [overlay, setOverlay] = useState(<OverlayOne />);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [initialloader,setIntitalLoader]=useState(true);
+  useEffect(()=>{
+    setTimeout(() => {
+      setIntitalLoader(false);
+      
+    }, 2000);
+  },[])
 
   const { t } = useTranslation();
 
   return (
     <div>
+      {
+        initialloader?<IntialLoader/>:
+      <>
       <Navbar />
 
       <ChatBot steps={steps} floating={true} className="chatbot" />
@@ -116,6 +127,8 @@ function App() {
           </ModalBody>
         </ModalContent>
       </Modal>
+      </>
+}
     </div>
   );
 }
