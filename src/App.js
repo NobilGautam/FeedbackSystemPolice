@@ -14,6 +14,7 @@ import MyVisits from "./Pages/MyVisits";
 import ChatBot from "react-simple-chatbot";
 import { useTranslation } from "react-i18next";
 import QR from "./Pages/QR";
+import FeedbackThread from "./Pages/FeedbackThread";
 import {
   ModalOverlay,
   useDisclosure,
@@ -71,7 +72,6 @@ function App() {
 
   return (
     <div>
-      
         <>
           <Navbar isAdminLoggedIn={isAdminLoggedIn} onAdminLogout={handleAdminLogout} />
           <ChatBot steps={steps} floating={true} className="chatbot" />
@@ -108,6 +108,7 @@ function App() {
             
             <Route path="/newVisit" element={<NewVisit />} />
             <Route path="/QR/:id" element={<QR />} />
+            {user && <Route path="/feedbackThread/:documentID" element={<FeedbackThread/>}></Route>}
             {user && <Route path="/form" element={<Form />}></Route>}
             {user && (
               <Route
@@ -169,7 +170,6 @@ function App() {
             </ModalContent>
           </Modal>
         </>
-      
     </div>
   );
 }
