@@ -41,6 +41,17 @@ function App() {
   const [overlay, setOverlay] = useState(<OverlayOne />);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [initialloader,setIntitalLoader]=useState(true);
+  const [isAdminLoggedIn, setAdminLoggedIn] = useState(false);
+
+  // Function to handle admin login
+  const handleAdminLogin = () => {
+    setAdminLoggedIn(true);
+  };
+
+  // Function to handle admin logout
+  const handleAdminLogout = () => {
+    setAdminLoggedIn(false);
+  };
   useEffect(()=>{
     setTimeout(() => {
       setIntitalLoader(false);
@@ -51,12 +62,13 @@ function App() {
   const { t } = useTranslation();
   const {admin}=useSupabase();
 
+
   return (
     <div>
       {
         initialloader?<IntialLoader/>:
       <>
-      <Navbar />
+      <Navbar  isAdminLoggedIn={isAdminLoggedIn} onAdminLogout={handleAdminLogout}/>
 
       <ChatBot steps={steps} floating={true} className="chatbot" />
       <Button
@@ -82,8 +94,8 @@ function App() {
         {user && <Route path="/followupform/:documentID" element={<FollowupForm />}></Route>}
         { <Route path="/followupform" element={<FollowupForm />}></Route>}
         {user && <Route path="/grievance" element={<Grievance/>}></Route>}
-        {user && <Route path="/admin" element={<Admin/>}></Route>}
-        {user && <Route path="/singleAdmin/:pincode" element={<SingleAdmin admin={admin}/>}></Route>}
+         <Route path="/admin" element={<Admin handleAdminLogin={handleAdminLogin}/>}></Route>
+          <Route path="/singleAdmin/:pincode" element={<SingleAdmin admin={admin} isAdminLoggedin={isAdminLoggedIn}/>}></Route>
         {/* { user && <Route path="/chat" element={<Chat/>}></Route>}
          */}
         <Route path="*" element={<Error />}></Route>
