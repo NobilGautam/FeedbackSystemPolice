@@ -29,6 +29,9 @@ import { IoCallOutline, IoClose } from "react-icons/io5";
 import FollowupForm from "./Pages/FollowupForm";
 import IntialLoader from "./components/IntialLoader";
 import Grievance from "./Pages/Grievance";
+import Admin from "./Pages/Admin";
+import  SingleAdmin from "./Pages/SingleAdmin"
+import { useSupabase } from "./context/SupabaseContext";
 
 function App() {
   const OverlayOne = () => (
@@ -46,6 +49,7 @@ function App() {
   },[])
 
   const { t } = useTranslation();
+  const {admin}=useSupabase();
 
   return (
     <div>
@@ -78,6 +82,8 @@ function App() {
         {user && <Route path="/followupform/:documentID" element={<FollowupForm />}></Route>}
         { <Route path="/followupform" element={<FollowupForm />}></Route>}
         {user && <Route path="/grievance" element={<Grievance/>}></Route>}
+        {user && <Route path="/admin" element={<Admin/>}></Route>}
+        {user && <Route path="/singleAdmin/:pincode" element={<SingleAdmin admin={admin}/>}></Route>}
         {/* { user && <Route path="/chat" element={<Chat/>}></Route>}
          */}
         <Route path="*" element={<Error />}></Route>

@@ -29,6 +29,7 @@ export const SupabaseProvider = ({ children }) => {
   const [statsLoading, setStatsLoading] = useState(true);
   const [QR, setQR] = useState(false);
   const [show2, setShow2] = useState(false);
+  const [admin,setAdmin]=useState('');
 
   useEffect(() => {
     const fetchTableData = async () => {
@@ -338,6 +339,8 @@ export const SupabaseProvider = ({ children }) => {
         fetchStats,
         setQR,
         setShow2,
+        admin,
+        setAdmin
       }}
     >
       {children}
