@@ -63,7 +63,8 @@ function App() {
         <Route path="/newVisit" element={<NewVisit />} />
         <Route path="/QR/:id" element={<QR />} />
         {user && <Route path="/form" element={<Form />}></Route>}
-        {user && <Route path="/followupform" element={<FollowupForm />}></Route>}
+        {user && <Route path="/followupform/:documentID" element={<FollowupForm />}></Route>}
+        { <Route path="/followupform" element={<FollowupForm />}></Route>}
         {user && <Route path="/grievance" element={<Grievance/>}></Route>}
         {/* { user && <Route path="/chat" element={<Chat/>}></Route>}
          */}

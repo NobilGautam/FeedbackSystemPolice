@@ -127,8 +127,6 @@ const Feedback = () => {
           >
             <option value="name">Name</option>
             <option value="name_dsc">Name Dsc</option>
-            <option value="rating">Rating</option>
-            <option value="rating_dsc">Rating Dsc</option>
             <option value="day_Reported">Day Reported</option>
           </select>
           <Button
