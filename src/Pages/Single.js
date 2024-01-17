@@ -28,45 +28,44 @@ function Single() {
     QR,
     tableData: policeStations,
     setIndividual,
-    fetchVisits,
-    visits,
-    visitsLoader,
+  
+    
+ 
     tableData: PoliceData,
   } = useSupabase();
   const [policeData, setPoliceData] = useState({});
-  const [flag,setFlag]=useState(false);
-  const [docu,setDocu]=useState('');
+
   const navigator = useNavigate();
   const { t } = useTranslation();
-  useEffect(() => {
-    if (user) {
-      fetchVisits(user.email);
-      console.log(visits)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // useEffect(() => {
+  //   if (user) {
+  //     fetchVisits(user.email);
+  //     console.log(visits)
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
 
-  }, [PoliceData, policeStations,user,visitsLoader]);
+  // }, [PoliceData, policeStations,user,visitsLoader]);
 
   
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
 
-useEffect(()=>{
-var ff=true;
-var dou='';
-  for(var i=0; i<visits.length; i++){
-    if(visits[i].policeStation===policeData.name && visits[i].feedback===null){
+// useEffect(()=>{
+// var ff=true;
+// var dou='';
+//   for(var i=0; i<visits.length; i++){
+//     if(visits[i].policeStation===policeData.name && visits[i].feedback===null){
       
-      ff=false;
-      dou=visits[i].documentID;
-      break;
-    }
-  }
-  setFlag(ff);
-  setDocu(dou);
-}
-,[PoliceData, policeStations,user,visitsLoader,visits])
+//       ff=false;
+//       dou=visits[i].documentID;
+//       break;
+//     }
+//   }
+//   setFlag(ff);
+//   setDocu(dou);
+// }
+// ,[PoliceData, policeStations,user,visitsLoader,visits])
   useEffect(() => {
     if (policeStations) {
       let temp = {};
@@ -99,23 +98,11 @@ var dou='';
 // if(visits.length===0){
 //   return null;
 // }
-const handleClickFeed=()=>{
-  navigator(`/newFeedback/${docu}`)
-}
+// const handleClickFeed=()=>{
+//   navigator(`/newFeedback/${docu}`)
+// }
 
-if (visitsLoader) {
-  return (
-    <h1 className="mt-32 text-center text-[#8c4e1d] text-5xl">
-      <Spinner
-        thickness="4px"
-        speed="0.65s"
-        emptyColor="gray.200"
-        color="#8C4E1D"
-        size="xl"
-      />
-    </h1>
-  );
-}
+
   return (
     <div data-aos="fade-up">
       <div className="container mt-12 p-6 pb-12 md:p-0 md:mt-32 mx-auto flex items-center justify-center">
@@ -146,7 +133,7 @@ if (visitsLoader) {
                 <IoCheckmarkDoneCircleOutline/>
                 <span className="text-lg ml-2 md:text-xl">{t("single.markAsVisited")}</span>{" "}
               </Button>
-              <Button size={"lg"} isDisabled={flag?true:false} className="w-[48%]" onClick={handleClickFeed}>
+              <Button size={"lg"} isDisabled={true} className="w-[48%]" >
                 {" "}
           
                 <span className="text-lg md:text-xl">{t("single.fillFeedback")}</span>
