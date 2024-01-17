@@ -7,20 +7,18 @@ import {
   Input,
   Select,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import emailjs from "emailjs-com";
 import { useSupabase } from "../context/SupabaseContext";
 
 function Grievance() {
-  const { tableData: policeData } = useSupabase();
-  const [formPsEmail, setPsEmail] = useState("");
+  const { tableData: policeData, griSubmit } = useSupabase();
   const [formData, setFormData] = useState({
     name: "",
     phoneNumber: "",
     email: "",
     subject: "",
     policeStation: "",
-    ps_email: "",
     explanation: "",
     supportingMedia: null,
   });
@@ -41,60 +39,57 @@ function Grievance() {
     });
   };
 
-  useEffect(() => {
-    for(var i = 0;i < policeData.length;i++){
-      if(policeData[i].name === formData.policeStation){
-        setPsEmail(policeData[i].email)
-      }
-    }
-  },[policeData,formData.policeStation])
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   const serviceId = "service_iq3klrn";
+  //   const templateId = "template_grwkcgj";
+  //   const userId = "J7e9RNG6UyRKw69xz";
+
+  //   try {
+  //     const data = {
+  //       name: formData.name,
+  //       phoneNumber: formData.phoneNumber,
+  //       email: formData.email,
+  //       subject: formData.subject,
+  //       policeStation: formData.policeStation,
+  //       explanation: formData.explanation,
+  //     };
+
+  //     if (formData.supportingMedia) {
+  //       const file = formData.supportingMedia;
+  //       const reader = new FileReader();
+
+  //       reader.onloadend = function() {
+  //         const base64data = reader.result.split(",")[1];
+  //         const blob = new Blob([base64data], { type: file.type });
+
+  //         data.supportingMedia = blob;
+  //         emailjs.send(serviceId, templateId, data, userId).then(
+  //           (response) => {
+  //             console.log("Email sent successfully!", response);
+  //           },
+  //           (error) => {
+  //             console.error("Error sending email:", error);
+  //           }
+  //         );
+  //       };
+
+  //       reader.readAsDataURL(file);
+  //     } else {
+  //       await emailjs.send(serviceId, templateId, data, userId);
+  //       console.log("Email sent successfully!");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error sending email:", error);
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const serviceId = "service_iq3klrn";
-    const templateId = "template_grwkcgj";
-    const userId = "J7e9RNG6UyRKw69xz";
-
-    try {
-      const data = {
-        name: formData.name,
-        phoneNumber: formData.phoneNumber,
-        email: formData.email,
-        ps_email: formPsEmail,
-        subject: formData.subject,
-        policeStation: formData.policeStation,
-        explanation: formData.explanation,
-      };
-
-      if (formData.supportingMedia) {
-        const file = formData.supportingMedia;
-        const reader = new FileReader();
-
-        reader.onloadend = function() {
-          const base64data = reader.result.split(",")[1];
-          const blob = new Blob([base64data], { type: file.type });
-
-          data.supportingMedia = blob;
-          emailjs.send(serviceId, templateId, data, userId).then(
-            (response) => {
-              console.log("Email sent successfully!", response);
-            },
-            (error) => {
-              console.error("Error sending email:", error);
-            }
-          );
-        };
-
-        reader.readAsDataURL(file);
-      } else {
-        await emailjs.send(serviceId, templateId, data, userId);
-        console.log("Email sent successfully!");
-      }
-    } catch (error) {
-      console.error("Error sending email:", error);
-    }
-  };
+    e.preventDefault()
+    await griSubmit(formData)
+    console.log("Done",formData)
+  }
 
   return (
     <Flex justify="center" align="center" h="100vh" className="mt-32">
@@ -162,7 +157,7 @@ function Grievance() {
           <FormHelperText>
             Elaborate issue face with Rajasthan Police
           </FormHelperText>
-          <FormLabel className="mt-4">Supporting Media</FormLabel>
+          {/* <FormLabel className="mt-4">Supporting Media</FormLabel>
           <Input
             type="file"
             size="sm"
@@ -171,7 +166,7 @@ function Grievance() {
           />
           <FormHelperText>
             Upload any supporting media (image, video, etc.)
-          </FormHelperText>
+          </FormHelperText> */}
         </FormControl>
 
         <Button type="submit" className="mt-4 customButton">
