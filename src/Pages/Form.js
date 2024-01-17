@@ -84,6 +84,17 @@ function Form() {
   }, [individual]);
 
   const toast = useToast();
+  function generateRandomString(length) {
+    const characters = 'abcdefghijklmnopqrstuvwxyz';
+    let randomString = '';
+  
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      randomString += characters[randomIndex];
+    }
+  
+    return randomString;
+  }
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -101,13 +112,13 @@ function Form() {
       gender: form.gender,
       feedback: encrypt(form.feedback, toString(process.env.SECRET_KEY)),
       purpose: form.purpose,
-      Feel: sentiment.analyze(form.feedback, options).score,
+      Feel:sentiment.analyze(form.feedback, options).score,
       overallRating: rating,
-      time: time,
-      pbehaviour: pbehaviour,
-      pguidance: pguidance,
-      phelpful: phelpful,
-      infra: infra,
+      time: encrypt(generateRandomString(10)+time+generateRandomString(10),process.env.REACT_APP_SECRET_KEY),
+      pbehaviour:encrypt(generateRandomString(10)+ pbehaviour+generateRandomString(10),process.env.REACT_APP_SECRET_KEY),
+      pguidance: encrypt(generateRandomString(10)+pguidance+generateRandomString(10),process.env.REACT_APP_SECRET_KEY),
+      phelpful: encrypt(generateRandomString(10)+phelpful+generateRandomString(10),process.env.REACT_APP_SECRET_KEY),
+      infra: encrypt(generateRandomString(10)+infra+generateRandomString(10),process.env.REACT_APP_SECRET_KEY),
     };
 
     if (documentId) {
