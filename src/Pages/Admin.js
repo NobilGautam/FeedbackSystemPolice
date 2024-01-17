@@ -11,7 +11,7 @@ function Admin({handleAdminLogin}) {
     
     const [pincode,setPincode]=useState('');
     const [userpass,setUserPass]=useState('');
-    const {setAdmin}=useSupabase();
+    
     
     const navigator=useNavigate();
     const pass="1234";
@@ -29,7 +29,6 @@ function Admin({handleAdminLogin}) {
         return alert("INVALID CREDITENTIAL");
     
     }
-        setAdmin(pincode);
         handleAdminLogin();
         
         navigator(`/singleAdmin/${pincode}`);

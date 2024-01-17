@@ -65,11 +65,9 @@ function App() {
 
   return (
     <div>
-      {initialloader ? (
-        <IntialLoader />
-      ) : (
+      
         <>
-          <Navbar />
+          <Navbar isAdminLoggedIn={isAdminLoggedIn} onAdminLogout={handleAdminLogout} />
           <ChatBot steps={steps} floating={true} className="chatbot" />
           <Button
             className="customButton helpline"
@@ -95,13 +93,13 @@ function App() {
             {user && (
               <Route path="/newFeedback/:documentId" element={<Form />} />
             )}
-            {user && <Route path="/admin" element={<Admin />}></Route>}
-            {user && (
+             <Route path="/admin" element={<Admin handleAdminLogin={handleAdminLogin} />}></Route>
+           
               <Route
                 path="/singleAdmin/:pincode"
-                element={<SingleAdmin admin={admin} />}
+                element={<SingleAdmin admin={admin} isAdminLoggedin={isAdminLoggedIn} />}
               ></Route>
-            )}
+            
             <Route path="/newVisit" element={<NewVisit />} />
             <Route path="/QR/:id" element={<QR />} />
             {user && <Route path="/form" element={<Form />}></Route>}
@@ -165,7 +163,7 @@ function App() {
             </ModalContent>
           </Modal>
         </>
-      )}
+      
     </div>
   );
 }
