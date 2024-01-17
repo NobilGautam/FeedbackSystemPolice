@@ -6,7 +6,7 @@ import { Button } from '@chakra-ui/react';
 import { useSupabase } from '../context/SupabaseContext';
 import { useNavigate } from 'react-router';
 
-function Admin() {
+function Admin({handleAdminLogin}) {
     const { t } = useTranslation();
     
     const [pincode,setPincode]=useState('');
@@ -30,6 +30,7 @@ function Admin() {
     
     }
         setAdmin(pincode);
+        handleAdminLogin();
         
         navigator(`/singleAdmin/${pincode}`);
     }

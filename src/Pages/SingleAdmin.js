@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router';
 import { load } from 'ol/Image';
 
-function SingleAdmin() {
+function SingleAdmin({isAdminLoggedin}) {
     const {tableData}=useSupabase();
     const {pincode}=useParams();
     console.log(pincode);
@@ -29,7 +29,9 @@ function SingleAdmin() {
 
     },[pincode,tableData])
    
-   
+   if(!isAdminLoggedin){
+    return <h1 className='mt-32'>Login admin first</h1>
+   }
     if(loading){
         return <h1 className='mt-32'>Loading...</h1>
     }

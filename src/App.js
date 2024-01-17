@@ -41,8 +41,19 @@ function App() {
   const [user] = useAuthState(Auth);
   const [overlay, setOverlay] = useState(<OverlayOne />);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [initialloader, setIntitalLoader] = useState(true);
-  useEffect(() => {
+  const [initialloader,setIntitalLoader]=useState(true);
+  const [isAdminLoggedIn, setAdminLoggedIn] = useState(false);
+
+  // Function to handle admin login
+  const handleAdminLogin = () => {
+    setAdminLoggedIn(true);
+  };
+
+  // Function to handle admin logout
+  const handleAdminLogout = () => {
+    setAdminLoggedIn(false);
+  };
+  useEffect(()=>{
     setTimeout(() => {
       setIntitalLoader(false);
     }, 2500);
@@ -50,6 +61,7 @@ function App() {
 
   const { t } = useTranslation();
   const { admin } = useSupabase();
+
 
   return (
     <div>
