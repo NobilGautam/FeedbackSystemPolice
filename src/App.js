@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./Pages/Home";
 import { useEffect, useState } from "react";
 import { Button } from "@chakra-ui/react";
@@ -43,15 +43,21 @@ function App() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [initialloader,setIntitalLoader]=useState(true);
   const [isAdminLoggedIn, setAdminLoggedIn] = useState(false);
+  const navigator=useNavigate();
 
   // Function to handle admin login
   const handleAdminLogin = () => {
     setAdminLoggedIn(true);
+  
   };
 
   // Function to handle admin logout
   const handleAdminLogout = () => {
+    
     setAdminLoggedIn(false);
+    sessionStorage.removeItem('authToken');
+   
+
   };
   useEffect(()=>{
     setTimeout(() => {
