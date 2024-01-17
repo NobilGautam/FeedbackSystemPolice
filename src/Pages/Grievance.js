@@ -84,7 +84,7 @@ function Grivance() {
   };
 
   return (
-    <Flex justify="center" align="center" h="100vh">
+    <Flex justify="center" align="center" h="100vh" className="mt-32">
       <form onSubmit={handleSubmit} className="w-[80%] bg-white p-4 rounded-md">
         <FormControl isRequired>
           <FormLabel>Name</FormLabel>
