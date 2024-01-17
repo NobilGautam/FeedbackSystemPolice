@@ -7,9 +7,13 @@ import TabData from "../components/TabData";
 import TabFeedbacks from "../components/TabFeedbacks";
 import TabGri from "../components/TabGri";
 
+
+
 function SingleAdmin({ isAdminLoggedin }) {
   // When the application starts
   const storedToken = sessionStorage.getItem("authToken");
+  
+
   const isAuthenticated = !!storedToken;
   const { fetchPSstatsName, psstatsLoading ,psStatsData } = useSupabase();
   const { pincode } = useParams();
@@ -36,7 +40,7 @@ function SingleAdmin({ isAdminLoggedin }) {
     <div className="mt-32">
        <div>
             <h1 className="text-[#8c4e1d] text-3xl font-semibold">HI ADMIN_{psStatsData[0].policeStation}</h1>
-            <p className="text-[#8C4E1D] font-semibold mt-5">Following are your Feedbacks</p>
+           
         </div>
       <Tabs
         isLazy
