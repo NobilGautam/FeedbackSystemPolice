@@ -5,6 +5,11 @@ import { useParams } from 'react-router';
 import { load } from 'ol/Image';
 
 function SingleAdmin({isAdminLoggedin}) {
+
+
+// When the application starts
+const storedToken = sessionStorage.getItem('authToken');
+const isAuthenticated = !!storedToken;
     const {tableData}=useSupabase();
     const {pincode}=useParams();
     console.log(pincode);
@@ -29,7 +34,7 @@ function SingleAdmin({isAdminLoggedin}) {
 
     },[pincode,tableData])
    
-   if(!isAdminLoggedin){
+   if(!isAuthenticated){
     return <h1 className='mt-32'>Login admin first</h1>
    }
     if(loading){
