@@ -116,7 +116,7 @@ function Form() {
       alert("CHECK THE CAPTCHA");
       return;
     }
-    const newFeedback=form.feedback.split(' ');
+    const newFeedback=form.feedback.split(' ');//check commit
       if(newFeedback.some(element => adultWords.includes(element))){
         return alert("USE DECENT LANGUAGE");
       }
