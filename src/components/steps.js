@@ -3,6 +3,7 @@ import ChatBotHelpLines from "./ChatBotHelpLines";
 import ChatBotNearest from "./ChatBotNearest";
 import ChatBotDistrict from "./ChatBotDistrict";
 import ChatBotHandlePolice from "./ChatBotHandlePolice";
+import ChatBotPoliceComplaint from "./ChatBotPoliceComplaint";
 export const steps = [
   {
     id: "0",
@@ -30,7 +31,7 @@ export const steps = [
   },
   {
     id: "policecomplaint",
-    message: "policecomplaint",
+   component:<ChatBotPoliceComplaint/>,
     trigger: "options",
   },
   {
