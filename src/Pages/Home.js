@@ -4,7 +4,7 @@ import { Button, Input, Spinner } from "@chakra-ui/react";
 import { ThreeDots } from "react-loader-spinner";
 import { useSupabase } from "../context/SupabaseContext";
 import { useTranslation } from "react-i18next";
-import axios from 'axios';
+import axios from "axios";
 
 function Home() {
   const { tableData: PoliceData } = useSupabase();
@@ -22,15 +22,15 @@ function Home() {
 
   const handlechange = async (e) => {
     try {
-      const response = await axios.post('https://libretranslate.de/translate', {
+      const response = await axios.post("https://libretranslate.de/translate", {
         q: e.target.value,
-        source: 'auto',
-        target: 'en',
+        source: "auto",
+        target: "en",
       });
 
       setSearchTerm(response.data.translatedText);
     } catch (error) {
-      console.error('Error translating text:', error);
+      console.error("Error translating text:", error);
       setSearchTerm(e.target.value); // Fallback to the original text on error
     }
   };
@@ -65,7 +65,7 @@ function Home() {
     setSearchResults(temp);
   };
   const sort = (sortState) => {
-    console.log(searchResults)
+    console.log(searchResults);
     if (sortState === "name" || sortState === "rating")
       searchResults.sort(sortBy(sortMethods[sortState].method));
     else searchResults.sort(sortByRev(sortMethods[sortState].method));

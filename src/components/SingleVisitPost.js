@@ -20,7 +20,7 @@ function SingleVisitPost({ item, ImgLinks, addressLinks, documentId }) {
   const { t } = useTranslation();
   const match = item.policeStation.match(/(\d+)$/);
   const cityNumber = match ? match[1] : null;
-  const cityName = item.policeStation.replace(/\d+$/, '').trim();
+  const cityName = item.policeStation.replace(/\d+$/, "").trim();
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
@@ -68,7 +68,9 @@ function SingleVisitPost({ item, ImgLinks, addressLinks, documentId }) {
 
         <Stack>
           <CardBody>
-            <Heading size="md">{`${t(`policeStation.${cityName}`)} ${cityNumber}`}</Heading>
+            <Heading size="md">{`${t(
+              `policeStation.${cityName}`
+            )} ${cityNumber}`}</Heading>
             <p className="py-2">
               <span className="font-semibold">{t("home.address")} - </span>
               {addressLinks.get(item.policeStation)}
@@ -83,7 +85,7 @@ function SingleVisitPost({ item, ImgLinks, addressLinks, documentId }) {
               {item.feedback !== null ? (
                 <Button isDisabled className="customButton">
                   {t("myVisits.feedbackAdded")}
-                  </Button>
+                </Button>
               ) : (
                 <Link to={`/newFeedback/${documentId}`}>
                   <Button className="customButton">

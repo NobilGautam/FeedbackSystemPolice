@@ -40,15 +40,15 @@ function TabData({ policeStation }) {
     return null;
   }
   const customOptions = {
-    maintainAspectRatio: false, // Set to false to allow custom height and width
-    height: 800, // Set the desired height
-    width: 1200, // Set the desired width
+    maintainAspectRatio: false,
+    height: 800,
+    width: 1200,
     plugins: {
       legend: {
         display: true,
         position: "chartArea",
         labels: {
-          boxWidth: 10, // Set the width of the colored boxes in the legend
+          boxWidth: 10,
         },
       },
     },

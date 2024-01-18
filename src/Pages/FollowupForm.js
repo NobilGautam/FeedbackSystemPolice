@@ -15,7 +15,7 @@ import { useSupabase } from "../context/SupabaseContext";
 import { useNavigate, useParams } from "react-router";
 
 function FollowupForm() {
-  const { documentID } = useParams()
+  const { documentID } = useParams();
   const [documentId, setDocumentId] = useState(documentID || "");
   const [status, setStatus] = useState("Resolved");
   const [isValidDocumentId, setIsValidDocumentId] = useState(true);
@@ -23,7 +23,7 @@ function FollowupForm() {
   const toast = useToast();
   const navigator = useNavigate();
 
-  console.log(documentID)
+  console.log(documentID);
 
   useEffect(() => {
     setDocumentId(documentID || "");
@@ -49,7 +49,6 @@ function FollowupForm() {
           isClosable: true,
         });
         navigator("/");
-
       } catch (error) {
         console.error("Error in handleSubmit:", error.message);
       }
@@ -71,12 +70,12 @@ function FollowupForm() {
 
       if (fetchedVisits.length === 0) {
         toast({
-            title: "DocumentID Not Found",
-            description: "An error occurred while updating visit information.",
-            status: "error",
-            duration: 3000,
-            isClosable: true,
-          });
+          title: "DocumentID Not Found",
+          description: "An error occurred while updating visit information.",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
         throw new Error("No matching feedback found for the given Document ID");
       } else {
         await updateVisit(documentID, null, status);
