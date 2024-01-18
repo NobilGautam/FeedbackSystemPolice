@@ -16,7 +16,7 @@ const TabFeedbacks = ({ policeStation }) => {
           {reviews
             .filter((item) => item.feedback !== null)
             .map((item) => (
-                <IndFeedback item={item}/>
+              <IndFeedback key={item.id} item={item} />
             ))}
         </>
       )}

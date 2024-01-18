@@ -7,9 +7,7 @@ function Error() {
     <div className=" w-[80%] mx-auto mt-36 text-center text-3xl ">
       <div>Not Found 404</div>
       <Link to="/">
-        <Button  className="customButton">
-          Go to Home
-        </Button>
+        <Button className="customButton">Go to Home</Button>
       </Link>
     </div>
   );

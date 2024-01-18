@@ -6,7 +6,6 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 import { SupabaseProvider } from "./context/SupabaseContext";
-import Modal from 'react-modal';
 import { I18nextProvider } from 'react-i18next';
 import i18n from 'i18next';
 import translationsEN from './locales/en/translation.json';
@@ -14,7 +13,7 @@ import translationsHI from './locales/hi/translation.json';
 
 i18n.init({
   interpolation: { escapeValue: false },
-  lng: 'en', // default language
+  lng: 'en',
   resources: {
     en: {
       translation: translationsEN,

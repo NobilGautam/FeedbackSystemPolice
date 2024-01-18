@@ -28,7 +28,7 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks, blink }) {
   const match = item.policeStation.match(/(\d+)$/);
   const cityNumber = match ? match[1] : null;
   const cityName = item.policeStation.replace(/\d+$/, "").trim();
-  const navigator = useNavigate()
+  const navigator = useNavigate();
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
@@ -48,8 +48,8 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks, blink }) {
   }, [blink]);
 
   const navigate = () => {
-    navigator(`/followupform/${item.documentID}`)
-  }
+    navigator(`/followupform/${item.documentID}`);
+  };
 
   const formatTimestamp = (timestamp) => {
     const date = timestamp ? new Date(timestamp) : null;
@@ -104,9 +104,24 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks, blink }) {
               {formatTimestamp(item.created_at)}
             </p>
             <span className="font-semibold">Status:</span>
-            <Box className={`${isBlinking ? 'animate-blink' : ''} w-fit`} border="1px solid #ccc" p={2} borderRadius="md" display="flex" alignItems="center">
-              <Text className="mr-4" flex="1">{item.follow_up || "No Status Set"}</Text>
-                <IconButton onClick={navigate} isDisabled={item.follow_up === "Resolved"} icon={<IoPencilOutline />} aria-label="Edit" colorScheme="orange"/>
+            <Box
+              className={`${isBlinking ? "animate-blink" : ""} w-fit`}
+              border="1px solid #ccc"
+              p={2}
+              borderRadius="md"
+              display="flex"
+              alignItems="center"
+            >
+              <Text className="mr-4" flex="1">
+                {item.follow_up || "No Status Set"}
+              </Text>
+              <IconButton
+                onClick={navigate}
+                isDisabled={item.follow_up === "Resolved"}
+                icon={<IoPencilOutline />}
+                aria-label="Edit"
+                colorScheme="orange"
+              />
             </Box>
           </CardBody>
           <CardFooter>
@@ -120,14 +135,19 @@ function SingleFeedbackPost({ item, ImgLinks, addressLinks, blink }) {
                 {decrypt(item.feedback, toString(process.env.SECRET_KEY))}
               </p>
               <blockquote className="my-2">
-              <Link to={`/feedbackThread/${item.documentID}`}><Button className="customButton my-2">Expand</Button></Link>
+                <Link to={`/feedbackThread/${item.documentID}`}>
+                  <Button className="customButton my-2">Expand</Button>
+                </Link>
                 <Share
                   className="tweet"
                   url="https://feedback-system-police-private.vercel.app/"
                   options={{
-                    text: `During my recent visit to the #${
-                      item.policeStation.replace(' ','')
-                    } Police station regarding ${item.purpose}, \nI experienced ${decrypt(
+                    text: `During my recent visit to the #${item.policeStation.replace(
+                      " ",
+                      ""
+                    )} Police station regarding ${
+                      item.purpose
+                    }, \nI experienced ${decrypt(
                       item.feedback,
                       toString(process.env.SECRET_KEY)
                     )}\n@PoliceRajasthan @RajPoliceHelp \n I submitted and am sharing this feedback using Rajasthan Police Station Feedback Portal `,

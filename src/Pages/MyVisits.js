@@ -40,14 +40,12 @@ const MyVisits = () => {
     if (user) {
       fetchVisits(user.email);
     }
-    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     const matching_PS = [];
     setPoliceStations(PoliceData);
- 
 
     for (var i = 0; i < visits.length; i++) {
       const Ps = visits[i].policeStation;
@@ -97,16 +95,16 @@ const MyVisits = () => {
 
   const handleChange = async (e) => {
     try {
-      const response = await axios.post('https://libretranslate.de/translate', {
+      const response = await axios.post("https://libretranslate.de/translate", {
         q: e.target.value,
-        source: 'auto',
-        target: 'en',
+        source: "auto",
+        target: "en",
       });
 
       setSearchTerm(response.data.translatedText);
     } catch (error) {
-      console.error('Error translating text:', error);
-      setSearchTerm(e.target.value); // Fallback to the original text on error
+      console.error("Error translating text:", error);
+      setSearchTerm(e.target.value);
     }
   };
 
@@ -170,20 +168,16 @@ const MyVisits = () => {
                 ? visits
                     .sort((a, b) => {
                       if (a.feedback === null && b.feedback === null) {
-                        // If both have feedback as null, sort by shorter policeStation name
                         if (a.policeStation.length !== b.policeStation.length) {
                           return (
                             a.policeStation.length - b.policeStation.length
                           );
                         } else {
-                          // If lengths are equal, sort by lexicographical order
                           return a.policeStation.localeCompare(b.policeStation);
                         }
                       } else if (a.feedback === null) {
-                        // If only 'a' has null feedback, 'a' comes before 'b'
                         return -1;
                       } else {
-                        // If 'b' has null feedback or both have feedback, 'b' comes before 'a'
                         return 1;
                       }
                     })

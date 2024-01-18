@@ -1,8 +1,9 @@
 import ChatBotFeedback from "./ChatBotFeedback";
-import ChatBotHelpLines from "./ChatBotHelpLines"
+import ChatBotHelpLines from "./ChatBotHelpLines";
 import ChatBotNearest from "./ChatBotNearest";
 import ChatBotDistrict from "./ChatBotDistrict";
 import ChatBotHandlePolice from "./ChatBotHandlePolice";
+import ChatBotPoliceComplaint from "./ChatBotPoliceComplaint";
 export const steps = [
   {
     id: "0",
@@ -25,12 +26,12 @@ export const steps = [
       { value: 2, label: "Fill a Feedback", trigger: "feedback" },
       { value: 3, label: "Helplines", trigger: "helplines" },
       { value: 4, label: "Nearest Police station near me", trigger: "ask" },
-      {value:5,label:"Get Report of Police Station",trigger:"report"}
+      { value: 5, label: "Get Report of Police Station", trigger: "report" },
     ],
   },
   {
     id: "policecomplaint",
-    message: "policecomplaint",
+   component:<ChatBotPoliceComplaint/>,
     trigger: "options",
   },
   {
@@ -39,66 +40,55 @@ export const steps = [
     trigger: "fillafeedback",
   },
   {
-    id:"fillafeedback",
-    component:<ChatBotFeedback/>,
-    trigger:"options"
+    id: "fillafeedback",
+    component: <ChatBotFeedback />,
+    trigger: "options",
   },
   {
     id: "helplines",
-    
-  component:<ChatBotHelpLines/>,
-  trigger:"options"
-  },
-  {
-    id:"ask",
-    message:"Sure !,Please Provide me with your Area's Pincode",
-    trigger:"input"
-  },
-  {
-    id:"input",
-    user:true,
-    trigger:"police"
 
-  },
-  
-  {
-    id: "police",
-  component:<ChatBotNearest/>,
+    component: <ChatBotHelpLines />,
     trigger: "options",
   },
-  { id:"report",
-    message:"Please provide me with the name of the district you would want to get a report of",
-    trigger:"reportinput",
-
+  {
+    id: "ask",
+    message: "Sure !,Please Provide me with your Area's Pincode",
+    trigger: "input",
+  },
+  {
+    id: "input",
+    user: true,
+    trigger: "police",
   },
 
-  { id:"reportinput",
-   user:true,
-   trigger:"renderdistrict",
+  {
+    id: "police",
+    component: <ChatBotNearest />,
+    trigger: "options",
+  },
+  {
+    id: "report",
+    message:
+      "Please provide me with the name of the district you would want to get a report of",
+    trigger: "reportinput",
+  },
 
-},
-{ id:"renderdistrict",
-  component:<ChatBotDistrict/>,
-  trigger:"choose",
-
-},
-{
-  id:"choose",
-  message:"Please type a suitable Police Station name you would want to get report",
-  trigger:"userinputpolice",
-},
-{
-  id:"userinputpolice",
-  user:true,
-  trigger:"handlepolice"
-},
-{
-  id:"handlepolice",
-  component:<ChatBotHandlePolice/>,
-  trigger:"options",
-}
-
-
-
-
+  { id: "reportinput", user: true, trigger: "renderdistrict" },
+  { id: "renderdistrict", component: <ChatBotDistrict />, trigger: "choose" },
+  {
+    id: "choose",
+    message:
+      "Please type a suitable Police Station name you would want to get report",
+    trigger: "userinputpolice",
+  },
+  {
+    id: "userinputpolice",
+    user: true,
+    trigger: "handlepolice",
+  },
+  {
+    id: "handlepolice",
+    component: <ChatBotHandlePolice />,
+    trigger: "options",
+  },
 ];

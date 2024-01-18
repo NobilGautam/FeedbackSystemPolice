@@ -11,6 +11,7 @@ import { useToast } from "@chakra-ui/react";
 import { encrypt } from "n-krypta";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
+import { adultWords } from 'adults-list';
 var Sentiment = require("sentiment");
 var sentiment = new Sentiment();
 
@@ -115,7 +116,10 @@ function Form() {
       alert("CHECK THE CAPTCHA");
       return;
     }
-        
+    const newFeedback=form.feedback.split(' ');//check commit
+      if(newFeedback.some(element => adultWords.includes(element))){
+        return alert("USE DECENT LANGUAGE");
+      }
 
     const updatedFormData = {
       name: form.fname,
