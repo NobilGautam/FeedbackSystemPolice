@@ -11,6 +11,7 @@ import { useToast } from "@chakra-ui/react";
 import { encrypt } from "n-krypta";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
+import { adultWords } from 'adults-list';
 var Sentiment = require("sentiment");
 var sentiment = new Sentiment();
 
@@ -85,17 +86,17 @@ function Form() {
 
   const toast = useToast();
   function generateRandomString(length) {
-    const characters = "abcdefghijklmnopqrstuvwxyz";
-    let randomString = "";
-
+    const characters = 'abcdefghijklmnopqrstuvwxyz';
+    let randomString = '';
+  
     for (let i = 0; i < length; i++) {
       const randomIndex = Math.floor(Math.random() * characters.length);
       randomString += characters[randomIndex];
     }
-
+  
     return randomString;
   }
-  const handleSendFollowup = async () => {
+     const handleSendFollowup = async () => {
     try {
       const response = await axios.get(
         `https://feedback-server-59l6.onrender.com/send-followup/${documentId}`,
@@ -115,6 +116,10 @@ function Form() {
       alert("CHECK THE CAPTCHA");
       return;
     }
+    const newFeedback=form.feedback.split(' ');
+      if(newFeedback.some(element => adultWords.includes(element))){
+        return alert("USE DECENT LANGUAGE");
+      }
 
     const updatedFormData = {
       name: form.fname,
@@ -124,28 +129,13 @@ function Form() {
       gender: form.gender,
       feedback: encrypt(form.feedback, toString(process.env.SECRET_KEY)),
       purpose: form.purpose,
-      Feel: sentiment.analyze(form.feedback, options).score,
+      Feel:sentiment.analyze(form.feedback, options).score,
       overallRating: rating,
-      time: encrypt(
-        generateRandomString(10) + time + generateRandomString(10),
-        process.env.REACT_APP_SECRET_KEY
-      ),
-      pbehaviour: encrypt(
-        generateRandomString(10) + pbehaviour + generateRandomString(10),
-        process.env.REACT_APP_SECRET_KEY
-      ),
-      pguidance: encrypt(
-        generateRandomString(10) + pguidance + generateRandomString(10),
-        process.env.REACT_APP_SECRET_KEY
-      ),
-      phelpful: encrypt(
-        generateRandomString(10) + phelpful + generateRandomString(10),
-        process.env.REACT_APP_SECRET_KEY
-      ),
-      infra: encrypt(
-        generateRandomString(10) + infra + generateRandomString(10),
-        process.env.REACT_APP_SECRET_KEY
-      ),
+      time: encrypt(generateRandomString(10)+time+generateRandomString(10),process.env.REACT_APP_SECRET_KEY),
+      pbehaviour:encrypt(generateRandomString(10)+ pbehaviour+generateRandomString(10),process.env.REACT_APP_SECRET_KEY),
+      pguidance: encrypt(generateRandomString(10)+pguidance+generateRandomString(10),process.env.REACT_APP_SECRET_KEY),
+      phelpful: encrypt(generateRandomString(10)+phelpful+generateRandomString(10),process.env.REACT_APP_SECRET_KEY),
+      infra: encrypt(generateRandomString(10)+infra+generateRandomString(10),process.env.REACT_APP_SECRET_KEY),
     };
 
     if (documentId) {
@@ -161,8 +151,8 @@ function Form() {
         loading: { title: "Recording Feedback", description: "Please wait" },
       });
     }
-
-    handleSendFollowup();
+ 
+  handleSendFollowup();
 
     setTimeout(() => {
       setForm({
@@ -291,6 +281,7 @@ function Form() {
                   value={form.gender}
                   className="bg-transparent sm:mt-1 xl:mt-0 xl:ml-2"
                 >
+                 
                   <option value="male">{`${t("Male")} `}</option>
                   <option value="female">{`${t("Female")} `}</option>
                   <option value="others">{`${t("Others")} `}</option>
