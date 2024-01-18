@@ -23,7 +23,7 @@ function Admin({ handleAdminLogin }) {
     sessionStorage.setItem("authToken", "your_token_here");
     handleAdminLogin();
 
-    navigator(`/singleAdmin/${pincode}`);
+    navigator(`/singleAdmin/${pincode.toUpperCase()}`);
   };
   return (
     <div className="py-5 mt-32 w-[40%] mx-auto text-center flex flex-col items-centers">
