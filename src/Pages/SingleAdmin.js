@@ -41,7 +41,7 @@ function SingleAdmin({ isAdminLoggedin }) {
     <Flex justify="center" direction="column" align="center" h="100vh" className="mt-32">
       <div>
         <h1 className="text-[#8c4e1d] text-3xl font-semibold">
-          HI ADMIN_{psStatsData[0].policeStation}
+          HI ADMIN {psStatsData[0].policeStation}
         </h1>
       </div>
       <Tabs
