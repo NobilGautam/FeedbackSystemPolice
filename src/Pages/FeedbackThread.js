@@ -18,6 +18,7 @@ const FeedbackThread = () => {
   const [loading, setLoading] = useState(true);
   const [senderMessage, setSenderMessage] = useState("");
   const [receiverMessage, setReceiverMessage] = useState("");
+  const [receivedMessageArray, setReceivedMessageArray] = useState([]);
   const [submit, setSubmit] = useState(false);
   const [chat, setChat] = useState("");
   const [temp, setTemp] = useState("");
@@ -37,8 +38,12 @@ const FeedbackThread = () => {
       setSenderMessage(
         decrypt(visits[0].feedback, toString(process.env.REACT_APP_SECRET_KEY))
       );
-      setReceiverMessage(visits[0].comment);
-      console.log(receiverMessage);
+      const receivedMessages = visits[0].comment_arr || [];
+      setReceivedMessageArray(receivedMessages);
+
+      // Creating a string representation for the purpose of displaying in MessageBox
+      setReceiverMessage(receivedMessages.join('\n'));
+      console.log(receivedMessageArray);
     }
   }, [loading]);
 
