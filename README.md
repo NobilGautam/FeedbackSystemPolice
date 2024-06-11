@@ -1,35 +1,46 @@
-# Problem Statement 1
+# Rajasthan Police Feedback System
 
 ## Problem
 
-Getting feedback on police operations is difficult due to outdated methods and privacy concerns. Traditional ways like inspections and calls to complainants are restricted and lack inclusivity. This hampers understanding community feelings and addressing policing issues effectively.
+Getting feedback on police operations is difficult due to outdated methods and privacy concerns. Traditional ways like inspections and calls to complainants are restricted and lack inclusivity, hampering the understanding of community feelings and addressing policing issues effectively.
 
-### Background
+## Features
 
-Current feedback methods are non-digital, missing guest records, and lack a uniform tracking system. Limited manpower inhibits daily follow-up, and the diverse, less digitally aware community adds complexity. Standard Operating Procedures (SOPs) for model police stations highlight the need for regular feedback to improve transparency and efficiency.
+1. **Feedback Form:**
+   - Create an intuitive and easy-to-use feedback form with relevant fields.
+   - Include options for rating different aspects such as service quality, responsiveness, and professionalism.
 
-### Challenges
+2. **User Authentication:**
+   - Implement secure authentication mechanisms for both citizens and police personnel administrators.
+   - Ensure role-based access controls for different user types.
 
-- Non-digital method.
-- Lack of uniform guest records.
-- Inadequate staff for daily follow-up.
-- Multi-lingual and digitally less-literate society.
+3. **Dashboard for Police Station Personnel:**
+   - Develop a dashboard for police station staff to view and manage feedback.
+   - Include features for sorting, filtering, and responding to feedback.
 
-## Solution
+4. **Reporting and Analytics:**
+   - Implement analytics tools to generate reports on feedback trends.
+   - Provide insights for police stations to improve services based on feedback data.
 
-Design a user-friendly, cost-effective Police Feedback System incorporating:
+5. **Mobile Responsiveness:**
+   - Ensure the website is responsive and accessible on various devices, including mobile phones and tablets.
 
-- Bulk SMS Tool: Gather quick comments on experiences (Happy/Not Happy).
-- Auto Chatbot: Engage users with questions and compile answers in real-time.
-- Online Portal: Record detailed comments for a holistic view.
-- Social Media-Like Platform: Allow users to share experiences, tagging specific places for easy categorization.
+6. **Security Measures:**
+   - Implement robust security measures to protect user data and maintain the integrity of the feedback system.
 
-### Expectations
+## UI
+![Desktop](https://github.com/Iron0utlaw/Rajasthan-Police-Feedback-System/assets/92783708/a4f112a4-1e35-486d-84ff-0bdcd1545ad0)
+![Mobile](https://github.com/Iron0utlaw/Rajasthan-Police-Feedback-System/assets/92783708/ca6aa62f-01d2-49f0-b50d-4c3c4dad4087)
 
-- User-Friendly: A simple, intuitive system for different tech proficiencies.
-- Mobile-Friendly: Optimize for mobile use.
-- Cost-Effective: Keep costs within 2-5K per spot.
-- Simplicity: Easy for users to provide comments.
-- Auto Data Entry: Regularly collect data for efficient monitoring.
+## Tech Stack
 
-This Police Feedback System aims to improve transparency and efficiency by providing an accessible, real-time platform for community members to share their experiences and feedback on police interactions.
+- Frontend:
+  - React
+  - Chakra UI
+  - Chart.js
+
+- [Backend](https://github.com/Iron0utlaw/flask-api-render):
+  - Flask
+
+- Communication:
+  - Twilio
